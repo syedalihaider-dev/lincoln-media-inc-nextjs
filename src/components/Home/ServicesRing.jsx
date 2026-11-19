@@ -7,7 +7,7 @@ import * as THREE from "three";
 const CYAN = new THREE.Color("#36e4d0");
 const R = 4.3; // ring radius
 const H = 2.85; // panel height
-const tex = (img) => `/_next/image?url=${encodeURIComponent(img.src)}&w=828&q=75`;
+const tex = (img) => img.src; // static file directly (image optimisation is off; see next.config.mjs)
 
 // One curved panel on the ring, its photograph cropped to "cover" the arc
 function Panel({ map, index, count, state }) {

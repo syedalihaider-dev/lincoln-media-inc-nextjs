@@ -6,6 +6,8 @@ const nextConfig = {
   serverExternalPackages: ["kokoro-js"],
   outputFileTracingExcludes: { "*": ["node_modules/kokoro-js/**", "node_modules/onnxruntime-node/**", "node_modules/@huggingface/**"] },
   images: {
+    // Serve the original files: Vercel's image optimiser answers 402 once the plan's quota is used up
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     qualities: [75, 80],
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920, 2400],

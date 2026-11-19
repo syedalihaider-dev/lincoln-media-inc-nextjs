@@ -11,8 +11,8 @@ const VIOLET = new THREE.Color("#3b5bff");
 const START_Z = 7;
 const END_Z = -52;
 
-// Small, already-optimised copies of the studio's own imagery for textures (Next's image optimiser)
-const tex = (img) => `/_next/image?url=${encodeURIComponent(img.src)}&w=640&q=75`;
+// The studio's own imagery as textures — the static files directly (image optimisation is off; see next.config.mjs)
+const tex = (img) => img.src;
 
 /**
  * The plates: the studio's work and disciplines, hung in a long corridor of space.
