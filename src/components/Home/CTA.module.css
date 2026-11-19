@@ -1,0 +1,22 @@
+.section { position: relative; background: var(--lm-ink); }
+.pin { position: relative; height: 100vh; min-height: 620px; display: grid; place-items: center; overflow: hidden; }
+.window { position: absolute; inset: 0; overflow: hidden; }
+.window video, .window img { transform-origin: 50% 50%; will-change: transform; filter: grayscale(0.55) sepia(0.35) hue-rotate(168deg) saturate(1.5) brightness(0.82) contrast(1.08); }
+
+.copy { position: relative; z-index: 2; display: grid; justify-items: center; gap: 4vh; padding: 0 var(--lm-gutter); text-align: center; }
+.kicker { font: 500 10px var(--lm-mono); letter-spacing: 0.3em; text-transform: uppercase; color: var(--lm-accent); }
+.title { display: grid; font: 800 clamp(38px, 7.6vw, 156px)/0.92 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; color: var(--lm-paper); text-shadow: 0 10px 60px rgba(3, 5, 11, 0.5); }
+.title span { display: block; }
+.title em { color: var(--lm-accent); }
+.after { display: grid; justify-items: center; gap: 30px; }
+.after p { max-width: 40ch; font: 300 clamp(15px, 1.2vw, 18px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.86); }
+/* Scan line sweeping the film once it's open — the guide's signal passing through the city */
+.window::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--lm-accent), transparent); box-shadow: 0 0 24px 2px rgba(54, 228, 208, 0.5); animation: scan 6s linear infinite; opacity: 0.7; }
+@keyframes scan { from { transform: translateY(0); } to { transform: translateY(100vh); } }
+@media (prefers-reduced-motion: reduce) { .window::after { display: none; } }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 900px) {
+  .pin { height: auto; min-height: 100svh; padding: 16vh 0; }
+  .title { font-size: clamp(30px, 10vw, 72px); }
+}

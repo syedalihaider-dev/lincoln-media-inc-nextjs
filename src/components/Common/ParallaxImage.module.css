@@ -1,0 +1,13 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  background: var(--lm-ink-2);
+}
+/* Taller than the frame so the parallax drift never shows an edge */
+.img {
+  object-fit: cover;
+  top: calc(var(--amt) * -1) !important;
+  height: calc(100% + var(--amt) * 2) !important;
+  will-change: transform;
+}

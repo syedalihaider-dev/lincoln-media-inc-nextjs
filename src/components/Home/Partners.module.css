@@ -1,0 +1,30 @@
+/* Minimal world: paper, generous air, three photographs that open like doors */
+.section { position: relative; background: var(--lm-paper); color: var(--lm-ink); padding: 18vh var(--lm-gutter) 16vh; }
+.head { display: grid; gap: 26px; margin-bottom: 8vh; }
+.title { font: 800 clamp(32px, 5vw, 96px)/0.95 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.title em { color: var(--lm-violet); }
+
+.row { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; height: min(70vh, 640px); }
+.panel { position: relative; flex: 1 1 0; min-width: 0; transition: flex-grow 1.1s var(--lm-ease-in-out); }
+.open { flex-grow: 3.2; }
+.inner { position: absolute; inset: 0; display: block; overflow: hidden; color: var(--lm-paper); }
+.img { object-fit: cover; transform: scale(1.12); transition: transform 1.4s var(--lm-ease), filter 0.8s; filter: grayscale(0.7) brightness(0.6); }
+.open .img { transform: scale(1); filter: none; }
+.shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3, 5, 11, 0.1) 30%, rgba(3, 5, 11, 0.88)); }
+.no { position: absolute; top: 22px; left: 24px; font: 500 10px var(--lm-mono); letter-spacing: 0.22em; color: var(--lm-accent); }
+.meta { position: absolute; left: 24px; right: 24px; bottom: 26px; display: grid; gap: 8px; }
+.name { font: 800 clamp(22px, 2.6vw, 48px)/0.95 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; white-space: nowrap; }
+.role, .visit { font: 300 15px var(--lm-light); color: rgba(238, 241, 247, 0.8); opacity: 0; transform: translateY(10px); transition: opacity 0.5s, transform 0.7s var(--lm-ease); }
+.visit { font: 500 10px var(--lm-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-accent); }
+.open .role, .open .visit { opacity: 1; transform: none; transition-delay: 0.35s; }
+
+/* Closed panels: the name turns on its side */
+.panel:not(.open) .name { position: absolute; left: 0; bottom: 0; writing-mode: vertical-rl; transform: rotate(180deg); font-size: clamp(18px, 1.7vw, 30px); }
+
+@media (max-width: 900px) {
+  .row { flex-direction: column; height: auto; gap: 12px; }
+  .panel { flex: none; aspect-ratio: 16 / 10; }
+  .img { filter: none; transform: none; }
+  .role, .visit { opacity: 1; transform: none; }
+  .panel:not(.open) .name { position: static; writing-mode: horizontal-tb; transform: none; font-size: clamp(22px, 6.4vw, 40px); }
+}

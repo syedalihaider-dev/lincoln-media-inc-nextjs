@@ -1,0 +1,50 @@
+/* White studio: the method laid out like a technical drawing */
+.section { position: relative; background: var(--lm-white); color: var(--lm-ink); --pp: 0; }
+.pin { display: grid; grid-template-rows: auto 1fr auto; gap: 4vh; padding: calc(var(--lm-header-h) + 4vh) var(--lm-gutter) 7vh; }
+@media (min-width: 901px) { .pin { height: 100vh; min-height: 620px; } }
+
+.head { display: grid; gap: 22px; }
+.title { font: 800 clamp(30px, 3.8vw, 72px)/0.96 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.title em { color: var(--lm-violet); }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 4vw; min-height: 0; }
+
+.numeral { position: relative; height: 1em; overflow: hidden; font: 800 clamp(150px, 34vh, 400px)/1 var(--lm-display); letter-spacing: -0.07em; }
+.strip { display: flex; flex-direction: column; transition: transform 1s var(--lm-ease-in-out); }
+/* Hollow numeral that fills with violet as the chapter progresses */
+.strip span {
+  height: 1em;
+  display: block;
+  color: transparent;
+  background: linear-gradient(0deg, var(--lm-violet) calc(var(--pp) * 100%), var(--lm-paper-2) calc(var(--pp) * 100%));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.step { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(40px); transition: opacity 0.5s var(--lm-ease), transform 0.9s var(--lm-ease), visibility 0.5s; }
+.step.on { opacity: 1; visibility: visible; transform: none; transition-delay: 0.12s; }
+.stepNo { font: 500 10px var(--lm-mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-violet); }
+.stepTitle { margin: 16px 0 20px; font: 800 clamp(34px, 4.4vw, 84px)/0.95 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.stepText { max-width: 34ch; font: 300 clamp(16px, 1.3vw, 20px)/1.55 var(--lm-light); color: var(--lm-mute-dark); }
+
+.timeline { position: relative; height: 54px; margin: 0 6px; }
+.track { position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: var(--lm-line-dark); }
+.track i { position: absolute; inset: 0; background: var(--lm-violet); transform: scaleX(var(--pp)); transform-origin: left; }
+.node { position: absolute; top: 0; transform: translateX(-50%); display: grid; justify-items: center; gap: 12px; cursor: pointer; }
+.node:first-of-type { transform: none; justify-items: start; }
+.node:last-of-type { transform: translateX(-100%); justify-items: end; }
+.node i { width: 13px; height: 13px; transform: rotate(45deg); border: 1px solid var(--lm-line-dark); background: var(--lm-white); transition: background-color 0.5s, border-color 0.5s, transform 0.5s var(--lm-ease); }
+.node span { font: 500 10px var(--lm-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--lm-mute-dark); white-space: nowrap; transition: color 0.4s; }
+.passed i { background: var(--lm-violet); border-color: var(--lm-violet); transform: rotate(45deg) scale(0.8); }
+.passed span { color: var(--lm-ink); }
+
+/* Phones, and desktops without pinning: the five moves in order */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .pin { height: auto; padding-top: 14vh; }
+  .stage { grid-template-columns: 1fr; }
+  .numeral, .timeline { display: none; }
+  .steps { gap: 0; counter-reset: s; }
+  .step { grid-area: auto; opacity: 1; visibility: visible; transform: none; padding: 34px 0; border-top: 1px solid var(--lm-line-dark); }
+  .stepTitle { font-size: clamp(28px, 8.4vw, 56px); }
+}

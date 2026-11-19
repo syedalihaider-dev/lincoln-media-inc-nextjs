@@ -1,0 +1,71 @@
+/* =====================================================================
+ * The guided intro's share of the old studio-site stylesheet (public/site.css).
+ * The new homepage replaced that site, so the homepage no longer loads site.css — but the intro
+ * relied on these rules (logo lockup, hidden nav/talk button, HUD fading out once in-site).
+ * Copied verbatim from site.css; do not edit, so the intro looks exactly as it always has.
+ * ===================================================================== */
+:root {
+  /* Original blue theme (same accents as the guided experience) */
+  --red: #36e4d0;      /* primary accent (cyan) — variable name kept so the rules below stay unchanged */
+  --red-2: #7ff0e2;
+  --red-deep: #1fa89a;
+  --violet: #3b5bff;
+  --paper: #eef1f7;
+  --paper-2: #d9dee8;
+  --muted: #8a90a3;
+  --ink-bg: #03050b;
+  --card: #0a101c;
+  --card-2: #0f1626;
+  --display: "Unbounded", "Inter Tight", system-ui, sans-serif;
+  --body: "Instrument Sans", "Inter Tight", system-ui, sans-serif;
+  --hair: rgba(238, 241, 247, .12);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Smooth scrolling is handled by Lenis once the site unlocks */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- Header once the site is open ---------- */
+.site-nav, .hud .talk { display: none; }
+/* Experience logo text (undo the generic ".logo span" rule for the wrapper) */
+.logo .logo-text { display: block; margin: 0; color: var(--ink); font-weight: 600; letter-spacing: .02em; font-size: 15px; }
+.logo .logo-text > span { display: block; color: var(--accent); font-weight: 400; letter-spacing: .38em; font-size: 10px; margin-top: 4px; }
+body.in-site .hud { padding-top: 18px; padding-bottom: 18px; background: linear-gradient(180deg, rgba(3, 5, 11, .88), rgba(3, 5, 11, .45)); backdrop-filter: blur(14px); backdrop-filter: blur(14px) saturate(1.2); border-bottom: 1px solid var(--hair); transition: background .5s, padding .5s; }
+body.in-site .hud-tag, body.in-site .sound { display: none; }
+body.in-site .site-nav { display: flex; gap: clamp(18px, 2.4vw, 36px); position: absolute; left: 50%; transform: translateX(-50%); }
+body.in-site .hud .talk { display: inline-flex; margin-left: auto; }
+.site-nav a { position: relative; font: 500 13px var(--body); letter-spacing: .12em; text-transform: uppercase; color: rgba(238, 241, 247, .72); transition: color .3s; }
+.site-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--red); transform: scaleX(0); transform-origin: right; transition: transform .45s var(--ease); }
+.site-nav a:hover, .site-nav a.on { color: var(--paper); }
+.site-nav a:hover::after, .site-nav a.on::after { transform: scaleX(1); transform-origin: left; }
+body.in-site .menu-btn { display: none; }
+body.in-site .hud-ring, body.in-site .readout, body.in-site .progress, body.in-site .disclaimer { opacity: 0 !important; pointer-events: none; transition: opacity .8s; }
+body.in-site .cursor { border-color: var(--red); }
+
+/* ---------- Buttons ---------- */
+.btn { position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; font: 600 13px var(--body); letter-spacing: .14em; text-transform: uppercase; overflow: hidden; isolation: isolate; transition: color .35s, border-color .35s, box-shadow .35s; will-change: transform; }
+.btn i { font-style: normal; transition: transform .35s var(--ease); }
+.btn:hover i { transform: translate(3px, -3px); }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform: translateY(101%); transition: transform .5s var(--ease); }
+.btn:hover::before { transform: none; }
+.btn-red { background: var(--red); color: var(--ink-bg); box-shadow: 0 0 0 0 rgba(54, 228, 208, 0); }
+.btn-red::before { background: var(--paper); }
+.btn-red:hover { color: var(--ink-bg); box-shadow: 0 0 40px -6px rgba(54, 228, 208, .6); }
+.btn-ghost { border: 1px solid rgba(238, 241, 247, .22); color: var(--paper); background: rgba(3, 5, 11, .35); backdrop-filter: blur(8px); }
+.btn-ghost::before { background: var(--red); }
+.btn-ghost:hover { border-color: var(--red); }
+.btn-sm { padding: 12px 20px; font-size: 12px; }
+.link-arrow { display: inline-flex; gap: 10px; align-items: center; font: 600 12px var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--paper); border-bottom: 1px solid var(--red); padding-bottom: 6px; }
+.link-arrow i { font-style: normal; color: var(--red); transition: transform .35s var(--ease); }
+
+.mono { font-family: var(--mono); }
+
+@media (max-width: 1100px) {
+  body.in-site .site-nav { display: none; }
+  body.in-site .menu-btn { display: grid; opacity: 1; pointer-events: auto; }
+}
+@media (max-width: 560px) {
+  .hud .talk { display: none !important; }
+}

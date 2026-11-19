@@ -1,0 +1,95 @@
+/* =====================================================================
+ * Global styles for the homepage.
+ * The guided intro keeps its own stylesheets (public/styles.css + intro-site.css, loaded with its markup),
+ * and the inner pages keep theirs — so everything here is either a token or scoped to the homepage.
+ *
+ * Brand: the same identity the intro speaks in — deep navy space, the AI guide's cyan signal,
+ * an electric violet, and paper white; Unbounded for display, Instrument Sans / Inter Tight for text,
+ * JetBrains Mono for instrument labels.
+ * ===================================================================== */
+:root {
+  --lm-ink: #03050b;
+  --lm-ink-2: #0a101c;
+  --lm-ink-3: #0f1626;
+  --lm-paper: #eef1f7;
+  --lm-paper-2: #d9dee8;
+  --lm-white: #f8f9fc;
+  --lm-accent: #36e4d0;
+  --lm-accent-2: #7ff0e2;
+  --lm-accent-deep: #1fa89a;
+  --lm-violet: #3b5bff;
+  --lm-violet-2: #7b5bff;
+  --lm-mute: #8a90a3;
+  --lm-mute-dark: rgba(3, 5, 11, 0.6);
+  --lm-line: rgba(238, 241, 247, 0.13);
+  --lm-line-strong: rgba(238, 241, 247, 0.32);
+  --lm-line-dark: rgba(3, 5, 11, 0.14);
+  --lm-display: "Unbounded", "Inter Tight", system-ui, sans-serif;
+  --lm-body: "Instrument Sans", "Inter Tight", system-ui, sans-serif;
+  --lm-light: "Inter Tight", system-ui, sans-serif;
+  --lm-mono: "JetBrains Mono", ui-monospace, monospace;
+  --lm-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --lm-ease-in-out: cubic-bezier(0.77, 0, 0.18, 1);
+  --lm-gutter: clamp(20px, 4.2vw, 72px);
+  --lm-header-h: 84px;
+}
+
+/* ---------- Homepage only: hand the stage from the intro's HUD to the new header ---------- */
+/* (The intro's own header stays exactly as it was until the visitor reaches the homepage) */
+body[data-page="home"].in-site header.hud,
+body[data-page="home"].in-site nav.menu {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+/* The intro's corner brackets belong to the HUD; the homepage has its own frame */
+body[data-page="home"].in-site .frame { opacity: 0; transition: opacity 0.6s; }
+body[data-page="home"].in-site .cursor { mix-blend-mode: difference; border-color: var(--lm-accent); }
+
+#site {
+  font-family: var(--lm-body);
+  font-weight: 400;
+  color: var(--lm-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+#site ::selection { background: var(--lm-accent); color: var(--lm-ink); }
+#site img { display: block; max-width: 100%; }
+/* Unbounded has no italic: emphasis is carried by colour or outline, never a faked slant */
+#site em { font-style: normal; }
+#site :focus-visible {
+  outline: 1px solid var(--lm-accent);
+  outline-offset: 4px;
+}
+#site a:focus:not(:focus-visible), #site button:focus:not(:focus-visible) { outline: none; }
+
+/* Masked lines produced by SplitText (RevealText) */
+.lm-line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.lm-line { will-change: transform; }
+
+.lm-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip link: first focusable element on the homepage */
+.lm-skip {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  z-index: 200;
+  padding: 12px 18px;
+  background: var(--lm-accent);
+  color: var(--lm-ink);
+  font: 600 12px var(--lm-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: translateY(-160%);
+  transition: transform 0.3s;
+}
+.lm-skip:focus { transform: none; }

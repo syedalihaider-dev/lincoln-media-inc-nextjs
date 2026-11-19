@@ -1,15 +1,16 @@
-import pages from "../content/pages.json";
+import pages from "@/data/legacy-pages.json";
 
-// Renders one of the site's pages exactly as it was built: same markup, stylesheets and scripts.
+// Renders one of the site's pre-built pages exactly as it was built: same markup, stylesheets and scripts.
 // The browser runs the page's scripts in order while parsing (as on the static site), and the
 // wrapper uses `display: contents`, so it adds no box to the layout.
+// Used by the inner pages (services, work, about, policies); the homepage is src/app/page.js.
 export function getPage(route) {
   return pages[route] || null;
 }
 
 export function pageMetadata(route) {
   const p = getPage(route);
-  return p ? { title: p.title, description: p.description } : {};
+  return p ? { title: p.title, description: p.description, alternates: { canonical: route } } : {};
 }
 
 export default function LegacyPage({ route }) {

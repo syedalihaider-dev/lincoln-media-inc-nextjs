@@ -1,0 +1,10 @@
+/* Same wordmark as the intro's HUD (public/styles.css .logo) so the hand-over is seamless */
+.logo { display: inline-flex; flex-direction: column; line-height: 1; }
+.main { font: 600 15px/1 var(--lm-light); letter-spacing: 0.02em; text-transform: uppercase; color: var(--lm-paper); }
+.sub {
+  margin-top: 4px;
+  font: 400 10px/1 var(--lm-light);
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--lm-accent);
+}

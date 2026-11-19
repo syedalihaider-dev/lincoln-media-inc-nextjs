@@ -1,4 +1,4 @@
-// Converts the hand-built HTML pages in legacy/ into content/pages.json, which the Next.js app renders.
+// Converts the hand-built HTML pages in legacy/ into src/data/legacy-pages.json, which the Next.js app renders.
 // Each page keeps its exact markup, stylesheets and scripts, so behaviour is identical to the static site.
 // Usage: npm run pages   (runs build-pages.py first, then this)
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync } from "node:fs";
@@ -41,6 +41,6 @@ for (const file of walk(legacy).sort()) {
     body: body.trim(),
   };
 }
-mkdirSync(join(root, "content"), { recursive: true });
-writeFileSync(join(root, "content/pages.json"), JSON.stringify(pages));
-console.log(`Converted ${Object.keys(pages).length} pages → content/pages.json`);
+mkdirSync(join(root, "src/data"), { recursive: true });
+writeFileSync(join(root, "src/data/legacy-pages.json"), JSON.stringify(pages));
+console.log(`Converted ${Object.keys(pages).length} pages → src/data/legacy-pages.json`);

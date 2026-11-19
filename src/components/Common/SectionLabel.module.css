@@ -1,0 +1,20 @@
+/* Chapter marker in the intro's instrument language: "03 / 13 — WHAT WE DO" */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 11px/1 var(--lm-mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.index { font-weight: 500; letter-spacing: 0.1em; }
+.index::after { content: " / 13"; opacity: 0.45; }
+.rule { display: block; width: 44px; height: 1px; background: currentColor; opacity: 0.5; }
+.dark { color: var(--lm-paper); }
+.dark .index { color: var(--lm-accent); }
+.light { color: var(--lm-ink); }
+.light .index { color: var(--lm-violet); }
+.onAccent { color: var(--lm-ink); }
+.onAccent .index { color: var(--lm-ink); }
+.onViolet { color: var(--lm-white); }
+.onViolet .index { color: var(--lm-accent); }
