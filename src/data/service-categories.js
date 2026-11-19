@@ -129,7 +129,7 @@ export const OTHER_SERVICES = [
 ];
 
 // Where a category lives: its own page, or its place on the Services page
-export const categoryHref = (c) => c.href || `/services#${c.key}`;
+export const categoryHref = (c) => c.href || `/services#index-${c.key}`; // the index opens that tab
 
 // The Services mega menu: the live site's menu groups, with Video and Animation together and the other lines last
 const byKey = Object.fromEntries(SERVICE_CATEGORIES.map((c) => [c.key, c]));

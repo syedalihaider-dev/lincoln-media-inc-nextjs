@@ -5,7 +5,7 @@
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   align-items: center;
   gap: 4vw;
-  padding: 18vh var(--lm-gutter) 16vh;
+  padding: clamp(72px, 11vh, 120px) var(--lm-gutter);
   background:
     radial-gradient(circle at 70% 50%, rgba(54, 228, 208, 0.12), transparent 40%),
     radial-gradient(circle at 1px 1px, rgba(238, 241, 247, 0.05) 1px, transparent 1.6px) 0 0 / 30px 30px,
@@ -13,12 +13,12 @@
   border-top: 1px solid var(--lm-line);
   overflow: clip;
 }
-.copy { display: grid; gap: 28px; }
-.title { font: 800 clamp(36px, 4.4vw, 84px)/0.98 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.copy { display: grid; gap: 22px; }
+.title { font: 800 clamp(30px, 3.3vw, 58px)/0.98 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
 .title em { color: var(--lm-accent); }
 
 .groups { display: grid; border-top: 1px solid var(--lm-line); }
-.groups button { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; text-align: left; font: 600 clamp(17px, 1.3vw, 21px) var(--lm-body); color: rgba(238, 241, 247, 0.62); border-bottom: 1px solid var(--lm-line); transition: color 0.35s, padding 0.5s var(--lm-ease); }
+.groups button { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 13px 0; text-align: left; font: 600 clamp(16px, 1.2vw, 19px) var(--lm-body); color: rgba(238, 241, 247, 0.62); border-bottom: 1px solid var(--lm-line); transition: color 0.35s, padding 0.5s var(--lm-ease); }
 .groups button i { width: 10px; height: 10px; transform: rotate(45deg); border: 1px solid var(--lm-line-strong); transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s; }
 .groups button:hover { color: var(--lm-paper); padding-left: 10px; }
 .groupOn { color: var(--lm-accent) !important; padding-left: 10px !important; }
@@ -28,7 +28,7 @@
 
 /* The globe */
 .sphereWrap { position: relative; display: grid; justify-items: center; gap: 14px; }
-.sphere { position: relative; width: min(42vw, 640px); aspect-ratio: 1; cursor: grab; touch-action: pan-y; user-select: none; }
+.sphere { position: relative; width: min(36vw, 540px); aspect-ratio: 1; cursor: grab; touch-action: pan-y; user-select: none; }
 .sphere:active { cursor: grabbing; }
 .core { position: absolute; inset: 36%; border-radius: 50%; background: radial-gradient(circle, rgba(54, 228, 208, 0.5), rgba(54, 228, 208, 0.05) 60%, transparent 72%); filter: blur(6px); }
 .ring { position: absolute; inset: 8%; border-radius: 50%; border: 1px solid rgba(54, 228, 208, 0.18); transform: rotateX(70deg); animation: tilt 16s linear infinite; }
@@ -52,7 +52,7 @@
 .hint { font: 500 13px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--lm-mute); }
 
 @media (max-width: 900px) {
-  .tech { grid-template-columns: minmax(0, 1fr); padding: 14vh var(--lm-gutter) 12vh; gap: 6vh; }
+  .tech { grid-template-columns: minmax(0, 1fr); padding: 64px var(--lm-gutter); gap: 36px; }
   .sphere { width: min(86vw, 460px); }
   .membersAll { display: none; } /* on phones the sphere shows them all; a chosen group lists its own */
   .title { font-size: clamp(32px, 7vw, 60px); }

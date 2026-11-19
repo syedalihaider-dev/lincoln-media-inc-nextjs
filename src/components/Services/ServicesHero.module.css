@@ -2,12 +2,12 @@
 .hero { position: relative; background: #010307; }
 .pin {
   position: relative;
-  height: 100svh;
-  min-height: 720px;
+  height: min(88svh, 820px);
+  min-height: 600px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: minmax(0, 1fr);
-  padding: calc(var(--lm-header-h) + 4vh) var(--lm-gutter) 6vh;
+  padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 5vh;
   overflow: hidden;
   isolation: isolate;
   background:
@@ -56,10 +56,10 @@
 .veil { position: absolute; inset: 0; z-index: 3; background: var(--lm-ink-2); opacity: 0; pointer-events: none; }
 
 @media (max-width: 900px) {
-  .pin { height: auto; min-height: 100svh; gap: 4vh; padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 8vh; }
+  .pin { height: auto; min-height: 0; gap: 4vh; padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 8vh; }
   .top { flex-direction: column; }
   .rfp { text-align: left; }
-  .giant { font-size: clamp(44px, 13vw, 120px); padding: 14vh 0; }
+  .giant { font-size: clamp(44px, 13vw, 120px); padding: 8vh 0; }
   .bottom { grid-template-columns: minmax(0, 1fr); }
   .title { font-size: clamp(22px, 6vw, 34px); }
   .actions { justify-content: flex-start; }

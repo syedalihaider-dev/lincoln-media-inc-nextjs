@@ -22,10 +22,10 @@ const D = "M10 230 C 120 230, 150 90, 250 90 S 380 220, 500 210 S 640 70, 750 80
 const AT = [0.05, 0.27, 0.5, 0.73, 0.95]; // where each step sits along it
 
 /**
- * How we work: the studio's five steps on a path. On desktop the chapter holds while a cyan path
+ * How we work: the studio's five steps on a path. On desktop a cyan path
  * draws itself across the screen and a light travels along it; each step's node lights as the light
  * reaches it, its picture opens above it, and the step's name and line take the stage. Phones: a
- * vertical line through the five.
+ * vertical line through the five. Nothing holds the page; the path draws as the section scrolls by.
  */
 export default function ProcessPath() {
   const ref = useRef(null);
@@ -45,12 +45,11 @@ export default function ProcessPath() {
       nodes.forEach((n, i) => { const p = path.getPointAtLength(AT[i] * len); n.style.left = `${p.x / 10}%`; n.style.top = `${p.y / 3}%`; });
       let cur = 0;
       ScrollTrigger.create({
-        trigger: root.querySelector("[data-pin]"),
-        start: "top top",
-        end: "+=260%",
-        pin: true,
-        scrub: true,
-        anticipatePin: 1,
+        // no pin: the path draws as the section passes through the screen
+        trigger: root.querySelector("[data-map]"),
+        start: "top 85%",
+        end: "bottom 62%",
+        scrub: 0.5,
         onUpdate: (s) => {
           const p = s.progress;
           path.style.strokeDashoffset = String(1 - p);
@@ -78,21 +77,23 @@ export default function ProcessPath() {
   return (
     <section ref={ref} id="process" className={styles.process} aria-labelledby="process-title">
       <div className={styles.pin} data-pin>
+        <div className={styles.topRow}>
         <header className={styles.head}>
           <Label>How we work</Label>
           <RevealText id="process-title" className={styles.title}>Five moves. <em>No wasted ones.</em></RevealText>
         </header>
+        <div className={styles.now} aria-live="polite">
+            <motion.div key={s.title} initial={{ opacity: 0, y: 30, clipPath: "inset(0% 0% 100% 0%)" }} animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE } }}>
+              <h3 className={styles.stepName}>{s.title}</h3>
+              <p className={styles.stepText}>{s.text}</p>
+            </motion.div>
+        </div>
+
+        </div>
 
         {/* Desktop stage */}
         <div className={styles.stage}>
-          <div className={styles.now} aria-live="polite">
-              <motion.div key={s.title} initial={{ opacity: 0, y: 30, clipPath: "inset(0% 0% 100% 0%)" }} animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE } }}>
-                <h3 className={styles.stepName}>{s.title}</h3>
-                <p className={styles.stepText}>{s.text}</p>
-              </motion.div>
-          </div>
-
-          <div className={styles.map} aria-hidden="true">
+          <div className={styles.map} data-map aria-hidden="true">
             <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className={styles.svg}>
               <path d={D} className={styles.ghostPath} />
               <path d={D} pathLength="1" className={styles.path} data-path />
@@ -114,7 +115,7 @@ export default function ProcessPath() {
           <ol className={styles.items}>
           {PROCESS.map((p, i) => (
             <li key={p.title} className={styles.item} data-item>
-              <figure className={styles.itemImg} aria-hidden="true"><Image src={IMAGES[i]} alt="" fill sizes="90vw" /></figure>
+              <figure className={styles.itemImg} aria-hidden="true"><Image src={IMAGES[i]} alt="" fill sizes="(max-width: 640px) 120px, 200px" /></figure>
               <h3 className={styles.stepName} data-t>{p.title}</h3>
               <p className={styles.stepText} data-t>{p.text}</p>
             </li>

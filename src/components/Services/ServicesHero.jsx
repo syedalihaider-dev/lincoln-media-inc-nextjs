@@ -45,7 +45,8 @@ export default function ServicesHero() {
       return () => { giant.revert(); head.revert(); };
     });
     mm.add(DESKTOP_MOTION, () => {
-      const tl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector("[data-pin]"), start: "top top", end: "+=110%", pin: true, scrub: 0.8, anticipatePin: 1 } });
+      // No holding the page: the exit plays out as the hero scrolls away
+      const tl = gsap.timeline({ scrollTrigger: { trigger: root, start: "top top", end: "bottom top", scrub: 0.6 } });
       tl.to(progress, { current: 1, ease: "none", duration: 1 }, 0)
         .to(root.querySelector("[data-giant]"), { scale: 1.7, letterSpacing: "0.04em", opacity: 0, ease: "power2.in", duration: 1 }, 0)
         .to(root.querySelector("[data-top]"), { yPercent: -120, opacity: 0, ease: "power2.in", duration: 0.6 }, 0)

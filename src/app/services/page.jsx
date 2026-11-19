@@ -3,14 +3,9 @@ import { SERVICES_PAGE, SERVICE_CATEGORIES } from "@/data/service-categories";
 import PageShell from "@/components/Common/PageShell";
 import ServicesHero from "@/components/Services/ServicesHero";
 import ServicesApproach from "@/components/Services/ServicesApproach";
-import CapabilityShowcase from "@/components/Services/CapabilityShowcase";
 import ServiceIndex from "@/components/Services/ServiceIndex";
-import Disciplines from "@/components/Services/Disciplines";
 import ProcessPath from "@/components/Services/ProcessPath";
 import TechSphere from "@/components/Services/TechSphere";
-import WhyLincoln from "@/components/Services/WhyLincoln";
-import WorkPreview from "@/components/Services/WorkPreview";
-import AnimationServices from "@/components/Services/AnimationServices";
 import ServicesFinale from "@/components/Services/ServicesFinale";
 
 export const metadata = {
@@ -47,14 +42,9 @@ export default function ServicesPage() {
       <PageShell current="/services">
         <ServicesHero />
         <ServicesApproach />
-        <CapabilityShowcase />
         <ServiceIndex />
-        <Disciplines />
         <ProcessPath />
         <TechSphere />
-        <WhyLincoln />
-        <WorkPreview />
-        <AnimationServices />
         <ServicesFinale />
       </PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

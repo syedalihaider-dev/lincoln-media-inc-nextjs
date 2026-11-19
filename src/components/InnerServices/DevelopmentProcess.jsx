@@ -1,79 +1,55 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { useSiteMotion, sfx } from "@/lib/motion";
+import { gsap, useGSAP, ANY_MOTION } from "@/lib/gsap";
+import { useSiteMotion } from "@/lib/motion";
 import SectionHead from "./SectionHead";
 import styles from "./DevelopmentProcess.module.css";
 
-const FILM = "(min-width: 1101px) and (prefers-reduced-motion: no-preference)";
-
 /**
- * How a build moves: the studio's steps as a horizontal journey. On desktop the chapter holds and the
- * steps slide past — each a panel with the step's name set large, its line, and a photograph that
- * drifts against the motion — while a rail of the step names fills and lights as you go. Phones: the
- * steps down the page along a line.
+ * How a build moves: the steps in one row, no holding the page. A line of light runs along the top
+ * of the row as the section passes through the screen, and each step's marker lights and its
+ * photograph opens as the line reaches it. On phones the steps stack along a vertical line.
  */
 export default function DevelopmentProcess({ data }) {
   const ref = useRef(null);
-  const [active, setActive] = useState(0);
   const { ready } = useSiteMotion();
-  const n = data.steps.length;
 
   useGSAP(() => {
     if (!ready) return;
     const root = ref.current;
+    const steps = gsap.utils.toArray("[data-step]", root);
     const mm = gsap.matchMedia();
-    mm.add(FILM, () => {
-      const track = root.querySelector("[data-track]");
-      const distance = () => track.scrollWidth - innerWidth;
-      let cur = 0;
-      const film = gsap.to(track, {
-        x: () => -distance(), ease: "none",
-        scrollTrigger: {
-          trigger: root.querySelector("[data-pin]"), start: "top top", end: () => `+=${distance()}`, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
-          onUpdate: (s) => {
-            root.style.setProperty("--pp", s.progress.toFixed(4));
-            const i = Math.min(n - 1, Math.round(s.progress * (n - 1)));
-            if (i !== cur) { cur = i; setActive(i); sfx("tick"); }
-          },
-        },
+    mm.add(ANY_MOTION, () => {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector("[data-row]"), start: "top 85%", end: "top 30%", scrub: 0.6 } });
+      tl.fromTo(root.querySelector("[data-line]"), { scaleX: 0, scaleY: 0 }, { scaleX: 1, scaleY: 1, ease: "none", duration: steps.length }, 0);
+      steps.forEach((st, i) => {
+        tl.fromTo(st.querySelector("[data-dot]"), { scale: 0.4, backgroundColor: "rgba(54,228,208,0)" }, { scale: 1, backgroundColor: "rgba(54,228,208,1)", duration: 0.3, ease: "none" }, i + 0.2)
+          .fromTo(st.querySelector("[data-img]"), { clipPath: "inset(100% 0% 0% 0% round 12px)" }, { clipPath: "inset(0% 0% 0% 0% round 12px)", duration: 0.8, ease: "none" }, i)
+          .fromTo(st.querySelector("[data-copy]"), { opacity: 0.25, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "none" }, i + 0.2);
       });
-      gsap.utils.toArray("[data-step]", root).forEach((st) => {
-        gsap.fromTo(st.querySelector("[data-img] img"), { xPercent: -12 }, { xPercent: 12, ease: "none", scrollTrigger: { trigger: st, containerAnimation: film, start: "left right", end: "right left", scrub: true } });
-        gsap.fromTo(st.querySelector("[data-img]"), { clipPath: "inset(0% 0% 0% 100%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", scrollTrigger: { trigger: st, containerAnimation: film, start: "left 90%", end: "left 40%", scrub: 0.6 } });
-        gsap.fromTo(st.querySelector("[data-name]"), { yPercent: 40, opacity: 0.2 }, { yPercent: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: st, containerAnimation: film, start: "left 85%", end: "left 45%", scrub: 0.6 } });
-      });
-    });
-    mm.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(root.querySelector("[data-vline]"), { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: root.querySelector("[data-track]"), start: "top 70%", end: "bottom 70%", scrub: 0.5 } });
     });
     return () => mm.revert();
-  }, { dependencies: [ready, n], scope: ref });
+  }, { dependencies: [ready], scope: ref });
 
   return (
     <section ref={ref} id="process" className={styles.process} aria-labelledby="process-title">
-      <div className={styles.pin} data-pin>
-        <div className={styles.top}>
-          <SectionHead kicker={data.kicker} title={data.title} id="process-title" />
-          <div className={styles.rail} aria-hidden="true">
-            <i className={styles.railFill} />
-            <ol>{data.steps.map((s, i) => <li key={s.name} className={i <= active ? styles.railOn : undefined}><span>{s.name}</span></li>)}</ol>
-          </div>
-        </div>
+      <SectionHead kicker={data.kicker} title={data.title} id="process-title" />
 
-        <div className={styles.track} data-track>
-          <span className={styles.vline} aria-hidden="true"><i data-vline /></span>
-          {data.steps.map((s) => (
-            <article key={s.name} className={styles.step} data-step>
-              <figure className={styles.img} data-img aria-hidden="true"><Image src={s.image} alt="" fill sizes="(min-width: 1101px) 30vw, 90vw" /></figure>
-              <div className={styles.copy}>
-                <h3 className={styles.name} data-name>{s.name}</h3>
-                <p className={styles.text}>{s.text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+      <div className={styles.row} data-row>
+        <span className={styles.line} aria-hidden="true"><i data-line /></span>
+        <ol className={styles.steps}>
+        {data.steps.map((s) => (
+          <li key={s.name} className={styles.step} data-step>
+            <i className={styles.dot} data-dot aria-hidden="true" />
+            <figure className={styles.img} data-img aria-hidden="true"><Image src={s.image} alt="" fill sizes="(min-width: 1001px) 18vw, 30vw" loading="lazy" /></figure>
+            <div className={styles.copy} data-copy>
+              <h3 className={styles.name}>{s.name}</h3>
+              <p className={styles.text}>{s.text}</p>
+            </div>
+          </li>
+        ))}
+        </ol>
       </div>
     </section>
   );

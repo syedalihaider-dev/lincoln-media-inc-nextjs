@@ -4,7 +4,6 @@ import ServiceIntro from "./ServiceIntro";
 import ServiceCapabilities from "./ServiceCapabilities";
 import TechnologyExperience from "./TechnologyExperience";
 import ServiceDetails from "./ServiceDetails";
-import WhyLincoln from "./WhyLincoln";
 import DevelopmentProcess from "./DevelopmentProcess";
 import ServiceShowcase from "./ServiceShowcase";
 import ServiceFAQ from "./ServiceFAQ";
@@ -41,7 +40,6 @@ export default function InnerServicePage({ service: s }) {
         {s.capabilities && <ServiceCapabilities data={s.capabilities} />}
         {s.technology && <TechnologyExperience data={s.technology} />}
         {s.details && <ServiceDetails data={s.details} />}
-        {s.why && <WhyLincoln data={s.why} />}
         {s.process && <DevelopmentProcess data={s.process} />}
         {s.showcase && <ServiceShowcase data={s.showcase} motif={s.motif} />}
         {s.faq && <ServiceFAQ data={s.faq} />}

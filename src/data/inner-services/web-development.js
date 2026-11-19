@@ -3,7 +3,7 @@
 // Solutions", technologies, portfolio, FAQ), its Services menu (names + URLs), and this site's own copy
 // (src/data/services.js, src/data/home.js PROCESS). Copy is restructured for reading, not invented.
 // Left out on purpose: the live page's figures (265+, 325+, "20+ years" vs "10 years"), AED prices,
-// timelines, named enterprise clients and its process section (which is video-animation template text).
+// timelines, named enterprise clients, any "why choose us" section and its process section (which is video-animation template text).
 import heroDev from "@public/images/inner/web-development/hero-mob.jpg";
 import mockApi from "@public/images/inner/web-development/portfolio-img-1.webp";
 import mockCircle from "@public/images/inner/web-development/portfolio-img-2.webp";
@@ -45,6 +45,12 @@ const WEB_DEVELOPMENT = {
     primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
     secondary: { label: "Explore what we build", href: "#capabilities" },
     marquee: ["WordPress", "SharePoint", "Sitecore", "Drupal", "Laravel", "PHP", "ASP.NET", "Python", "AngularJS", "Joomla"],
+    // decorative interface fragments floating over the hero background (no claims)
+    fragments: {
+      url: "www.yourbrand.com",
+      code: ["<website responsive>", "header · navigation · hero", "cms: WordPress · Drupal", "app: Laravel · ASP.NET", "</website>"],
+      status: "Live · responsive · SEO-friendly",
+    },
   },
 
   intro: {
@@ -55,7 +61,7 @@ const WEB_DEVELOPMENT = {
       "Design, front-end and back-end development come together in one team — the people who take on complex projects and see them through.", // (live, restructured)
       "A project is complete only when its stakeholders are satisfied, and every client gets prompt support and full transparency along the way.", // (live, restructured)
     ],
-    points: ["Front-end & back-end", "Prompt support", "Full transparency", "Free consultation"], // (live)
+    points: ["Responsive on every screen", "Front-end & back-end", "SEO-friendly architecture", "Support after launch"], // (live)
     images: [imgCode, heroDev, imgGlow],
   },
 
@@ -155,18 +161,6 @@ const WEB_DEVELOPMENT = {
     ],
   },
 
-  why: {
-    kicker: "Why The Lincoln Media",
-    title: "Why teams build their websites with us.",
-    reasons: [
-      { title: "Complete only when you are.", text: "A project isn't finished until its stakeholders are satisfied.", image: imgStudio }, // (live)
-      { title: "Prompt support. Full transparency.", text: "Every client gets prompt support and full transparency throughout the project.", image: imgTeam }, // (live)
-      { title: "Both sides of the build.", text: "Front-end and back-end in one team that takes on complex projects.", image: imgCode }, // (live)
-      { title: "Built to rank.", text: "Developers and SEO specialists plan the architecture together.", image: imgData }, // (live)
-      { title: "One team. Zero hand-offs.", text: "Creativity, technology and strategy under one roof.", image: imgGlow }, // (repo)
-    ],
-  },
-
   process: {
     kicker: "How a build moves",
     title: "From the first workshop to launch day.",
@@ -204,6 +198,8 @@ const WEB_DEVELOPMENT = {
     title: ["Have a digital experience in mind?", "Let's build it."],
     text: "Reach out to our team and we'll get back to you within a day.", // (live)
     primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    // what working with the team means, kept to the CTA (no separate "why us" section) — all (live)
+    points: ["Complete only when you are satisfied", "Prompt support & full transparency", "Front-end and back-end in one team", "SEO-friendly architecture", "Free consultation"],
     image: imgGlow,
   },
 };

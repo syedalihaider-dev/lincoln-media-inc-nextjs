@@ -42,7 +42,7 @@ export default function ServiceCTA({ data }) {
     const mm = gsap.matchMedia();
     mm.add(ANY_MOTION, () => {
       const split = SplitText.create(root.querySelectorAll("[data-l]"), { type: "words", mask: "words" });
-      gsap.from(split.words, { yPercent: 120, duration: 1.2, ease: "expo.out", stagger: 0.06, scrollTrigger: { trigger: root, start: "top 60%", once: true } });
+      gsap.from(split.words, { yPercent: 120, duration: 1.2, ease: "expo.out", stagger: 0.06, onComplete: () => split.revert(), scrollTrigger: { trigger: root, start: "top 60%", once: true } });
       gsap.fromTo(root.querySelector("[data-bg] img"), { scale: 1.3 }, { scale: 1, ease: "none", scrollTrigger: { trigger: root, start: "top bottom", end: "bottom bottom", scrub: true } });
       gsap.fromTo(root.querySelector("[data-orbwrap]"), { scale: 0.4, rotate: -90, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: root, start: "top 55%", once: true } });
       gsap.fromTo(root.querySelectorAll("[data-rise]"), { clipPath: "inset(0% 0% 100% 0%)", yPercent: 30 }, { clipPath: "inset(0% 0% 0% 0%)", yPercent: 0, duration: 1, ease: "expo.out", stagger: 0.08, scrollTrigger: { trigger: root, start: "top 45%", once: true } });
@@ -69,7 +69,14 @@ export default function ServiceCTA({ data }) {
         <div className={styles.orbWrap} data-orbwrap><Orb href={data.primary.href} label={data.primary.label} /></div>
 
         <div className={styles.foot}>
-          <p className={styles.text} data-rise>{data.text}</p>
+          <div className={styles.say}>
+            <p className={styles.text} data-rise>{data.text}</p>
+            {data.points && (
+              <ul className={styles.points} aria-label="Working with us">
+                {data.points.map((t) => <li key={t} data-rise>{t}</li>)}
+              </ul>
+            )}
+          </div>
           <div className={styles.actions} data-rise>
             <ServiceButton href={data.primary.href} size="lg">{data.primary.label}</ServiceButton>
             <ServiceButton href={SITE.phoneHref} variant="outline" size="lg" icon="phone">{SITE.phone}</ServiceButton>
