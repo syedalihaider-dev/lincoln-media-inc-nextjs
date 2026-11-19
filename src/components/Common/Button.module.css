@@ -1,0 +1,116 @@
+/* Label + disc. The disc is where the light comes from: on hover it floods the whole button. */
+@property --spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.btn {
+  --h: 58px;
+  --fg: var(--lm-ink);
+  --bg: var(--lm-accent);
+  --flood: var(--lm-paper);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--h);
+  padding: 0 6px 0 26px;
+  overflow: hidden;
+  border-radius: calc(var(--h) / 2);
+  font: 600 15px/1 var(--lm-body);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--fg);
+  background: var(--bg);
+  cursor: pointer;
+  will-change: transform;
+  transition: color 0.5s var(--lm-ease), box-shadow 0.6s var(--lm-ease);
+}
+.noIcon { padding-right: 26px; }
+.sm { --h: 46px; padding-left: 20px; font-size: 14px; }
+.lg { --h: 66px; padding-left: 32px; font-size: 16px; gap: 10px; }
+
+/* The flood: a circle growing out of the disc until it covers the button */
+.flood {
+  position: absolute;
+  z-index: -1;
+  right: calc(var(--h) / 2 - 3px);
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--flood);
+  transform: translate(50%, -50%) scale(0);
+  transition: transform 0.8s var(--lm-ease);
+  pointer-events: none;
+}
+.btn:hover .flood, .btn:focus-visible .flood { transform: translate(50%, -50%) scale(90); }
+.btn:hover { box-shadow: 0 0 0 1px rgba(54, 228, 208, 0.25), 0 14px 40px -12px rgba(54, 228, 208, 0.55); }
+
+/* The label rolls over letter by letter */
+.label { position: relative; display: block; overflow: hidden; padding: 2px 10px 2px 0; line-height: 1.2; }
+.rollA, .rollB { display: block; }
+.rollB { position: absolute; left: 0; top: 2px; }
+.ch { display: inline-block; white-space: pre; transition: transform 0.6s var(--lm-ease); transition-delay: calc(var(--i) * 18ms); }
+.rollB .ch { transform: translateY(110%); }
+.btn:hover .rollA .ch, .btn:focus-visible .rollA .ch { transform: translateY(-110%); }
+.btn:hover .rollB .ch, .btn:focus-visible .rollB .ch { transform: translateY(0); }
+
+/* The disc: the arrow leaves and a new one arrives */
+.disc {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: calc(var(--h) - 12px);
+  height: calc(var(--h) - 12px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--lm-ink);
+  color: var(--lm-accent);
+  transition: background-color 0.5s, color 0.5s;
+}
+.disc svg { position: absolute; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--lm-ease); }
+.iconB { transform: translate(-160%, 160%); }
+.btn:hover .iconA, .btn:focus-visible .iconA { transform: translate(160%, -160%); }
+.btn:hover .iconB, .btn:focus-visible .iconB { transform: none; }
+.btn:hover .disc { background: var(--lm-accent); color: var(--lm-ink); }
+
+/* Outline: transparent with a slowly turning lit border */
+.outline {
+  --fg: var(--lm-paper);
+  --bg: transparent;
+  --flood: var(--lm-accent);
+  background: transparent;
+}
+.outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--spin), rgba(238, 241, 247, 0.22), rgba(54, 228, 208, 0.9) 18%, rgba(238, 241, 247, 0.22) 36%, rgba(238, 241, 247, 0.22));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin 5s linear infinite;
+}
+@keyframes spin { to { --spin: 360deg; } }
+.outline .disc { background: rgba(54, 228, 208, 0.12); }
+.outline:hover { color: var(--lm-ink); }
+.outline:hover .disc { background: var(--lm-ink); color: var(--lm-accent); }
+
+/* Text: a quiet link — the disc lights on hover, no flood */
+.text { --fg: var(--lm-paper); --bg: transparent; padding-left: 0; box-shadow: none !important; }
+.text .flood { display: none; }
+.text .disc { width: calc(var(--h) - 18px); height: calc(var(--h) - 18px); background: transparent; box-shadow: inset 0 0 0 1px rgba(54, 228, 208, 0.5); }
+.text:hover { color: var(--lm-accent); }
+
+.btn:focus-visible { outline: 1px solid var(--lm-accent); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .outline::before { animation: none; }
+  .ch, .disc svg, .flood { transition: none; }
+}

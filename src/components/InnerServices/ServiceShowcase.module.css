@@ -1,0 +1,61 @@
+/* A showroom: the work on a turntable under a cyan spotlight, reflected on a dark floor */
+.showcase { position: relative; background: #020408; border-top: 1px solid var(--lm-line); }
+.pin {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 4vh;
+  padding: calc(var(--lm-header-h) + 4vh) var(--lm-gutter) 6vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse 40% 55% at 65% 45%, rgba(54, 228, 208, 0.16), transparent 70%), radial-gradient(ellipse 60% 20% at 65% 92%, rgba(54, 228, 208, 0.08), transparent 70%);
+}
+.stage { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); align-items: center; gap: 3vw; }
+
+.info { display: grid; gap: 30px; align-content: center; }
+.info > div { display: grid; gap: 16px; }
+.logo { display: inline-flex; align-self: start; justify-self: start; padding: 8px 12px; border-radius: 10px; background: rgba(238, 241, 247, 0.92); }
+.logo img { display: block; height: 30px; width: auto; }
+.name { font: 800 clamp(32px, 3.4vw, 64px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.platform { justify-self: start; padding: 7px 14px; border-radius: 16px; font: 600 14px var(--lm-body); color: var(--lm-ink); background: var(--lm-accent); }
+.text { max-width: 34ch; font: 300 clamp(18px, 1.35vw, 22px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.86); }
+.dots { list-style: none; display: grid; gap: 8px; border-left: 1px solid var(--lm-line); padding-left: 16px; }
+.dots li { font: 500 15px var(--lm-body); color: rgba(238, 241, 247, 0.4); transition: color 0.4s, transform 0.5s var(--lm-ease); }
+.dots .dotOn { color: var(--lm-accent); transform: translateX(8px); }
+
+/* The turntable */
+.space { position: relative; height: min(66vh, 620px); perspective: 1600px; }
+.tilt { position: absolute; inset: 0; transform-style: preserve-3d; }
+.ring { position: absolute; left: 50%; top: 46%; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }
+.panel {
+  --w: min(30vw, 520px);
+  position: absolute;
+  left: calc(var(--w) / -2);
+  top: calc(var(--w) * -0.39);
+  width: var(--w);
+  aspect-ratio: 689 / 530;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #5b5b5b;
+  transform: rotateY(var(--a)) translateZ(calc(var(--w) * 0.62));
+  box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(238, 241, 247, 0.1);
+  -webkit-box-reflect: below 14px linear-gradient(transparent 70%, rgba(255, 255, 255, 0.18));
+  filter: brightness(0.55) saturate(0.7);
+  transition: filter 0.7s var(--lm-ease), box-shadow 0.7s;
+}
+.panel img { object-fit: cover; }
+.panelOn { filter: none; box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(54, 228, 208, 0.5), 0 0 70px -10px rgba(54, 228, 208, 0.35); }
+.floor { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(54, 228, 208, 0.08), transparent 70%); pointer-events: none; }
+
+.mobile { display: none; }
+
+/* ---------- Tablet & phone, or reduced motion ---------- */
+@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
+  .pin { min-height: 0; padding: 14vh var(--lm-gutter) 12vh; }
+  .stage { display: none; }
+  .mobile { display: grid; gap: 9vh; }
+  .mproj { display: grid; gap: 16px; }
+  .mimg { position: relative; margin: 0 0 6px; aspect-ratio: 689 / 530; overflow: hidden; border-radius: 16px; background: #5b5b5b; }
+  .mimg img { object-fit: cover; }
+}

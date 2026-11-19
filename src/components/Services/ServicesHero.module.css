@@ -1,0 +1,66 @@
+/* A digital environment: deep ink, a faint perspective grid, cyan light at the core where the word sits */
+.hero { position: relative; background: #010307; }
+.pin {
+  position: relative;
+  height: 100svh;
+  min-height: 720px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+  padding: calc(var(--lm-header-h) + 4vh) var(--lm-gutter) 6vh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 45% 40% at 50% 52%, rgba(54, 228, 208, 0.16), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(54, 228, 208, 0.08), transparent 70%),
+    #010307;
+}
+.scene { position: absolute; inset: 0; z-index: 0; }
+.grid {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -10%;
+  height: 55%;
+  z-index: -1;
+  transform: perspective(700px) rotateX(70deg);
+  transform-origin: bottom;
+  background: linear-gradient(rgba(54, 228, 208, 0.12) 1px, transparent 1px) 0 0 / 100% 48px, linear-gradient(90deg, rgba(54, 228, 208, 0.12) 1px, transparent 1px) 0 0 / 48px 100%;
+  mask-image: linear-gradient(transparent, #000 70%);
+  -webkit-mask-image: linear-gradient(transparent, #000 70%);
+}
+
+.top { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.rfp { max-width: 40ch; text-align: right; font: 400 clamp(15px, 1.05vw, 17px)/1.55 var(--lm-body); color: rgba(238, 241, 247, 0.72); }
+.rfp a { color: var(--lm-paper); border-bottom: 1px solid var(--lm-accent); transition: color 0.3s; }
+.rfp a:hover { color: var(--lm-accent); }
+
+.giant {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+  font: 800 clamp(60px, 13.4vw, 300px)/0.85 var(--lm-display); /* eight letters: about 84vw wide */
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  color: var(--lm-paper);
+  text-shadow: 0 0 120px rgba(54, 228, 208, 0.25);
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.bottom { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.2fr) auto; align-items: end; gap: 28px 4vw; }
+.title { max-width: 24ch; font: 700 clamp(24px, 2.4vw, 44px)/1.12 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.veil { position: absolute; inset: 0; z-index: 3; background: var(--lm-ink-2); opacity: 0; pointer-events: none; }
+
+@media (max-width: 900px) {
+  .pin { height: auto; min-height: 100svh; gap: 4vh; padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 8vh; }
+  .top { flex-direction: column; }
+  .rfp { text-align: left; }
+  .giant { font-size: clamp(44px, 13vw, 120px); padding: 14vh 0; }
+  .bottom { grid-template-columns: minmax(0, 1fr); }
+  .title { font-size: clamp(22px, 6vw, 34px); }
+  .actions { justify-content: flex-start; }
+}

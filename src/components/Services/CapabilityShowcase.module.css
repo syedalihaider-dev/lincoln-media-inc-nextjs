@@ -1,0 +1,79 @@
+/* A chamber of light that moves with each service: ink, a cyan pool that drifts, a ghost word behind */
+.cap { position: relative; background: var(--lm-ink); border-top: 1px solid var(--lm-line); --cp: 0; }
+.head { display: grid; gap: 26px; padding: 18vh var(--lm-gutter) 6vh; }
+.title { max-width: 16ch; font: 800 clamp(36px, 4.8vw, 92px)/0.98 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.title em { color: var(--lm-accent); }
+
+.pin {
+  position: relative;
+  height: 100vh;
+  min-height: 720px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: 2vh 4vw;
+  padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 4vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse 50% 60% at var(--lx) var(--ly), rgba(54, 228, 208, 0.16), transparent 70%), var(--lm-ink);
+  transition: background-position 1s;
+}
+.ghost {
+  position: absolute;
+  left: -0.03em;
+  bottom: 9vh;
+  z-index: -1;
+  margin: 0;
+  font: 800 clamp(90px, 10.6vw, 220px)/0.8 var(--lm-display); /* the longest, ANIMATION, stays inside the screen */
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  color: rgba(54, 228, 208, 0.045);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: drift 1.4s var(--lm-ease) both;
+}
+@keyframes drift { from { transform: translateX(8%); opacity: 0; } }
+
+.copy { align-self: center; position: relative; min-height: 64vh; display: grid; align-items: center; }
+.copyInner { display: grid; gap: 22px; }
+.name { font: 800 clamp(36px, 4vw, 80px)/0.96 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.text { max-width: 30ch; font: 400 clamp(20px, 1.6vw, 26px)/1.4 var(--lm-body); color: var(--lm-paper); }
+.blurb { max-width: 40ch; font: 300 clamp(17px, 1.25vw, 20px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.74); }
+.subs { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.subs li { position: relative; padding-left: 16px; font: 500 15px/1.4 var(--lm-body); color: rgba(238, 241, 247, 0.86); }
+.subs li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 7px; height: 7px; transform: rotate(45deg); background: var(--lm-accent); }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; padding-top: 6px; }
+
+/* The visual: photograph in a circle, an orbit line, the 3D object in front */
+.visual { position: relative; align-self: center; height: min(66vh, 640px); }
+.photo { position: absolute; inset: 0; }
+.photo img { object-fit: cover; filter: grayscale(0.55) contrast(1.12) brightness(0.62); }
+.photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(3, 5, 11, 0.7) 60%); }
+.orbit { position: absolute; inset: 6%; border-radius: 50%; border: 1px solid rgba(54, 228, 208, 0.35); box-shadow: inset 0 0 60px rgba(54, 228, 208, 0.12); animation: turn 30s linear infinite; }
+.orbit::before { content: ""; position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; background: var(--lm-accent); transform: rotate(45deg); box-shadow: 0 0 16px var(--lm-accent); }
+@keyframes turn { to { rotate: 360deg; } }
+.object { position: absolute; inset: -10%; z-index: 2; pointer-events: none; }
+
+/* The rail: the eight names, the current one lit and filling */
+.rail { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; }
+.rail button { display: grid; gap: 10px; padding: 8px 0; text-align: left; font: 500 14px var(--lm-body); color: rgba(238, 241, 247, 0.5); transition: color 0.4s; }
+.rail button:hover { color: var(--lm-paper); }
+.rail i { position: relative; display: block; height: 2px; background: rgba(238, 241, 247, 0.12); overflow: hidden; }
+.rail i::after { content: ""; position: absolute; inset: 0; background: var(--lm-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--lm-ease); }
+.rail .railOn { color: var(--lm-paper); }
+.rail .railOn i::after { transform: scaleX(1); box-shadow: 0 0 10px var(--lm-accent); }
+
+.stack { display: none; }
+
+/* ---------- Tablet & phone, or reduced motion ---------- */
+@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
+  .pin { display: none; }
+  .stack { display: grid; padding: 0 var(--lm-gutter) 12vh; }
+  .block { display: grid; gap: 18px; padding: 8vh 0; border-top: 1px solid var(--lm-line); }
+  .bImg { position: relative; margin: 0 0 8px; height: 66vw; max-height: 520px; overflow: hidden; background: var(--lm-ink-3); }
+  .bImg img { object-fit: cover; filter: grayscale(0.4) contrast(1.08) brightness(0.8); }
+  .name { font-size: clamp(30px, 8vw, 56px); }
+  .head { padding: 14vh var(--lm-gutter) 2vh; }
+  .title { font-size: clamp(32px, 7vw, 60px); }
+}
+@media (prefers-reduced-motion: reduce) { .orbit { animation: none; } }

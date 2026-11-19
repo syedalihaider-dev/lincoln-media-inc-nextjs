@@ -1,0 +1,26 @@
+/* The last chapter: New York at night through a widening circle, a beam of cyan rising into the footer */
+.finale { position: relative; min-height: 120vh; background: #010204; border-top: 1px solid var(--lm-line); overflow: clip; isolation: isolate; }
+.film { position: absolute; inset: 0; z-index: -2; }
+.shade { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(1, 2, 4, 0.35), rgba(1, 2, 4, 0.88)), linear-gradient(180deg, rgba(1, 2, 4, 0.6), transparent 30%, transparent 70%, var(--lm-ink-2)); }
+.beam { position: absolute; left: 50%; bottom: 0; z-index: -1; width: min(460px, 44vw); height: 100%; translate: -50% 0; background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(54, 228, 208, 0.24), rgba(54, 228, 208, 0.06) 55%, transparent 80%); transform-origin: bottom; pointer-events: none; }
+
+.inner { display: grid; gap: 8vh; padding: 22vh var(--lm-gutter) 18vh; }
+.words { display: grid; gap: 0.06em; font: 800 clamp(56px, 11vw, 220px)/0.9 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; will-change: transform; }
+.words > span { display: block; }
+.design { position: relative; justify-self: start; }
+.design span { display: inline-block; }
+.rule { position: absolute; left: 0; right: 0; bottom: 0.02em; height: 4px; background: var(--lm-accent); transform-origin: left; box-shadow: 0 0 16px rgba(54, 228, 208, 0.7); }
+.build { justify-self: center; color: rgba(238, 241, 247, 0.92); }
+.launch { justify-self: end; color: var(--lm-accent); text-shadow: 0 0 70px rgba(54, 228, 208, 0.4); }
+
+.close { display: grid; gap: 26px; justify-items: center; text-align: center; }
+.title { font: 800 clamp(30px, 3.8vw, 72px)/1.04 var(--lm-display); letter-spacing: -0.035em; text-transform: uppercase; }
+.promise { max-width: 40ch; font: 300 clamp(19px, 1.5vw, 24px)/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.9); }
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+@media (max-width: 900px) {
+  .finale { min-height: 0; }
+  .inner { padding: 16vh var(--lm-gutter) 12vh; gap: 6vh; }
+  .words { font-size: clamp(42px, 15vw, 100px); }
+  .build, .launch { justify-self: start; }
+}

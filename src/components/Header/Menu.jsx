@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV, SITE } from "@/data/site";
-import { SERVICES } from "@/data/services";
+import { SERVICE_CATEGORIES, categoryHref } from "@/data/service-categories";
 import styles from "./Menu.module.css";
 
 const EASE = [0.77, 0, 0.18, 1];
@@ -16,8 +16,10 @@ const item = {
 };
 const fade = { closed: { opacity: 0, y: 12, transition: { duration: 0.2 } }, open: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } };
 
-/** Full-screen navigation overlay (Framer Motion). Escape closes it; focus moves in and back out. */
-export default function Menu({ open, onClose }) {
+const link = (base, href) => (!base || !href.startsWith("#") ? href : href === "#home" ? base : base + href);
+
+/** Full-screen navigation (tablet and phone): the main pages, every service category, and how to reach the studio. */
+export default function Menu({ open, onClose, base = "", current = null }) {
   const first = useRef(null);
 
   useEffect(() => {
@@ -34,39 +36,37 @@ export default function Menu({ open, onClose }) {
         <motion.div id="lm-menu" className={styles.menu} role="dialog" aria-modal="true" aria-label="Menu" initial="closed" animate="open" exit="closed" variants={panel}>
           <div className={styles.inner}>
             <nav className={styles.primary} aria-label="Menu">
-              <ol>
+              <ul>
                 {NAV.map((n, i) => (
                   <li key={n.href}>
-                    <motion.a ref={i === 0 ? first : undefined} href={n.href} variants={item} onClick={onClose}>
-                      <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
+                    <motion.a ref={i === 0 ? first : undefined} href={link(base, n.href)} variants={item} onClick={onClose} className={current === n.href ? styles.current : undefined} aria-current={current === n.href ? "page" : undefined}>
                       <span className={styles.word}>{n.label}</span>
                     </motion.a>
                   </li>
                 ))}
                 <li>
                   {/* Reloading the homepage starts the AI guide again */}
-                  <motion.a href="/" variants={item}>
-                    <span className={styles.num}>06</span>
+                  <motion.a href="/" variants={item} onClick={onClose}>
                     <span className={styles.word}><em>Your build plan</em></span>
                   </motion.a>
                 </li>
-              </ol>
+              </ul>
             </nav>
 
             <motion.aside className={styles.side} variants={fade}>
               <div>
                 <p className={styles.h}>Services</p>
                 <ul className={styles.services}>
-                  {SERVICES.map((s) => (
-                    <li key={s.key}><a href={s.href}>{s.title}</a></li>
+                  {SERVICE_CATEGORIES.map((c) => (
+                    <li key={c.key}><a href={categoryHref(c)} onClick={onClose}>{c.name}</a></li>
                   ))}
                 </ul>
               </div>
               <div>
                 <p className={styles.h}>Say hello</p>
                 <ul className={styles.contact}>
+                  <li><a className={styles.tel} href={SITE.phoneHref}>{SITE.phone}</a></li>
                   <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-                  <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
                   <li><a href={SITE.whatsapp} target="_blank" rel="noopener">WhatsApp</a></li>
                   <li className={styles.addr}>{SITE.street},<br />{SITE.locality}</li>
                 </ul>

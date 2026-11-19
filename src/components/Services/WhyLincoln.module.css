@@ -1,0 +1,51 @@
+/* Statements in the dark, each lit from a different side; photographs drifting through the words */
+.why { position: relative; background: #03060c; border-top: 1px solid var(--lm-line); overflow: clip; }
+.head { position: absolute; left: var(--lm-gutter); top: 14vh; z-index: 3; }
+
+.statement {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding: 14vh var(--lm-gutter);
+  isolation: isolate;
+}
+.s0 { background: radial-gradient(ellipse 50% 50% at 80% 40%, rgba(54, 228, 208, 0.12), transparent 70%); }
+.s1 { background: radial-gradient(ellipse 50% 50% at 15% 60%, rgba(54, 228, 208, 0.1), transparent 70%), linear-gradient(180deg, #03060c, #071416); }
+.s2 { background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(54, 228, 208, 0.1), transparent 70%), #071416; }
+.s3 { background: radial-gradient(ellipse 50% 50% at 90% 70%, rgba(123, 91, 255, 0.08), transparent 70%), linear-gradient(180deg, #071416, #03060c); }
+.s4 { background: radial-gradient(ellipse 60% 60% at 30% 40%, rgba(54, 228, 208, 0.14), transparent 70%), #03060c; }
+
+.text {
+  position: relative;
+  z-index: 1;
+  max-width: 17ch;
+  font: 800 clamp(38px, 5.6vw, 108px)/1.02 var(--lm-display);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+.text span { display: inline-block; white-space: pre; }
+.lit { color: var(--lm-accent); text-shadow: 0 0 50px rgba(54, 228, 208, 0.3); }
+.s1 .text, .s3 .text { justify-self: end; text-align: right; }
+
+.layer { position: absolute; margin: 0; overflow: hidden; background: var(--lm-ink-3); will-change: transform; }
+.layer img { object-fit: cover; }
+.back { z-index: -1; right: 8%; top: 18%; width: 34vw; height: 56vh; }
+.back img { filter: grayscale(0.7) contrast(1.15) brightness(0.55); }
+.back::after { content: ""; position: absolute; inset: 0; background: linear-gradient(200deg, rgba(54, 228, 208, 0.35), transparent 60%); mix-blend-mode: multiply; }
+/* crosses just behind the words, so every statement stays readable */
+.front { z-index: 0; left: 52%; bottom: 10%; width: 18vw; aspect-ratio: 4 / 5; box-shadow: 0 40px 80px -24px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(54, 228, 208, 0.35); }
+.front img { filter: contrast(1.06) saturate(0.9); }
+.s1 .back, .s3 .back { right: auto; left: 8%; }
+.s1 .front, .s3 .front { left: auto; right: 54%; }
+
+@media (max-width: 900px) {
+  .head { top: 10vh; }
+  .statement { min-height: 86vh; padding: 16vh var(--lm-gutter) 12vh; }
+  .text { font-size: clamp(24px, 6.8vw, 52px); max-width: none; } /* "GROUND-BREAKING" fits a 360px screen */
+  .s1 .text, .s3 .text { text-align: left; justify-self: start; }
+  .back { width: 70vw; height: 40vh; right: 0; top: 10%; }
+  .s1 .back, .s3 .back { left: 0; }
+  .front { width: 36vw; left: auto; right: 6%; bottom: 6%; }
+  .s1 .front, .s3 .front { right: auto; left: 6%; }
+}

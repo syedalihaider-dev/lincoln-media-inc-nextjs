@@ -1,0 +1,59 @@
+/* The close: a dark stage, the invitation lit only where the cursor's beam falls, a horizon at the foot */
+.cta {
+  position: relative;
+  padding: 20vh var(--lm-gutter) 16vh;
+  background: linear-gradient(180deg, #04070f, #020308 60%, var(--lm-ink-2));
+  overflow: hidden;
+  isolation: isolate;
+}
+.top { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 7vh; }
+.promise { margin: 0; max-width: 32ch; text-align: right; font: 400 clamp(16px, 1.2vw, 19px)/1.5 var(--lm-body); color: rgba(238, 241, 247, 0.8); }
+
+.beamWrap { position: relative; --x: 50%; --y: 40%; cursor: default; }
+.title {
+  margin: 0;
+  display: grid;
+  font: 800 clamp(52px, 10.6vw, 210px)/0.88 var(--lm-display);
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  color: rgba(238, 241, 247, 0.13);
+}
+.row { display: block; white-space: nowrap; will-change: transform; }
+.row:nth-child(2) { padding-left: 12vw; }
+.lit {
+  position: absolute;
+  inset: 0;
+  color: var(--lm-paper);
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle 26vw at var(--x) var(--y), #000 0%, rgba(0, 0, 0, 0.85) 35%, transparent 70%);
+  mask-image: radial-gradient(circle 26vw at var(--x) var(--y), #000 0%, rgba(0, 0, 0, 0.85) 35%, transparent 70%);
+  text-shadow: 0 0 40px rgba(54, 228, 208, 0.25);
+}
+.accent { color: var(--lm-accent); }
+
+.actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 28px 4vw; margin-top: 9vh; }
+.text { margin: 0; max-width: 34ch; font: 300 clamp(19px, 1.5vw, 24px)/1.5 var(--lm-light); color: var(--lm-paper); }
+.buttons { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn { font-size: 14px !important; letter-spacing: 0.14em !important; }
+.direct { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 36px; font: 500 15px var(--lm-mono); letter-spacing: 0.06em; }
+.direct a { color: var(--lm-paper); background: linear-gradient(var(--lm-accent), var(--lm-accent)) 0 100% / 0 1px no-repeat; padding-bottom: 4px; transition: background-size 0.5s var(--lm-ease), color 0.3s; }
+.direct a:hover { color: var(--lm-accent); background-size: 100% 1px; }
+
+/* The horizon the footer rises from */
+.horizon { position: absolute; left: 0; right: 0; bottom: -1px; height: 40vh; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(54, 228, 208, 0.16), transparent 70%); }
+.horizon::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--lm-accent), transparent); opacity: 0.6; }
+
+/* Touch screens and reduced motion: no beam to steer, so the words are simply lit */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .title { color: var(--lm-paper); }
+  .lit { display: none; }
+  .row:last-child { color: var(--lm-accent); }
+}
+@media (max-width: 900px) {
+  .cta { padding: 14vh var(--lm-gutter) 12vh; }
+  .top { flex-direction: column; align-items: flex-start; }
+  .promise { text-align: left; }
+  .title { font-size: clamp(30px, 9.8vw, 90px); }
+  .row:nth-child(2) { padding-left: 0; }
+  .actions { grid-template-columns: 1fr; }
+}

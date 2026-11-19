@@ -1,0 +1,81 @@
+/* Three values, three bands of their own light: a scatter of colour, a terminal grid, a drafting table */
+.values { position: relative; background: #020308; overflow: clip; }
+.head { display: grid; gap: 26px; padding: 18vh var(--lm-gutter) 10vh; }
+.title { max-width: 18ch; font: 800 clamp(36px, 4.6vw, 86px)/0.98 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
+
+.band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 6vw;
+  padding: 12vh var(--lm-gutter);
+  border-top: 1px solid var(--lm-line);
+}
+.flip .copy { order: 2; }
+.copy { display: grid; gap: 28px; min-width: 0; }
+
+.word {
+  font: 800 clamp(40px, 5.2vw, 100px)/0.95 var(--lm-display);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ch { display: inline-block; will-change: transform; }
+.ch i { display: inline-block; font-style: normal; }
+.line { max-width: 36ch; font: 300 clamp(19px, 1.45vw, 24px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.86); }
+
+.visual { position: relative; margin: 0; height: min(58vh, 560px); overflow: hidden; background: var(--lm-ink-3); clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%); }
+.visual img { object-fit: cover; will-change: transform; }
+
+/* Creativity: light thrown from two corners; the picture in its own colour */
+.creativity { background: radial-gradient(ellipse 45% 60% at 10% 30%, rgba(54, 228, 208, 0.14), transparent 70%), radial-gradient(ellipse 40% 50% at 95% 90%, rgba(123, 91, 255, 0.1), transparent 70%); }
+.creativity .ch:nth-child(3n + 1) i { color: var(--lm-accent); }
+
+/* Technology: a terminal grid across the picture, the word in signal cyan */
+.technology { background: radial-gradient(ellipse 50% 60% at 30% 50%, rgba(54, 228, 208, 0.08), transparent 70%), var(--lm-ink); }
+.technology .word { color: var(--lm-accent); text-shadow: 0 0 50px rgba(54, 228, 208, 0.3); }
+.technology .line { font-family: var(--lm-mono); font-size: clamp(16px, 1.15vw, 19px); line-height: 1.7; letter-spacing: 0.02em; color: var(--lm-accent-2); }
+.technology .visual img { filter: contrast(1.1) brightness(0.8); }
+.grid {
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  background:
+    linear-gradient(rgba(54, 228, 208, 0.16) 1px, transparent 1px) 0 0 / 100% 36px,
+    linear-gradient(90deg, rgba(54, 228, 208, 0.16) 1px, transparent 1px) 0 0 / 36px 100%;
+  mix-blend-mode: screen;
+}
+
+/* Strategy: graphite, a measured baseline under the word */
+.strategy { background: linear-gradient(180deg, var(--lm-ink-3), var(--lm-ink-2)); }
+.strategy .visual img { filter: grayscale(0.5) contrast(1.08); }
+.ruler { display: flex; justify-content: space-between; align-items: flex-start; height: 18px; margin-top: -10px; border-top: 1px solid var(--lm-accent); transform-origin: left; }
+.ruler i { width: 1px; height: 8px; background: rgba(54, 228, 208, 0.6); }
+.ruler i:nth-child(5n + 1) { height: 16px; background: var(--lm-accent); }
+
+/* The creed */
+.creed {
+  display: grid;
+  justify-items: center;
+  gap: 0.1em;
+  padding: 18vh var(--lm-gutter) 20vh;
+  text-align: center;
+  font: 800 clamp(40px, 7vw, 132px)/0.95 var(--lm-display);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  background: radial-gradient(ellipse 55% 60% at 50% 55%, rgba(54, 228, 208, 0.14), transparent 70%), linear-gradient(160deg, #061416, #020308);
+  border-top: 1px solid var(--lm-line);
+}
+.accent { color: var(--lm-accent); }
+
+/* ---------- Tablet & phone: word and line above, picture below ---------- */
+@media (max-width: 900px) {
+  .head { padding: 14vh var(--lm-gutter) 6vh; }
+  .title { font-size: clamp(32px, 7vw, 60px); }
+  .band { grid-template-columns: minmax(0, 1fr); gap: 5vh; padding: 10vh var(--lm-gutter); }
+  .flip .copy { order: 0; }
+  .word { font-size: clamp(34px, 10.2vw, 80px); }
+  .visual { height: 62vw; }
+  .creed { font-size: clamp(30px, 9.4vw, 72px); padding: 14vh var(--lm-gutter); }
+}
