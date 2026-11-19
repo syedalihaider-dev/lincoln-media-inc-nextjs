@@ -52,7 +52,7 @@ export default function Process() {
     <section ref={ref} id="process" className={styles.section} data-chapter="Process" data-nav="home" aria-labelledby="process-title">
       <div className={styles.pin} data-pin>
         <header className={styles.head}>
-          <SectionLabel index="08" tone="light">How we work</SectionLabel>
+          <SectionLabel index="08" tone="dark">How we work</SectionLabel>
           <RevealText id="process-title" className={styles.title}>
             Five moves. <em>No wasted ones.</em>
           </RevealText>

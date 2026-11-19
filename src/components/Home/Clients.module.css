@@ -1,9 +1,9 @@
-/* White world: the names alone, travelling at the speed you scroll */
-.section { position: relative; background: var(--lm-white); color: var(--lm-ink); padding: 12vh 0 16vh; overflow: hidden; }
+/* Marquee at night: the names alone in light, travelling at the speed you scroll along a cyan horizon */
+.section { position: relative; background: radial-gradient(ellipse 80% 35% at 50% 62%, rgba(54, 228, 208, 0.07), transparent 70%), var(--lm-ink); color: var(--lm-paper); border-top: 1px solid var(--lm-line); padding: 12vh 0 16vh; overflow: hidden; }
 .head { padding: 0 var(--lm-gutter); margin-bottom: 6vh; }
 .marquee { overflow: hidden; padding: 1vh 0; }
-.track { display: flex; align-items: center; gap: 3.2vw; width: max-content; white-space: nowrap; font: 800 clamp(44px, 7vw, 136px)/1.08 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; color: var(--lm-ink); will-change: transform; }
-.track b { font-size: 0.32em; color: var(--lm-violet); font-weight: 400; }
-.outline .track { color: var(--lm-violet); }
-.outline .track b { color: var(--lm-accent-deep); }
+.track { display: flex; align-items: center; gap: 3.2vw; width: max-content; white-space: nowrap; font: 800 clamp(44px, 7vw, 136px)/1.08 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; color: var(--lm-paper); will-change: transform; }
+.track b { font-size: 0.32em; color: var(--lm-accent); font-weight: 400; }
+.outline .track { color: rgba(54, 228, 208, 0.75); }
+.outline .track b { color: var(--lm-mute); }
 @media (prefers-reduced-motion: reduce) { .track { flex-wrap: wrap; width: auto; white-space: normal; padding: 0 var(--lm-gutter); } .track > :nth-child(n + 17) { display: none; } }

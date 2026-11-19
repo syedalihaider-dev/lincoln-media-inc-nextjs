@@ -16,6 +16,8 @@ const nextConfig = {
     return [
       { source: "/videos/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       { source: "/images/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      // The guide's recorded lines are requested with ?v=VOICE_VERSION (public/app.js), so a new recording gets a new URL
+      { source: "/assets/voice/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
     ];
   },
 };

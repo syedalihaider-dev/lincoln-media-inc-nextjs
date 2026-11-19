@@ -1,11 +1,11 @@
-/* Violet world: the numbers as kinetic typography, New York layered underneath */
-.section { position: relative; background: var(--lm-violet); color: var(--lm-white); padding: 20vh var(--lm-gutter) 18vh; overflow: hidden; }
+/* Night city: the numbers as kinetic typography in pure ink, New York glowing underneath in cyan */
+.section { position: relative; background: linear-gradient(180deg, var(--lm-ink), #02040a); color: var(--lm-paper); padding: 20vh var(--lm-gutter) 18vh; overflow: hidden; }
 .section::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 60% 50% at 85% 10%, rgba(123, 91, 255, 0.7), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(54, 228, 208, 0.18), transparent 70%);
+  background: radial-gradient(ellipse 55% 45% at 85% 8%, rgba(54, 228, 208, 0.14), transparent 70%), radial-gradient(ellipse 50% 40% at 0% 100%, rgba(123, 91, 255, 0.08), transparent 70%);
 }
 .top { position: relative; display: grid; gap: 30px; margin-bottom: 10vh; }
 .statement { max-width: 18ch; font: 800 clamp(34px, 5.4vw, 104px)/0.95 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
@@ -23,8 +23,8 @@
   gap: 24px;
   padding: 2.4vh 0 1.4vh;
 }
-.stat::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(248, 249, 252, 0.4); transform: scaleX(var(--rule)); transform-origin: left; }
-.stat dt { align-self: start; padding-top: 10px; font: 500 11px var(--lm-mono); letter-spacing: 0.24em; text-transform: uppercase; color: rgba(248, 249, 252, 0.8); }
+.stat::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(238, 241, 247, 0.22); transform: scaleX(var(--rule)); transform-origin: left; }
+.stat dt { align-self: start; padding-top: 10px; font: 500 11px var(--lm-mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-mute); }
 .stat dd { margin: 0; justify-self: end; }
 .s1 dd, .s3 dd { justify-self: start; }
 
@@ -34,20 +34,21 @@
 .strip span { display: block; height: 1em; }
 .sep { opacity: 0.45; }
 .odo em { color: var(--lm-accent); font-size: 0.5em; margin-left: 0.04em; }
-.s1 .odo, .s3 .odo { color: var(--lm-accent); }
+.s1 .odo, .s3 .odo { color: var(--lm-accent); text-shadow: 0 0 60px rgba(54, 228, 208, 0.25); }
 
 .visual { position: relative; width: min(100%, 1100px); justify-self: end; }
 .photo { aspect-ratio: 21 / 9; width: 100%; }
-.photo img { filter: grayscale(1) contrast(1.1); }
-.photo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, var(--lm-violet), #10164a); mix-blend-mode: multiply; opacity: 0.9; pointer-events: none; }
+.photo img { filter: grayscale(1) contrast(1.15) brightness(0.85); }
+.photo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #0f4a47, var(--lm-ink)); mix-blend-mode: multiply; opacity: 0.85; pointer-events: none; }
 .card {
   position: absolute;
   left: -6%;
   bottom: -10%;
   width: min(320px, 70%);
   padding: 24px 26px;
-  background: var(--lm-ink);
+  background: var(--lm-ink-3);
   color: var(--lm-paper);
+  border: 1px solid var(--lm-line);
   display: grid;
   gap: 12px;
   box-shadow: 0 40px 80px -30px rgba(3, 5, 11, 0.6);

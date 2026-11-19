@@ -68,7 +68,7 @@ export default function Manifesto() {
     <section ref={ref} id="stories" className={styles.section} data-chapter="About" data-nav="home" aria-labelledby="manifesto-title">
       <div className={styles.panel} data-panel>
         <header className={styles.head} data-head>
-          <SectionLabel index="02" tone="light">About the studio</SectionLabel>
+          <SectionLabel index="02" tone="dark">About the studio</SectionLabel>
           <span className={styles.folio}>{SITE.name} — {SITE.city}</span>
           <span className={styles.folio}>Est. {SITE.established}</span>
         </header>

@@ -51,7 +51,7 @@ export default function Clients() {
   return (
     <section ref={ref} id="clients" className={styles.section} data-chapter="Clients" data-nav="home" aria-labelledby="clients-title">
       <div className={styles.head}>
-        <SectionLabel index="11" tone="light">Brands we&apos;ve moved</SectionLabel>
+        <SectionLabel index="11" tone="dark">Brands we&apos;ve moved</SectionLabel>
         <h2 id="clients-title" className="lm-sr-only">Brands we&apos;ve moved</h2>
         <ul className="lm-sr-only">{CLIENTS.map((c) => <li key={c}>{c}</li>)}</ul>
       </div>

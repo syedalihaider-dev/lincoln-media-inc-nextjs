@@ -15,6 +15,23 @@
   const clipUrl = (key) => `assets/voice/${key}.mp3?v=${VOICE_VERSION}`;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const LINES = window.VOICE_LINES || {};
+  // Recorded clips are fetched a step ahead of when the guide speaks them (in the order she uses them)
+  // and kept in memory, so each line starts the moment it's due instead of waiting on the network.
+  const clipBlobs = new Map(), clipJobs = new Map();
+  function preloadClips(keys) {
+    let chain = Promise.resolve();
+    keys.filter((k) => LINES[k] && !clipJobs.has(k)).forEach((k) => {
+      const job = chain
+        .then(() => fetch(clipUrl(k)))
+        .then((r) => (r.ok ? r.blob() : null))
+        .then((b) => { if (b) clipBlobs.set(k, URL.createObjectURL(b)); else clipJobs.delete(k); })
+        .catch(() => clipJobs.delete(k));
+      clipJobs.set(k, job);
+      chain = job;
+    });
+    return chain;
+  }
+  const clipSrc = (key) => clipBlobs.get(key) || clipUrl(key);
   const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
   /* =====================================================================
@@ -616,7 +633,7 @@
     const line = LINES[key]; if (!line) return;
     const spans = renderWords(el, line.show);
     setStatus("SPEAKING");
-    const ok = sfx.on ? await voice.play(clip || clipUrl(key), line.say, (f) => revealTo(spans, f)) : false;
+    const ok = sfx.on ? await voice.play(clip || clipSrc(key), line.say, (f) => revealTo(spans, f)) : false;
     if (my !== flow) return;
     if (ok) revealTo(spans, 1); else await typeOut(spans, my);
     if (my === flow) setStatus("LISTENING");
@@ -652,6 +669,12 @@
     if (name === "result") tint(answers.build);
     else if (STEP_COLORS[name]) colTarget = STEP_COLORS[name];
     sfx.blip(440 + Math.max(qi, 0) * 90);
+    // Fetch what she may say next: this question's replies, then the following question (or the plan lines)
+    if (sfx.on && qi > -1) {
+      const acks = Object.keys(LINES).filter((k) => k.startsWith(`ack-${name}-`));
+      const next = name === "reading" ? [`result-${answers.build || "unsure"}`, "result", "unlock"] : [QUESTIONS[qi + 1], name === "name" ? "email-bad" : ""];
+      preloadClips([...acks, ...next]);
+    }
     return step;
   }
 
@@ -672,15 +695,16 @@
     let clip = null;
     if (name === "email" && sfx.on) {
       // Processing sound while the guide "thinks". The line with the visitor's name is generated
-      // in the browser (usually pre-made while they typed). If the voice model is still
-      // downloading, wait for it a little so she can actually say the name.
+      // live (usually pre-made while they typed). The wait is capped: if the voice model is still
+      // downloading (it is ~90 MB on a first visit), she says the recorded line instead of
+      // keeping the visitor waiting — the "thinking" beat stays the same length either way.
       setStatus("PROCESSING");
       const stopProc = sfx.processing();
       const minThink = wait(1100);
       try {
         if (answers.name) {
-          if (!live.ready && live.loading) await Promise.race([live.loading, wait(15000)]);
-          if (live.ready && my === flow) clip = await nameLine(answers.name);
+          if (!live.ready && live.loading) await Promise.race([live.loading, wait(1100)]);
+          if (live.ready && my === flow) clip = await nameLine(answers.name, 3500);
         }
         await minThink;
       } catch (_) { clip = null; } // never get stuck here — fall back to the recorded line
@@ -721,7 +745,11 @@
   // Gate
   function startExperience(withSound) {
     setSound(withSound);
-    if (withSound) live.warm();
+    if (withSound) {
+      // The intro's lines first (they play right away), then the first questions
+      preloadClips(["intro-1", "intro-2", "intro-3", "intro-4", "intro-5", "intro-6", "name", "email"]);
+      live.warm();
+    }
     $(".hud-ring").style.opacity = "";
     enter("intro");
   }
@@ -744,16 +772,25 @@
   // Start voicing "Nice to meet you, <name>" as soon as the visitor pauses typing
   const nameClips = new Map();
   const cleanName = (v) => v.replace(/[^\p{L}\p{M}' .-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 40);
-  function nameLine(n) {
+  function nameLine(n, budget = 8000) {
     if (!LINES.email) return Promise.resolve(null);
     if (!nameClips.has(n)) nameClips.set(n, live.say(LINES.email.say.replace("Nice to meet you.", `Nice to meet you, ${n}.`), 12000));
-    return Promise.race([nameClips.get(n), wait(8000).then(() => null)]);
+    return Promise.race([nameClips.get(n), wait(budget).then(() => null)]);
   }
-  let nameTimer = 0;
+  let nameTimer = 0, primeWhenReady = false;
   $("#nameInput").addEventListener("input", (e) => {
     clearTimeout(nameTimer);
     const n = cleanName(e.target.value);
-    if (n.length > 1 && live.ready && sfx.on) nameTimer = setTimeout(() => nameLine(n), 600);
+    if (n.length < 2 || !sfx.on) return;
+    if (live.ready) nameTimer = setTimeout(() => nameLine(n), 600);
+    // The model finished loading after they started typing: make the line as soon as it's ready
+    else if (live.loading && !primeWhenReady) {
+      primeWhenReady = true;
+      live.loading.then(() => {
+        const v = cleanName($("#nameInput").value);
+        if (live.ready && sfx.on && v.length > 1 && stepName === "name") nameLine(v);
+      });
+    }
   });
   $("#nameInput").addEventListener("keydown", (e) => {
     if (e.key !== "Enter") return;
@@ -776,7 +813,7 @@
       emailHint.classList.add("err"); emailHint.textContent = "PLEASE CHECK YOUR EMAIL";
       $(".field-box", e.target.closest(".field")).animate([{ transform: "translateX(0)" }, { transform: "translateX(-8px)" }, { transform: "translateX(8px)" }, { transform: "translateX(0)" }], { duration: 260 });
       sfx.blip(220, 0.18, 0.05);
-      if (sfx.on) { voice.stop(); voice.play(clipUrl("email-bad"), LINES["email-bad"].say); }
+      if (sfx.on) { voice.stop(); voice.play(clipSrc("email-bad"), LINES["email-bad"].say); }
       return;
     }
     answers.email = v;
@@ -1013,7 +1050,7 @@
     const expected = (LIB.build[answers.build] || LIB.build.unsure).title;
     const key = p.archetype === expected ? `result-${answers.build || "unsure"}` : "result";
     const line = LINES[key];
-    if (sfx.on && line) await voice.play(clipUrl(key), line.say);
+    if (sfx.on && line) await voice.play(clipSrc(key), line.say);
     else await wait(1600);
     if (my !== flow) return;
     await present($("#unlockHint"), "unlock", my);
@@ -1086,6 +1123,8 @@
     if (!on) voice.stop();
   }
   try { paintSound(localStorage.getItem("lm-sound") !== "off"); } catch (_) {}
+  // While the gate is up, quietly fetch her first two lines (~80 KB) so "Hello there." starts on the click
+  addEventListener("load", () => setTimeout(() => { if (stepName === "gate" && !document.body.classList.contains("skipped")) preloadClips(["intro-1", "intro-2"]); }, 600));
   soundBtn.addEventListener("click", () => setSound(!sfx.on));
 
   /* =====================================================================

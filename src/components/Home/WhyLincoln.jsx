@@ -69,7 +69,7 @@ export default function WhyLincoln() {
   return (
     <section ref={ref} id="numbers" className={styles.section} data-chapter="Why us" data-nav="home" aria-labelledby="why-title">
       <div className={styles.top}>
-        <SectionLabel index="09" tone="onViolet">Why The Lincoln Media</SectionLabel>
+        <SectionLabel index="09" tone="dark">Why The Lincoln Media</SectionLabel>
         <RevealText id="why-title" className={styles.statement} stagger={0.12}>
           Twelve years. Twelve hundred projects. <em>One standard.</em>
         </RevealText>

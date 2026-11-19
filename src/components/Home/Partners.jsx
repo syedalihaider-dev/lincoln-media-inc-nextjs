@@ -17,7 +17,7 @@ export default function Partners() {
   return (
     <section id="about" className={styles.section} data-chapter="Partners" data-nav="home" aria-labelledby="partners-title">
       <header className={styles.head}>
-        <SectionLabel index="10" tone="light">Three companies. One ecosystem.</SectionLabel>
+        <SectionLabel index="10" tone="dark">Three companies. One ecosystem.</SectionLabel>
         <RevealText id="partners-title" className={styles.title}>
           Our <em>partners.</em>
         </RevealText>
