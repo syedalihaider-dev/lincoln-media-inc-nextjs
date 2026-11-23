@@ -1,0 +1,61 @@
+/* A showroom at night: four screens on a reflective floor, cyan light pooling beneath them */
+.resp {
+  position: relative;
+  padding: clamp(80px, 12vh, 130px) var(--lm-gutter) clamp(60px, 9vh, 100px);
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 92%, rgba(54, 228, 208, 0.12), transparent 70%),
+    linear-gradient(180deg, var(--lm-ink-2), #040810);
+  border-top: 1px solid var(--lm-line);
+  overflow: hidden;
+}
+.copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 6vw; align-items: end; }
+.headCol { display: grid; gap: 20px; }
+.title { display: grid; font: 800 clamp(30px, 3.6vw, 66px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.em { color: var(--lm-accent); }
+.textCol { display: grid; gap: 24px; }
+.text { font: 300 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.points { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.points li { display: grid; gap: 6px; padding-top: 14px; border-top: 1px solid rgba(54, 228, 208, 0.4); }
+.points h3 { font: 600 15px/1.3 var(--lm-body); color: var(--lm-paper); }
+.points p { font: 400 14px/1.5 var(--lm-body); color: rgba(238, 241, 247, 0.65); }
+
+.stageWrap { position: relative; margin-top: clamp(48px, 8vh, 90px); perspective: 2200px; }
+.stage { position: relative; width: min(100%, 1240px); margin: 0 auto; aspect-ratio: 16 / 8.6; transform-style: preserve-3d; transform-origin: 50% 100%; }
+.floor { position: absolute; left: 10%; right: 10%; bottom: -4%; height: 30%; background: radial-gradient(closest-side, rgba(54, 228, 208, 0.22), transparent); filter: blur(24px); z-index: -1; }
+
+.device { position: absolute; will-change: transform; }
+.body { position: relative; will-change: transform; }
+.screen { position: relative; overflow: hidden; background: #000; }
+.label { position: absolute; left: 50%; bottom: -30px; translate: -50% 0; font: 500 11px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.4); }
+
+/* monitor: back centre, on a stand */
+.monitor { left: 24%; top: 0; width: 54%; z-index: 1; }
+.monitor .screen { aspect-ratio: 16 / 9.4; border: 10px solid #0d121c; border-radius: 14px; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.12), 0 40px 80px -30px rgba(0, 0, 0, 0.9); }
+.stand { display: block; margin: 0 auto; width: 18%; height: 44px; background: linear-gradient(180deg, #1a2130, #0d121c); clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); }
+.monitor .label { bottom: -26px; }
+
+/* laptop: front left, a lid and a base */
+.laptop { left: 2%; top: 40%; width: 42%; z-index: 3; }
+.laptop .screen { aspect-ratio: 16 / 10; border: 8px solid #0d121c; border-bottom-width: 14px; border-radius: 12px 12px 0 0; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.12); }
+.base { display: block; height: 14px; margin: 0 -6%; border-radius: 0 0 14px 14px; background: linear-gradient(180deg, #2a3242, #0d121c); box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.9); }
+
+/* tablet: right, portrait */
+.tablet { right: 3%; top: 18%; width: 21%; z-index: 2; }
+.tablet .screen { aspect-ratio: 3 / 4.1; border: 10px solid #0d121c; border-radius: 22px; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.14), 0 40px 70px -30px rgba(0, 0, 0, 0.9); }
+
+/* phone: front, between the laptop and the tablet */
+.phone { left: 64%; top: 46%; width: 10.5%; z-index: 4; }
+.phone .screen { aspect-ratio: 9 / 19; border: 6px solid #0d121c; border-radius: 26px; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.18), 0 30px 60px -20px rgba(0, 0, 0, 0.95), 0 0 50px rgba(54, 228, 208, 0.18); }
+
+@media (max-width: 900px) {
+  .copy { grid-template-columns: minmax(0, 1fr); }
+  .points { grid-template-columns: minmax(0, 1fr); }
+  .stage { aspect-ratio: 16 / 10.5; }
+  .label { display: none; }
+  .monitor .screen { border-width: 4px; border-radius: 6px; }
+  .laptop .screen { border-width: 3px; border-bottom-width: 6px; border-radius: 6px 6px 0 0; }
+  .base { height: 6px; }
+  .stand { height: 18px; }
+  .tablet .screen { border-width: 4px; border-radius: 10px; }
+  .phone .screen { border-width: 3px; border-radius: 12px; }
+}

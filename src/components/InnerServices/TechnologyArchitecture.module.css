@@ -1,0 +1,54 @@
+/* The stack as architecture: a dark hall, the lit structure in the middle, the layers to the right */
+.arch { position: relative; background: radial-gradient(ellipse 50% 60% at 50% 55%, rgba(54, 228, 208, 0.08), transparent 70%), #02050c; border-top: 1px solid var(--lm-line); }
+.track { height: 240svh; }
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 2vw;
+  padding: calc(var(--lm-header-h) + 2vh) var(--lm-gutter) 5vh;
+  overflow: hidden;
+}
+.scene { position: absolute; inset: 0; }
+.halo { position: absolute; left: 50%; top: 55%; width: 46vmin; height: 46vmin; translate: -50% -50%; border-radius: 50%; border: 1px solid rgba(54, 228, 208, 0.12); box-shadow: 0 0 0 7vmin rgba(54, 228, 208, 0.02), inset 0 0 80px rgba(54, 228, 208, 0.06); pointer-events: none; }
+
+.copy { position: relative; z-index: 1; display: grid; gap: 22px; align-self: center; }
+.text { max-width: 38ch; font: 300 clamp(16px, 1.1vw, 18px)/1.65 var(--lm-light); color: rgba(238, 241, 247, 0.76); }
+
+.layers { position: relative; z-index: 1; grid-column: 3; list-style: none; display: grid; gap: 6px; }
+.layerTitle { margin: 0; font: inherit; }
+.layer { border-bottom: 1px solid var(--lm-line); }
+.layerHead { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 0; text-align: left; }
+.layerHead .nm { font: 700 clamp(18px, 1.5vw, 26px)/1.1 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; color: rgba(238, 241, 247, 0.42); transition: color 0.4s; }
+.layerHead:hover .nm { color: var(--lm-paper); }
+.dot { flex: none; width: 10px; height: 10px; rotate: 45deg; border: 1px solid rgba(54, 228, 208, 0.5); transition: background-color 0.4s, box-shadow 0.4s; }
+.on .layerHead .nm { color: var(--lm-paper); }
+.on .dot { background: var(--lm-accent); box-shadow: 0 0 12px var(--lm-accent); }
+
+.items { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; max-height: 0; overflow: hidden; transition: max-height 0.7s var(--lm-ease), padding 0.5s; }
+.items li { padding: 6px 12px; border-radius: 20px; font: 500 13px var(--lm-mono); color: var(--lm-paper); background: rgba(54, 228, 208, 0.08); border: 1px solid rgba(54, 228, 208, 0.3); opacity: 0; transform: translateY(10px); transition: opacity 0.4s, transform 0.6s var(--lm-ease); }
+.on .items { max-height: 240px; padding-bottom: 16px; }
+.on .items li { opacity: 1; transform: none; transition-delay: calc(var(--k) * 40ms + 120ms); }
+
+/* Laptops: the copy and the layers share the left column, the structure takes the right half */
+@media (max-width: 1200px) and (min-width: 901px) {
+  .stage { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; gap: 28px 2vw; }
+  .scene { left: 44%; }
+  .halo { display: none; }
+  .copy, .layers { grid-column: 1; }
+}
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .track { height: auto; }
+  .stage { position: relative; height: auto; grid-template-columns: minmax(0, 1fr); padding: 72px var(--lm-gutter); gap: 28px; }
+  .scene { position: relative; inset: auto; height: 80vw; max-height: 440px; order: 1; }
+  .copy { order: 0; }
+  .layers { grid-column: auto; order: 2; }
+  .items { max-height: none; padding-bottom: 14px; }
+  .items li { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) and (min-width: 901px) {
+  .scene { display: none; }
+}

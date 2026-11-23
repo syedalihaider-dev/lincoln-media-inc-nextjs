@@ -20,6 +20,9 @@ export const SERVICES_PAGE = {
   description:
     "A full-service creative digital agency: web development, mobile apps, digital marketing, UI/UX design, e-commerce, branding & communication, video animation and animation services.",
   headline: "Our digital services create lovely projects & deliver memorable experiences.", // (live) services hero
+  heroTitle: ["Digital capabilities", "built to move", "brands forward."],
+  ecosystem: "Many capabilities. One digital ecosystem.",
+  explore: "Explore Services",
   eyebrow: "A full-service creative digital agency", // (live)
   expert: "Speak to an Expert", // (live)
   rfp: "If you have any RFP requirement, please share it with us at", // (live)

@@ -20,7 +20,7 @@ export function innerServiceMetadata(slug) {
     description: s.seo.description,
     alternates: { canonical: s.path },
     robots: { index: true, follow: true },
-    openGraph: { type: "website", url: s.path, title: s.seo.title, description: s.seo.description, siteName: SITE.name, images: s.hero.image ? [{ url: s.hero.image.src, alt: s.hero.imageAlt }] : undefined },
-    twitter: { card: "summary_large_image", title: s.seo.title, description: s.seo.description },
+    openGraph: { type: "website", url: s.path, title: s.seo.title, description: s.seo.description, siteName: SITE.name, images: s.seo.image ? [{ url: s.seo.image.src, width: s.seo.image.width, height: s.seo.image.height, alt: s.seo.imageAlt }] : undefined },
+    twitter: { card: "summary_large_image", title: s.seo.title, description: s.seo.description, images: s.seo.image ? [s.seo.image.src] : undefined },
   };
 }

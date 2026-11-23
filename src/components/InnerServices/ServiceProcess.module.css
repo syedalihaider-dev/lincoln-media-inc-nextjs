@@ -1,0 +1,55 @@
+/* A journey: steps glide sideways past one evolving screen; a line fills toward launch */
+.process { position: relative; background: linear-gradient(180deg, #02050c, var(--lm-ink-2)); border-top: 1px solid var(--lm-line); overflow: hidden; }
+.inner {
+  height: 100svh;
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 3vh 4vw;
+  padding: calc(var(--lm-header-h) + 2vh) var(--lm-gutter) 5vh;
+}
+.head { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.title { font: 800 clamp(26px, 2.8vw, 50px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; text-align: right; }
+
+.viewport { position: relative; overflow: hidden; align-self: center; mask-image: linear-gradient(90deg, #000 70%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent); }
+.vline { display: none; }
+.rail { list-style: none; display: flex; width: calc(var(--n) * 100%); will-change: transform; }
+.step { flex: 0 0 calc(100% / var(--n)); display: grid; gap: 20px; align-content: center; padding-right: 6vw; opacity: 0.25; transition: opacity 0.6s; }
+.step.on { opacity: 1; }
+.name { font: 800 clamp(40px, 5.6vw, 104px)/0.92 var(--lm-display); letter-spacing: -0.055em; text-transform: uppercase; }
+.on .name { color: var(--lm-accent); }
+.text { max-width: 34ch; font: 400 clamp(18px, 1.45vw, 24px)/1.45 var(--lm-body); color: var(--lm-paper); }
+.inlineVisual { display: none; }
+
+.screenWrap { position: relative; align-self: center; perspective: 1400px; }
+.screen { position: relative; aspect-ratio: 640 / 420; transform-style: preserve-3d; will-change: transform; }
+.layer { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(54, 228, 208, 0.25); opacity: 0; transform: translateZ(-80px) scale(0.94); clip-path: inset(0 100% 0 0 round 14px); transition: opacity 0.5s, transform 0.9s var(--lm-ease), clip-path 0.9s var(--lm-ease); }
+.layer.past { opacity: 0.0; clip-path: inset(0 0 0 0 round 14px); transform: translateZ(-160px) scale(0.9); }
+.layer.shown { opacity: 1; transform: none; clip-path: inset(0 0 0 0 round 14px); }
+.live { width: 100%; height: 100%; }
+.caption { position: absolute; left: 18px; bottom: -44px; display: flex; align-items: center; gap: 10px; font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.7); }
+.caption i { width: 7px; height: 7px; border-radius: 50%; background: var(--lm-accent); box-shadow: 0 0 8px var(--lm-accent); }
+
+.progress { grid-column: 1 / -1; display: grid; gap: 14px; }
+.track { position: relative; height: 1px; background: var(--lm-line); }
+.fill { position: absolute; inset: 0; background: var(--lm-accent); box-shadow: 0 0 10px var(--lm-accent); transform-origin: left; transform: scaleX(0); }
+.marks { list-style: none; display: flex; justify-content: space-between; }
+.marks li { display: flex; align-items: center; gap: 8px; font: 500 12px var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238, 241, 247, 0.4); transition: color 0.4s; }
+.marks i { width: 8px; height: 8px; rotate: 45deg; border: 1px solid rgba(54, 228, 208, 0.5); transition: background-color 0.4s; }
+.marks .reached { color: var(--lm-paper); }
+.marks .reached i { background: var(--lm-accent); }
+
+/* Phones & reduced motion: a vertical line, each step with its own screen */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .inner { height: auto; min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: none; padding: 72px var(--lm-gutter); }
+  .head { flex-direction: column; align-items: flex-start; }
+  .title { text-align: left; }
+  .viewport { overflow: visible; mask-image: none; -webkit-mask-image: none; padding-left: 26px; }
+  .vline { display: block; position: absolute; left: 4px; top: 0; bottom: 0; width: 1px; background: var(--lm-accent); transform-origin: top; box-shadow: 0 0 8px var(--lm-accent); }
+  .rail { flex-direction: column; width: auto; gap: 44px; transform: none !important; }
+  .step { padding: 0; opacity: 1; }
+  .step .name { color: var(--lm-paper); font-size: clamp(30px, 9vw, 56px); }
+  .inlineVisual { display: block; max-width: 520px; border-radius: 12px; overflow: hidden; aspect-ratio: 640 / 420; }
+  .screenWrap, .progress { display: none; }
+}

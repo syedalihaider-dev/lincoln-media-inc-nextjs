@@ -1,3 +1,4 @@
+import ogImage from "@public/images/services/web-development.jpg";
 import { SITE } from "@/data/site";
 import { SERVICES_PAGE, SERVICE_CATEGORIES } from "@/data/service-categories";
 import PageShell from "@/components/Common/PageShell";
@@ -5,15 +6,15 @@ import ServicesHero from "@/components/Services/ServicesHero";
 import ServicesApproach from "@/components/Services/ServicesApproach";
 import ServiceIndex from "@/components/Services/ServiceIndex";
 import ProcessPath from "@/components/Services/ProcessPath";
-import TechSphere from "@/components/Services/TechSphere";
 import ServicesFinale from "@/components/Services/ServicesFinale";
 
 export const metadata = {
   title: { absolute: SERVICES_PAGE.title },
   description: SERVICES_PAGE.description,
   alternates: { canonical: "/services" },
-  openGraph: { type: "website", url: "/services", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description, siteName: SITE.name },
-  twitter: { card: "summary_large_image", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description },
+  robots: { index: true, follow: true },
+  openGraph: { type: "website", url: "/services", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description, siteName: SITE.name, images: [{ url: ogImage.src, width: ogImage.width, height: ogImage.height, alt: "Code open in an editor on a laptop screen" }] },
+  twitter: { card: "summary_large_image", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description, images: [ogImage.src] },
 };
 
 const jsonLd = {
@@ -44,7 +45,6 @@ export default function ServicesPage() {
         <ServicesApproach />
         <ServiceIndex />
         <ProcessPath />
-        <TechSphere />
         <ServicesFinale />
       </PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
