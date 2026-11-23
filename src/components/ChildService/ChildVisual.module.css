@@ -1,0 +1,20 @@
+/* A window that opens to the full screen while the frame holds */
+.visual { position: relative; height: 175svh; background: #02040a; }
+.sticky { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; overflow: hidden; }
+.frame { position: absolute; inset: 0; margin: 0; overflow: hidden; will-change: clip-path; }
+.img { object-fit: cover; will-change: transform; }
+.shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2, 4, 10, 0.55), rgba(2, 4, 10, 0.25) 40%, rgba(2, 4, 10, 0.85)), radial-gradient(ellipse 60% 50% at 50% 55%, rgba(2, 4, 10, 0.45), transparent 70%); }
+.caption { position: relative; z-index: 1; display: grid; justify-items: center; gap: 4px; padding: 0 var(--lm-gutter); text-align: center; }
+.line { font: 800 clamp(38px, 7vw, 136px)/0.92 var(--lm-display); letter-spacing: -0.055em; text-transform: uppercase; color: var(--lm-paper); text-shadow: 0 10px 60px rgba(0, 0, 0, 0.5); }
+.line span { display: inline-block; will-change: transform; }
+.em { color: var(--lm-accent); }
+.note { margin-top: 18px; max-width: 36ch; font: 400 clamp(16px, 1.2vw, 20px)/1.5 var(--lm-body); color: rgba(238, 241, 247, 0.88); }
+
+@media (max-width: 900px) {
+  .visual { height: 130svh; }
+  .line { font-size: clamp(32px, 10vw, 64px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visual { height: auto; }
+  .sticky { position: relative; height: 80svh; }
+}

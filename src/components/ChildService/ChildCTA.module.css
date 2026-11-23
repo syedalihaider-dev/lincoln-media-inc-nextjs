@@ -1,0 +1,31 @@
+/* The final scene: a real photograph opening to full screen, the invitation over it, the sibling pages beneath */
+.cta { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-rows: 1fr auto; min-height: max(700px, min(100svh, 980px)); background: #010206; text-align: center; border-top: 1px solid var(--lm-line); }
+.frame { position: absolute; inset: 0; z-index: -1; margin: 0; overflow: hidden; will-change: clip-path; }
+.img { object-fit: cover; object-position: 40% 50%; will-change: transform; }
+.grade { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 45%, rgba(1, 2, 6, 0.55), rgba(1, 2, 6, 0.9) 75%), linear-gradient(180deg, rgba(1, 2, 6, 0.7), rgba(1, 2, 6, 0.35) 40%, #010206); }
+
+.inner { align-self: center; display: grid; justify-items: center; gap: 24px; padding: 14vh var(--lm-gutter) 8vh; }
+.title { display: grid; font: 800 clamp(34px, 5.6vw, 108px)/0.95 var(--lm-display); letter-spacing: -0.055em; text-transform: uppercase; text-shadow: 0 10px 50px rgba(0, 0, 0, 0.6); }
+.em { color: var(--lm-accent); text-shadow: 0 0 80px rgba(54, 228, 208, 0.45); }
+.text { max-width: 42ch; font: 400 clamp(17px, 1.35vw, 22px)/1.5 var(--lm-body); color: rgba(238, 241, 247, 0.85); }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.mail { font: 400 15px var(--lm-body); color: rgba(238, 241, 247, 0.6); }
+.mail a { color: var(--lm-paper); border-bottom: 1px solid var(--lm-accent); transition: color 0.3s; }
+.mail a:hover { color: var(--lm-accent); }
+
+.sibs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 18px 36px; padding: 26px var(--lm-gutter); text-align: left; border-top: 1px solid var(--lm-line); background: rgba(1, 2, 6, 0.7); backdrop-filter: blur(8px); }
+.sibsHead { display: flex; gap: 10px; white-space: nowrap; font: 500 12px/1.9 var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--lm-accent); }
+.sibsHead i { font-style: normal; transition: transform 0.4s var(--lm-ease); }
+.sibsHead:hover i { transform: translateX(4px); }
+.sibs ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.sibs li a { position: relative; font: 400 15px/1.6 var(--lm-body); color: rgba(238, 241, 247, 0.65); transition: color 0.3s; }
+.sibs li a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--lm-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.45s var(--lm-ease); }
+.sibs li a:hover { color: var(--lm-paper); }
+.sibs li a:hover::after { transform: scaleX(1); }
+
+@media (max-width: 900px) {
+  .cta { min-height: 0; }
+  .inner { padding: 110px var(--lm-gutter) 70px; }
+  .title { font-size: clamp(28px, 8.6vw, 60px); }
+  .sibs { grid-template-columns: minmax(0, 1fr); }
+}

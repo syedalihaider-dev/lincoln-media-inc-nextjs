@@ -58,7 +58,17 @@ export default function Menu({ open, onClose, base = "", current = null }) {
                 <p className={styles.h}>Services</p>
                 <ul className={styles.services}>
                   {SERVICE_CATEGORIES.map((c) => (
-                    <li key={c.key}><a href={categoryHref(c)} onClick={onClose}>{c.name}</a></li>
+                    <li key={c.key}>
+                      {c.key === "web" ? (
+                        // Web Development opens to its 14 child pages
+                        <details className={styles.sub}>
+                          <summary><a href={categoryHref(c)} onClick={onClose}>{c.name}</a><i aria-hidden="true" /></summary>
+                          <ul>{c.items.filter((it) => it.href).map((it) => <li key={it.href}><a href={it.href} onClick={onClose}>{it.name}</a></li>)}</ul>
+                        </details>
+                      ) : (
+                        <a href={categoryHref(c)} onClick={onClose}>{c.name}</a>
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>

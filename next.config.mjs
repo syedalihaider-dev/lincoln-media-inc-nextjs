@@ -12,6 +12,10 @@ const nextConfig = {
     qualities: [75, 80],
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920, 2400],
   },
+  // The live site's WhatsApp page is /services/whatsapp-web-integration; the older route forwards there
+  async redirects() {
+    return [{ source: "/services/whatsapp-business-integration", destination: "/services/whatsapp-web-integration", permanent: true }];
+  },
   async headers() {
     return [
       { source: "/videos/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },

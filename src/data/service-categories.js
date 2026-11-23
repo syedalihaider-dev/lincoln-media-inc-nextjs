@@ -137,7 +137,8 @@ export const categoryHref = (c) => c.href || `/services#index-${c.key}`; // the 
 // The Services mega menu: the live site's menu groups, with Video and Animation together and the other lines last
 const byKey = Object.fromEntries(SERVICE_CATEGORIES.map((c) => [c.key, c]));
 export const MEGA_MENU = [
-  { title: "Web Development", href: byKey.web.href, items: byKey.web.items },
+  // wide: the 14 Web Development child pages (see src/data/child-services) get two columns
+  { title: "Web Development", href: byKey.web.href, items: byKey.web.items, wide: true },
   { title: "Mobile App Development", href: byKey.mobile.href, items: byKey.mobile.items },
   { title: "Digital Marketing", href: byKey.marketing.href, items: byKey.marketing.items },
   { title: "UI/UX Design", href: byKey.ux.href, items: byKey.ux.items },

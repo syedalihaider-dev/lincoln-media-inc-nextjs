@@ -88,13 +88,17 @@
 .megaText { font: 400 15px/1.55 var(--lm-body); color: rgba(238, 241, 247, 0.72); }
 .megaActions { display: grid; justify-items: start; gap: 12px; padding-top: 6px; }
 
-.megaGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px 28px; align-content: start; }
+.megaGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 30px 26px; align-content: start; }
 .group { display: grid; align-content: start; gap: 12px; }
 .groupTitle { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--lm-line); font: 700 15px/1.25 var(--lm-display); letter-spacing: -0.01em; text-transform: uppercase; color: var(--lm-paper); transition: color 0.35s, border-color 0.35s; }
 .groupTitle i { font-style: normal; color: var(--lm-accent); opacity: 0; transform: translateX(-6px); transition: opacity 0.35s, transform 0.5s var(--lm-ease); }
 .groupTitle:hover { color: var(--lm-accent); border-color: rgba(54, 228, 208, 0.5); }
 .groupTitle:hover i { opacity: 1; transform: none; }
 .group ul { list-style: none; display: grid; gap: 1px; }
+/* Web Development: its 14 child pages in two columns */
+.groupWide { grid-column: span 2; }
+.groupWide ul { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(7, auto); grid-auto-flow: column; column-gap: 24px; }
+.group li a[aria-current] { color: var(--lm-accent); }
 .group li a, .group li span { position: relative; display: inline-block; padding: 4px 0; font: 400 14px/1.35 var(--lm-body); color: rgba(238, 241, 247, 0.7); transition: color 0.3s, transform 0.45s var(--lm-ease); }
 .group li span { color: rgba(238, 241, 247, 0.5); }
 .group li a:hover, .group li a:focus-visible { color: var(--lm-paper); transform: translateX(6px); }

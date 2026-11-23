@@ -1,0 +1,52 @@
+/* A turning carousel of screens on a lit floor */
+.show { position: relative; overflow: hidden; padding: clamp(84px, 12vh, 140px) 0 clamp(64px, 10vh, 110px); background: radial-gradient(ellipse 60% 45% at 50% 75%, rgba(54, 228, 208, 0.12), transparent 70%), linear-gradient(180deg, var(--lm-ink), #050b14); border-top: 1px solid var(--lm-line); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 18px 6vw; align-items: end; padding: 0 var(--lm-gutter); }
+.head > :first-child { grid-column: 1 / -1; }
+.title { font: 800 clamp(28px, 3.4vw, 60px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.text { font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+
+/* desktop: the section is pinned, so it is exactly one screen tall — head, stage, labels */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .show { height: 100svh; min-height: 660px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: calc(var(--lm-header-h) + 3vh) 0 5vh; }
+  .stage { height: auto !important; margin-top: 2vh !important; }
+  .labels { margin-top: 0 !important; }
+}
+.stage { position: relative; height: clamp(320px, 31vw, 470px); margin-top: clamp(30px, 5vh, 60px); perspective: 2200px; perspective-origin: 50% 30%; }
+.tilt { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(-6deg); }
+.ring { --a: 0deg; --r: clamp(440px, 46vw, 820px); position: absolute; left: 50%; top: 6%; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(calc(var(--r) * -1)) rotateY(var(--a)); }
+.item {
+  --w: clamp(300px, 40vw, 700px);
+  position: absolute;
+  left: calc(var(--w) / -2);
+  top: 0;
+  width: var(--w);
+  margin: 0;
+  transform: rotateY(calc(var(--i) * var(--step))) translateZ(var(--r));
+  border-radius: 14px;
+  box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(238, 241, 247, 0.12);
+  filter: brightness(0.55) saturate(0.8);
+  transition: filter 0.6s, box-shadow 0.6s;
+  backface-visibility: hidden;
+}
+.isPhone { --w: clamp(140px, 13vw, 230px); top: 0; border-radius: 28px; }
+.front { filter: none; box-shadow: 0 60px 100px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--lm-accent), 0 0 80px -20px rgba(54, 228, 208, 0.5); }
+.floor { position: absolute; left: 15%; right: 15%; bottom: -6%; height: 34%; background: radial-gradient(closest-side, rgba(54, 228, 208, 0.18), transparent); filter: blur(20px); }
+
+.labels { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; margin-top: 28px; padding: 0 var(--lm-gutter); }
+.labels li { display: flex; align-items: center; gap: 10px; font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.4); transition: color 0.4s; }
+.labels i { width: 7px; height: 7px; rotate: 45deg; border: 1px solid rgba(54, 228, 208, 0.6); transition: background-color 0.4s; }
+.labels .on { color: var(--lm-paper); }
+.labels .on i { background: var(--lm-accent); }
+
+/* Phones & reduced motion: a swipeable row instead of the carousel */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .stage { height: auto; perspective: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px var(--lm-gutter) 30px; }
+  .stage::-webkit-scrollbar { display: none; }
+  .tilt, .ring { position: static; transform: none !important; width: auto; height: auto; }
+  .ring { display: flex; align-items: flex-end; gap: 16px; }
+  .item { --w: min(78vw, 520px); position: relative; left: auto; flex: none; transform: none; filter: none; scroll-snap-align: center; }
+  .isPhone { --w: min(36vw, 200px); }
+  .floor { display: none; }
+  .labels { display: none; }
+}
+@media (max-width: 900px) { .head { grid-template-columns: minmax(0, 1fr); } }

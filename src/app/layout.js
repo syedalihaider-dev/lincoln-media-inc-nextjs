@@ -14,6 +14,12 @@ export const metadata = {
   openGraph: { type: "website", siteName: SITE.name, locale: "en_US" },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
+  // The brand mark (public/images/favicon.png, 64×64); src/app/favicon.ico carries the same PNG for /favicon.ico requests
+  icons: {
+    icon: [{ url: "/images/favicon.png", type: "image/png", sizes: "64x64" }],
+    shortcut: [{ url: "/images/favicon.png", type: "image/png" }],
+    apple: [{ url: "/images/favicon.png", sizes: "64x64" }],
+  },
 };
 
 export const viewport = {

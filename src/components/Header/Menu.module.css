@@ -27,6 +27,12 @@
 .services, .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .services a, .contact a { font: 400 16px/1.4 var(--lm-body); color: var(--lm-mute); transition: color 0.3s; }
 .services a:hover, .contact a:hover { color: var(--lm-paper); }
+.sub summary { display: flex; align-items: center; gap: 10px; list-style: none; cursor: pointer; }
+.sub summary::-webkit-details-marker { display: none; }
+.sub summary i { width: 8px; height: 8px; border: solid var(--lm-accent); border-width: 0 1.5px 1.5px 0; rotate: 45deg; translate: 0 -2px; transition: rotate 0.4s var(--lm-ease); }
+.sub[open] summary i { rotate: 225deg; translate: 0 2px; }
+.sub ul { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; margin: 10px 0 4px; padding-left: 12px; border-left: 1px solid rgba(54, 228, 208, 0.35); }
+.sub ul a { font-size: 14px; }
 .addr { font: 400 15px/1.5 var(--lm-body); color: var(--lm-mute); }
 .contact .tel { font: 600 20px var(--lm-body); color: var(--lm-accent); }
 

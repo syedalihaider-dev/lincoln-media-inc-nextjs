@@ -1,0 +1,32 @@
+/* Compact questions in two columns, light filling each row on hover */
+.faq { position: relative; padding: clamp(84px, 12vh, 130px) var(--lm-gutter); background: linear-gradient(180deg, #02040a, var(--lm-ink-2)); }
+.top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px 5vw; margin-bottom: clamp(32px, 5vh, 56px); }
+.ask { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.ask p { font: 300 18px/1.4 var(--lm-light); color: rgba(238, 241, 247, 0.75); }
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3vw; align-items: start; }
+.list { list-style: none; border-top: 1px solid var(--lm-line); }
+.item { position: relative; overflow: hidden; border-bottom: 1px solid var(--lm-line); isolation: isolate; }
+.item::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(54, 228, 208, 0.09), transparent 80%); transform: scaleX(0); transform-origin: left; transition: transform 0.7s var(--lm-ease); }
+.item:hover::before, .item.on::before { transform: scaleX(1); }
+.qWrap { margin: 0; font: inherit; }
+.q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 18px 14px 18px 6px; text-align: left; }
+.q span { font: 600 clamp(16px, 1.15vw, 19px)/1.35 var(--lm-body); color: rgba(238, 241, 247, 0.86); transition: color 0.4s, transform 0.6s var(--lm-ease); }
+.on .q span { color: var(--lm-accent); transform: translateX(8px); }
+.q i { position: relative; flex: none; width: 34px; height: 34px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(238, 241, 247, 0.22); transition: background-color 0.4s, transform 0.6s var(--lm-ease); }
+.q i::before, .q i::after { content: ""; position: absolute; left: 10px; right: 10px; top: 50%; height: 1.5px; margin-top: -0.75px; background: var(--lm-paper); transition: transform 0.5s var(--lm-ease); }
+.q i::after { transform: rotate(90deg); }
+.on .q i { background: var(--lm-accent); transform: rotate(180deg); }
+.on .q i::before, .on .q i::after { background: var(--lm-ink); }
+.on .q i::after { transform: rotate(0deg); }
+.a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.7s var(--lm-ease); }
+.on .a { grid-template-rows: 1fr; }
+.aIn { overflow: hidden; }
+.aIn p { padding: 0 56px 22px 14px; font: 300 clamp(15px, 1.05vw, 17px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.86); }
+
+@media (max-width: 900px) {
+  .top { grid-template-columns: minmax(0, 1fr); }
+  .cols { grid-template-columns: minmax(0, 1fr); }
+  .list + .list { border-top: 0; }
+  .aIn p { padding-right: 6px; }
+}

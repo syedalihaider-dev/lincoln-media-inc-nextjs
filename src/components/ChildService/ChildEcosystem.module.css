@@ -1,0 +1,42 @@
+/* One window carrying a project from its first draft to the finished site */
+.eco { --p: 0; position: relative; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4vw; align-items: center; padding: clamp(84px, 12vh, 140px) var(--lm-gutter); overflow: hidden; background: radial-gradient(ellipse 50% 60% at 70% 50%, rgba(54, 228, 208, 0.08), transparent 70%), #02050c; border-top: 1px solid var(--lm-line); }
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .eco { height: 100svh; min-height: 680px; padding: calc(var(--lm-header-h) + 3vh) var(--lm-gutter) 5vh; }
+}
+
+.side { display: grid; gap: 28px; align-content: center; }
+.flowWrap { position: relative; }
+.flow { list-style: none; display: grid; gap: 2px; padding-left: 28px; }
+.line { position: absolute; left: 5px; top: 10px; bottom: 10px; width: 1px; background: linear-gradient(var(--lm-accent) calc(var(--p) * 100%), var(--lm-line) calc(var(--p) * 100%)); box-shadow: 0 0 8px rgba(54, 228, 208, 0.4); }
+.stage { position: relative; display: grid; gap: 6px; padding: 10px 0; }
+.node { position: absolute; left: -28px; top: 16px; z-index: 1; width: 11px; height: 11px; rotate: 45deg; background: #02050c; border: 1px solid rgba(54, 228, 208, 0.5); transition: background-color 0.4s, box-shadow 0.4s; }
+.done .node { background: rgba(54, 228, 208, 0.5); }
+.on .node { background: var(--lm-accent); box-shadow: 0 0 12px var(--lm-accent); }
+.name { font: 700 clamp(17px, 1.35vw, 22px)/1.2 var(--lm-display); letter-spacing: -0.02em; text-transform: uppercase; color: rgba(238, 241, 247, 0.42); transition: color 0.4s; }
+.on .name { color: var(--lm-accent); }
+.done .name { color: rgba(238, 241, 247, 0.7); }
+.text { overflow: hidden; max-width: 42ch; font: 400 clamp(15px, 1.05vw, 17px)/1.55 var(--lm-body); color: rgba(238, 241, 247, 0.84); opacity: 0; transition: opacity 0.5s, max-height 0.7s var(--lm-ease); max-height: 0; }
+.on .text { opacity: 1; max-height: 140px; }
+.inline { display: none; }
+
+.view { position: relative; perspective: 1800px; }
+.window { position: relative; border-radius: 14px; overflow: hidden; background: #0b111c; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.14), 0 60px 120px -40px rgba(0, 0, 0, 0.9), 0 0 120px -40px rgba(54, 228, 208, 0.35); transform: rotateY(-8deg) rotateX(3deg); }
+.chrome { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; background: #141b28; }
+.chrome i { width: 9px; height: 9px; border-radius: 50%; background: rgba(238, 241, 247, 0.2); }
+.chrome span { margin: 0 auto; padding: 3px 40px; border-radius: 6px; font: 500 11px var(--lm-mono); color: rgba(238, 241, 247, 0.7); background: rgba(238, 241, 247, 0.08); animation: url 0.5s var(--lm-ease); }
+@keyframes url { from { opacity: 0; transform: translateY(6px); } }
+.screen { position: relative; aspect-ratio: 16 / 10; }
+.layer { position: absolute; inset: 0; transform-origin: 50% 0%; will-change: transform, clip-path; }
+.caption { display: flex; align-items: center; gap: 10px; margin-top: 18px; font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.65); }
+.caption i { width: 7px; height: 7px; border-radius: 50%; background: var(--lm-accent); box-shadow: 0 0 8px var(--lm-accent); }
+
+/* Phones & reduced motion: every stage open, each with its own screen */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .eco { grid-template-columns: minmax(0, 1fr); }
+  .view { display: none; }
+  .text { opacity: 1; max-height: none; }
+  .inline { display: block; margin-top: 10px; }
+  .inlineFrame { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.12); }
+  .flow { gap: 22px; }
+  .line { background: var(--lm-line); }
+}

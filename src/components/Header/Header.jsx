@@ -145,14 +145,14 @@ export default function Header({ inSite, active, base = "", current = null }) {
                         </motion.div>
                         <div className={styles.megaGrid}>
                           {MEGA_MENU.map((g, i) => (
-                            <motion.div key={g.title} className={styles.group} custom={i + 1} variants={col} initial="hidden" animate="show">
+                            <motion.div key={g.title} className={`${styles.group} ${g.wide ? styles.groupWide : ""}`} custom={i + 1} variants={col} initial="hidden" animate="show">
                               <a className={styles.groupTitle} href={g.href} onClick={() => setMega(false)}>
                                 {g.title}<i aria-hidden="true">→</i>
                               </a>
                               <ul>
                                 {g.items.map((it) => (
                                   <li key={it.name}>
-                                    {it.href ? <a href={it.href} onClick={() => setMega(false)}>{it.name}</a> : <span>{it.name}</span>}
+                                    {it.href ? <a href={it.href} aria-current={activeHref === it.href ? "page" : undefined} onClick={() => setMega(false)}>{it.name}</a> : <span>{it.name}</span>}
                                   </li>
                                 ))}
                               </ul>
