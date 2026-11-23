@@ -1,0 +1,7 @@
+.head { display: grid; gap: 20px; justify-items: start; }
+.tag { display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border: 1px solid rgba(54, 228, 208, 0.4); border-radius: 6px; font: 500 11px/1 var(--lm-mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--lm-accent); }
+.tag i { width: 6px; height: 6px; background: var(--lm-accent); transform: rotate(45deg); }
+.title { max-width: 20ch; font: 700 clamp(28px, 3.4vw, 58px)/1.02 var(--lm-display); letter-spacing: -0.045em; }
+.ink .title { color: var(--lm-ink); }
+.ink .tag { color: var(--lm-ink); border-color: rgba(3, 5, 11, 0.35); }
+.ink .tag i { background: var(--lm-ink); }

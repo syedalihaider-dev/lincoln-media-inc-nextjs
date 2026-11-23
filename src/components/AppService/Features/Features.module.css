@@ -1,0 +1,16 @@
+/* The cyan sheet: brand cyan as a surface, ink type on it */
+.feat { display: grid; gap: clamp(24px, 4vh, 40px); padding: clamp(90px, 13vh, 150px) 0; overflow: hidden; color: var(--lm-ink); background: radial-gradient(circle at 1px 1px, rgba(3, 5, 11, 0.12) 1px, transparent 1.5px) 0 0 / 24px 24px, var(--lm-accent); }
+.head { padding: 0 var(--lm-gutter); margin-bottom: clamp(10px, 3vh, 30px); }
+.row { display: grid; gap: 14px; }
+.label { padding: 0 var(--lm-gutter); font: 500 12px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(3, 5, 11, 0.6); }
+.strip { list-style: none; display: flex; gap: 12px; width: max-content; padding: 0 var(--lm-gutter); will-change: transform; }
+.strip li { padding: 18px 28px; border-radius: 99px; background: var(--lm-ink); color: var(--lm-paper); font: 700 clamp(18px, 1.9vw, 32px)/1 var(--lm-display); letter-spacing: -0.03em; white-space: nowrap; }
+.alt li { background: transparent; color: var(--lm-ink); box-shadow: inset 0 0 0 1.5px var(--lm-ink); }
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .strip { flex-wrap: wrap; width: auto; }
+  .strip li { padding: 12px 18px; font-size: 16px; }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .strip { flex-wrap: nowrap; }
+}

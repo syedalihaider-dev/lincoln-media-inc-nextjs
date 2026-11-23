@@ -1,0 +1,54 @@
+.perf { position: relative; padding: clamp(96px, 14vh, 160px) var(--lm-gutter); background: linear-gradient(180deg, #02050b, #060a14); }
+.top { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: end; gap: 4vw; margin-bottom: clamp(44px, 7vh, 80px); }
+.lead { max-width: 44ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.76); }
+
+.tiles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tile { display: grid; grid-template-rows: auto auto 1fr; gap: 10px; padding: 18px 18px 24px; border-radius: 22px; background: linear-gradient(160deg, #0d1422, #090e18); border: 1px solid var(--lm-line); }
+.tile h3 { margin-top: 8px; font: 700 clamp(17px, 1.3vw, 21px)/1.15 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; }
+.tile p { font: 300 15px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.72); }
+.inst { position: relative; height: 150px; padding: 14px; border-radius: 14px; background: #05080f; border: 1px solid rgba(238, 241, 247, 0.06); overflow: hidden; }
+
+/* frames under budget */
+.frames { position: relative; display: flex; align-items: flex-end; gap: 3px; height: 100%; }
+.frames i { flex: 1; height: var(--h); border-radius: 2px 2px 0 0; background: linear-gradient(var(--lm-accent), rgba(54, 228, 208, 0.3)); transform-origin: bottom; }
+.budget { position: absolute; left: 0; right: 0; bottom: 83.5%; border-top: 1px dashed rgba(255, 120, 120, 0.6); }
+.budget small { position: absolute; right: 0; top: -18px; font: 500 10px var(--lm-mono); color: rgba(255, 150, 150, 0.85); }
+/* spring curve */
+.curve { width: 100%; height: 100%; overflow: visible; }
+.axis { fill: none; stroke: rgba(238, 241, 247, 0.12); }
+.spring { fill: none; stroke: var(--lm-accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; filter: drop-shadow(0 0 6px rgba(54, 228, 208, 0.6)); }
+/* instances */
+.grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; height: 100%; }
+.grid i { border-radius: 6px; background: rgba(54, 228, 208, 0.22); box-shadow: inset 0 0 0 1px rgba(54, 228, 208, 0.45); }
+/* lists */
+.lines { list-style: none; display: grid; gap: 8px; font: 400 12.5px var(--lm-mono); color: rgba(238, 241, 247, 0.82); }
+.lines li { display: flex; align-items: center; gap: 10px; }
+.lines i { font-style: normal; font-size: 9px; color: var(--lm-accent); }
+.lines .ok { font-size: 13px; color: #34d399; }
+.log li { display: grid; grid-template-columns: 34px 1fr auto; }
+.log b { font-weight: 600; color: #34d399; }
+.log b[data-c="3"] { color: #9fb2ff; }
+.log b[data-c="5"] { color: #fbbf24; }
+.log small { color: rgba(238, 241, 247, 0.45); }
+/* screen sizes */
+.devices { display: flex; align-items: flex-end; justify-content: center; gap: 14px; height: 100%; }
+.devices i { border-radius: 8px; border: 1.5px solid rgba(54, 228, 208, 0.7); background: rgba(54, 228, 208, 0.06); transform-origin: bottom; }
+.dPhone { width: 34px; height: 70%; }
+.dFold { width: 62px; height: 78%; }
+.dTab { width: 98px; height: 92%; }
+/* code fix */
+.diff { font: 400 12px/1.8 var(--lm-mono); white-space: pre-wrap; }
+.rm { color: #f87171; background: rgba(248, 113, 113, 0.08); }
+.add { color: #34d399; background: rgba(52, 211, 153, 0.08); }
+.ctx { color: rgba(238, 241, 247, 0.55); }
+/* rollout */
+.rollout { display: grid; align-content: center; gap: 12px; height: 100%; }
+.rollBar { height: 12px; border-radius: 6px; background: rgba(238, 241, 247, 0.07); overflow: hidden; }
+.rollBar s { display: block; height: 100%; background: linear-gradient(90deg, var(--lm-violet), var(--lm-accent)); transform-origin: left; }
+.rollout p { display: flex; justify-content: space-between; }
+.rollout small { font: 500 11px var(--lm-mono); color: rgba(238, 241, 247, 0.6); }
+.rollNote { color: rgba(238, 241, 247, 0.45) !important; }
+
+@media (max-width: 1100px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .top { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .tiles { grid-template-columns: minmax(0, 1fr); } }

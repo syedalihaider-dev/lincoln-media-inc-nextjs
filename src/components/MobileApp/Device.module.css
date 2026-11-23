@@ -1,0 +1,29 @@
+/* A solid phone in CSS 3D. Proportions follow a 390 × 844 screen inside a thin bezel. */
+.device {
+  --r: 15.5% / 7.2%;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 408 / 862;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.slab, .back, .front { position: absolute; inset: 0; border-radius: var(--r); }
+.slab { background: linear-gradient(115deg, #3b4250, #151a23 40%, #2c323d 70%, #0b0e14); }
+.graphite .slab { background: linear-gradient(115deg, #4a5262, #161b24 38%, #343b48 68%, #0b0e14); }
+.silver .slab { background: linear-gradient(115deg, #e3e6ec, #9aa1ad 38%, #d0d4db 68%, #7b828e); }
+.back { transform: translateZ(calc(var(--d) * -1)) rotateY(180deg); backface-visibility: hidden; background: linear-gradient(150deg, #262c37, #0d1118); }
+.silver .back { background: linear-gradient(150deg, #dfe2e8, #a5acb8); }
+.cam { position: absolute; left: 7%; top: 3.6%; width: 38%; aspect-ratio: 1; border-radius: 26%; background: radial-gradient(circle at 30% 30%, #0b0e14 13%, #2b313c 15%, transparent 16%), radial-gradient(circle at 70% 30%, #0b0e14 13%, #2b313c 15%, transparent 16%), radial-gradient(circle at 30% 70%, #0b0e14 13%, #2b313c 15%, transparent 16%), rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); }
+.front {
+  padding: 2.2%;
+  background: #05070b;
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1.5px rgba(238, 241, 247, 0.18), inset 0 0 0 3px #05070b;
+}
+.silver .front { box-shadow: inset 0 0 0 1.5px #c9ced6, inset 0 0 0 3px #05070b; }
+.glass { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 13.4% / 6.2%; background: #0b0f17; isolation: isolate; }
+.layer { position: absolute; inset: 0; }
+.layer + .layer { opacity: 0; }
+.island { position: absolute; z-index: 5; left: 50%; top: 1.4%; width: 29%; height: 3.6%; translate: -50% 0; border-radius: 99px; background: #000; }
+.punch { position: absolute; z-index: 5; left: 50%; top: 1.6%; width: 3.4%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: #000; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4); }
+.glare { position: absolute; z-index: 6; inset: 0; pointer-events: none; background: linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 34%, transparent 70%, rgba(255, 255, 255, 0.05)); mix-blend-mode: screen; }

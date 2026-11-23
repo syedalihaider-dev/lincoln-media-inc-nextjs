@@ -1,0 +1,32 @@
+/* A pale drafting surface that turns into the dark stage when the app is finished */
+.concept { --fg: #03050b; position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr; gap: 2vh; padding: calc(var(--lm-header-h) + 8px) var(--lm-gutter) 32px; overflow: hidden; isolation: isolate; color: var(--fg); background: linear-gradient(rgba(3, 5, 11, 0.05) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, rgba(3, 5, 11, 0.05) 1px, transparent 1px) 0 0 / 40px 40px, #e7eaf0; }
+.dark { position: absolute; z-index: -1; inset: 0; opacity: 0; background: radial-gradient(ellipse 40% 55% at 50% 58%, rgba(54, 228, 208, 0.18), transparent 70%), #02040a; pointer-events: none; }
+.head h2 { font-size: clamp(28px, 3.2vw, 54px); }
+.head h2, .head p { color: var(--fg) !important; }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px) minmax(0, 1fr); align-items: center; gap: 4vw; }
+.wordsWin { height: clamp(60px, 7vw, 120px); overflow: hidden; mask-image: linear-gradient(transparent, #000 20%, #000 80%, transparent); }
+.words { list-style: none; will-change: transform; }
+.words li { height: clamp(60px, 7vw, 120px); display: flex; align-items: center; font: 800 clamp(24px, 2.7vw, 50px)/1 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; color: color-mix(in srgb, var(--fg) 20%, transparent); transition: color 0.5s; }
+.words li[data-on] { color: var(--lm-violet); }
+.phone { position: relative; justify-self: center; width: min(100%, calc((100svh - var(--lm-header-h) - 190px) / 2.25), 320px); perspective: 1500px; }
+.scan { position: absolute; z-index: 8; left: -8%; right: -8%; top: 0; height: 2px; opacity: 0; background: var(--lm-accent); box-shadow: 0 0 18px 4px rgba(54, 228, 208, 0.6); pointer-events: none; }
+.push { z-index: 9; left: 50%; bottom: 18%; margin-left: -150px; opacity: 0; visibility: hidden; transform: translateZ(80px); }
+.says { list-style: none; display: grid; }
+.says li { grid-area: 1 / 1; display: grid; gap: 12px; max-width: 30ch; font: 300 clamp(16px, 1.25vw, 21px)/1.5 var(--lm-light); color: color-mix(in srgb, var(--fg) 80%, transparent); }
+.says b { font: 500 12px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--lm-violet); }
+.grid { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .says li:not(:first-child) { visibility: hidden; }
+}
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .concept { min-height: 0; padding-top: clamp(90px, 13vh, 140px); padding-bottom: 80px; }
+  .stage { display: none; }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; margin-top: 30px; }
+  .grid li { display: grid; gap: 8px; align-content: start; }
+  .grid b { font: 700 15px/1.1 var(--lm-display); letter-spacing: -0.02em; text-transform: uppercase; }
+  .grid span { font: 400 14px/1.45 var(--lm-light); color: rgba(3, 5, 11, 0.72); }
+  .mini { width: 100%; margin-bottom: 8px; }
+}
+@media (max-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

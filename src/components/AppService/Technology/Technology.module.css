@@ -1,0 +1,37 @@
+.tech { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5vw; padding: clamp(96px, 14vh, 160px) var(--lm-gutter); background: linear-gradient(180deg, #05080f, #0a1020); }
+.visual { position: relative; }
+.view { position: sticky; top: calc(var(--lm-header-h) + 40px); height: min(72vh, 640px); display: grid; place-items: center; perspective: 2400px; }
+.block { position: relative; width: min(74%, 380px); aspect-ratio: 1 / 1.25; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-40deg); will-change: transform; }
+.slab {
+  position: absolute; inset: 0;
+  display: grid; align-content: end; gap: 6px; padding: 22px;
+  border-radius: 22px;
+  background: linear-gradient(rgba(54, 228, 208, 0.08) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(90deg, rgba(54, 228, 208, 0.08) 1px, transparent 1px) 0 0 / 20px 20px, rgba(12, 20, 36, 0.88);
+  border: 1px solid rgba(54, 228, 208, 0.28);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 30px 50px -20px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
+  will-change: transform;
+}
+.slab b { font: 700 22px/1 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); transition: color 0.5s; }
+.slab small { font: 500 12px var(--lm-mono); color: rgba(238, 241, 247, 0.45); }
+.on { background-color: rgba(54, 228, 208, 0.22); border-color: var(--lm-accent); box-shadow: 0 0 40px rgba(54, 228, 208, 0.35), 0 30px 50px -20px rgba(0, 0, 0, 0.7); }
+.on b { color: var(--lm-paper); }
+.on small { color: var(--lm-accent); }
+
+.copy { display: grid; gap: clamp(36px, 6vh, 64px); align-content: start; }
+.rows { list-style: none; display: grid; }
+.row { display: grid; gap: 8px; padding: clamp(24px, 4vh, 40px) 0 clamp(24px, 4vh, 40px) 22px; border-left: 1px solid var(--lm-line); transition: border-color 0.5s; }
+.row h3 { font: 700 clamp(20px, 1.8vw, 30px)/1.1 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; color: rgba(238, 241, 247, 0.45); transition: color 0.5s; }
+.row p { max-width: 44ch; font: 300 16px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.65); }
+.row .techs { font: 500 13px var(--lm-mono); color: var(--lm-accent); }
+.rowOn { border-color: var(--lm-accent); }
+.rowOn h3 { color: var(--lm-paper); }
+.rowOn p { color: rgba(238, 241, 247, 0.85); }
+
+@media (max-width: 900px) {
+  .tech { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .view { position: relative; top: auto; height: 100vw; max-height: 460px; }
+  .copy { order: -1; }
+  .row h3, .row p { color: inherit; }
+  .row { border-color: rgba(54, 228, 208, 0.4); }
+}

@@ -1,0 +1,24 @@
+.faq { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 5vw; padding: clamp(96px, 14vh, 160px) var(--lm-gutter); background: radial-gradient(circle at 1px 1px, rgba(238, 241, 247, 0.07) 1px, transparent 1.5px) 0 0 / 28px 28px, #070b16; }
+.side { position: sticky; top: calc(var(--lm-header-h) + 30px); align-self: start; display: grid; gap: 22px; }
+.side > p { margin-top: 12px; font: 300 18px/1.4 var(--lm-light); color: rgba(238, 241, 247, 0.75); }
+.ask { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.list { list-style: none; display: grid; gap: 10px; perspective: 1200px; }
+.card { border-radius: 16px; background: #0c1322; border: 1px solid var(--lm-line); transition: border-color 0.5s, background-color 0.5s; }
+.on { border-color: rgba(54, 228, 208, 0.55); background: #0e1828; }
+.qWrap { margin: 0; font: inherit; }
+.q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 22px; text-align: left; }
+.q span { font: 600 clamp(16px, 1.2vw, 19px)/1.35 var(--lm-body); }
+.q i { position: relative; flex: none; width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--lm-line-strong); transition: transform 0.6s var(--lm-ease), background-color 0.4s; }
+.q i::before, .q i::after { content: ""; position: absolute; left: 8px; right: 8px; top: 50%; height: 1.5px; margin-top: -0.75px; background: var(--lm-paper); transition: transform 0.5s var(--lm-ease); }
+.q i::after { transform: rotate(90deg); }
+.on .q i { background: var(--lm-accent); border-color: var(--lm-accent); transform: rotate(45deg); }
+.on .q i::before, .on .q i::after { background: var(--lm-ink); }
+.a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.7s var(--lm-ease); }
+.on .a { grid-template-rows: 1fr; }
+.aIn { overflow: hidden; }
+.aIn p { padding: 0 22px 22px; max-width: 64ch; font: 300 16px/1.65 var(--lm-light); color: rgba(238, 241, 247, 0.82); }
+
+@media (max-width: 900px) {
+  .faq { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .side { position: static; }
+}

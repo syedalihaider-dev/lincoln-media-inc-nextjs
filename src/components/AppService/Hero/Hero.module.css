@@ -1,0 +1,63 @@
+/* The dossier: a blueprint plane under the brief */
+.hero {
+  position: relative;
+  min-height: max(760px, 100svh);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  column-gap: 3vw;
+  padding: calc(var(--lm-header-h) + 20px) var(--lm-gutter) 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 1px 1px, rgba(238, 241, 247, 0.09) 1px, transparent 1.5px) 0 0 / 28px 28px, radial-gradient(ellipse 50% 60% at 72% 50%, rgba(54, 228, 208, 0.09), transparent 70%), #04070e;
+}
+.copy { position: relative; z-index: 3; display: grid; gap: 20px; will-change: transform; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; font: 500 12px/1.4 var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent); }
+.crumb a { transition: color 0.3s; }
+.crumb a:hover { color: var(--lm-accent); }
+.crumb [aria-current] { color: var(--lm-paper); }
+/* mixed case on purpose: names like iOS, iPhone and Flutter keep their own spelling */
+.title { display: grid; font: 800 clamp(40px, 4.6vw, 92px)/0.95 var(--lm-display); letter-spacing: -0.055em; }
+.mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.mask > span { display: block; }
+.l2 { color: transparent; background: linear-gradient(90deg, var(--lm-accent), #7ff0e2 60%, var(--lm-paper)); -webkit-background-clip: text; background-clip: text; }
+.tagline { max-width: 28ch; font: 500 clamp(19px, 1.45vw, 25px)/1.3 var(--lm-body); }
+.lead { max-width: 46ch; font: 300 clamp(16px, 1.1vw, 18px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.74); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+
+/* the isometric scene */
+.scene { position: relative; height: min(80vh, 760px); perspective: 2600px; perspective-origin: 50% 20%; }
+.plane { position: absolute; left: 50%; top: 52%; width: clamp(200px, 17vw, 300px); aspect-ratio: 408 / 862; translate: -50% -50%; transform-style: preserve-3d; transform: rotateX(56deg) rotateZ(-38deg); will-change: transform; }
+.floor { position: absolute; inset: -38% -70%; border: 1px solid rgba(54, 228, 208, 0.16); border-radius: 24px; background: linear-gradient(rgba(54, 228, 208, 0.07) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(54, 228, 208, 0.07) 1px, transparent 1px) 0 0 / 24px 24px; transform: translateZ(-18px); }
+.phone { position: absolute; inset: 0; transform-style: preserve-3d; }
+.lift { position: absolute; transform-style: preserve-3d; will-change: transform; }
+.ui { inset: 2.2%; }
+.uiScreen { width: 100%; height: 100%; overflow: hidden; border-radius: 13.4% / 6.2%; box-shadow: 0 0 0 1px rgba(54, 228, 208, 0.5), 0 40px 60px -20px rgba(0, 0, 0, 0.8); }
+.n0 { left: 42%; top: 48%; }
+.n1 { left: -64%; top: 14%; }
+.note { position: relative !important; }
+.tag { position: absolute; left: 0; top: -26px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--lm-accent); white-space: nowrap; }
+.tag::before { content: ""; width: 18px; height: 1px; background: var(--lm-accent); }
+
+/* the spec strip */
+.spec { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 calc(var(--lm-gutter) * -1); border-top: 1px solid var(--lm-line); }
+.spec div { display: grid; gap: 6px; padding: 22px var(--lm-gutter); border-right: 1px solid var(--lm-line); }
+.spec div:last-child { border-right: 0; }
+.spec dt { font: 500 11px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.5); }
+.spec dd { font: 600 clamp(15px, 1.2vw, 19px)/1.3 var(--lm-body); }
+
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: minmax(0, 1fr); row-gap: 20px; padding-top: calc(var(--lm-header-h) + 28px); }
+  .title { font-size: clamp(38px, 10.5vw, 80px); }
+  .scene { height: 110vw; max-height: 620px; }
+  .plane { width: 40vw; max-width: 250px; }
+  .n1 { left: -40%; top: 4%; }
+  .n0 { left: 20%; top: 60%; }
+  .note { scale: 0.8; transform-origin: left top; }
+}
+@media (max-width: 640px) {
+  .spec { grid-template-columns: minmax(0, 1fr); }
+  .spec div { border-right: 0; border-bottom: 1px solid var(--lm-line); padding-block: 16px; }
+}

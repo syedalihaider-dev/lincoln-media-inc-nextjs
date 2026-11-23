@@ -1,0 +1,15 @@
+.caps { display: grid; gap: clamp(44px, 7vh, 80px); padding: clamp(96px, 14vh, 160px) var(--lm-gutter); background: radial-gradient(circle at 1px 1px, rgba(238, 241, 247, 0.07) 1px, transparent 1.5px) 0 0 / 28px 28px, #080d19; }
+.grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(40px, 6vh, 70px) 2.4vw; }
+.card { display: grid; gap: 22px; }
+.table { position: relative; height: clamp(300px, 26vw, 420px); display: grid; place-items: center; perspective: 1400px; border-radius: 22px; background: linear-gradient(rgba(54, 228, 208, 0.05) 1px, transparent 1px) 0 0 / 22px 22px, linear-gradient(90deg, rgba(54, 228, 208, 0.05) 1px, transparent 1px) 0 0 / 22px 22px, #0b1220; border: 1px solid var(--lm-line); overflow: hidden; }
+.screen { position: relative; width: 44%; aspect-ratio: 390 / 844; overflow: hidden; border-radius: 22px; box-shadow: 0 0 0 5px #05070b, 0 0 0 6px rgba(238, 241, 247, 0.16); transform: rotateX(8deg); will-change: transform; }
+.shadow { position: absolute; left: 22%; right: 22%; bottom: 7%; height: 40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.8), transparent); }
+.copy { display: grid; gap: 10px; }
+.copy h3 { font: 700 clamp(18px, 1.5vw, 24px)/1.15 var(--lm-display); letter-spacing: -0.03em; }
+.copy p { max-width: 38ch; font: 300 16px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.75); }
+
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .table { height: 92vw; max-height: 420px; }
+}

@@ -1,0 +1,37 @@
+.caps { position: relative; padding: clamp(96px, 14vh, 160px) var(--lm-gutter) clamp(60px, 9vh, 110px); background: #060a14; }
+.head { margin-bottom: clamp(40px, 7vh, 80px); }
+.stack { list-style: none; display: grid; gap: 4vh; }
+.card {
+  --dim: 0;
+  position: sticky;
+  top: calc(var(--lm-header-h) + 20px + var(--i) * 14px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 4vw;
+  min-height: min(76vh, 640px);
+  padding: clamp(28px, 4vw, 64px);
+  border-radius: 30px;
+  overflow: hidden;
+  background: radial-gradient(ellipse 50% 70% at 82% 50%, rgba(54, 228, 208, 0.12), transparent 70%), linear-gradient(150deg, #101a2c, #0a101c 60%);
+  border: 1px solid rgba(238, 241, 247, 0.1);
+  box-shadow: 0 -30px 80px -30px rgba(0, 0, 0, 0.9);
+  transform-origin: 50% 0%;
+}
+.card::after { content: ""; position: absolute; inset: 0; background: #03050b; opacity: var(--dim); pointer-events: none; }
+.card:nth-child(even) { background: radial-gradient(ellipse 50% 70% at 82% 50%, rgba(59, 91, 255, 0.16), transparent 70%), linear-gradient(150deg, #121830, #0b0f1e 60%); }
+.copy { display: grid; gap: 22px; }
+.copy h3 { font: 800 clamp(30px, 3.6vw, 64px)/0.95 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; }
+.copy p { max-width: 42ch; font: 300 clamp(16px, 1.2vw, 20px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.copy ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.copy ul li { padding: 8px 14px; border-radius: 99px; border: 1px solid var(--lm-line-strong); font: 500 13px var(--lm-body); color: rgba(238, 241, 247, 0.88); }
+.visual { justify-self: center; width: min(100%, 44vh, 300px); perspective: 1400px; }
+.turn { transform-style: preserve-3d; transform: rotateY(-16deg); will-change: transform; }
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .card { position: relative; top: auto; min-height: 0; }
+}
+@media (max-width: 900px) {
+  .card { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 28px 22px; }
+  .visual { width: 52vw; max-width: 240px; }
+}
