@@ -3,13 +3,12 @@ import { useRef, useState } from "react";
 import { gsap, SplitText, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import Label from "@/components/About/Label";
-import { Browser, Phone, Site, Editor, Store, Settings } from "./ui/Screens";
+import { Browser, Phone, Site, ScreenBody, screenUrl } from "./ui/Screens";
 import styles from "./ChildShowcase.module.css";
 
-function Screen({ kind, photos, url }) {
+function Screen({ kind, photos, url, ui }) {
   if (kind === "phone") return <Phone><Site photos={photos} compact /></Phone>;
-  const body = { site: <Site photos={photos} />, editor: <Editor photo={photos[1]} />, store: <Store photos={photos} />, settings: <Settings /> }[kind];
-  return <Browser url={kind === "site" || kind === "store" ? url : `${url}/wp-admin`}>{body}</Browser>;
+  return <Browser url={screenUrl(kind, ui, url)}><ScreenBody kind={kind} photos={photos} ui={ui} /></Browser>;
 }
 
 /**
@@ -19,7 +18,7 @@ function Screen({ kind, photos, url }) {
  * and the last faces you as the hold ends. Nothing before the section can advance it. The cursor tips
  * the carousel. Phones: the screens sit in a row you can swipe through.
  */
-export default function ChildShowcase({ data, photos }) {
+export default function ChildShowcase({ data, photos, ui }) {
   const ref = useRef(null);
   const [front, setFront] = useState(0);
   const { ready } = useSiteMotion();
@@ -75,7 +74,7 @@ export default function ChildShowcase({ data, photos }) {
           <div className={styles.ring} data-ring style={{ "--step": `${step}deg` }}>
             {data.screens.map((s, i) => (
               <figure key={s.label} className={`${styles.item} ${s.kind === "phone" ? styles.isPhone : ""} ${i === front ? styles.front : ""}`} style={{ "--i": i }}>
-                <Screen kind={s.kind} photos={photos} url={data.url} />
+                <Screen kind={s.kind} photos={photos} url={data.url} ui={ui} />
               </figure>
             ))}
           </div>

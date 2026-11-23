@@ -58,14 +58,16 @@ export function Site({ photos = [], video, poster, compact = false }) {
 }
 
 /* ---------- The CMS editor ---------- */
-export function Editor({ photo }) {
+const EDITOR = { title: "Home — Editing", action: "Update", panel: "Blocks", blocks: ["Heading", "Paragraph", "Image", "Cover", "Columns", "Gallery", "Buttons", "Query loop"] };
+export function Editor({ photo, editor = {} }) {
+  const e = { ...EDITOR, ...editor };
   return (
     <div className={styles.app}>
-      <div className={styles.appBar}><b className={styles.appLogo} /><span>Home — Editing</span><small>Saved</small><em>Update</em></div>
+      <div className={styles.appBar}><b className={styles.appLogo} /><span>{e.title}</span><small>Saved</small><em>{e.action}</em></div>
       <div className={styles.editor}>
         <aside className={styles.edBlocks}>
-          <p>Blocks</p>
-          {["Heading", "Paragraph", "Image", "Cover", "Columns", "Gallery", "Buttons", "Query loop"].map((b, i) => <span key={b} className={i === 0 ? styles.edOn : ""}><i />{b}</span>)}
+          <p>{e.panel}</p>
+          {e.blocks.map((b, i) => <span key={b} className={i === 0 ? styles.edOn : ""}><i />{b}</span>)}
         </aside>
         <div className={styles.edCanvas}>
           <p className={styles.edLabel}>Heading</p>
@@ -104,21 +106,23 @@ const CODE = [
   ["", "    ] );"],
   ["k", "} );"],
 ];
-export function Code() {
+// code = { tabs: [first tab is the open file, …], lines: [[type, text]] } — type: "c" comment · "k" keyword · "s" string · "" plain
+export function Code({ code = {} }) {
+  const tabs = code.tabs || ["functions.php", "theme.json", "style.css"];
+  const lines = code.lines || CODE;
   return (
     <div className={styles.code}>
-      <div className={styles.codeTabs}><span className={styles.tabOn}>functions.php</span><span>theme.json</span><span>style.css</span></div>
-      <pre>{CODE.map(([t, l], i) => <span key={i} className={styles[`t_${t || "n"}`]}><em>{String(i + 1).padStart(2, " ")}</em>{l}{"\n"}</span>)}</pre>
+      <div className={styles.codeTabs}>{tabs.map((t, i) => <span key={t} className={i === 0 ? styles.tabOn : undefined}>{t}</span>)}</div>
+      <pre>{lines.map(([t, l], i) => <span key={i} className={styles[`t_${t || "n"}`]}><em>{String(i + 1).padStart(2, " ")}</em>{l}{"\n"}</span>)}</pre>
     </div>
   );
 }
 
-/* ---------- The REST API answering the front end ---------- */
-export function Api() {
-  return (
-    <div className={styles.api}>
-      <p className={styles.apiReq}><b>GET</b> /wp-json/wp/v2/collection?per_page=3 <span>200 OK</span></p>
-      <pre className={styles.apiJson}>{`[
+/* ---------- The API answering the front end ---------- */
+const API = {
+  method: "GET",
+  path: "/wp-json/wp/v2/collection?per_page=3",
+  json: `[
   {
     "id": 128,
     "title": { "rendered": "New season" },
@@ -127,9 +131,17 @@ export function Api() {
     "link": "https://yourbrand.com/collections/new-season/"
   },
   { "id": 127, "title": { "rendered": "Journal" }, ... }
-]`}</pre>
+]`,
+  links: [["WooCommerce", "Orders & products"], ["ERP", "Stock & invoices"], ["WhatsApp", "Customer messages"]],
+};
+export function Api({ api = {} }) {
+  const a = { ...API, ...api };
+  return (
+    <div className={styles.api}>
+      <p className={styles.apiReq}><b>{a.method}</b> {a.path} <span>200 OK</span></p>
+      <pre className={styles.apiJson}>{a.json}</pre>
       <div className={styles.apiLinks}>
-        {[["WooCommerce", "Orders & products"], ["ERP", "Stock & invoices"], ["WhatsApp", "Customer messages"]].map(([n, d]) => (
+        {a.links.map(([n, d]) => (
           <span key={n}><i />{n}<small>{d}</small></span>
         ))}
       </div>
@@ -138,10 +150,10 @@ export function Api() {
 }
 
 /* ---------- The theme's design system ---------- */
-export function Theme() {
+export function Theme({ file = "theme.json" }) {
   return (
     <div className={styles.theme}>
-      <div className={styles.themeHead}><b>theme.json</b><span>yourbrand · v1.0</span></div>
+      <div className={styles.themeHead}><b>{file}</b><span>yourbrand · v1.0</span></div>
       <div className={styles.themeGrid}>
         <div className={styles.themeType}>
           <p className={styles.tLabel}>Typography</p>
@@ -193,18 +205,69 @@ export function Store({ photos = [] }) {
 }
 
 /* ---------- A custom plugin's settings ---------- */
-export function Settings() {
-  const rows = [["Online booking", true], ["Show on product pages", true], ["Email notifications", false], ["Sync with calendar", true]];
+const SETTINGS = {
+  title: "Bookings · Settings",
+  tabs: ["General", "Availability", "Integrations", "Emails"],
+  rows: [["Online booking", true], ["Show on product pages", true], ["Email notifications", false], ["Sync with calendar", true]],
+  slider: "Slots per day",
+};
+export function Settings({ settings = {} }) {
+  const s = { ...SETTINGS, ...settings };
   return (
     <div className={styles.app}>
-      <div className={styles.appBar}><b className={styles.appLogo} /><span>Bookings · Settings</span><em>Save changes</em></div>
+      <div className={styles.appBar}><b className={styles.appLogo} /><span>{s.title}</span><em>Save changes</em></div>
       <div className={styles.settings}>
-        <nav>{["General", "Availability", "Integrations", "Emails"].map((t, i) => <span key={t} className={i === 0 ? styles.edOn : ""}>{t}</span>)}</nav>
+        <nav>{s.tabs.map((t, i) => <span key={t} className={i === 0 ? styles.edOn : ""}>{t}</span>)}</nav>
         <div className={styles.rows}>
-          {rows.map(([r, on]) => <div key={r} className={styles.row}><span>{r}</span><i className={on ? styles.toggleOn : ""} /></div>)}
-          <div className={styles.row}><span>Slots per day</span><b className={styles.slider}><i /></b></div>
+          {s.rows.map(([r, on]) => <div key={r} className={styles.row}><span>{r}</span><i className={on ? styles.toggleOn : ""} /></div>)}
+          <div className={styles.row}><span>{s.slider}</span><b className={styles.slider}><i /></b></div>
         </div>
       </div>
     </div>
   );
+}
+
+/* ---------- A messaging conversation (WhatsApp-style business chat) ---------- */
+const CHAT = {
+  title: "yourbrand · Business chat",
+  messages: [
+    ["in", "Hi! Is the new season collection in stock?"],
+    ["out", "Hello 👋 Yes — 12 pieces are available today. Would you like the catalogue?"],
+    ["in", "Yes please"],
+    ["out", "Here it is. You can also book a studio visit from this chat."],
+  ],
+  quick: ["View catalogue", "Book a visit", "Talk to the team"],
+};
+export function Chat({ chat = {} }) {
+  const c = { ...CHAT, ...chat };
+  return (
+    <div className={styles.chat}>
+      <div className={styles.chatBar}><b /><span>{c.title}<small>online</small></span></div>
+      <div className={styles.chatBody}>
+        {c.messages.map(([dir, t], i) => <p key={i} className={dir === "out" ? styles.out : styles.in}>{t}</p>)}
+        <div className={styles.quick}>{c.quick.map((q) => <span key={q}>{q}</span>)}</div>
+      </div>
+      <div className={styles.chatInput}><span>Type a message</span><i /></div>
+    </div>
+  );
+}
+
+/* ---------- One place that turns a screen name into its interface, with the service's content ---------- */
+export function ScreenBody({ kind, photos = [], ui = {} }) {
+  switch (kind) {
+    case "code": return <Code code={ui.code} />;
+    case "theme": return <Theme file={ui.themeFile} />;
+    case "settings": return <Settings settings={ui.settings} />;
+    case "editor": return <Editor photo={photos[1]} editor={ui.editor} />;
+    case "store": return <Store photos={photos} />;
+    case "api": return <Api api={ui.api} />;
+    case "draft": return <Draft />;
+    case "chat": return <Chat chat={ui.chat} />;
+    default: return <Site photos={photos} />;
+  }
+}
+// the address shown in a browser frame for each screen
+export function screenUrl(kind, ui = {}, site = "yourbrand.com") {
+  const admin = `${site}${ui.admin ?? "/wp-admin"}`;
+  return { code: ui.code?.tabs?.[0] || "functions.php", theme: ui.themeFile || "theme.json", settings: admin, editor: admin, api: `${site}${ui.apiBase ?? "/wp-json"}`, chat: "web.whatsapp.com", draft: "homepage-copy.docx" }[kind] || site;
 }

@@ -63,12 +63,12 @@ export default function ChildServicePage({ service: s }) {
         <ChildHero service={s} />
         {s.intro && <ChildIntro data={s.intro} />}
         {s.visual && <ChildVisual data={s.visual} />}
-        {s.expertise && <ChildExpertise data={s.expertise} photos={photos} />}
+        {s.expertise && <ChildExpertise data={s.expertise} photos={photos} ui={s.ui} />}
         {s.process && <ChildProcess data={s.process} />}
         {s.technology && <ChildTechnology data={s.technology} />}
-        {s.showcase && <ChildShowcase data={s.showcase} photos={photos} />}
+        {s.showcase && <ChildShowcase data={s.showcase} photos={photos} ui={s.ui} />}
         {s.capabilities && <ChildCapabilities data={s.capabilities} />}
-        {s.ecosystem && <ChildEcosystem data={s.ecosystem} photos={photos} />}
+        {s.ecosystem && <ChildEcosystem data={s.ecosystem} photos={photos} ui={s.ui} />}
         {s.outcome && <ChildOutcome data={s.outcome} />}
         {s.faq && <ChildFAQ data={s.faq} />}
         {s.cta && <ChildCTA data={s.cta} parent={s.parent} siblings={siblingsOf(s.slug)} />}

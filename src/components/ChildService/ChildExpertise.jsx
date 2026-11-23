@@ -5,14 +5,13 @@ import { gsap, SplitText, useGSAP, ANY_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import Label from "@/components/About/Label";
 import RevealText from "@/components/Common/RevealText";
-import { Browser, Phone, Site, Editor, Code, Theme, Settings, Store } from "./ui/Screens";
+import { Browser, Phone, Site, ScreenBody, screenUrl } from "./ui/Screens";
 import styles from "./ChildExpertise.module.css";
 
 // The interface each discipline produces
-function Screen({ kind, photos }) {
+function Screen({ kind, photos, ui }) {
   if (kind === "phone") return <Phone><Site photos={photos} compact /></Phone>;
-  const body = { code: <Code />, theme: <Theme />, settings: <Settings />, editor: <Editor photo={photos[1]} />, store: <Store photos={photos} />, site: <Site photos={photos} /> }[kind];
-  return <Browser dark={kind === "code"} url={kind === "code" ? "functions.php" : kind === "theme" ? "theme.json" : "yourbrand.com/wp-admin"}>{body}</Browser>;
+  return <Browser dark={kind === "code"} url={screenUrl(kind, ui)}><ScreenBody kind={kind} photos={photos} ui={ui} /></Browser>;
 }
 
 /**
@@ -22,7 +21,7 @@ function Screen({ kind, photos }) {
  * arrives the photograph opens through a wipe, the interface swings in from depth in front of it, and
  * the two drift at different speeds while you read. Chapters alternate sides.
  */
-export default function ChildExpertise({ data, photos }) {
+export default function ChildExpertise({ data, photos, ui }) {
   const ref = useRef(null);
   const { ready } = useSiteMotion();
 
@@ -73,7 +72,7 @@ export default function ChildExpertise({ data, photos }) {
                 <Image src={it.photo} alt={it.photoAlt} fill sizes="(max-width: 900px) 92vw, 46vw" quality={80} className={styles.cover} />
               </figure>
               <div className={`${styles.ui} ${it.screen === "phone" ? styles.uiPhone : ""}`} data-ui>
-                <Screen kind={it.screen} photos={photos} />
+                <Screen kind={it.screen} photos={photos} ui={ui} />
               </div>
             </div>
           </li>

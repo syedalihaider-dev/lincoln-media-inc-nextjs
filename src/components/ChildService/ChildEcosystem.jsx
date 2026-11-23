@@ -4,12 +4,11 @@ import { gsap, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap";
 import { useSiteMotion, sfx } from "@/lib/motion";
 import SectionHead from "@/components/InnerServices/SectionHead";
 import ScaledScreen from "@/components/InnerServices/ScaledScreen";
-import { Draft, Editor, Theme, Code, Api, Site } from "./ui/Screens";
+import { ScreenBody } from "./ui/Screens";
 import styles from "./ChildEcosystem.module.css";
 
-function Layer({ kind, photos }) {
-  const body = { draft: <Draft />, editor: <Editor photo={photos[1]} />, theme: <Theme />, code: <Code />, api: <Api />, site: <Site photos={photos} /> }[kind];
-  return <ScaledScreen width={1280}>{body}</ScaledScreen>;
+function Layer({ kind, photos, ui }) {
+  return <ScaledScreen width={1280}><ScreenBody kind={kind} photos={photos} ui={ui} /></ScaledScreen>;
 }
 
 /**
@@ -19,7 +18,7 @@ function Layer({ kind, photos }) {
  * the editor gets its theme, the theme its code, the code its connections, and the site appears),
  * while the flow line on the left lights the stage you're on. Phones: each stage with its own screen.
  */
-export default function ChildEcosystem({ data, photos }) {
+export default function ChildEcosystem({ data, photos, ui }) {
   const ref = useRef(null);
   const [active, setActive] = useState(0);
   const { ready } = useSiteMotion();
@@ -68,7 +67,7 @@ export default function ChildEcosystem({ data, photos }) {
               <span className={styles.node} aria-hidden="true" />
               <h3 className={styles.name}>{s.name}</h3>
               <p className={styles.text}>{s.text}</p>
-              <div className={styles.inline} aria-hidden="true"><div className={styles.inlineFrame}><Layer kind={s.screen} photos={photos} /></div></div>
+              <div className={styles.inline} aria-hidden="true"><div className={styles.inlineFrame}><Layer kind={s.screen} photos={photos} ui={ui} /></div></div>
             </li>
           ))}
         </ol>
@@ -79,7 +78,7 @@ export default function ChildEcosystem({ data, photos }) {
         <div className={styles.window}>
           <div className={styles.chrome}><i /><i /><i /><span key={active}>{data.stages[active].url}</span></div>
           <div className={styles.screen}>
-            {data.stages.map((s, i) => <div key={s.name} className={styles.layer} data-layer style={{ zIndex: i + 1 }}><Layer kind={s.screen} photos={photos} /></div>)}
+            {data.stages.map((s, i) => <div key={s.name} className={styles.layer} data-layer style={{ zIndex: i + 1 }}><Layer kind={s.screen} photos={photos} ui={ui} /></div>)}
           </div>
         </div>
         <p className={styles.caption}><i />{data.stages[active].name}</p>

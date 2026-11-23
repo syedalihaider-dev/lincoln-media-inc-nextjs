@@ -4,7 +4,7 @@ import { gsap, SplitText, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap
 import { useSiteMotion } from "@/lib/motion";
 import Label from "@/components/About/Label";
 import Button from "@/components/Common/Button";
-import { Browser, Phone, Site, Editor } from "./ui/Screens";
+import { Browser, Phone, Site, Editor, screenUrl } from "./ui/Screens";
 import styles from "./ChildHero.module.css";
 
 /**
@@ -14,6 +14,7 @@ import styles from "./ChildHero.module.css";
  * layers lean with the cursor at their own depths, and scrolling turns the composition to face you.
  */
 export default function ChildHero({ service: s }) {
+  const ui = s.ui || {};
   const ref = useRef(null);
   const { ready } = useSiteMotion();
   const h = s.hero;
@@ -76,7 +77,7 @@ export default function ChildHero({ service: s }) {
 
       <div className={styles.view} aria-hidden="true">
         <div className={styles.stage} data-stage>
-          <div className={`${styles.layer} ${styles.editor}`} data-layer data-depth="0.6"><Browser url={`${st.url}/wp-admin`}><Editor photo={st.photos[1]} /></Browser></div>
+          <div className={`${styles.layer} ${styles.editor}`} data-layer data-depth="0.6"><Browser url={screenUrl("editor", ui, st.url)}><Editor photo={st.photos[1]} editor={ui.editor} /></Browser></div>
           <div className={`${styles.layer} ${styles.main}`} data-layer data-depth="1"><Browser url={st.url}><Site photos={st.photos} video={st.video} poster={st.poster} /></Browser></div>
           <div className={`${styles.layer} ${styles.phone}`} data-layer data-depth="1.8"><Phone><Site photos={st.photos} compact /></Phone></div>
           <p className={`${styles.layer} ${styles.toast}`} data-layer data-depth="2.4"><i />{st.toast}<b>View page</b></p>
