@@ -34,7 +34,6 @@
 .actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 28px 4vw; margin-top: 9vh; }
 .text { margin: 0; max-width: 34ch; font: 300 clamp(19px, 1.5vw, 24px)/1.5 var(--lm-light); color: var(--lm-paper); }
 .buttons { display: flex; flex-wrap: wrap; gap: 14px; }
-.btn { font-size: 14px !important; letter-spacing: 0.14em !important; }
 .direct { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 36px; font: 500 15px var(--lm-mono); letter-spacing: 0.06em; }
 .direct a { color: var(--lm-paper); background: linear-gradient(var(--lm-accent), var(--lm-accent)) 0 100% / 0 1px no-repeat; padding-bottom: 4px; transition: background-size 0.5s var(--lm-ease), color 0.3s; }
 .direct a:hover { color: var(--lm-accent); background-size: 100% 1px; }

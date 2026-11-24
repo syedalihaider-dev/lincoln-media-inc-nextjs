@@ -14,7 +14,8 @@ const C = {
   cyanSoft: "rgba(54, 228, 208, 0.28)",
   violet: "#5b74ff",
 };
-const MONO = '"JetBrains Mono", ui-monospace, monospace';
+// Canvas text can't use CSS variables, so read next/font's Poppins family (it has a generated name) at draw time
+const MONO = () => (typeof document !== 'undefined' && getComputedStyle(document.documentElement).getPropertyValue('--font-poppins').trim()) || '"Poppins", sans-serif';
 
 function rr(ctx, x, y, w, h, r, fill, stroke) {
   ctx.beginPath();
@@ -37,7 +38,7 @@ function frame(ctx, W, H, label, { chrome = true } = {}) {
   if (label) {
     rr(ctx, 110, 13, Math.min(W - 140, 300), 28, 14, C.soft);
     ctx.fillStyle = C.text;
-    ctx.font = `500 15px ${MONO}`;
+    ctx.font = `500 15px ${MONO()}`;
     ctx.fillText(label, 126, 32);
   }
   return 54;
@@ -72,7 +73,7 @@ const DRAW = {
   code(ctx, W, H, label, lines) {
     const t = frame(ctx, W, H, label || "index.html");
     const src = lines && lines.length ? lines : ["<section class=\"hero\">", "  <h1>Your brand</h1>", "  <nav>…</nav>", "</section>"];
-    ctx.font = `500 19px ${MONO}`;
+    ctx.font = `500 19px ${MONO()}`;
     const cols = [C.cyan, C.paper, C.violet, C.text];
     let y = t + 44;
     for (let i = 0; y < H - 20; i++, y += 34) {
@@ -188,7 +189,7 @@ const DRAW = {
       bar(ctx, x + 12, y + gh * 0.5 + 24, gw * 0.5, 9, "rgba(238,241,247,0.5)");
     }
     rr(ctx, W - p - 150, H - 58, 150, 38, 19, C.cyan);
-    ctx.fillStyle = "#06101c"; ctx.font = `600 16px ${MONO}`; ctx.fillText("Add to cart", W - p - 128, H - 33);
+    ctx.fillStyle = "#06101c"; ctx.font = `600 16px ${MONO()}`; ctx.fillText("Add to cart", W - p - 128, H - 33);
   },
   // Video: a frame with a play mark and a timeline of clips
   video(ctx, W, H, label) {

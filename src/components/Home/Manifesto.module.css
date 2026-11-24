@@ -80,7 +80,7 @@
   padding-top: 10vh;
 }
 .philosophy {
-  font: 700 clamp(16px, 1.35vw, 22px)/1.25 var(--lm-display);
+  font: 700 clamp(16px, 1.35vw, 22px)/1.25 var(--lm-text);
   letter-spacing: -0.01em;
   text-transform: uppercase;
   padding-left: 18px;

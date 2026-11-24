@@ -75,7 +75,7 @@
 .on .idxName::before { content: ""; display: inline-block; width: 18px; height: 1px; margin: 0 10px 0.3em 0; background: var(--lm-accent); vertical-align: middle; }
 
 .counter { text-align: center; font: 500 11px var(--lm-mono); letter-spacing: 0.2em; color: var(--lm-mute); }
-.counter b { font: 800 28px/1 var(--lm-display); letter-spacing: -0.02em; color: var(--lm-accent); margin-right: 6px; }
+.counter b { font: 800 28px/1 var(--lm-text); letter-spacing: -0.02em; color: var(--lm-accent); margin-right: 6px; }
 .progress { position: relative; height: 1px; background: var(--lm-line); }
 .progress i { position: absolute; inset: 0; background: var(--lm-accent); transform: scaleX(var(--p)); transform-origin: left; }
 

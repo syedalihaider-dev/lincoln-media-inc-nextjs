@@ -5,7 +5,7 @@ import { gsap, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap";
 import { useMediaQuery, useReducedMotion, useSiteMotion } from "@/lib/motion";
 import { HERO } from "@/data/home";
 import { SITE } from "@/data/site";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import Clock from "@/components/Common/Clock";
 import styles from "./Hero.module.css";
 
@@ -115,8 +115,8 @@ export default function Hero() {
         <span className={styles.hair} data-hair data-keep aria-hidden="true" />
         <p className={styles.lede} data-fade>{HERO.lede}</p>
         <div className={styles.ctas} data-fade>
-          <MagneticButton href="#contact">Start a project</MagneticButton>
-          <MagneticButton href="#work" variant="ghost" icon="↓">View work</MagneticButton>
+          <Button href="#contact">Start a project</Button>
+          <Button href="#work" variant="outline" icon="down">View work</Button>
         </div>
         <div className={styles.hud} data-fade aria-hidden="true">
           <span>40.7128° N · 74.0060° W</span>

@@ -69,7 +69,7 @@
 .outroText em { color: var(--lm-accent); }
 
 .hud { position: absolute; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 28px; display: flex; align-items: center; gap: 22px; font: 500 10px var(--lm-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-mute); }
-.hud b { font: 800 24px var(--lm-display); letter-spacing: -0.02em; color: var(--lm-accent); }
+.hud b { font: 800 24px var(--lm-text); letter-spacing: -0.02em; color: var(--lm-accent); }
 .bar { position: relative; flex: 1; height: 1px; background: var(--lm-line); }
 .bar i { position: absolute; inset: 0; background: var(--lm-accent); transform: scaleX(var(--wp)); transform-origin: left; }
 

@@ -1,9 +1,12 @@
+import { Poppins } from "next/font/google";
 import { SITE } from "@/data/site";
 import "./globals.css";
 
-// Typography: The Lincoln Media's own families (Unbounded, Instrument Sans, Inter Tight, JetBrains Mono)
-// arrive with each page's original <head> — the same Google Fonts request the intro and the inner pages
-// have always made — so the homepage uses exactly the brand's fonts without downloading a second copy.
+// Typography: Unbounded (headings) arrives with each page's font request; Poppins (everything else) is loaded here.
+
+// Poppins: every non-heading text on the site (body, labels, buttons, nav, forms). Headings keep Unbounded.
+// Self-hosted by next/font and exposed as --font-poppins, which the font tokens in globals.css point at.
+const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800"], display: "swap", variable: "--font-poppins" });
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -30,7 +33,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={poppins.variable} suppressHydrationWarning>
       {/* Each page sets its own body class (e.g. "locked") and the scripts change it at runtime */}
       <body suppressHydrationWarning>{children}</body>
     </html>

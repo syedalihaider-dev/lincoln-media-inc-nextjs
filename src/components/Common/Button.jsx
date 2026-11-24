@@ -24,7 +24,7 @@ const Letters = ({ text }) => [...(Array.isArray(text) ? text.join("") : String(
  * variant: "solid" · "outline" (a slowly turning lit border) · "text" (a quiet link with a disc)
  * size: "sm" · "md" · "lg". Children should be plain text.
  */
-export default function Button({ href, children, variant = "solid", icon = "arrow", size = "md", external = false, className = "", onClick, ...rest }) {
+export default function Button({ href, children, variant = "solid", icon = "arrow", size = "md", external = false, className = "", onClick, type = "button", ...rest }) {
   const ref = useRef(null);
   const spring = { stiffness: 240, damping: 17, mass: 0.4 };
   const x = useSpring(useMotionValue(0), spring), y = useSpring(useMotionValue(0), spring);
@@ -67,6 +67,6 @@ export default function Button({ href, children, variant = "solid", icon = "arro
   return href ? (
     <motion.a href={href} {...(external ? { target: "_blank", rel: "noopener" } : {})} {...props}>{inner}</motion.a>
   ) : (
-    <motion.button type="button" {...props}>{inner}</motion.button>
+    <motion.button type={type} {...props}>{inner}</motion.button>
   );
 }

@@ -4,9 +4,13 @@
  * and the inner pages keep theirs — so everything here is either a token or scoped to the homepage.
  *
  * Brand: the same identity the intro speaks in — deep navy space, the AI guide's cyan signal,
- * an electric violet, and paper white; Unbounded for display, Instrument Sans / Inter Tight for text,
- * JetBrains Mono for instrument labels.
+ * an electric violet, and paper white; Unbounded for headings, Poppins for every other piece of text.
  * ===================================================================== */
+/* The pre-built pages, the homepage chrome and the guided intro keep their own stylesheets with their own
+   font variables (public/site.css, intro-site.css, styles.css). html:root outranks their :root, so the
+   same Poppins rule reaches them without editing those files. Their --display (Unbounded) is untouched. */
+html:root { --body: var(--lm-text); --mono: var(--lm-text); --sans: var(--lm-text); }
+
 :root {
   --lm-ink: #03050b;
   --lm-ink-2: #0a101c;
@@ -24,10 +28,14 @@
   --lm-line: rgba(238, 241, 247, 0.13);
   --lm-line-strong: rgba(238, 241, 247, 0.32);
   --lm-line-dark: rgba(3, 5, 11, 0.14);
-  --lm-display: "Unbounded", "Inter Tight", system-ui, sans-serif;
-  --lm-body: "Instrument Sans", "Inter Tight", system-ui, sans-serif;
-  --lm-light: "Inter Tight", system-ui, sans-serif;
-  --lm-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Typography: headings = Unbounded; EVERYTHING else = Poppins (one shared variable, --lm-text) */
+  --lm-text: var(--font-poppins), "Poppins", sans-serif;
+  --lm-display: "Unbounded", var(--font-poppins), sans-serif;
+  --lm-body: var(--lm-text);
+  --lm-light: var(--lm-text);
+  --lm-mono: var(--lm-text); /* labels and eyebrows were monospace — now Poppins too */
+  /* only for code shown inside editor/terminal mock-ups — it has to read as code */
+  --lm-code: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
   --lm-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --lm-ease-in-out: cubic-bezier(0.77, 0, 0.18, 1);
   --lm-gutter: clamp(20px, 4.2vw, 72px);

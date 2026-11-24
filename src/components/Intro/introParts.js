@@ -1,4 +1,5 @@
 import pages from "@/data/legacy-pages.json";
+import { trimFontRequest } from "@/components/Common/fonts";
 
 /**
  * The guided AI intro, exactly as the original homepage (legacy/index.html) defines it.
@@ -43,7 +44,7 @@ export function introParts() {
   // The intro only needs a few of its rules, copied verbatim into public/intro-site.css.
   const SITE_CSS = /href="site\.css\?v=\d+"/;
   if (!SITE_CSS.test(home.head)) throw new Error("Intro markup: site.css link not found in <head>");
-  const head = home.head.replace(SITE_CSS, 'href="intro-site.css?v=1"');
+  const head = trimFontRequest(home.head.replace(SITE_CSS, 'href="intro-site.css?v=1"'));
 
   cache = { boot, head, chrome, experience, scripts: scripts.join("") };
   return cache;

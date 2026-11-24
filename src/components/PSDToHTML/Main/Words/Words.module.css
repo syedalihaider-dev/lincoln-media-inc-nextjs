@@ -15,7 +15,7 @@
 .handles em { position: absolute; left: -2px; top: -30px; padding: 3px 8px; border-radius: 4px; background: #0d99ff; color: #fff; font: 600 12px/1.3 var(--lm-mono); font-style: normal; letter-spacing: 0; text-transform: none; white-space: nowrap; }
 
 /* code: the same word as markup */
-.code .word { font-family: var(--lm-mono); font-weight: 500; letter-spacing: -0.04em; text-transform: none; font-size: clamp(30px, 7vw, 140px); color: #e6edf3; }
+.code .word { font-family: var(--lm-code); font-weight: 500; letter-spacing: -0.04em; text-transform: none; font-size: clamp(30px, 7vw, 140px); color: #e6edf3; }
 .code .word b { margin-right: 0.5em; font-weight: 400; font-size: 0.35em; vertical-align: middle; color: #484f58; }
 .code .word i { font-style: normal; color: #6e7681; }
 .tag { color: #7ee787; }
@@ -28,7 +28,7 @@
 .bar i:nth-child(2) { background: #ffbd2e; }
 .bar i:nth-child(3) { background: #28c941; }
 .bar em { margin: 0 auto; padding: 2px 14px; border-radius: 99px; background: #fff; font: 500 12px var(--lm-mono); font-style: normal; color: #5b5248; }
-.exp .word { padding: 0.25em 0.4em 0.3em; color: #1d1a16; font-family: "Instrument Sans", sans-serif; font-weight: 600; text-transform: none; letter-spacing: -0.05em; font-size: clamp(36px, 8vw, 150px); }
+.exp .word { padding: 0.25em 0.4em 0.3em; color: #1d1a16; font-family: var(--lm-text); font-weight: 600; text-transform: none; letter-spacing: -0.05em; font-size: clamp(36px, 8vw, 150px); }
 .click { position: absolute; right: 12%; bottom: 22%; width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 0 0 3px #c4572e, 0 0 0 10px rgba(196, 87, 46, 0.2); }
 
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {

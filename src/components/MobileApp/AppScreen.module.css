@@ -3,10 +3,10 @@
   --bg: #f6f6f8; --card: #ffffff; --fg: #0d1220; --mute: #6b7180; --line: rgba(13, 18, 32, 0.08); --soft: #eceef2;
   --r: 18px; --btn-r: 14px;
   position: relative; display: flex; flex-direction: column; width: 390px; height: 100%; min-height: 844px; overflow: hidden;
-  background: var(--bg); color: var(--fg); font: 400 15px/1.35 "Inter Tight", system-ui, sans-serif; letter-spacing: -0.01em;
+  background: var(--bg); color: var(--fg); font: 400 15px/1.35 var(--lm-text); letter-spacing: -0.01em;
 }
 .dark { --bg: #0b0e15; --card: #151a24; --fg: #f2f4f8; --mute: #8d94a3; --line: rgba(242, 244, 248, 0.08); --soft: #1d2330; }
-.android { --r: 24px; --btn-r: 999px; font-family: "Instrument Sans", system-ui, sans-serif; letter-spacing: 0; }
+.android { --r: 24px; --btn-r: 999px; font-family: var(--lm-text); letter-spacing: 0; }
 .app b { font-weight: 600; }
 .app small { display: block; font-size: 13px; color: var(--mute); }
 .app em { font-style: normal; }
@@ -17,7 +17,7 @@
 /* system chrome */
 .status { position: relative; z-index: 3; flex: none; display: flex; justify-content: space-between; align-items: center; height: 54px; padding: 14px 30px 0 34px; color: var(--fg); }
 .android .status { height: 40px; padding: 8px 22px 0; }
-.status b { font: 600 16px system-ui, sans-serif; }
+.status b { font: 600 16px var(--lm-text); }
 .android .status b { font-size: 14px; font-weight: 500; }
 .onDark { color: #fff; }
 .sys { display: flex; align-items: center; gap: 6px; }
@@ -244,7 +244,7 @@
 .lockBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(5, 8, 15, 0.35), rgba(5, 8, 15, 0.7)); }
 .clock { position: relative; z-index: 2; display: grid; justify-items: center; padding-top: 30px; color: #fff; }
 .clock small { color: rgba(255, 255, 255, 0.85); font-size: 17px; font-weight: 500; }
-.clock b { font: 700 96px/1 system-ui, sans-serif; letter-spacing: -0.03em; }
+.clock b { font: 700 96px/1 var(--lm-text); letter-spacing: -0.03em; }
 .notes { position: relative; z-index: 2; display: grid; gap: 10px; margin-top: auto; padding: 0 12px 70px; }
 .note { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 14px; border-radius: 22px; background: rgba(245, 246, 250, 0.72); backdrop-filter: blur(20px); color: #0d1220; }
 .note small { color: rgba(13, 18, 32, 0.7); }

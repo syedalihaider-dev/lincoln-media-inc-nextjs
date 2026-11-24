@@ -4,7 +4,7 @@ import { gsap, useGSAP, DESKTOP_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import { SITE } from "@/data/site";
 import VideoBackground from "@/components/Common/VideoBackground";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import styles from "./CTA.module.css";
 
 /**
@@ -50,8 +50,8 @@ export default function CTA() {
           <div className={styles.after} data-after>
             <p>Tell us what you&apos;re building. We&apos;ll come back with a plan, a team and a timeline.</p>
             <div className={styles.btns}>
-              <MagneticButton href="#contact" size="lg" icon="↓">Start a project</MagneticButton>
-              <MagneticButton href="/" variant="ghost" size="lg">Get your AI build plan</MagneticButton>
+              <Button href="#contact" size="lg" icon="down">Start a project</Button>
+              <Button href="/" variant="outline" size="lg">Get your AI build plan</Button>
             </div>
           </div>
         </div>

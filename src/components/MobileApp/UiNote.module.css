@@ -6,7 +6,7 @@
 .top { display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.04em; }
 .icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(145deg, #36e4d0, #1f6feb); color: #fff; font: 800 16px var(--lm-display); }
 .code { padding: 12px 16px 14px; background: #0c111b; border: 1px solid rgba(238, 241, 247, 0.12); }
-.code code, .api code { font: 500 13px/1.4 var(--lm-mono); color: #e6edf6; }
+.code code, .api code { font: 500 13px/1.4 var(--lm-code); color: #e6edf6; }
 .file { color: rgba(238, 241, 247, 0.5); font-family: var(--lm-mono) !important; letter-spacing: 0.04em; }
 .api { grid-auto-flow: column; align-items: center; gap: 12px; padding: 12px 16px; background: #0c111b; border: 1px solid rgba(54, 228, 208, 0.3); }
 .api small { color: rgba(238, 241, 247, 0.5); font-family: var(--lm-mono); }

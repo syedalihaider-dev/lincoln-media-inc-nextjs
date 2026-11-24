@@ -37,7 +37,7 @@
 }
 .under, .over { position: absolute; inset: 0; }
 .over { mask-image: radial-gradient(circle var(--r) at var(--lx) var(--ly), transparent 98%, #000 100%); -webkit-mask-image: radial-gradient(circle var(--r) at var(--lx) var(--ly), transparent 98%, #000 100%); }
-.code { position: absolute; right: 3%; top: 12%; margin: 0; padding: 18px 22px; border-radius: 10px; font: 500 clamp(9px, 0.95vw, 14px)/1.7 var(--lm-mono); color: var(--lm-accent); background: rgba(3, 5, 11, 0.82); border: 1px solid rgba(54, 228, 208, 0.35); white-space: pre; }
+.code { position: absolute; right: 3%; top: 12%; margin: 0; padding: 18px 22px; border-radius: 10px; font: 500 clamp(9px, 0.95vw, 14px)/1.7 var(--lm-code); color: var(--lm-accent); background: rgba(3, 5, 11, 0.82); border: 1px solid rgba(54, 228, 208, 0.35); white-space: pre; }
 .ring { position: absolute; left: var(--lx); top: var(--ly); width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: -50% -50%; border-radius: 50%; border: 1px solid var(--lm-accent); box-shadow: 0 0 0 1px rgba(3, 5, 11, 0.4), 0 0 40px rgba(54, 228, 208, 0.45), inset 0 0 40px rgba(54, 228, 208, 0.2); pointer-events: none; }
 .ring em { position: absolute; left: 50%; top: 100%; translate: -50% 10px; padding: 5px 12px; border-radius: 20px; font: 500 11px var(--lm-mono); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: var(--lm-ink); background: var(--lm-accent); }
 

@@ -13,7 +13,7 @@
 
 .nodePhone { width: 62%; margin: 0 auto; perspective: 900px; }
 .nodePhone > div { transform: rotateY(-14deg); }
-.req { overflow: hidden; font: 400 clamp(9.5px, 0.78vw, 12px)/1.7 var(--lm-mono); color: #e6edf6; white-space: pre-wrap; word-break: break-word; }
+.req { overflow: hidden; font: 400 clamp(9.5px, 0.78vw, 12px)/1.7 var(--lm-code); color: #e6edf6; white-space: pre-wrap; word-break: break-word; }
 .m { padding: 2px 6px; border-radius: 5px; background: rgba(59, 91, 255, 0.25); color: #9fb2ff; }
 .c { color: #6f7a8c; } .s { color: #7ff0e2; } .ok { color: var(--lm-accent); }
 .svcs { list-style: none; display: grid; gap: 7px; }
@@ -32,7 +32,7 @@
 .rows li { border-bottom: 1px solid var(--lm-line); }
 .rowLink, .svcRow { display: grid; grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.2fr) 20px; grid-template-areas: "name stack go" "name what go"; gap: 4px 20px; align-items: center; padding: 18px 0; }
 .svcRow { grid-template-columns: minmax(150px, 0.7fr) minmax(0, 1.3fr); grid-template-areas: "name what"; }
-.rows b { grid-area: name; font: 700 clamp(16px, 1.3vw, 21px)/1.15 var(--lm-display); letter-spacing: -0.03em; transition: color 0.4s; }
+.rows b { grid-area: name; font: 700 clamp(16px, 1.3vw, 21px)/1.15 var(--lm-text); letter-spacing: -0.03em; transition: color 0.4s; }
 .stack { grid-area: stack; font: 500 12px var(--lm-mono); color: var(--lm-accent); }
 .what { grid-area: what; font: 300 15px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.72); }
 .rowLink i { grid-area: go; font-style: normal; color: var(--lm-accent); transition: transform 0.4s var(--lm-ease); }

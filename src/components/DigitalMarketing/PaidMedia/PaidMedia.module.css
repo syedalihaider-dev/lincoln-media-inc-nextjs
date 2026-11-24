@@ -14,7 +14,7 @@
 .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8, 20, 18, 0.85), transparent 60%); }
 .card figcaption { position: absolute; z-index: 1; left: 7%; right: 7%; bottom: 7%; display: grid; gap: 10px; color: #fff; }
 .card small { font: 500 11px var(--lm-mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; }
-.card b { font: 400 clamp(20px, 2vw, 32px)/1.08 Georgia, serif; }
+.card b { font: 400 clamp(20px, 2vw, 32px)/1.08 var(--lm-text); }
 .card span { justify-self: start; padding: 9px 18px; border-radius: 99px; background: #f7f3ec; color: #12382f; font: 500 13px var(--lm-body); }
 .side { display: none; }
 .portal, .action { position: relative; }
@@ -27,10 +27,10 @@
   .deck { position: absolute; left: 42vw; right: 2vw; top: 12vh; bottom: 8vh; height: auto; max-height: none; transform-style: preserve-3d; }
   .card { width: auto; height: 62vh; transform: translateZ(calc(var(--i) * -90px)) rotate(calc(var(--i) * 4deg)); }
   .side { display: block; position: absolute; will-change: transform; }
-  .searchAd { left: -6%; top: 6%; display: grid; gap: 6px; width: 300px; padding: 18px 20px; border-radius: 14px; background: #fff; color: #1b1f29; font: 400 14px/1.45 "Inter Tight", sans-serif; transform: translateZ(-120px); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+  .searchAd { left: -6%; top: 6%; display: grid; gap: 6px; width: 300px; padding: 18px 20px; border-radius: 14px; background: #fff; color: #1b1f29; font: 400 14px/1.45 var(--lm-text); transform: translateZ(-120px); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
   .searchAd b { font-weight: 500; font-size: 17px; color: #1a3fb0; }
   .searchAd span { color: #4d5260; }
-  .sp { font: 700 12px "Inter Tight", sans-serif; color: #1b1f29; }
+  .sp { font: 700 12px var(--lm-text); color: #1b1f29; }
   .social { right: 2%; bottom: 4%; width: 150px; transform: translateZ(-60px); }
   /* the opened page fills the stage beside the copy, so the lit AD → LANDING PAGE → ACTION stays readable */
   .portal, .action { position: absolute; inset: 0 0 0 39vw; z-index: 6; display: grid; place-items: center; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 6vh 2vw; background: radial-gradient(ellipse at 50% 50%, #0d1030, #05061a 70%); visibility: hidden; }

@@ -5,7 +5,7 @@ import { gsap, SplitText, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap
 import { useSiteMotion } from "@/lib/motion";
 import { ABOUT_HERO } from "@/data/about";
 import { SITE } from "@/data/site";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import Label from "./Label";
 import styles from "./AboutHero.module.css";
 
@@ -78,8 +78,8 @@ export default function AboutHero() {
           <div data-wipe><dt>City</dt><dd>{SITE.locality}</dd></div>
         </dl>
         <div className={styles.actions} data-wipe>
-          <MagneticButton href="/#contact" className={styles.btn}>Start a project</MagneticButton>
-          <MagneticButton href="#story" variant="ghost" icon="↓" className={styles.btn}>Our story</MagneticButton>
+          <Button href="/#contact">Start a project</Button>
+          <Button href="#story" variant="outline" icon="down">Our story</Button>
         </div>
       </div>
 

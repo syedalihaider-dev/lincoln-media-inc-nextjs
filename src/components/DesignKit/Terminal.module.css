@@ -1,4 +1,4 @@
-.term { position: relative; display: flex; flex-direction: column; width: 100%; overflow: hidden; border-radius: 14px; background: #0a0d12; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.1), 0 40px 90px -30px rgba(0, 0, 0, 0.85); font: 400 clamp(10px, 0.86vw, 14px)/1.7 var(--lm-mono); color: #c9d1d9; }
+.term { position: relative; display: flex; flex-direction: column; width: 100%; overflow: hidden; border-radius: 14px; background: #0a0d12; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.1), 0 40px 90px -30px rgba(0, 0, 0, 0.85); font: 400 clamp(10px, 0.86vw, 14px)/1.7 var(--lm-code); color: #c9d1d9; }
 .bar { position: relative; display: flex; align-items: center; justify-content: center; height: 2.6em; background: #161b22; border-bottom: 1px solid #21262d; }
 .bar b { font-weight: 500; color: #8b949e; }
 .dots { position: absolute; left: 1em; display: flex; gap: 6px; }

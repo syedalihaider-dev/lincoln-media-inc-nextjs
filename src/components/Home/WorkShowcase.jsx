@@ -6,7 +6,7 @@ import { useSiteMotion } from "@/lib/motion";
 import { CASE_STUDIES } from "@/data/work";
 import SectionLabel from "@/components/Common/SectionLabel";
 import VideoBackground from "@/components/Common/VideoBackground";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import styles from "./WorkShowcase.module.css";
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -98,7 +98,7 @@ export default function WorkShowcase() {
           ))}
           <div className={styles.outro}>
             <p className={styles.outroText}>Eight brands, eight different problems. <em>Yours could be next.</em></p>
-            <MagneticButton href="#contact">Start a project</MagneticButton>
+            <Button href="#contact">Start a project</Button>
           </div>
         </div>
         <div className={styles.hud} aria-hidden="true">

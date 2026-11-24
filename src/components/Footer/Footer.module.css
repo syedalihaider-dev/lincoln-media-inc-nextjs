@@ -3,7 +3,7 @@
 
 .cols { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr)); gap: 40px; }
 .lead { display: grid; align-content: start; gap: 22px; }
-.leadText { max-width: 24ch; font: 700 clamp(17px, 1.5vw, 24px)/1.2 var(--lm-display); letter-spacing: -0.02em; text-transform: uppercase; }
+.leadText { max-width: 24ch; font: 700 clamp(17px, 1.5vw, 24px)/1.2 var(--lm-text); letter-spacing: -0.02em; text-transform: uppercase; }
 .mail { justify-self: start; font: 500 15px var(--lm-body); color: var(--lm-accent); border-bottom: 1px solid currentColor; padding-bottom: 3px; }
 .h { font: 500 10px var(--lm-mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-accent); margin-bottom: 18px; }
 .col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

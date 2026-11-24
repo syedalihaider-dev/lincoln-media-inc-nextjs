@@ -3,7 +3,7 @@ import { SITE } from "@/data/site";
 import { CONTACT_SERVICES } from "@/data/services";
 import SectionLabel from "@/components/Common/SectionLabel";
 import RevealText from "@/components/Common/RevealText";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import styles from "./Contact.module.css";
 
 // Exact strings: the guided intro pre-selects the range that matches the visitor's estimate
@@ -65,7 +65,7 @@ export default function Contact() {
           <span>Project description *</span>
         </label>
         <div className={styles.foot}>
-          <MagneticButton type="submit" variant="dark" size="lg">Send enquiry</MagneticButton>
+          <Button type="submit" size="lg">Send enquiry</Button>
           <p className={styles.avail}><i aria-hidden="true" />Available for new projects</p>
           <p className={styles.note} id="formNote" aria-live="polite" />
         </div>

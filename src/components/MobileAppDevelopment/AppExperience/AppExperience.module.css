@@ -41,7 +41,7 @@
 .miniScreen, .uiScreen { width: 100%; aspect-ratio: 390 / 844; overflow: hidden; border-radius: 10px; }
 .ui { padding: 8px; border-radius: 22px; }
 .uiScreen { border-radius: 16px; }
-.code pre { overflow: hidden; font: 400 clamp(10px, 0.82vw, 13px)/1.65 var(--lm-mono); color: #e6edf6; }
+.code pre { overflow: hidden; font: 400 clamp(10px, 0.82vw, 13px)/1.65 var(--lm-code); color: #e6edf6; }
 .t_c { color: #6f7a8c; } .t_k { color: #c4a7ff; } .t_s { color: #7ff0e2; }
 .product { position: relative; perspective: 1200px; }
 .push { left: -60%; bottom: 12%; transform: translateZ(60px) scale(0.86); transform-origin: left bottom; }

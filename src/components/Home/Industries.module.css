@@ -169,7 +169,7 @@
 /* Counter and progress: six segments filling in turn */
 .foot { position: absolute; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 4vh; z-index: 6; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 28px; }
 .counter { margin: 0; font: 500 11px var(--lm-mono); letter-spacing: 0.2em; color: var(--lm-mute); }
-.counter b { display: inline-block; font: 800 22px/1 var(--lm-display); letter-spacing: -0.02em; color: var(--lm-accent); margin-right: 6px; animation: roll 0.7s var(--lm-ease); }
+.counter b { display: inline-block; font: 800 22px/1 var(--lm-text); letter-spacing: -0.02em; color: var(--lm-accent); margin-right: 6px; animation: roll 0.7s var(--lm-ease); }
 @keyframes roll { from { transform: translateY(70%) rotateX(-80deg); opacity: 0; } }
 .rail { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
 .rail span { position: relative; height: 2px; background: rgba(238, 241, 247, 0.12); overflow: hidden; }

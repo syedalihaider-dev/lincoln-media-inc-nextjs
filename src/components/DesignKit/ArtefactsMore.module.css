@@ -1,4 +1,4 @@
-.jm, .audit, .brand { height: 800px; font: 400 15px/1.4 "Instrument Sans", "Inter Tight", sans-serif; color: #1d1a16; }
+.jm, .audit, .brand { height: 800px; font: 400 15px/1.4 var(--lm-text); color: #1d1a16; }
 .head { display: flex; justify-content: space-between; align-items: baseline; }
 .head b { font-size: 28px; letter-spacing: -0.03em; }
 .head span { color: #7a7166; }
@@ -31,7 +31,7 @@
 /* brand board */
 .brand { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 22px; padding: 40px; }
 .brand > div { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.45); }
-.mark { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #c4572e; color: #f4efe8; font: 700 30px/1 "Instrument Sans", sans-serif; font-style: normal; }
+.mark { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #c4572e; color: #f4efe8; font: 700 30px/1 var(--lm-text); font-style: normal; }
 .logoDark, .logoLight { display: grid; place-content: center; justify-items: center; gap: 14px; }
 .logoDark { background: #1d1a16; color: #f4efe8; }
 .logoLight { background: #f4efe8; }
@@ -49,7 +49,7 @@
 .brochure b { font-size: 28px; line-height: 1.05; letter-spacing: -0.03em; }
 .palette { display: grid; grid-template-columns: repeat(4, 1fr); }
 .palette i { display: grid; align-content: end; padding: 14px; }
-.palette small { font: 600 12px monospace; color: #fff; mix-blend-mode: difference; }
+.palette small { font: 600 12px var(--lm-text); color: #fff; mix-blend-mode: difference; }
 .specimen { display: grid; place-content: center; gap: 10px; padding: 26px; background: #fff; }
 .specimen b { font-size: 120px; line-height: 0.9; letter-spacing: -0.05em; }
 .specimen span { color: #7a7166; }

@@ -64,7 +64,7 @@ export function Brand() {
         <div className={m.card} data-piece><b>Ana Ruiz</b><small>Senior agent</small><span>ana@meridian.example<br />Madison Avenue, New York</span><i className={m.mark}>M</i></div>
         <div className={m.brochure} data-piece><Image src={imgEmpire} alt="" fill sizes="20vw" style={{ objectFit: "cover" }} /><small>The Meridian West</small><b>Forty-two homes. One view.</b></div>
         <div className={m.palette} data-piece>{["#1D1A16", "#F4EFE8", "#C4572E", "#2F6B45"].map((h) => <i key={h} style={{ background: h }}><small>{h}</small></i>)}</div>
-        <div className={m.specimen} data-piece><b>Aa</b><span>Instrument Sans<br />Semibold · Regular</span></div>
+        <div className={m.specimen} data-piece><b>Aa</b><span>Poppins<br />Semibold · Regular</span></div>
       </div>
     </Board>
   );

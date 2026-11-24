@@ -30,7 +30,6 @@
 .facts dt { font: 500 13px/1 var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--lm-accent); margin-bottom: 8px; }
 .facts dd { font: 500 16px/1.35 var(--lm-body); color: var(--lm-paper); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn { font-size: 14px !important; letter-spacing: 0.14em !important; }
 
 /* ---------- The layered composition (real 3D space) ---------- */
 .visual { position: relative; height: min(76vh, 760px); perspective: 1600px; }

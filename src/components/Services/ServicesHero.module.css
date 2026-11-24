@@ -39,7 +39,7 @@
 /* the readout: which discipline is nearest */
 .readout { grid-column: 2; grid-row: 3; position: relative; z-index: 2; align-self: end; display: grid; gap: 8px; justify-items: end; padding: 0 var(--lm-gutter) 44px 0; text-align: right; }
 .readLabel { font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.5); }
-.readName { max-width: 16ch; font: 700 clamp(16px, 1.4vw, 24px)/1.15 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; color: var(--lm-accent); animation: roll 0.7s var(--lm-ease); }
+.readName { max-width: 16ch; font: 700 clamp(16px, 1.4vw, 24px)/1.15 var(--lm-text); letter-spacing: -0.03em; text-transform: uppercase; color: var(--lm-accent); animation: roll 0.7s var(--lm-ease); }
 @keyframes roll { from { opacity: 0; transform: translateY(60%); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); } }
 
 /* every discipline, a real link; the nearest one lit */

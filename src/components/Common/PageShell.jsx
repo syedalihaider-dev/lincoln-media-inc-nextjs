@@ -6,9 +6,10 @@ import { MotionContext } from "@/lib/motion";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import styles from "./PageShell.module.css";
+import { FONT_CSS } from "./fonts";
 
-// The brand typefaces — the same request every other page makes (React hoists these into <head>)
-const FONTS = "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap";
+// The heading typeface (React hoists this into <head>); body text is Poppins via next/font
+const FONTS = FONT_CSS;
 // The base the homepage gets from the intro stylesheet (public/styles.css), so shared parts render the same
 const BASE_CSS = [
   "*{box-sizing:border-box;margin:0;padding:0}",

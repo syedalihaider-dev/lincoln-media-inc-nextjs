@@ -55,7 +55,7 @@ export default function Canvas({ frame = "Home — Desktop", children, select, r
             <p className={c.ph}>Fill</p>
             <p className={c.swatch}><i style={{ background: "#f4efe8" }} />F4EFE8</p>
             <p className={c.ph}>Text</p>
-            <p className={c.font}>Instrument Sans<br /><small>Semibold · 64 / 64 · −4.5%</small></p>
+            <p className={c.font}>Poppins<br /><small>Semibold · 64 / 64 · −4.5%</small></p>
             <p className={c.ph}>Export</p>
             <p className={c.font}>PNG · SVG · <b>Code</b></p>
           </aside>

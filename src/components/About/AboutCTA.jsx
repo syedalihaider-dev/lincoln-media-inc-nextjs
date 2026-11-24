@@ -4,7 +4,7 @@ import { gsap, useGSAP, ANY_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import { ABOUT_CTA } from "@/data/about";
 import { SITE } from "@/data/site";
-import MagneticButton from "@/components/Common/MagneticButton";
+import Button from "@/components/Common/Button";
 import Label from "./Label";
 import styles from "./AboutCTA.module.css";
 
@@ -65,8 +65,8 @@ export default function AboutCTA() {
       <div className={styles.actions} data-actions>
         <p className={styles.text} data-rise>{ABOUT_CTA.text}</p>
         <div className={styles.buttons} data-rise>
-          <MagneticButton href="/#contact" size="lg" className={styles.btn}>Start a project</MagneticButton>
-          <MagneticButton href="/" variant="ghost" size="lg" className={styles.btn}>Get your AI build plan</MagneticButton>
+          <Button href="/#contact" size="lg">Start a project</Button>
+          <Button href="/" variant="outline" size="lg">Get your AI build plan</Button>
         </div>
         <ul className={styles.direct} data-rise>
           <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>

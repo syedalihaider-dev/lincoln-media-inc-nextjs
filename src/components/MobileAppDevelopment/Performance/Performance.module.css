@@ -37,7 +37,7 @@
 .dFold { width: 62px; height: 78%; }
 .dTab { width: 98px; height: 92%; }
 /* code fix */
-.diff { font: 400 12px/1.8 var(--lm-mono); white-space: pre-wrap; }
+.diff { font: 400 12px/1.8 var(--lm-code); white-space: pre-wrap; }
 .rm { color: #f87171; background: rgba(248, 113, 113, 0.08); }
 .add { color: #34d399; background: rgba(52, 211, 153, 0.08); }
 .ctx { color: rgba(238, 241, 247, 0.55); }

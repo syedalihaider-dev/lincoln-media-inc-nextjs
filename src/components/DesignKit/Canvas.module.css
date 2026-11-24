@@ -1,5 +1,5 @@
 .tool { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 40px 90px -30px rgba(0, 0, 0, 0.8); }
-.app { display: grid; grid-template-columns: 220px 1fr 240px; grid-template-rows: 48px 1fr; height: 900px; background: #1e1e1e; color: #d6d6d6; font: 400 13px/1.4 "Inter Tight", system-ui, sans-serif; }
+.app { display: grid; grid-template-columns: 220px 1fr 240px; grid-template-rows: 48px 1fr; height: 900px; background: #1e1e1e; color: #d6d6d6; font: 400 13px/1.4 var(--lm-text); }
 .top { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; padding: 0 14px; background: #2c2c2c; border-bottom: 1px solid #3a3a3a; }
 .menu { display: grid; gap: 3px; }
 .menu i { width: 16px; height: 2px; background: #bbb; }
@@ -8,7 +8,7 @@
 .tools b { background: #0d99ff; color: #fff; font-weight: 500; }
 .file { margin: 0 auto; color: #ddd; }
 .avatars { display: flex; }
-.avatars i { display: grid; place-items: center; width: 26px; height: 26px; margin-left: -6px; border-radius: 50%; border: 2px solid #2c2c2c; font: 700 9px/1 "Inter Tight", sans-serif; font-style: normal; color: #fff; background: #c4572e; }
+.avatars i { display: grid; place-items: center; width: 26px; height: 26px; margin-left: -6px; border-radius: 50%; border: 2px solid #2c2c2c; font: 700 9px/1 var(--lm-text); font-style: normal; color: #fff; background: #c4572e; }
 .avatars i:nth-child(2) { background: #7b5bff; }
 .avatars i:nth-child(3) { background: #1f9d8a; }
 .share { padding: 6px 14px; border-radius: 6px; background: #0d99ff; color: #fff; font-weight: 500; }

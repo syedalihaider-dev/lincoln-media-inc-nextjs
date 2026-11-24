@@ -1,6 +1,6 @@
 .board { position: relative; width: 100%; overflow: hidden; border-radius: 16px; background: #f4efe8; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 40px 90px -30px rgba(0, 0, 0, 0.75); }
 .paperBoard { background: #efe9e0 radial-gradient(rgba(29, 26, 22, 0.08) 1px, transparent 1px) 0 0 / 24px 24px; }
-.research, .map, .tokens, .test { position: relative; height: 800px; font: 400 15px/1.45 "Instrument Sans", "Inter Tight", sans-serif; color: #1d1a16; }
+.research, .map, .tokens, .test { position: relative; height: 800px; font: 400 15px/1.45 var(--lm-text); color: #1d1a16; }
 
 /* research board */
 .research { display: grid; grid-template-columns: 1fr 300px; grid-template-rows: auto 1fr; gap: 26px; padding: 40px; }

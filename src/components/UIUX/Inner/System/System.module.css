@@ -5,7 +5,7 @@
 .work { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 
 /* the inspector — a design tool's properties panel */
-.panel { display: grid; align-content: start; gap: 10px; padding: 18px; border-radius: 16px; background: #2c2c2c; font: 400 13px/1.4 "Inter Tight", sans-serif; color: #d6d6d6; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
+.panel { display: grid; align-content: start; gap: 10px; padding: 18px; border-radius: 16px; background: #2c2c2c; font: 400 13px/1.4 var(--lm-text); color: #d6d6d6; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
 .ph { margin-top: 6px; font-size: 11px; font-weight: 600; color: #9a9a9a; }
 .prop { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 10px; }
 .prop > span { color: #9a9a9a; }
@@ -18,7 +18,7 @@
 .sp { background: repeating-linear-gradient(90deg, #555 0 2px, transparent 2px 4px); }
 
 /* the live components */
-.live { --ink: #1d1a16; --bg: #f4efe8; --act: #c4572e; --pad: 16px 28px; position: relative; display: grid; gap: 18px; align-content: center; justify-items: start; padding: clamp(22px, 3vw, 44px); border-radius: 20px; background: var(--bg); color: var(--ink); font: 400 16px/1.4 "Instrument Sans", sans-serif; transition: background-color 0.5s, color 0.5s; }
+.live { --ink: #1d1a16; --bg: #f4efe8; --act: #c4572e; --pad: 16px 28px; position: relative; display: grid; gap: 18px; align-content: center; justify-items: start; padding: clamp(22px, 3vw, 44px); border-radius: 20px; background: var(--bg); color: var(--ink); font: 400 16px/1.4 var(--lm-text); transition: background-color 0.5s, color 0.5s; }
 .btn { position: relative; display: inline-flex; align-items: center; padding: var(--pad); border-radius: 99px; background: var(--act); color: #fff; font-weight: 600; font-size: 17px; transition: all 0.35s var(--lm-ease); }
 .input { display: grid; gap: 2px; width: min(100%, 360px); padding: 12px 16px; border-radius: 14px; background: #fff; border: 1.5px solid #e7ded2; transition: all 0.35s; }
 .input small { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #7a7166; }

@@ -40,7 +40,7 @@
 /* Chapter 2: the five disciplines set large; their pictures take the frame in turn */
 .c2 { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
 .discList { list-style: none; display: grid; gap: 2px; }
-.discList li { position: relative; padding: 8px 0 8px 22px; font: 700 clamp(20px, 1.7vw, 30px)/1.2 var(--lm-display); letter-spacing: -0.02em; text-transform: uppercase; color: rgba(238, 241, 247, 0.32); cursor: default; transition: color 0.4s, padding 0.6s var(--lm-ease); }
+.discList li { position: relative; padding: 8px 0 8px 22px; font: 700 clamp(20px, 1.7vw, 30px)/1.2 var(--lm-text); letter-spacing: -0.02em; text-transform: uppercase; color: rgba(238, 241, 247, 0.32); cursor: default; transition: color 0.4s, padding 0.6s var(--lm-ease); }
 .discList li::before { content: ""; position: absolute; left: 0; top: 50%; width: 10px; height: 2px; background: var(--lm-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--lm-ease); }
 .discList li.on { color: var(--lm-paper); padding-left: 30px; }
 .discList li.on::before { transform: scaleX(1.6); }
@@ -56,7 +56,7 @@
 .brandList li { position: relative; }
 .rule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--lm-line-strong); transform-origin: left; }
 .brandList a { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 12px; padding: 16px 0; }
-.brandList b { font: 700 clamp(18px, 1.45vw, 24px)/1.2 var(--lm-display); letter-spacing: -0.02em; text-transform: uppercase; color: var(--lm-paper); transition: color 0.3s; }
+.brandList b { font: 700 clamp(18px, 1.45vw, 24px)/1.2 var(--lm-text); letter-spacing: -0.02em; text-transform: uppercase; color: var(--lm-paper); transition: color 0.3s; }
 .brandList span { grid-column: 1; font: 400 15px var(--lm-body); color: var(--lm-mute); }
 .brandList i { grid-row: 1; grid-column: 2; font-style: normal; color: var(--lm-accent); transition: transform 0.4s var(--lm-ease); }
 .brandList a:hover b, .brandList a:focus-visible b { color: var(--lm-accent); }
