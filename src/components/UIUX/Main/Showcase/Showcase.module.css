@@ -1,0 +1,21 @@
+.section { --tint: #2a1d16; position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: radial-gradient(ellipse 70% 60% at 50% 60%, var(--tint), #070606 75%); transition: background 0.8s; }
+.top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.now { display: none; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 50px; }
+.card { margin: 0; display: grid; gap: 14px; }
+.phone { width: min(56%, 280px); justify-self: center; }
+.cap { font: 300 15px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.75); }
+.cap b { font-weight: 600; color: var(--lm-paper); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-rows: auto 1fr; gap: 10px; padding: calc(var(--lm-header-h) + 16px) var(--lm-gutter) 30px; }
+  .top { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+  .top h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .now { display: grid; gap: 4px; max-width: 34ch; text-align: right; font: 300 16px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.75); animation: in 0.6s var(--lm-ease); }
+  .now b { font: 800 clamp(20px, 2vw, 32px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; color: #e08a5f; }
+  .stage { position: relative; display: block; perspective: 1800px; }
+  .card { position: absolute; left: 50%; top: 50%; width: min(52vw, 106vh); translate: 0 -50%; transform-style: preserve-3d; will-change: transform; }
+  .phone { width: min(15vw, 30vh); }
+  .cap { display: none; }
+}
+@keyframes in { from { opacity: 0; transform: translateY(10px); } }

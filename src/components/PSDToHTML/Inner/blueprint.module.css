@@ -1,0 +1,10 @@
+/* Shared blueprint tokens for the PSD-to-HTML inner sections */
+.bp { --bp: #0c2a52; --bp2: #0a2346; --line: rgba(220, 236, 255, 0.9); --faint: rgba(220, 236, 255, 0.28); --ink: #eaf3ff; --hi: #8fc1ff; position: relative; overflow: hidden; color: var(--ink);
+  background: linear-gradient(rgba(170, 205, 255, 0.07) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(170, 205, 255, 0.07) 1px, transparent 1px) 0 0 / 24px 24px, var(--bp); }
+.deep { background: linear-gradient(rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, var(--bp2); }
+/* a heading styled like a drawing's section label: number-free, ruled */
+.head { display: grid; gap: 14px; max-width: 900px; }
+.kicker { display: inline-flex; align-items: center; gap: 12px; font: 500 12px var(--lm-mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--hi); }
+.kicker::before { content: ""; width: 34px; height: 1px; background: var(--hi); }
+.title { max-width: 18ch; font: 800 clamp(28px, 3.6vw, 60px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.lede { max-width: 52ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(234, 243, 255, 0.8); }

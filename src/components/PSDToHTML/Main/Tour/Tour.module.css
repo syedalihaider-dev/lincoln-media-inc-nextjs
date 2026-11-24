@@ -1,0 +1,21 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: radial-gradient(ellipse 50% 60% at 65% 50%, rgba(54, 228, 208, 0.07), transparent 70%), #05080d; }
+.copy { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-content: start; }
+.beats { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.beats li { --on: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 12px 0; border-top: 1px solid var(--lm-line); opacity: calc(0.35 + var(--on) * 0.65); }
+.beats b { font: 600 17px/1.25 var(--lm-body); color: color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), var(--lm-paper)); }
+.beats p { font: 300 14.5px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.74); }
+.frame { position: relative; }
+.page { will-change: transform; }
+.track { position: absolute; z-index: 3; right: 6px; top: 12%; bottom: 3%; width: 5px; border-radius: 4px; background: rgba(0, 0, 0, 0.08); }
+.track i { position: absolute; left: 0; right: 0; top: 0; height: 22%; border-radius: 4px; background: rgba(0, 0, 0, 0.35); }
+
+@media (min-width: 901px) {
+  .section { grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr); align-items: center; gap: 4vw; }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 30px; }
+  .copy :global(h2) { font-size: clamp(26px, 2.6vw, 42px); }
+  .frame { width: min(100%, calc((100svh - 160px) * 1.5)); justify-self: center; }
+}
+/* the two pages read as one: no footer between them, no second header */
+.page > div:first-child [data-part="footer"], .page > div:last-child [data-part="nav"] { display: none; }

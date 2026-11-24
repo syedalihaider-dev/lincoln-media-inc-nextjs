@@ -1,0 +1,28 @@
+.section { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; padding: clamp(90px, 14vh, 150px) var(--lm-gutter); }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
+.drawing { position: sticky; z-index: 2; top: calc(var(--lm-header-h) + 8px); align-self: start; }
+.area { position: absolute; z-index: 3; border: 1.5px dashed rgba(143, 193, 255, 0); border-radius: 6px; transition: border-color 0.4s, background-color 0.4s; pointer-events: none; }
+.area em { position: absolute; left: -2px; top: -22px; padding: 2px 7px; border-radius: 4px; background: #8fc1ff; color: #0c2a52; font: 700 10px var(--lm-mono); font-style: normal; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; opacity: 0; transition: opacity 0.3s; }
+.on { border-color: #8fc1ff; background: rgba(143, 193, 255, 0.14); box-shadow: 0 0 0 4px rgba(143, 193, 255, 0.15); }
+.on em { opacity: 1; }
+.list { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); }
+.list li { display: grid; grid-template-columns: 74px 30px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 30vh; padding: 16px 0; border-bottom: 1px solid var(--faint); opacity: 0.45; transition: opacity 0.4s; }
+.list .active { opacity: 1; }
+.tag { justify-self: start; padding: 4px 9px; border: 1.5px solid var(--line); font: 600 11px var(--lm-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.active .tag { background: #8fc1ff; border-color: #8fc1ff; color: #0c2a52; }
+.lead { height: 0; border-top: 1.5px dashed var(--faint); }
+.active .lead { border-color: #8fc1ff; }
+.list h3 { font: 700 clamp(17px, 1.4vw, 22px)/1.2 var(--lm-body); }
+.list p { font: 300 14.5px/1.5 var(--lm-light); color: rgba(234, 243, 255, 0.78); }
+
+@media (min-width: 901px) {
+  .grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: start; gap: 4vw; }
+  .list li { min-height: 0; }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-rows: auto 1fr; gap: 20px; padding: calc(var(--lm-header-h) + 12px) var(--lm-gutter) 28px; }
+  .head :global(h2) { font-size: clamp(24px, 2.4vw, 40px); }
+  .grid { align-items: center; }
+  .drawing { position: relative; top: 0; }
+  .list li { padding: 10px 0; }
+}

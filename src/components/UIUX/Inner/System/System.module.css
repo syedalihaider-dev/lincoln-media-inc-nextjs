@@ -1,0 +1,51 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(90px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #14110f, #0b0908); }
+.copy { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; align-content: start; }
+.tools { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.tools li { padding: 8px 14px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--lm-line-strong); font: 500 13px var(--lm-body); color: rgba(238, 241, 247, 0.85); }
+.work { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+
+/* the inspector — a design tool's properties panel */
+.panel { display: grid; align-content: start; gap: 10px; padding: 18px; border-radius: 16px; background: #2c2c2c; font: 400 13px/1.4 "Inter Tight", sans-serif; color: #d6d6d6; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
+.ph { margin-top: 6px; font-size: 11px; font-weight: 600; color: #9a9a9a; }
+.prop { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 10px; }
+.prop > span { color: #9a9a9a; }
+.prop p { display: flex; flex-wrap: wrap; gap: 4px; }
+.prop em { padding: 5px 9px; border-radius: 6px; background: #383838; font-style: normal; transition: background-color 0.3s, color 0.3s; }
+.prop .sel { background: #0d99ff; color: #fff; }
+.tok { display: flex; align-items: center; gap: 8px; font-family: var(--lm-mono); font-size: 12px; }
+.tok i { width: 16px; height: 16px; border-radius: 4px; transition: background-color 0.4s; }
+.rad { border-radius: 99px !important; background: #555; }
+.sp { background: repeating-linear-gradient(90deg, #555 0 2px, transparent 2px 4px); }
+
+/* the live components */
+.live { --ink: #1d1a16; --bg: #f4efe8; --act: #c4572e; --pad: 16px 28px; position: relative; display: grid; gap: 18px; align-content: center; justify-items: start; padding: clamp(22px, 3vw, 44px); border-radius: 20px; background: var(--bg); color: var(--ink); font: 400 16px/1.4 "Instrument Sans", sans-serif; transition: background-color 0.5s, color 0.5s; }
+.btn { position: relative; display: inline-flex; align-items: center; padding: var(--pad); border-radius: 99px; background: var(--act); color: #fff; font-weight: 600; font-size: 17px; transition: all 0.35s var(--lm-ease); }
+.input { display: grid; gap: 2px; width: min(100%, 360px); padding: 12px 16px; border-radius: 14px; background: #fff; border: 1.5px solid #e7ded2; transition: all 0.35s; }
+.input small { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #7a7166; }
+.card { display: grid; gap: 3px; width: min(100%, 300px); padding: 10px 10px 14px; border-radius: 16px; background: #fff; transition: all 0.4s; }
+.pic { position: relative; height: 140px; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+.card b { font-size: 19px; }
+.card small { color: #7a7166; }
+.cursor { position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: #1d1a16; clip-path: polygon(0 0, 100% 45%, 52% 56%, 36% 100%); opacity: 0; transition: all 0.4s var(--lm-ease); }
+
+.hover .btn { background: #ad4723; box-shadow: 0 12px 24px -10px rgba(196, 87, 46, 0.7); transform: translateY(-2px); }
+.hover .cursor, .pressed .cursor { opacity: 1; left: 150px; top: 54px; }
+.pressed .btn { background: #933a1c; transform: scale(0.96); }
+.focus .btn { box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px #0d99ff; }
+.focus .input { border-color: var(--ink); box-shadow: 0 0 0 4px rgba(196, 87, 46, 0.2); }
+.disabled .btn { background: #e7ded2; color: #a89e91; }
+.disabled .input { background: #f1ece5; color: #a89e91; }
+.large { --pad: 20px 36px; }
+.large .btn { font-size: 19px; }
+.dark { --ink: #f4efe8; --bg: #1d1a16; --act: #e08a5f; }
+.dark .input, .dark .card { background: #2a2520; border-color: #3a332c; }
+.dark .btn { color: #1d1a16; }
+
+@media (min-width: 901px) {
+  .work { grid-template-columns: 260px minmax(0, 1fr); align-items: stretch; gap: 22px; }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 30px; }
+  .copy :global(h2) { font-size: clamp(26px, 2.6vw, 44px); }
+}
+@media (prefers-reduced-motion: reduce) { .live, .btn, .input, .card, .cursor, .prop em, .tok i { transition: none; } }

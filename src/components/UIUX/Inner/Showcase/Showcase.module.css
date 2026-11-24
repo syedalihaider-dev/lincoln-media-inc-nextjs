@@ -1,0 +1,24 @@
+/* The design file's canvas — dark, dotted, artboards with their names above them */
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding: clamp(90px, 14vh, 150px) var(--lm-gutter); background: #1e1e1e radial-gradient(#2c2c2c 1px, transparent 1px) 0 0 / 24px 24px; }
+.view { position: relative; }
+.plane { display: grid; gap: 40px; }
+.board { --on: 0; position: relative; margin: 0; display: grid; gap: 10px; }
+.board figcaption { font: 500 12px var(--lm-mono); color: #a0a0a0; }
+.board > :nth-child(2) { box-shadow: 0 0 0 calc(var(--on) * 3px) #0d99ff, 0 30px 60px -30px rgba(0, 0, 0, 0.8); border-radius: 14px; }
+.tall { width: min(60%, 300px); }
+.note { font: 300 15px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.75); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-rows: auto 1fr; gap: 16px; padding: calc(var(--lm-header-h) + 14px) 0 0; }
+  .head { padding: 0 var(--lm-gutter); }
+  .head :global(h2) { font-size: clamp(26px, 2.6vw, 44px); }
+  .view { overflow: hidden; }
+  /* the whole file: a 3 × 2 arrangement of artboards in real canvas space */
+  .plane { position: absolute; left: 0; top: 0; width: 2600px; grid-template-columns: repeat(3, 760px); align-items: start; gap: 120px 100px; padding: 80px; will-change: transform; }
+  .board figcaption { font-size: 14px; }
+  .tall { width: 320px; justify-self: center; }
+  .note { font-size: 18px; color: rgba(238, 241, 247, 0.6); }
+}
+@media (min-width: 600px) and (max-width: 900px) {
+  .plane { grid-template-columns: 1fr 1fr; }
+}

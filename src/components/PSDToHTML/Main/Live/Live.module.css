@@ -1,0 +1,23 @@
+.section { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: #030508; }
+.stage, .caption { display: none; }
+.mobile { list-style: none; display: grid; gap: 34px; }
+.mobile li { display: grid; gap: 12px; }
+.mobile b { font: 600 18px var(--lm-body); color: var(--lm-accent); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; display: block; padding: 0; }
+  .label { position: absolute; z-index: 5; left: var(--lm-gutter); top: calc(var(--lm-header-h) + 22px); }
+  .mobile { display: none; }
+  .stage { display: grid; place-items: center; position: absolute; inset: 0; perspective: 1800px; }
+  .shot { position: relative; display: grid; width: min(70vw, 120vh); height: min(46vw, 78vh); border-radius: 16px; overflow: hidden; background: #0d1117; will-change: transform, width, height; }
+  .l { grid-area: 1 / 1; position: relative; display: grid; place-items: center; overflow: hidden; will-change: clip-path; }
+  .l > * { width: 100%; }
+  .codeL { background: #0d1117; align-items: start; }
+  .codeL > div { height: 100%; border-radius: 0; box-shadow: none; font-size: clamp(11px, 1vw, 16px); }
+  .live { position: absolute; inset: 0; background: #f4efe8; }
+  .live > div { height: 100%; }
+  .caption { display: block; position: absolute; z-index: 5; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 5vh; overflow: hidden; }
+  .track { display: flex; width: 400%; will-change: transform; }
+  .track span { display: flex; align-items: baseline; gap: 0.4em; width: 25%; font: 800 clamp(34px, 5.4vw, 96px)/1 var(--lm-display); letter-spacing: -0.055em; text-transform: uppercase; text-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); }
+  .track span:nth-child(even) { color: var(--lm-accent); }
+}

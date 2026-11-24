@@ -1,0 +1,18 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(90px, 14vh, 150px) var(--lm-gutter); background: #f6f2ec; color: #1d1a16; }
+.label { color: #1d1a16; }
+.top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: center; }
+.say { max-width: 20ch; font: 800 clamp(28px, 4.4vw, 78px)/1 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; }
+.print { position: relative; width: min(80vw, 460px); aspect-ratio: 4 / 5; margin: 0; justify-self: center; padding: 12px 12px 46px; background: #fff; box-shadow: 0 30px 60px -30px rgba(29, 26, 22, 0.5); will-change: transform; }
+.print::after { content: ""; position: absolute; left: 50%; top: -10px; width: 90px; height: 24px; translate: -50% 0; rotate: -3deg; background: rgba(242, 201, 168, 0.75); }
+.img { object-fit: cover; padding: 12px 12px 46px; }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+.col { position: relative; display: grid; gap: 12px; padding-top: 20px; }
+.rule { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: #1d1a16; transform-origin: left; }
+.col h3 { font: 500 12px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: #c4572e; }
+.col p { max-width: 40ch; font: 400 clamp(16px, 1.2vw, 19px)/1.6 var(--lm-light); color: #3b352e; }
+
+@media (min-width: 901px) {
+  .top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 5vw; }
+  .print { width: 100%; }
+  .cols { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw; }
+}

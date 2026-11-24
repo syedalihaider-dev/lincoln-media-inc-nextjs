@@ -1,0 +1,26 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #0b0908, #100c0a); }
+.left { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; align-content: start; }
+.rows { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 44px; }
+.row { --on: 1; display: grid; gap: 10px; }
+.name { font: 800 clamp(26px, 6vw, 44px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; color: color-mix(in srgb, #e08a5f calc(var(--on) * 100%), rgba(238, 241, 247, 0.4)); }
+.more { display: grid; gap: 10px; }
+.more p { max-width: 44ch; font: 300 16px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.more a { justify-self: start; display: inline-flex; gap: 8px; font: 500 14px var(--lm-body); border-bottom: 1px solid rgba(224, 138, 95, 0.6); }
+.more a i { font-style: normal; color: #e08a5f; }
+.mobileView { margin-top: 6px; }
+.lens { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 30px; }
+  .head h2 { font-size: clamp(20px, 1.8vw, 30px); }
+  .rows { gap: 0; }
+  .row { gap: 0; }
+  /* the type breathes: small when idle, display size when active */
+  .name { font-size: calc(17px + var(--on) * clamp(14px, 2.6vw, 44px)); line-height: 1.12; padding: 4px 0; }
+  .more { overflow: hidden; height: calc(var(--on) * 5.2em); opacity: var(--on); }
+  .more p { font-size: 15px; }
+  .mobileView { display: none; }
+  .lens { display: grid; position: relative; align-self: center; height: min(68vh, 620px); border-radius: 22px; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, #241a15, #0d0a09 75%); box-shadow: inset 0 0 0 1px var(--lm-line); }
+  .layer { grid-area: 1 / 1; align-self: center; justify-self: center; width: 90%; will-change: clip-path, transform; }
+  .tall { width: 34%; }
+}

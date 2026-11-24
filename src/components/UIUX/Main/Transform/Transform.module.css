@@ -1,0 +1,27 @@
+.section { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: #060505; }
+.label { position: relative; z-index: 3; }
+.caption { position: relative; z-index: 3; font: 800 clamp(30px, 6vw, 110px)/1 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; }
+.slot { display: block; height: 1em; overflow: hidden; }
+.reel { display: block; will-change: transform; }
+.reel > span { display: block; height: 1em; }
+.reel > span:nth-child(odd) { color: var(--lm-paper); }
+.reel > span:nth-child(even) { color: #e08a5f; }
+.stage { display: none; }
+.mobile { list-style: none; display: grid; gap: 34px; }
+.mobile li { display: grid; gap: 12px; }
+.mobile li:last-child > div { width: 54%; justify-self: center; }
+.mobile b { font: 600 18px var(--lm-body); color: #e08a5f; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; display: block; padding: 0; }
+  .label { position: absolute; left: var(--lm-gutter); top: calc(var(--lm-header-h) + 24px); }
+  .caption { position: absolute; left: var(--lm-gutter); bottom: 6vh; font-size: clamp(36px, 6vw, 110px); text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); }
+  .mobile { display: none; }
+  .stage { display: grid; place-items: center; position: absolute; inset: 0; perspective: 1800px; }
+  .shot { position: relative; display: grid; width: min(66vw, 118vh); will-change: transform; }
+  .l { grid-area: 1 / 1; position: relative; will-change: clip-path; }
+  .hot { position: absolute; z-index: 3; border-radius: 8px; background: rgba(13, 153, 255, 0.22); box-shadow: 0 0 0 2px #0d99ff; animation: pulse 1.6s ease-in-out infinite; }
+  .final { position: relative; width: 100%; aspect-ratio: 16 / 10.6; overflow: hidden; border-radius: 14px; }
+}
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(13, 153, 255, 0.25); } }
+@media (prefers-reduced-motion: reduce) { .hot { animation: none; } }

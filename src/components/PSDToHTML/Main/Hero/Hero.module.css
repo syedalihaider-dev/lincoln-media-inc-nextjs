@@ -1,0 +1,30 @@
+/* A developer's studio: near-black, a faint baseline grid, cyan as the only colour */
+.hero { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; min-height: max(760px, 100svh); padding: calc(var(--lm-header-h) + 24px) var(--lm-gutter) 50px; background: linear-gradient(rgba(54, 228, 208, 0.035) 1px, transparent 1px) 0 0 / 100% 32px, radial-gradient(ellipse 60% 70% at 75% 50%, rgba(54, 228, 208, 0.09), transparent 70%), #05080d; }
+.copy { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-content: center; will-change: transform; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; font: 500 12px/1.4 var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent); }
+.crumb a:hover { color: var(--lm-accent); }
+.crumb [aria-current] { color: var(--lm-paper); }
+.title { display: grid; font: 800 clamp(44px, 7vw, 128px)/0.9 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; }
+.mask { display: block; overflow: hidden; padding-bottom: 0.05em; }
+.mask > span { display: block; }
+.em { color: var(--lm-accent); }
+.sub { font: 500 13px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.7); }
+.sub::before { content: "<"; color: var(--lm-accent); }
+.sub::after { content: " />"; color: var(--lm-accent); }
+.lead { max-width: 46ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.flow { display: flex; flex-wrap: wrap; gap: 6px 0; list-style: none; font: 500 11px var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238, 241, 247, 0.7); }
+.flow li + li::before { content: "→"; margin: 0 10px; color: var(--lm-accent); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); perspective: 1800px; min-height: 64vw; }
+.plane { grid-area: 1 / 1; align-self: start; width: 92%; transform-style: preserve-3d; will-change: transform; }
+.code { justify-self: end; width: 70%; margin-top: 12%; }
+.browser { justify-self: center; align-self: end; width: 86%; will-change: clip-path, transform; }
+
+@media (min-width: 901px) {
+  .hero { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; gap: 3vw; }
+  .stage { min-height: min(70vh, 640px); align-content: center; }
+  .plane { align-self: center; }
+  .code { align-self: start; margin-top: 4%; width: 62%; }
+  .browser { width: 84%; margin-bottom: -2%; }
+}

@@ -1,0 +1,26 @@
+/* Phones / reduced motion: stages stacked, each showing its artefact. Desktop with motion: one held frame. */
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #0b0908, #0d0b0a); }
+.side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; align-content: start; }
+.list { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.item { --on: 1; display: grid; gap: 8px; }
+.item h3 { font: 800 clamp(24px, 6vw, 40px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; color: color-mix(in srgb, #e08a5f calc(var(--on) * 100%), rgba(238, 241, 247, 0.4)); }
+.item p { max-width: 44ch; font: 300 16px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.mobileView { margin-top: 10px; }
+.mobileView > * { max-width: 100%; }
+.meter { display: none; }
+.frame { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 30px; }
+  .side h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .list { gap: 0; }
+  .item { padding: 9px 0 9px 18px; border-left: 2px solid; border-left-color: color-mix(in srgb, #e08a5f calc(var(--on) * 100%), rgba(238, 241, 247, 0.12)); }
+  .item h3 { font-size: clamp(16px, 1.4vw, 22px); font-family: var(--lm-body); font-weight: 600; letter-spacing: -0.01em; text-transform: none; }
+  .item p { overflow: hidden; height: calc(var(--on) * 4.8em); opacity: var(--on); font-size: 14.5px; }
+  .mobileView { display: none; }
+  .meter { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; font: 500 10px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.5); }
+  .meter i { height: 4px; border-radius: 4px; background: rgba(238, 241, 247, 0.1); overflow: hidden; }
+  .meter b { display: block; height: 100%; background: linear-gradient(90deg, #8a8a8a, #e08a5f, var(--lm-accent)); transform-origin: left; }
+  .frame { display: grid; position: relative; }
+  .layer { grid-area: 1 / 1; align-self: center; will-change: clip-path, transform; }
+}

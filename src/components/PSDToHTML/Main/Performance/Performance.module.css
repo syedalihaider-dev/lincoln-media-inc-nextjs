@@ -1,0 +1,22 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #05080d, #070b12); }
+.report { border-radius: 18px; overflow: hidden; background: #0d1117; box-shadow: 0 0 0 1px #21262d, 0 50px 100px -40px rgba(0, 0, 0, 0.9); font-family: var(--lm-body); }
+.top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 16px 20px; background: #161b22; border-bottom: 1px solid #21262d; }
+.run { display: flex; align-items: center; gap: 10px; font: 500 12px var(--lm-mono); color: #8b949e; }
+.run i { width: 9px; height: 9px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 0 4px rgba(63, 185, 80, 0.2); }
+.barTrack { height: 4px; border-radius: 4px; background: #21262d; overflow: hidden; }
+.barTrack i { display: block; height: 100%; background: linear-gradient(90deg, #3fb950, var(--lm-accent)); transform-origin: left; }
+.rows { list-style: none; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 14px; padding: 14px 20px; border-bottom: 1px solid #21262d; }
+.headRow { display: none; }
+.name { display: grid; gap: 3px; }
+.name b { font-weight: 600; font-size: 16px; color: #e6edf3; }
+.name small { font: 300 14px/1.45 var(--lm-light); color: #8b949e; }
+.tick { display: none; }
+.pass { justify-self: end; padding: 4px 10px; border-radius: 99px; background: rgba(63, 185, 80, 0.15); color: #3fb950; font: 600 12px var(--lm-mono); font-style: normal; }
+
+@media (min-width: 901px) {
+  .row { grid-template-columns: minmax(0, 1fr) repeat(4, 90px) 90px; gap: 12px; padding: 14px 24px; }
+  .headRow { display: grid; padding: 10px 24px; font: 500 11px var(--lm-mono); letter-spacing: 0.1em; text-transform: uppercase; color: #6e7681; }
+  .br { text-align: center; }
+  .tick { display: grid; place-items: center; justify-self: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(63, 185, 80, 0.15); color: #3fb950; font-style: normal; font-weight: 700; }
+}

@@ -1,0 +1,55 @@
+.jm, .audit, .brand { height: 800px; font: 400 15px/1.4 "Instrument Sans", "Inter Tight", sans-serif; color: #1d1a16; }
+.head { display: flex; justify-content: space-between; align-items: baseline; }
+.head b { font-size: 28px; letter-spacing: -0.03em; }
+.head span { color: #7a7166; }
+
+/* journey map */
+.jm { display: grid; grid-template-rows: auto 1fr; gap: 24px; padding: 40px; }
+.jmGrid { display: grid; grid-template-columns: 120px repeat(5, 1fr); gap: 12px; align-content: start; }
+.row { align-self: center; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7a7166; }
+.stage { padding: 14px; border-radius: 12px; background: #1d1a16; color: #f4efe8; text-align: center; }
+.cell { min-height: 92px; margin: 0; padding: 14px; border-radius: 10px; background: #fff; box-shadow: 0 8px 18px -12px rgba(0, 0, 0, 0.3); }
+.y { background: #f7e27a; }
+.p { background: #f4b7a3; }
+.mood { position: relative; height: 70px; }
+.mood::after { content: ""; position: absolute; left: 50%; top: calc((100 - var(--m)) * 0.7px); width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #c4572e; box-shadow: 0 0 0 6px rgba(196, 87, 46, 0.2); }
+
+/* audit report */
+.audit { display: grid; grid-template-columns: 1fr 340px; background: #1d1a16; }
+.auditSite { position: relative; overflow: hidden; }
+.pin { position: absolute; z-index: 3; display: grid; place-items: center; width: 34px; height: 34px; translate: -50% -50%; border-radius: 50%; background: #e5484d; color: #fff; font-weight: 700; box-shadow: 0 0 0 6px rgba(229, 72, 77, 0.25); }
+.list { display: grid; align-content: start; gap: 10px; padding: 26px; color: #e9e3da; }
+.list > b { font-size: 22px; }
+.list > small { color: #a89e91; margin-bottom: 8px; }
+.list p { display: grid; gap: 4px; margin: 0; padding: 12px 14px; border-radius: 12px; background: rgba(244, 239, 232, 0.08); }
+.list p small { color: #a89e91; font-size: 12px; }
+.list em { justify-self: start; padding: 3px 9px; border-radius: 99px; font-style: normal; font-size: 11px; font-weight: 700; }
+.sevHigh { background: #e5484d; color: #fff; }
+.sevMedium { background: #e8a23b; color: #1d1a16; }
+.sevLow { background: #6b8f7a; color: #fff; }
+
+/* brand board */
+.brand { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 22px; padding: 40px; }
+.brand > div { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.45); }
+.mark { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #c4572e; color: #f4efe8; font: 700 30px/1 "Instrument Sans", sans-serif; font-style: normal; }
+.logoDark, .logoLight { display: grid; place-content: center; justify-items: center; gap: 14px; }
+.logoDark { background: #1d1a16; color: #f4efe8; }
+.logoLight { background: #f4efe8; }
+.logoDark b, .logoLight b { font-size: 40px; letter-spacing: -0.04em; }
+.logoLight small { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #c4572e; }
+.card { display: grid; align-content: end; gap: 4px; padding: 26px; background: #fff; }
+.card b { font-size: 22px; }
+.card small { color: #c4572e; font-weight: 600; }
+.card span { margin-top: 10px; color: #7a7166; font-size: 14px; }
+.card .mark { position: absolute; right: 22px; top: 22px; width: 42px; height: 42px; font-size: 20px; }
+.brochure { display: grid; align-content: end; gap: 8px; padding: 26px; color: #fff; }
+.brochure::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(29, 26, 22, 0.85), transparent 60%); }
+.brochure small, .brochure b { position: relative; z-index: 2; }
+.brochure small { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #f2c9a8; }
+.brochure b { font-size: 28px; line-height: 1.05; letter-spacing: -0.03em; }
+.palette { display: grid; grid-template-columns: repeat(4, 1fr); }
+.palette i { display: grid; align-content: end; padding: 14px; }
+.palette small { font: 600 12px monospace; color: #fff; mix-blend-mode: difference; }
+.specimen { display: grid; place-content: center; gap: 10px; padding: 26px; background: #fff; }
+.specimen b { font-size: 120px; line-height: 0.9; letter-spacing: -0.05em; }
+.specimen span { color: #7a7166; }

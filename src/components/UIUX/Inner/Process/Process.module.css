@@ -1,0 +1,25 @@
+.section { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; padding: clamp(90px, 14vh, 150px) var(--lm-gutter); background: #f6f2ec; color: #1d1a16; }
+.frame { position: relative; display: grid; }
+.before, .after { grid-area: 1 / 1; position: relative; }
+.before { z-index: 1; }
+.after { z-index: 2; will-change: clip-path; }
+.tag { position: absolute; z-index: 3; left: 12px; top: 12px; padding: 5px 11px; border-radius: 99px; background: rgba(29, 26, 22, 0.85); color: #f4efe8; font: 500 11px var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+.tagR { left: auto; right: 12px; background: #c4572e; }
+.divider { position: absolute; z-index: 4; top: -12px; bottom: -12px; left: 100%; width: 2px; translate: -1px 0; background: #c4572e; }
+.divider i { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; translate: -50% -50%; border-radius: 50%; background: #c4572e; box-shadow: 0 0 0 6px rgba(196, 87, 46, 0.25); }
+.divider i::before, .divider i::after { content: ""; position: absolute; top: 50%; width: 7px; height: 7px; border: solid #fff; border-width: 0 0 2px 2px; translate: 0 -50%; }
+.divider i::before { left: 10px; rotate: 45deg; }
+.divider i::after { right: 10px; rotate: -135deg; }
+.rail { list-style: none; display: grid; gap: 16px; }
+.step { --on: 1; display: grid; gap: 4px; padding-top: 12px; border-top: 3px solid; border-top-color: color-mix(in srgb, #c4572e calc(var(--on) * 100%), rgba(29, 26, 22, 0.15)); opacity: calc(0.4 + var(--on) * 0.6); }
+.step b { font: 600 16px/1.25 var(--lm-body); }
+.step p { font: 400 14px/1.5 var(--lm-light); color: #4a443c; }
+
+@media (min-width: 901px) {
+  .rail { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 2vw; }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-rows: auto 1fr auto; gap: 18px; padding: calc(var(--lm-header-h) + 14px) var(--lm-gutter) 26px; }
+  .head :global(h2) { font-size: clamp(24px, 2.4vw, 40px); }
+  .frame { align-self: center; justify-self: center; width: min(100%, calc((100svh - 400px) * 1.55)); }
+}

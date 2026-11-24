@@ -1,0 +1,2 @@
+/* the shared FAQ, re-toned to the blueprint */
+.faq > section { background: linear-gradient(rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, #0a2346; --lm-accent: #8fc1ff; --lm-line: rgba(220, 236, 255, 0.22); }
