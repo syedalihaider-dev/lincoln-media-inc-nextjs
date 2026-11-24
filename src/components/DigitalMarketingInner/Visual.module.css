@@ -1,0 +1,5 @@
+.wide { width: 100%; }
+.phone { width: min(40%, 300px); margin-inline: auto; }
+.photo { position: relative; width: 100%; aspect-ratio: 16 / 10.4; margin: 0; overflow: hidden; border-radius: 14px; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.65); }
+.cover { position: absolute; inset: 0; aspect-ratio: auto; border-radius: inherit; box-shadow: none; }
+.img { object-fit: cover; will-change: transform; }

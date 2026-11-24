@@ -58,7 +58,7 @@ export const SERVICES = [
       ["Social Media Optimization", s("social-media-optimization")],
       ["Pay Per Click", s("pay-per-click")],
       ["SEO", s("seo")],
-      ["Conversion Rate Optimization", s("conversion-rate-optimization")],
+      ["Conversion Rate Optimization", s("conversation-rate-optimization")],
       ["Email Marketing", s("email-marketing")],
       ["GMB Optimization", s("gmb-optimization-services")],
       ["Content Marketing", s("content-marketing")],

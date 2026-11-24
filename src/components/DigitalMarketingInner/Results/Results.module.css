@@ -1,0 +1,27 @@
+.section { position: relative; overflow: hidden; display: grid; gap: 44px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(59, 91, 255, 0.1), transparent 70%), #05070f; }
+.copy { display: grid; gap: 26px; align-content: start; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px 14px; list-style: none; font: 500 12px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.tabs li { display: flex; gap: 14px; color: color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), rgba(238, 241, 247, 0.4)); }
+.tabs i { font-style: normal; color: rgba(238, 241, 247, 0.3); }
+.lists { display: grid; gap: 26px; }
+.list h3 { margin-bottom: 10px; font: 500 11px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+.list ul { list-style: none; display: grid; gap: 0; }
+.list li { position: relative; padding: 13px 0 13px 26px; border-top: 1px solid var(--lm-line); font: 400 clamp(15px, 1.15vw, 19px)/1.45 var(--lm-body); }
+.list li::before { content: ""; position: absolute; left: 0; top: 21px; width: 10px; height: 10px; border-radius: 50%; }
+.l0 li::before { background: #e8a23b; box-shadow: 0 0 10px rgba(232, 162, 59, 0.6); }
+.l1 li::before { border-radius: 2px; background: var(--lm-violet-2); }
+.l2 li::before { background: var(--lm-accent); box-shadow: 0 0 10px rgba(54, 228, 208, 0.6); }
+.screen { position: relative; align-self: center; will-change: transform; }
+/* the same interface twice: drained of colour, and restored */
+.before { filter: grayscale(1) contrast(0.85) brightness(0.72); }
+.after { position: absolute; inset: 0; clip-path: inset(0% 0% 0% 0%); }
+.scan { position: absolute; top: -3%; bottom: -3%; left: 100%; width: 2px; translate: -1px 0; background: var(--lm-accent); box-shadow: 0 0 24px 4px rgba(54, 228, 208, 0.7); opacity: 0; pointer-events: none; }
+.phone { justify-self: center; width: min(62%, 300px); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 30px; }
+  .copy h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .lists { display: grid; min-height: 260px; }
+  .list { grid-area: 1 / 1; }
+  .phone { width: min(34%, 320px); }
+}

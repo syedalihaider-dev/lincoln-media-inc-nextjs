@@ -1,6 +1,10 @@
 import ScaledScreen from "@/components/InnerServices/ScaledScreen";
-import { SCREENS } from "./Screens";
+import { SCREENS as BASE } from "./Screens";
+import { MORE_SCREENS } from "./ScreensMore";
 import styles from "./Frames.module.css";
+
+const SCREENS = { ...BASE, ...MORE_SCREENS };
+export const isPhoneScreen = (kind) => !!SCREENS[kind]?.phone;
 
 /**
  * A browser window: traffic lights, an address bar and a page rendered at a real desktop width

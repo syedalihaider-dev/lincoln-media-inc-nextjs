@@ -1,0 +1,32 @@
+.section { position: relative; overflow: hidden; display: grid; gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #04060d, #070c18); }
+.top { display: grid; gap: 30px; }
+.bar, .stage { display: none; }
+.list { position: relative; list-style: none; display: grid; gap: 30px; padding-left: 30px; }
+.spine { position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; background: var(--lm-accent); transform-origin: top; box-shadow: 0 0 8px rgba(54, 228, 208, 0.6); }
+.list li { position: relative; display: grid; gap: 6px; }
+.list li::before { content: ""; position: absolute; left: -34px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: #04060d; box-shadow: 0 0 0 1.5px var(--lm-accent); }
+.list h3 { font: 800 clamp(22px, 5vw, 34px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.list p { max-width: 46ch; font: 300 16px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-rows: auto 1fr; gap: 24px; padding: calc(var(--lm-header-h) + 16px) var(--lm-gutter) 40px; }
+  .top { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: end; gap: 4vw; }
+  .top h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .list { display: none; }
+  .bar { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; list-style: none; padding-bottom: 14px; font: 500 11px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  .bar li { color: color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), rgba(238, 241, 247, 0.45)); }
+  .rail { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--lm-line); }
+  .rail i { position: absolute; inset: 0; background: var(--lm-accent); transform-origin: left; box-shadow: 0 0 10px rgba(54, 228, 208, 0.6); }
+  .stage { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: center; gap: 5vw; min-height: 0; }
+  .left { display: grid; gap: 26px; }
+  /* the slot: one stage name visible, the rest rolling above and below */
+  .slot { height: 1em; overflow: hidden; font: 800 clamp(32px, 3.6vw, 70px)/1 var(--lm-display); letter-spacing: -0.055em; text-transform: uppercase; }
+  .reel { will-change: transform; }
+  .reel p { height: 1em; white-space: nowrap; }
+  .reel p:nth-child(odd) { color: var(--lm-paper); }
+  .reel p:nth-child(even) { color: var(--lm-accent); }
+  .copies { display: grid; }
+  .copy { grid-area: 1 / 1; max-width: 40ch; font: 300 clamp(17px, 1.3vw, 21px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.84); }
+  .deck { display: grid; perspective: 1600px; }
+  .card { grid-area: 1 / 1; align-self: center; will-change: transform; }
+}

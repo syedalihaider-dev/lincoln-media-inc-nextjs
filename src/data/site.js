@@ -50,7 +50,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: "PPC", href: "/services/pay-per-click" },
       { label: "SEO", href: "/services/seo" },
-      { label: "CRO", href: "/services/conversion-rate-optimization" },
+      { label: "CRO", href: "/services/conversation-rate-optimization" },
       { label: "Content Marketing", href: "/services/content-marketing" },
       { label: "SMM", href: "/services/social-media-marketing" },
       { label: "SMO", href: "/services/social-media-optimization" },

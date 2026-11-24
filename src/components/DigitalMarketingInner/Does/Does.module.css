@@ -1,0 +1,25 @@
+/* Phones / reduced motion: four open panels stacked. Desktop with motion: one held row of panels. */
+.section { position: relative; overflow: hidden; display: grid; gap: 40px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #060a14, #080d1a); }
+.panels { list-style: none; display: grid; gap: 18px; }
+.panel { --open: 1; position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(160deg, rgba(238, 241, 247, 0.06), rgba(238, 241, 247, 0.015)); box-shadow: inset 0 0 0 1px var(--lm-line); }
+.spine { display: none; }
+.body { display: grid; gap: 14px; padding: 26px 22px; }
+.name { font: 800 clamp(24px, 2.4vw, 42px)/1 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.name span { color: var(--lm-accent); font: 500 0.42em var(--lm-mono); letter-spacing: 0.1em; vertical-align: 0.5em; }
+.text { max-width: 44ch; font: 300 clamp(15px, 1.1vw, 18px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.vis { margin-top: 8px; will-change: transform; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 680px; grid-template-rows: auto 1fr; gap: 28px; padding: calc(var(--lm-header-h) + 16px) var(--lm-gutter) 36px; }
+  .head h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .head p { display: none; }
+  .panels { display: flex; gap: 14px; min-height: 0; }
+  .panel { flex: 1 1 0; min-width: 0; background: linear-gradient(160deg, rgba(238, 241, 247, calc(0.03 + var(--open) * 0.05)), rgba(238, 241, 247, 0.01)); box-shadow: inset 0 0 0 1px rgba(54, 228, 208, calc(var(--open) * 0.45)), inset 0 0 0 1px var(--lm-line); }
+  /* the folded strip: number and name set vertically */
+  .spine { position: absolute; left: 0; top: 0; bottom: 0; width: 84px; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; padding: 26px 0; align-items: center; writing-mode: vertical-rl; transform: rotate(180deg); font: 800 clamp(20px, 1.8vw, 30px)/1 var(--lm-display); letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; opacity: calc(1 - var(--open)); }
+  .spine span { font: 500 12px var(--lm-mono); letter-spacing: 0.12em; color: var(--lm-accent); }
+  /* the open panel: name and description across the top, the interface large beneath */
+  .body { position: absolute; inset: 0; grid-template-columns: minmax(0, auto) minmax(0, 1fr); grid-template-rows: auto 1fr; align-items: start; gap: 18px 3vw; padding: 30px 34px; min-width: 46vw; opacity: var(--open); }
+  .text { padding-top: 4px; }
+  .vis { grid-column: 1 / -1; align-self: center; justify-self: center; width: min(100%, calc((100svh - 330px) * 1.5)); margin: 0; }
+}

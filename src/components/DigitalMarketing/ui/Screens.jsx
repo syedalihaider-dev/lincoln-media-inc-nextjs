@@ -13,13 +13,13 @@ import s from "./Screens.module.css";
  * data-funnel, data-cta, data-done, data-row, data-variant.
  */
 
-const Photo = ({ src, pos = "50% 50%", sizes = "(max-width: 900px) 50vw, 26vw", priority = false }) => (
+export const Photo = ({ src, pos = "50% 50%", sizes = "(max-width: 900px) 50vw, 26vw", priority = false }) => (
   <Image src={src} alt="" fill sizes={sizes} quality={75} priority={priority} style={{ objectFit: "cover", objectPosition: pos }} />
 );
-const Mark = ({ size = "md" }) => <span className={`${s.mark} ${s[size]}`}>Y</span>;
+export const Mark = ({ size = "md" }) => <span className={`${s.mark} ${s[size]}`}>Y</span>;
 
 // An SVG path through a series, scaled into a w × h box against a shared maximum
-const path = (pts, max, w = 800, h = 220) =>
+export const path = (pts, max, w = 800, h = 220) =>
   pts.map((v, i) => `${i ? "L" : "M"}${((i / (pts.length - 1)) * w).toFixed(1)},${(h - (v / max) * h * 0.9).toFixed(1)}`).join(" ");
 const THIS = [38, 42, 40, 47, 52, 50, 58, 61, 57, 66, 72, 70, 78, 84, 81, 90, 96, 94, 103, 110];
 const PREV = [36, 37, 39, 38, 41, 40, 43, 42, 44, 46, 45, 48, 47, 50, 49, 52, 51, 54, 53, 55];

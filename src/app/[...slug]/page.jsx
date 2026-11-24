@@ -2,13 +2,16 @@ import { notFound } from "next/navigation";
 import pages from "@/data/legacy-pages.json";
 import LegacyPage, { getPage, pageMetadata } from "@/components/Legacy/LegacyPage";
 import { CHILD_SERVICE_PATHS } from "@/data/child-services";
+import { MARKETING_SERVICE_PATHS } from "@/data/marketing-services";
 import { ROUTE_ALIASES, ALIASED_SOURCES, sourceOf } from "@/data/route-aliases";
 
 // All inner pages (services, work, policies) — pre-rendered at build time
 export const dynamicParams = false;
 
 // Routes that now have their own page in src/app (the legacy copy stays in the JSON, unused)
-const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", ...CHILD_SERVICE_PATHS]);
+// (/services/conversion-rate-optimization is the legacy spelling: it redirects to the live
+// /services/conversation-rate-optimization — next.config.mjs)
+const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", "/services/conversion-rate-optimization", ...CHILD_SERVICE_PATHS, ...MARKETING_SERVICE_PATHS]);
 
 
 export function generateStaticParams() {

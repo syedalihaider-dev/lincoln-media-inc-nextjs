@@ -14,7 +14,11 @@ const nextConfig = {
   },
   // The live site's WhatsApp page is /services/whatsapp-web-integration; the older route forwards there
   async redirects() {
-    return [{ source: "/services/whatsapp-business-integration", destination: "/services/whatsapp-web-integration", permanent: true }];
+    return [
+      { source: "/services/whatsapp-business-integration", destination: "/services/whatsapp-web-integration", permanent: true },
+      // the live site spells the CRO page "conversation-rate-optimization"; the older spelling forwards there
+      { source: "/services/conversion-rate-optimization", destination: "/services/conversation-rate-optimization", permanent: true },
+    ];
   },
   async headers() {
     return [

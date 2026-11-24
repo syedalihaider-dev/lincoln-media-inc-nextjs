@@ -1,0 +1,37 @@
+.hero { position: relative; overflow: hidden; isolation: isolate; padding: calc(var(--lm-header-h) + 28px) var(--lm-gutter) 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, #0b1730, transparent 70%), #02040a; }
+.glow { position: absolute; z-index: -1; left: 50%; top: 42%; width: 90vw; height: 60vw; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(54, 228, 208, 0.16), rgba(59, 91, 255, 0.1) 50%, transparent); opacity: 0.6; filter: blur(30px); pointer-events: none; will-change: transform; }
+.copy { position: relative; z-index: 2; display: grid; gap: 26px; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; font: 500 12px/1.4 var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent); }
+.crumb a { transition: color 0.3s; }
+.crumb a:hover { color: var(--lm-accent); }
+.crumb [aria-current] { color: var(--lm-paper); }
+/* sized so the longest single word ("OPTIMIZATION", 12 letters) fits a 360px phone */
+.title { max-width: 14ch; font: 800 clamp(27px, 7.4vw, 136px)/0.9 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; will-change: transform; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.headline { max-width: 22ch; font: 500 clamp(22px, 2.2vw, 38px)/1.2 var(--lm-body); letter-spacing: -0.02em; color: var(--lm-accent); }
+.side { display: grid; gap: 24px; align-content: start; }
+.text { max-width: 48ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.78); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; font: 500 11px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.75); }
+.tags li { padding: 8px 14px; border-radius: 99px; border: 1px solid var(--lm-line); }
+
+/* the plinth: lead screen lying back, supporting screens either side */
+.stage { position: relative; margin-top: clamp(40px, 7vh, 80px); perspective: 1600px; perspective-origin: 50% 0%; }
+.plinth { position: relative; height: clamp(280px, 36vw, 620px); transform: rotateX(34deg) scale(0.92); transform-origin: 50% 0%; transform-style: preserve-3d; will-change: transform; }
+.main { position: absolute; z-index: 2; left: 50%; top: 0; width: 62%; translate: -50% 0; }
+.panel { position: absolute; top: 14%; width: 27%; will-change: transform; }
+.l { left: 0; transform: translateZ(-60px) rotateY(14deg); }
+.r { right: 0; transform: translateZ(-60px) rotateY(-14deg); }
+.floor { position: absolute; left: 10%; right: 10%; bottom: 0; height: 30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(54, 228, 208, 0.2), transparent); filter: blur(20px); transform: translateZ(-120px); }
+
+@media (min-width: 901px) {
+  .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 5vw; }
+}
+@media (max-width: 900px) {
+  .plinth { height: 92vw; transform: rotateX(24deg) scale(0.96); }
+  .main { width: 84%; }
+  .panel { top: 46%; width: 42%; }
+  .l { left: -6%; }
+  .r { right: -6%; }
+}
