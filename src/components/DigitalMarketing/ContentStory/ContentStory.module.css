@@ -1,0 +1,41 @@
+.section { position: relative; overflow: hidden; display: grid; gap: clamp(80px, 14vh, 160px); padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #03050b, #050811); }
+.head { margin-bottom: -40px; }
+.row { position: relative; display: grid; gap: 26px; }
+.text { max-width: 44ch; font: 300 clamp(16px, 1.25vw, 21px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.8); }
+.text b { font-weight: 600; color: var(--lm-accent); }
+.center { justify-self: center; text-align: center; }
+.photo { position: absolute; inset: 0; overflow: hidden; }
+.big, .fill, .split, .over { font: 800 clamp(56px, 16vw, 300px)/0.86 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; }
+
+/* create: the photograph seen through the letters */
+.fill { color: transparent; background-color: #36e4d0; background-repeat: no-repeat; background-size: 130%; background-position: 50% 0%; -webkit-background-clip: text; background-clip: text; filter: saturate(1.2) contrast(1.1); }
+.create .text { justify-self: end; }
+
+/* capture: viewfinder */
+.capture { grid-template-columns: minmax(0, 1fr); }
+.frame { position: relative; margin: 0; aspect-ratio: 16 / 10; }
+.photo img { will-change: transform; }
+.corner { position: absolute; width: 36px; height: 36px; border: 0 solid var(--lm-accent); }
+.tl { left: -12px; top: -12px; border-width: 2px 0 0 2px; }
+.tr { right: -12px; top: -12px; border-width: 2px 2px 0 0; }
+.bl { left: -12px; bottom: -12px; border-width: 0 0 2px 2px; }
+.br { right: -12px; bottom: -12px; border-width: 0 2px 2px 0; }
+.side { display: grid; gap: 20px; align-content: center; }
+.big { font-size: clamp(40px, 5.2vw, 100px); }
+
+/* connect: two halves and a slit of photograph */
+.split { display: flex; justify-content: center; align-items: center; gap: 0.06em; white-space: nowrap; font-size: clamp(40px, 11.5vw, 220px); }
+.split > span { display: inline-block; will-change: transform; }
+.slit { position: relative; width: 0.9em; height: 0.82em; border-radius: 0.12em; overflow: hidden; }
+.slit .photo { border-radius: inherit; }
+
+/* convert: a band of photograph with the word over it */
+.band { position: relative; height: clamp(300px, 56vw, 720px); border-radius: 24px; overflow: hidden; display: grid; align-items: end; }
+.band .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(3, 5, 11, 0.8), transparent 60%); }
+.over { position: relative; z-index: 1; display: flex; padding: 0 3vw 2vw; font-size: clamp(40px, 12vw, 230px); color: var(--lm-paper); }
+.chMask { display: inline-block; overflow: hidden; padding-bottom: 0.04em; }
+.chMask > span { display: inline-block; will-change: transform; }
+
+@media (min-width: 901px) {
+  .capture { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: center; gap: 5vw; }
+}

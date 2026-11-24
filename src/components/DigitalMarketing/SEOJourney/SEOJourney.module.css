@@ -1,0 +1,27 @@
+/* Paper section — the search story told in daylight, between two dark chapters */
+.section { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 44px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: var(--lm-paper); color: var(--lm-ink); }
+.copy { display: grid; gap: 30px; align-content: start; }
+.steps { list-style: none; display: grid; gap: 0; }
+.step { --on: 1; position: relative; display: grid; gap: 4px; padding: 13px 0 13px 22px; }
+.step::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(3, 5, 11, 0.12); }
+.step::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--lm-violet); transform: scaleY(var(--on)); transform-origin: top; transition: transform 0.5s var(--lm-ease); }
+.step b { font: 600 clamp(17px, 1.3vw, 21px)/1.2 var(--lm-body); }
+.step p { max-width: 42ch; font: 300 15px/1.55 var(--lm-light); color: rgba(3, 5, 11, 0.7); }
+.stage { perspective: 1800px; }
+.win { transform-origin: 50% 50%; will-change: transform; box-shadow: 0 0 0 1px rgba(3, 5, 11, 0.08), 0 50px 100px -30px rgba(3, 5, 11, 0.45), 0 20px 40px -20px rgba(3, 5, 11, 0.3); }
+.urls { position: relative; display: grid; overflow: hidden; min-width: 50%; }
+.urls > span { grid-area: 1 / 1; overflow: hidden; text-overflow: ellipsis; }
+.urls > span + span { opacity: 0; }
+.layer { position: absolute; inset: 0; }
+.site, .book { opacity: 0; }
+.pointer { position: absolute; z-index: 5; left: 34%; top: 40%; width: 26px; height: 26px; opacity: 0; fill: #fff; stroke: #1b1f29; stroke-width: 1.5; stroke-linejoin: round; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 40px; }
+  .copy h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .step { opacity: calc(0.4 + var(--on) * 0.6); }
+}
+/* Reduced motion: show the finished journey — the confirmed booking — rather than the empty search */
+@media (prefers-reduced-motion: reduce) {
+  .site { opacity: 1; }
+}

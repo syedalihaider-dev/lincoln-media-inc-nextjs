@@ -1,0 +1,37 @@
+/* Phones / reduced motion: the copy, then the interfaces as a two-column board */
+.section { position: relative; overflow: hidden; isolation: isolate; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #03050b, #060b16 30%, #07101d); }
+.copy { position: relative; z-index: 2; display: grid; gap: 34px; }
+.index { list-style: none; display: grid; gap: 4px; counter-reset: none; }
+.node { --on: 1; display: grid; gap: 4px; padding: 14px 0 14px 18px; border-left: 1px solid; border-left-color:color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), rgba(238, 241, 247, 0.14)); }
+.node b { font: 600 clamp(17px, 1.3vw, 22px)/1.2 var(--lm-body); color: color-mix(in srgb, var(--lm-paper) calc(55% + var(--on) * 45%), transparent); }
+.node p { max-width: 40ch; font: 300 15px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.72); }
+.stage { margin-top: 48px; }
+.plane { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; }
+.links { display: none; }
+.tile { position: relative; display: grid; gap: 10px; }
+.phone { width: 52%; justify-self: center; }
+.tag { font: 500 11px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+.lit { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; padding: 0; }
+  .copy { position: absolute; left: var(--lm-gutter); top: calc(var(--lm-header-h) + 24px); bottom: 40px; width: min(440px, 34vw); align-content: start; gap: 26px; }
+  .copy::before { content: ""; position: absolute; z-index: -1; inset: -200px -16vw -200px calc(-1 * var(--lm-gutter)); background: linear-gradient(90deg, #04070f 40%, rgba(4, 7, 15, 0.85) 65%, transparent); pointer-events: none; }
+  .copy header > p { font-size: 15px; }
+  .copy h2 { font-size: clamp(28px, 2.8vw, 48px); }
+  .node { padding: 7px 0 7px 16px; }
+  .node p { overflow: hidden; height: calc(var(--on) * 4.8em); opacity: var(--on); font-size: 14px; }
+  .stage { position: absolute; inset: 0; z-index: 0; margin: 0; perspective: 1600px; perspective-origin: 60% 25%; }
+  .plane { position: absolute; left: 30vw; top: 4vh; display: block; width: 150vw; height: 80vw; transform-style: preserve-3d; transform-origin: 50% 30%; transform: rotateX(58deg) rotateZ(-8deg); background:
+    radial-gradient(ellipse at 40% 40%, rgba(54, 228, 208, 0.07), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(238, 241, 247, 0.04) 0 1px, transparent 1px 6vw),
+    repeating-linear-gradient(0deg, rgba(238, 241, 247, 0.04) 0 1px, transparent 1px 6vw);
+    border-radius: 3vw; }
+  .links { display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .links path { fill: none; stroke: var(--lm-accent); stroke-width: 2; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 6px rgba(54, 228, 208, 0.7)); }
+  .tile { position: absolute; display: block; width: 18vw; transform-origin: 50% 100%; transform-style: preserve-3d; will-change: transform; }
+  .phone { width: 7vw; }
+  .lit { display: block; position: absolute; inset: -6px; border-radius: 18px; box-shadow: 0 0 0 1.5px var(--lm-accent), 0 0 40px rgba(54, 228, 208, 0.35); opacity: 0; pointer-events: none; }
+  .phone .lit { border-radius: 22%/10%; }
+  .tag { position: absolute; left: 0; top: calc(100% + 10px); white-space: nowrap; font-size: 0.75vw; color: rgba(238, 241, 247, 0.8); }
+}

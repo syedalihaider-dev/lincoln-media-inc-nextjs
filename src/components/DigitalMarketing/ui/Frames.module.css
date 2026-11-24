@@ -1,0 +1,39 @@
+/* Browser window — light chrome over a real page, with a soft, deep shadow so it reads as an object */
+.browser {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  aspect-ratio: 16 / 10.4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f4f5f8;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 80px -20px rgba(0, 0, 0, 0.65), 0 12px 30px -12px rgba(0, 0, 0, 0.5);
+}
+.bar { flex: none; display: grid; grid-template-columns: 16% minmax(0, 1fr) 16%; align-items: center; gap: 10px; height: clamp(22px, 2.6vw, 36px); padding: 0 12px; background: #e9ebf0; border-bottom: 1px solid #d9dce3; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: clamp(6px, 0.7vw, 10px); aspect-ratio: 1; border-radius: 50%; background: #c9ccd4; }
+.dots i:first-child { background: #ff6159; }
+.dots i:nth-child(2) { background: #ffbd2e; }
+.dots i:nth-child(3) { background: #28c941; }
+.url { justify-self: center; max-width: 100%; overflow: hidden; padding: 3px 14px; border-radius: 99px; background: #fff; font: 500 clamp(8px, 0.72vw, 12px)/1.4 var(--lm-mono); color: #5b6170; white-space: nowrap; text-overflow: ellipsis; }
+.view { position: relative; flex: 1; min-height: 0; background: #fff; }
+
+.dark { background: #0b0f18; box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.12), 0 30px 80px -20px rgba(0, 0, 0, 0.8); }
+.dark .bar { background: #121826; border-color: #1d2536; }
+.dark .dots i { background: #2a3245; }
+.dark .url { background: #1a2131; color: #8d97ad; }
+.dark .view { background: #0b0f18; }
+
+/* Phone — a flat, lit device for 2D compositions (the 3D one lives in MobileApp/Device) */
+.phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 408 / 862;
+  padding: 2.2%;
+  border-radius: 15.5% / 7.2%;
+  background: linear-gradient(150deg, #2a303b, #0b0e14 55%, #1d222c);
+  box-shadow: inset 0 0 0 1.5px rgba(238, 241, 247, 0.2), 0 40px 90px -30px rgba(0, 0, 0, 0.8);
+}
+.glass { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 13.4% / 6.2%; background: #fff; isolation: isolate; }
+.island { position: absolute; z-index: 5; left: 50%; top: 1.4%; width: 29%; height: 3.6%; translate: -50% 0; border-radius: 99px; background: #000; }

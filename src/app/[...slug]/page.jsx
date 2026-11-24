@@ -8,7 +8,7 @@ import { ROUTE_ALIASES, ALIASED_SOURCES, sourceOf } from "@/data/route-aliases";
 export const dynamicParams = false;
 
 // Routes that now have their own page in src/app (the legacy copy stays in the JSON, unused)
-const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", ...CHILD_SERVICE_PATHS]);
+const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", ...CHILD_SERVICE_PATHS]);
 
 
 export function generateStaticParams() {

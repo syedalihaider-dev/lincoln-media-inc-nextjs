@@ -1,0 +1,6 @@
+.head { display: grid; gap: 22px; max-width: 980px; }
+.title { max-width: 17ch; font: 800 clamp(30px, 4vw, 66px)/0.98 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.text { max-width: 52ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.74); }
+.center { justify-items: center; text-align: center; margin-inline: auto; }
+.light .title, .light .label { color: var(--lm-ink); }
+.light .text { color: rgba(3, 5, 11, 0.68); }

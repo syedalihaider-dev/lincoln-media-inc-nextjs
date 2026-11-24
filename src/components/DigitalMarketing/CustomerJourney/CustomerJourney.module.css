@@ -1,0 +1,28 @@
+.section { position: relative; overflow: hidden; isolation: isolate; padding: clamp(96px, 14vh, 150px) 0; background: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(54, 228, 208, 0.07), transparent 70%), linear-gradient(180deg, #050811, #04060d); }
+.top { display: grid; gap: 30px; padding: 0 var(--lm-gutter); }
+.progress { display: none; }
+.viewport { margin-top: 48px; }
+.track { list-style: none; display: grid; gap: 64px; padding: 0 var(--lm-gutter); }
+.scene { display: grid; gap: 22px; width: min(100%, 860px); }
+.card { transform-style: preserve-3d; will-change: transform; }
+.phone .card { width: min(56%, 300px); justify-self: center; }
+.caption { display: grid; gap: 8px; max-width: 46ch; }
+.caption h3 { font: 800 clamp(24px, 2.2vw, 38px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; color: var(--lm-accent); }
+.caption p { font: 300 clamp(15px, 1.1vw, 18px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.78); }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; padding: calc(var(--lm-header-h) + 16px) 0 30px; }
+  .top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: end; gap: 4vw; }
+  .top h2 { font-size: clamp(26px, 2.8vw, 48px); }
+  .progress { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); list-style: none; padding-bottom: 14px; font: 500 11px var(--lm-mono); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238, 241, 247, 0.45); }
+  .progress li { transition: color 0.4s; }
+  .progress .on { color: var(--lm-accent); }
+  .line { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--lm-line); }
+  .line i { position: absolute; inset: 0; background: var(--lm-accent); transform-origin: left; box-shadow: 0 0 10px rgba(54, 228, 208, 0.6); }
+  .viewport { margin: 0; display: grid; align-items: center; overflow: visible; }
+  .track { display: flex; align-items: center; gap: 6vw; width: max-content; padding: 0 30vw 0 34vw; perspective: 1600px; will-change: transform; }
+  .scene { width: min(46vw, 88vh); perspective: 1500px; }
+  .phone { width: min(22vw, 40vh); }
+  .phone .card { width: 60%; }
+  .caption { padding-left: 4px; }
+}

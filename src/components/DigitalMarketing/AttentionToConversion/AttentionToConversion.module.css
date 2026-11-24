@@ -1,0 +1,43 @@
+/* Phones / reduced motion: three stacked moments. Desktop with motion: one held stage. */
+.section { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse 80% 60% at 50% 50%, #0a1224, #03050b 75%); padding: 110px 0 60px; }
+.kicker { position: relative; z-index: 3; padding: 0 var(--lm-gutter); }
+.block { position: relative; display: grid; gap: 20px; padding: 40px var(--lm-gutter); }
+.scene { position: relative; height: 92vw; max-height: 560px; overflow: hidden; border-radius: 18px; }
+.item { position: absolute; will-change: transform; }
+.shade { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(3, 5, 11, 0.55), rgba(3, 5, 11, 0.15) 70%), linear-gradient(0deg, rgba(3, 5, 11, 0.8), transparent 50%); pointer-events: none; }
+.word { position: relative; z-index: 3; display: flex; justify-content: center; perspective: 900px; font: 800 clamp(30px, 9vw, 190px)/0.9 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; color: var(--lm-paper); text-shadow: 0 10px 60px rgba(3, 5, 11, 0.6); white-space: nowrap; will-change: transform; }
+.ch { display: inline-block; transform-origin: 50% 100% -0.3em; backface-visibility: hidden; will-change: transform; }
+.text { position: relative; z-index: 3; max-width: 44ch; margin: 0 auto; text-align: center; font: 300 clamp(16px, 1.25vw, 21px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.82); }
+.text b { font-weight: 600; color: var(--lm-accent); }
+.steps { display: none; }
+
+/* scene layouts — each moment's interfaces placed around the word */
+.a1 { left: 0; top: 6%; width: 80%; }
+.a2 { right: 0; top: 26%; width: 30%; }
+.a3 { left: 10%; bottom: -12%; width: 26%; }
+.b1 { left: 0; bottom: 6%; width: 74%; }
+.b2 { right: 2%; top: 2%; width: 28%; }
+.b3 { left: 4%; top: 6%; width: 58%; }
+.c1 { left: 0; top: 4%; width: 76%; }
+.c2 { right: 0; top: 40%; width: 70%; }
+.c3 { left: 6%; bottom: -24%; width: 54%; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 680px; padding: 0; }
+  .kicker { position: absolute; left: 0; top: calc(var(--lm-header-h) + 20px); }
+  .block { position: absolute; inset: 0; display: grid; place-content: center; padding: 0; }
+  .scene { position: absolute; inset: 0; height: auto; max-height: none; border-radius: 0; }
+  .text { position: absolute; left: 50%; bottom: 13vh; width: min(560px, 80vw); translate: -50% 0; }
+  .steps { position: absolute; z-index: 4; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 5vh; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2vw; list-style: none; font: 500 11px var(--lm-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+  .steps li { position: relative; padding-bottom: 10px; border-bottom: 1px solid var(--lm-line); }
+  .steps i { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--lm-accent); transform-origin: left; }
+  .a1 { left: 3%; top: 14%; width: 40%; }
+  .a2 { right: 7%; top: 10%; width: 14%; }
+  .a3 { right: 24%; bottom: -6%; width: 12%; }
+  .b1 { left: 2%; bottom: 8%; width: 38%; }
+  .b2 { left: 46%; top: 6%; width: 13%; }
+  .b3 { right: 2%; top: 16%; width: 34%; }
+  .c1 { left: 4%; top: 18%; width: 34%; }
+  .c2 { right: 3%; top: 30%; width: 34%; }
+  .c3 { left: 3%; bottom: -16%; width: 28%; }
+}

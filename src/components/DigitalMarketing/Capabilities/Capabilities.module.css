@@ -1,0 +1,30 @@
+.section { position: relative; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: linear-gradient(180deg, #04060d, #070b16); }
+.head { margin-bottom: clamp(40px, 7vh, 80px); }
+.list { list-style: none; }
+.row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 34px 0 44px; }
+.rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--lm-line-strong); transform-origin: left; }
+.alt .rule { transform-origin: right; }
+.word { font: 800 clamp(32px, 10.2vw, 170px)/0.86 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; color: var(--lm-paper); white-space: nowrap; }
+.alt .word { color: var(--lm-accent); }
+.info { display: grid; gap: 10px; align-content: start; }
+.info h3 { font: 600 clamp(19px, 1.5vw, 25px)/1.25 var(--lm-body); }
+.info a { display: inline-flex; gap: 10px; align-items: baseline; transition: color 0.3s; }
+.info a i { font-style: normal; color: var(--lm-accent); transition: transform 0.4s var(--lm-ease); }
+.info a:hover { color: var(--lm-accent); }
+.info a:hover i { transform: translateX(5px); }
+.info p { max-width: 40ch; font: 300 clamp(15px, 1.1vw, 18px)/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.74); }
+.vis { width: 100%; }
+.vis > div, .vis [data-tilt] { will-change: transform, clip-path; }
+.phone { width: 42%; }
+
+@media (min-width: 901px) {
+  /* the word spans the row; description and interface sit beneath it, swapping sides each row */
+  .row { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); grid-template-areas: "word word" "info vis"; align-items: center; gap: 28px 5vw; padding: 44px 0 56px; }
+  .word { grid-area: word; font-size: clamp(56px, 10vw, 190px); }
+  .info { grid-area: info; }
+  .vis { grid-area: vis; justify-self: end; width: min(100%, 720px); }
+  .alt { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); grid-template-areas: "word word" "vis info"; }
+  .alt .word { text-align: right; }
+  .alt .vis { justify-self: start; }
+  .phone { width: 30% !important; justify-self: center !important; }
+}

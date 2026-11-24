@@ -1,0 +1,24 @@
+.section { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 48px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: radial-gradient(ellipse 60% 70% at 75% 50%, rgba(59, 91, 255, 0.12), transparent 70%), linear-gradient(180deg, #050913, #070d1a); }
+.copy { display: grid; gap: 30px; align-content: start; }
+.steps { list-style: none; display: grid; gap: 2px; }
+.step { --on: 1; display: grid; gap: 4px; padding: 14px 0; border-top: 1px solid var(--lm-line); }
+.step b { font: 600 clamp(17px, 1.3vw, 21px)/1.2 var(--lm-body); color: color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), rgba(238, 241, 247, 0.55)); }
+.step p { max-width: 42ch; font: 300 15px/1.55 var(--lm-light); color: rgba(238, 241, 247, 0.72); }
+.stage { position: relative; display: grid; gap: 28px; perspective: 1800px; }
+.rig { position: relative; transform-style: preserve-3d; will-change: transform; }
+.note { display: grid; gap: 4px; max-width: 300px; margin-top: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(247, 243, 236, 0.97); color: #1b1f29; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); font: 400 14px/1.45 var(--lm-body); }
+.note small { font: 600 11px var(--lm-mono); letter-spacing: 0.12em; text-transform: uppercase; color: #a5733a; }
+.note b { font-size: 16px; }
+.note span { color: #4d5260; }
+.ads { will-change: transform; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); align-items: center; gap: 4vw; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 40px; }
+  .copy h2 { font-size: clamp(26px, 2.6vw, 44px); }
+  .step { --on: 1; opacity: calc(0.45 + var(--on) * 0.55); }
+  .step p { overflow: hidden; height: calc(var(--on) * 4.7em); opacity: var(--on); }
+  .stage { display: block; height: min(72vh, 640px); }
+  .rig, .ads { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; }
+  .note { position: absolute; right: -3%; bottom: -16%; margin: 0; transform: translateZ(120px); }
+  .ads { opacity: 0; }
+}

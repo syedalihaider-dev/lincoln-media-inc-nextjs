@@ -1,0 +1,39 @@
+/* Phones / reduced motion: copy, the creative deck, then the landing page and the booking stacked */
+.section { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 44px; padding: clamp(96px, 14vh, 150px) var(--lm-gutter); background: radial-gradient(ellipse 60% 60% at 60% 55%, rgba(59, 91, 255, 0.2), transparent 70%), radial-gradient(ellipse 40% 50% at 10% 10%, rgba(54, 228, 208, 0.08), transparent), #05061a; }
+.copy { position: relative; z-index: 5; display: grid; gap: 22px; align-content: start; max-width: 620px; }
+.title { display: flex; flex-wrap: wrap; gap: 0 0.3em; font: 800 clamp(32px, 4.4vw, 76px)/0.98 var(--lm-display); letter-spacing: -0.05em; text-transform: uppercase; }
+.word { --on: 1; color: color-mix(in srgb, var(--lm-accent) calc(var(--on) * 100%), rgba(238, 241, 247, 0.3)); }
+.word i { font-style: normal; color: rgba(238, 241, 247, 0.3); }
+.text { max-width: 46ch; font: 300 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-light); color: rgba(238, 241, 247, 0.78); }
+.stages { list-style: none; display: grid; gap: 10px; font: 300 15px/1.5 var(--lm-light); color: rgba(238, 241, 247, 0.72); }
+.stages b { font-weight: 600; color: var(--lm-paper); }
+
+.stage { position: relative; display: grid; gap: 28px; }
+.deck { position: relative; height: 96vw; max-height: 520px; }
+.card { position: absolute; left: 50%; top: 50%; width: 64%; aspect-ratio: 4 / 5; margin: 0; overflow: hidden; border-radius: 18px; translate: -50% -50%; transform: rotate(calc((var(--i) - 1) * 7deg)) translateX(calc((var(--i) - 1) * 18%)); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08); will-change: transform; }
+.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8, 20, 18, 0.85), transparent 60%); }
+.card figcaption { position: absolute; z-index: 1; left: 7%; right: 7%; bottom: 7%; display: grid; gap: 10px; color: #fff; }
+.card small { font: 500 11px var(--lm-mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; }
+.card b { font: 400 clamp(20px, 2vw, 32px)/1.08 Georgia, serif; }
+.card span { justify-self: start; padding: 9px 18px; border-radius: 99px; background: #f7f3ec; color: #12382f; font: 500 13px var(--lm-body); }
+.side { display: none; }
+.portal, .action { position: relative; }
+.page { position: relative; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .section { height: 100svh; min-height: 700px; display: block; padding: 0; }
+  .copy { position: absolute; left: var(--lm-gutter); top: calc(var(--lm-header-h) + 30px); width: min(520px, 36vw); }
+  .stage { position: absolute; inset: 0; display: block; perspective: 1700px; }
+  .deck { position: absolute; left: 42vw; right: 2vw; top: 12vh; bottom: 8vh; height: auto; max-height: none; transform-style: preserve-3d; }
+  .card { width: auto; height: 62vh; transform: translateZ(calc(var(--i) * -90px)) rotate(calc(var(--i) * 4deg)); }
+  .side { display: block; position: absolute; will-change: transform; }
+  .searchAd { left: -6%; top: 6%; display: grid; gap: 6px; width: 300px; padding: 18px 20px; border-radius: 14px; background: #fff; color: #1b1f29; font: 400 14px/1.45 "Inter Tight", sans-serif; transform: translateZ(-120px); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+  .searchAd b { font-weight: 500; font-size: 17px; color: #1a3fb0; }
+  .searchAd span { color: #4d5260; }
+  .sp { font: 700 12px "Inter Tight", sans-serif; color: #1b1f29; }
+  .social { right: 2%; bottom: 4%; width: 150px; transform: translateZ(-60px); }
+  /* the opened page fills the stage beside the copy, so the lit AD → LANDING PAGE → ACTION stays readable */
+  .portal, .action { position: absolute; inset: 0 0 0 39vw; z-index: 6; display: grid; place-items: center; padding: calc(var(--lm-header-h) + 10px) var(--lm-gutter) 6vh 2vw; background: radial-gradient(ellipse at 50% 50%, #0d1030, #05061a 70%); visibility: hidden; }
+  .action { z-index: 7; }
+  .page { width: 100%; }
+}
