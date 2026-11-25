@@ -1,0 +1,15 @@
+.story { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); background: var(--vb2); color: var(--vf); }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0 0 26px; font: 500 12px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: var(--va); }
+.kicker i { width: 34px; height: 1px; background: currentColor; }
+.rule { display: block; height: 1px; margin-bottom: clamp(30px, 5vh, 54px); background: var(--vl); transform-origin: left; }
+.statement { max-width: 24ch; margin: 0; font: 500 clamp(30px, 4vw, 72px)/1.08 var(--lm-display); letter-spacing: -0.05em; }
+.body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: end; gap: 5vw; margin-top: clamp(60px, 10vh, 120px); }
+.pic { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--vs); }
+.pic img { object-fit: cover; }
+.cols { display: grid; gap: 22px; }
+.cols p { max-width: 48ch; margin: 0; font: 300 clamp(16px, 1.15vw, 19px)/1.7 var(--lm-text); color: var(--vm); }
+.cols p:first-child { font-weight: 400; color: var(--vf); }
+
+@media (max-width: 900px) {
+  .body { grid-template-columns: 1fr; gap: 30px; }
+}

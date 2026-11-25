@@ -1,0 +1,13 @@
+.head { display: grid; gap: 22px; max-width: 980px; }
+.center { justify-items: center; text-align: center; margin-inline: auto; }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; }
+.kicker i { width: 34px; height: 1px; background: currentColor; }
+.title { margin: 0; font: 500 clamp(34px, 4.6vw, 84px)/1.02 var(--lm-display); letter-spacing: -0.045em; }
+.text { max-width: 52ch; margin: 0; font: 300 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-text); }
+
+.dark .kicker { color: var(--lm-accent); }
+.dark .title { color: var(--lm-paper); }
+.dark .text { color: rgba(238, 241, 247, 0.72); }
+.light .kicker { color: #0f6f66; }
+.light .title { color: var(--lm-ink); }
+.light .text { color: rgba(3, 5, 11, 0.7); }

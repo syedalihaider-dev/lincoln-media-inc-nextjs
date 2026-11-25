@@ -1,0 +1,19 @@
+.story { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); overflow: hidden; background: #f3f2ee; color: var(--lm-ink); }
+.acts { display: grid; gap: clamp(90px, 14vh, 180px); margin-top: clamp(80px, 12vh, 150px); }
+.act { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; min-height: 70vh; }
+.word { position: absolute; left: 0; right: 0; top: 50%; z-index: 0; margin: 0; translate: 0 -50%; font: 800 clamp(70px, 15vw, 290px)/0.9 var(--lm-display); letter-spacing: -0.07em; text-transform: uppercase; color: rgba(3, 5, 11, 0.07); white-space: nowrap; pointer-events: none; will-change: transform; }
+.pic { position: relative; z-index: 1; grid-column: 1 / span 7; grid-row: 1; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: #dcdad3; }
+.pic img { object-fit: cover; scale: 1.25; }
+.copy { position: relative; z-index: 2; grid-column: 7 / span 5; grid-row: 1; display: grid; gap: 16px; padding: clamp(26px, 3vw, 48px); background: #f3f2ee; box-shadow: 0 30px 60px -36px rgba(3, 5, 11, 0.35); will-change: transform; }
+.copy h3 { margin: 0; font: 500 clamp(26px, 2.6vw, 46px)/1 var(--lm-display); letter-spacing: -0.05em; }
+.copy p { margin: 0; font: 400 clamp(15px, 1.1vw, 18px)/1.65 var(--lm-text); color: rgba(3, 5, 11, 0.75); }
+.flip .pic { grid-column: 6 / span 7; }
+.flip .copy { grid-column: 2 / span 5; }
+.flip .word { text-align: right; }
+
+@media (max-width: 900px) {
+  .act { grid-template-columns: 1fr; min-height: 0; }
+  .word { top: 0; translate: 0 -40%; font-size: 22vw; }
+  .pic, .flip .pic { grid-column: 1; grid-row: 1; }
+  .copy, .flip .copy { grid-column: 1; grid-row: 2; margin: -40px 16px 0; }
+}

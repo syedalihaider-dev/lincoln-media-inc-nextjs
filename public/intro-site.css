@@ -16,8 +16,8 @@
   --ink-bg: #03050b;
   --card: #0a101c;
   --card-2: #0f1626;
-  --display: "Unbounded", "Inter Tight", system-ui, sans-serif;
-  --body: "Instrument Sans", "Inter Tight", system-ui, sans-serif;
+  --display: "Unbounded", var(--font-poppins), "Poppins", sans-serif;
+  --body: var(--font-poppins), "Poppins", sans-serif; /* Poppins for all non-heading text */
   --hair: rgba(238, 241, 247, .12);
   --ease: cubic-bezier(.2, .8, .2, 1);
 }

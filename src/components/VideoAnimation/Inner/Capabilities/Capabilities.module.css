@@ -1,0 +1,10 @@
+.caps { padding: clamp(110px, 16vh, 190px) var(--lm-gutter) clamp(140px, 24vh, 260px); background: var(--vb2); color: var(--vf); }
+.list { margin: clamp(50px, 8vh, 90px) 0 0; }
+.row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: baseline; gap: 4vw; padding: clamp(26px, 5vh, 50px) 0; border-top: 1px solid var(--vl); will-change: filter, opacity; }
+.row dt { font: 500 clamp(28px, 3.8vw, 68px)/1.02 var(--lm-display); letter-spacing: -0.055em; }
+.row dd { max-width: 42ch; margin: 0; font: 300 clamp(15px, 1.1vw, 18px)/1.6 var(--lm-text); color: var(--vm); }
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 1fr; gap: 10px; }
+  .row dt { font-size: clamp(24px, 7.4vw, 36px); }
+}

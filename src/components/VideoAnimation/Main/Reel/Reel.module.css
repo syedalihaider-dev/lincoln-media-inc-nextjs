@@ -1,0 +1,52 @@
+.reel { position: relative; height: 240vh; background: #000; color: var(--lm-paper); }
+.pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.head { position: absolute; left: 0; right: 0; top: calc(var(--lm-header-h) + 5vh); z-index: 1; display: grid; justify-items: center; gap: 18px; padding: 0 var(--lm-gutter); text-align: center; }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-accent); }
+.kicker i { width: 34px; height: 1px; background: currentColor; }
+.title { margin: 0; font: 500 clamp(34px, 4.4vw, 80px)/1 var(--lm-display); letter-spacing: -0.05em; }
+
+.frame { position: absolute; inset: 0; z-index: 2; overflow: hidden; background: #0b0c10 url("/videos/video-animation/steadicam-poster.jpg") center / cover; will-change: clip-path; }
+.frame:fullscreen { clip-path: none !important; }
+.frame video { will-change: transform; }
+.shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 22%, transparent 58%, rgba(0, 0, 0, 0.78)); }
+.tcRow { position: absolute; left: var(--lm-gutter); right: var(--lm-gutter); top: calc(var(--lm-header-h) + 14px); display: flex; justify-content: space-between; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 255, 255, 0.75); }
+.tc { font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+.now { position: absolute; left: var(--lm-gutter); bottom: 110px; display: grid; gap: 10px; }
+.chName { margin: 0; font: 500 clamp(36px, 5vw, 92px)/1 var(--lm-display); letter-spacing: -0.05em; }
+.chText { max-width: 40ch; margin: 0; font: 300 clamp(15px, 1.1vw, 18px)/1.5 var(--lm-text); color: rgba(255, 255, 255, 0.8); }
+.controls { position: absolute; right: var(--lm-gutter); bottom: 110px; display: flex; gap: 10px; }
+.ctl { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45); transition: background-color 0.4s, color 0.4s, box-shadow 0.4s, transform 0.4s var(--lm-ease); }
+.ctl svg { width: 20px; height: 20px; fill: currentColor; }
+.ctl svg[fill="none"] { fill: none; }
+.ctl:hover, .ctl:focus-visible { background: #fff; color: var(--lm-ink); box-shadow: inset 0 0 0 1px #fff; transform: scale(1.06); }
+.bar { position: absolute; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.bar button { display: grid; gap: 12px; width: 100%; padding: 10px 0; text-align: left; }
+.track { display: block; height: 2px; overflow: hidden; background: rgba(255, 255, 255, 0.25); }
+.fill { display: block; height: 100%; background: var(--lm-accent); transform: scaleX(0); transform-origin: left; }
+.lbl { font: 500 12px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); transition: color 0.3s; }
+.bar [aria-current] .lbl, .bar button:hover .lbl { color: #fff; }
+
+@media (max-width: 900px) {
+  .reel { height: auto; padding: clamp(90px, 14vh, 130px) 0 70px; }
+  .pin { position: relative; height: auto; overflow: visible; display: grid; gap: 34px; }
+  .head { position: static; }
+  .frame { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+  .tcRow { top: 16px; left: 16px; right: 16px; font-size: 10px; }
+  .now { left: 16px; right: 16px; bottom: 92px; }
+  .chName { font-size: 34px; }
+  .controls { right: 16px; bottom: auto; top: 44px; }
+  .ctl { width: 44px; height: 44px; }
+  .bar { left: 16px; right: 16px; bottom: 16px; gap: 8px; }
+  .lbl { font-size: 10px; letter-spacing: 0.1em; }
+}
+/* before the scroll timeline takes over, the frame already sits small under the title */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .frame { clip-path: inset(30% 24% 8% 24% round 14px); }
+}
+/* no scroll-driven opening: title above a full-width player */
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .reel { height: auto; padding: 140px 0 0; }
+  .pin { position: relative; height: auto; display: grid; gap: 40px; }
+  .head { position: static; }
+  .frame { position: relative; inset: auto; height: 100vh; }
+}

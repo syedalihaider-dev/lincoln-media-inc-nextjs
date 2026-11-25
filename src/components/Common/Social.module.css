@@ -1,0 +1,27 @@
+/* Social icon buttons: a ring that fills on hover, a soft glow, the glyph rolling up and a fresh one
+   arriving from below — the same rollover idea as the site button, at icon scale. */
+.social { --s: 46px; --g: 19px; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.sm { --s: 40px; --g: 17px; gap: 8px; }
+.link { position: relative; display: grid; place-items: center; width: var(--s); height: var(--s); border-radius: 50%; overflow: hidden; transition: background-color 0.45s var(--lm-ease), color 0.45s var(--lm-ease), box-shadow 0.45s var(--lm-ease), transform 0.45s var(--lm-ease); }
+.glyphs { position: relative; width: var(--g); height: var(--g); overflow: hidden; }
+.glyphs svg { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform 0.45s var(--lm-ease); }
+.glyphs svg + svg { transform: translateY(140%); }
+.link:hover, .link:focus-visible { transform: translateY(-3px) scale(1.06); }
+.link:hover .glyphs svg, .link:focus-visible .glyphs svg { transform: translateY(-140%); }
+.link:hover .glyphs svg + svg, .link:focus-visible .glyphs svg + svg { transform: translateY(0); }
+.link:focus-visible { outline: 2px solid var(--lm-accent); outline-offset: 3px; }
+
+.dark .link { color: var(--lm-paper); box-shadow: inset 0 0 0 1px rgba(238, 241, 247, 0.28); }
+.dark .link:hover, .dark .link:focus-visible { color: var(--lm-ink); background: var(--lm-accent); box-shadow: inset 0 0 0 1px var(--lm-accent), 0 10px 30px -8px rgba(54, 228, 208, 0.55); }
+.light .link { color: var(--lm-ink); box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.22); }
+.light .link:hover, .light .link:focus-visible { color: var(--lm-paper); background: var(--lm-ink); box-shadow: inset 0 0 0 1px var(--lm-ink), 0 10px 26px -10px rgba(3, 5, 11, 0.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .link, .glyphs svg { transition: background-color 0.3s, color 0.3s; }
+  .link:hover, .link:focus-visible { transform: none; }
+  .link:hover .glyphs svg, .link:focus-visible .glyphs svg { transform: none; }
+  .glyphs svg + svg { display: none; }
+}
+@media (pointer: coarse) {
+  .social { --s: 48px; }
+}

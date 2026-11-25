@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext } from "@/lib/motion";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import Chat from "@/components/Common/Chat/Chat";
 import styles from "./PageShell.module.css";
 import { FONT_CSS } from "./fonts";
 
@@ -105,6 +106,7 @@ export default function PageShell({ current, children }) {
         <Header inSite base="/" current={current} />
         <main id="main">{children}</main>
         <Footer />
+        <Chat />
         <span className={styles.grain} aria-hidden="true" />
       </div>
     </MotionContext.Provider>

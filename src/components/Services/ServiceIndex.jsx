@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap, useGSAP, ANY_MOTION } from "@/lib/gsap";
 import { useSiteMotion, sfx } from "@/lib/motion";
-import { SERVICE_CATEGORIES, categoryHref } from "@/data/service-categories";
+import { SERVICE_CATEGORIES, categoryHref, visibleItems } from "@/data/service-categories";
 import Button from "@/components/Common/Button";
 import RevealText from "@/components/Common/RevealText";
 import Label from "@/components/About/Label";
@@ -94,7 +94,7 @@ export default function ServiceIndex() {
             </div>
           </div>
           <ul className={styles.list} aria-label={`${c.name} services`}>
-            {c.items.map((it) => (
+            {visibleItems(c.items).map((it) => (
               <li key={it.name} data-li>
                 {it.href ? <a href={it.href}><span>{it.name}</span><i aria-hidden="true">↗</i></a> : <span className={styles.plain}>{it.name}</span>}
               </li>

@@ -1,0 +1,18 @@
+.quality { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 5vw; padding: clamp(110px, 16vh, 190px) var(--lm-gutter); background: var(--vb); color: var(--vf); }
+.copy { display: grid; gap: clamp(40px, 6vh, 70px); }
+.pic { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--vs); }
+.pic img { object-fit: cover; scale: 1.18; }
+
+.sheet { position: sticky; top: calc(var(--lm-header-h) + 30px); display: grid; gap: 4px; padding: clamp(24px, 2.6vw, 44px); border-radius: 14px; background: #f7f6f2; color: #14161b; box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--vl); }
+.sheetHead { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 14px; padding-bottom: 16px; border-bottom: 2px solid #14161b; font: 600 12px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; }
+.checks { display: grid; margin: 0; padding: 0; list-style: none; }
+.check { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: start; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(20, 22, 27, 0.12); font: 400 clamp(15px, 1.1vw, 18px)/1.5 var(--lm-text); }
+.check svg { width: 26px; height: 26px; }
+.check rect { fill: none; stroke: #14161b; stroke-width: 1.6; }
+.check path { fill: none; stroke: #0f8f83; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; }
+.sign { justify-self: end; margin: 22px 0 0; padding: 10px 16px; border: 2px solid #0f8f83; border-radius: 6px; font: 700 13px/1 var(--lm-display); letter-spacing: 0.04em; text-transform: uppercase; color: #0f8f83; rotate: -4deg; }
+
+@media (max-width: 900px) {
+  .quality { grid-template-columns: 1fr; }
+  .sheet { position: static; }
+}

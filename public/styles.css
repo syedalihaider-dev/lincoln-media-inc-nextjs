@@ -6,8 +6,8 @@
   --accent: #36e4d0;
   --accent-2: #7b5bff;
   --pad: clamp(16px, 3.2vw, 44px);
-  --sans: "Inter Tight", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --sans: var(--font-poppins), "Poppins", sans-serif; /* body text is Poppins site-wide */
+  --mono: var(--font-poppins), "Poppins", sans-serif; /* labels: Poppins too (was a monospace) */
   --lv: 0; /* live voice level, set from JS */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }

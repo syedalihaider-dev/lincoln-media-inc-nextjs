@@ -14,6 +14,9 @@ import imgAi from "@public/images/services/ai-saas-mobile.jpg";
 import imgTeam from "@public/images/services/it-outsourcing.jpg";
 
 const s = (name, slug = null) => ({ name, href: slug ? `/services/${slug}` : null });
+// An offering kept in the data but not shown in the menus or the category's service list (visibleItems)
+const hidden = (name) => ({ name, href: null, hidden: true });
+export const visibleItems = (items) => items.filter((it) => !it.hidden);
 
 export const SERVICES_PAGE = {
   title: "Services — The Lincoln Media",
@@ -111,8 +114,11 @@ export const SERVICE_CATEGORIES = [
     blurb: "Explainer, product, sales and branding videos that make your brand look and sound its best.",
     href: "/services/video-animation", image: imgVideo, alt: "A video editing timeline on a monitor",
     items: [
+      // Two active service pages (src/app/services/<slug>, one master design — src/components/VideoAnimation/Inner).
+      // The live site lists five more (product-demo, video-game-trailers, 3d-architectural-walkthroughs,
+      // medical-animation-company, character-animation); they stay in the data, hidden from navigation.
       s("Explainer Video Production", "explainer-videos"), s("Whiteboard Animation Video", "whiteboard-videos-animation"),
-      s("Product Demo Animation"), s("Video Game Trailer"), s("3D Architectural Walkthroughs"), s("Medical Animation Studio"), s("Character Animation Video"),
+      hidden("Product Demo Animation"), hidden("Video Game Trailer"), hidden("3D Architectural Walkthroughs"), hidden("Medical Animation Studio"), hidden("Character Animation Video"),
     ],
   },
   {
@@ -144,6 +150,7 @@ export const MEGA_MENU = [
   { title: "UI/UX Design", href: byKey.ux.href, items: byKey.ux.items },
   { title: "E-Commerce", href: byKey.commerce.href, items: byKey.commerce.items },
   { title: "Branding & Communication", href: byKey.brand.href, items: byKey.brand.items },
-  { title: "Video & Animation", href: byKey.video.href, items: [...byKey.video.items, ...byKey.animation.items] },
+  // only the two active Video & Animation pages (the animation offerings stay on the Services page's index)
+  { title: "Video & Animation", href: byKey.video.href, items: visibleItems(byKey.video.items) },
   { title: "Other Digital Services", href: "/services", items: OTHER_SERVICES.map((o) => ({ name: o.name, href: o.href })) },
 ];

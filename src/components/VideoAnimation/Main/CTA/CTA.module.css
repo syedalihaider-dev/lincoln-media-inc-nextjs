@@ -1,0 +1,35 @@
+.cta { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; background: #000; color: #fff; }
+.bg { position: absolute; inset: 0; z-index: -3; background: #000 url("/videos/video-animation/beam-poster.jpg") center / cover; }
+.bg video { will-change: transform; }
+.shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent 45%); }
+.black { position: absolute; inset: 0; z-index: -1; background: #000; opacity: 0; pointer-events: none; }
+.inner { display: grid; align-content: center; gap: 28px; min-height: 100svh; padding: clamp(120px, 18vh, 200px) var(--lm-gutter) clamp(50px, 8vh, 90px); }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-accent); }
+.kicker i { width: 34px; height: 1px; background: currentColor; }
+.title { display: grid; margin: 0; font: 500 clamp(50px, 8.4vw, 160px)/0.92 var(--lm-display); letter-spacing: -0.06em; text-transform: uppercase; }
+.tl { display: block; }
+.accent { color: var(--lm-accent); }
+.text { max-width: 46ch; margin: 0; font: 300 clamp(16px, 1.2vw, 20px)/1.6 var(--lm-text); color: rgba(255, 255, 255, 0.82); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
+
+/* end credits */
+.credits { display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: start; gap: 22px clamp(30px, 4vw, 70px); margin: clamp(30px, 6vh, 60px) 0 0; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+.credits div { display: grid; align-content: start; gap: 10px; }
+.credits dt { font: 500 11px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); }
+.credits dd, .credits address { margin: 0; font: 400 15px/1.5 var(--lm-text); font-style: normal; color: #fff; }
+.credits a:hover { color: var(--lm-accent); }
+
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.links a { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3); font: 500 14px/1 var(--lm-text); transition: background-color 0.4s, color 0.4s, box-shadow 0.4s; }
+.links a i { transition: translate 0.4s var(--lm-ease); }
+.links a:hover { background: #fff; color: var(--lm-ink); box-shadow: inset 0 0 0 1px #fff; }
+.links a:hover i { translate: 4px 0; }
+
+@media (max-width: 1100px) {
+  .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .title { font-size: clamp(40px, 12.4vw, 80px); }
+  .shade { background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)); }
+  .credits { grid-template-columns: 1fr; }
+}

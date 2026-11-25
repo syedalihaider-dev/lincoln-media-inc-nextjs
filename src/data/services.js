@@ -110,11 +110,13 @@ export const SERVICES = [
   {
     key: "video",
     title: "Video Animation",
-    href: "/services",
+    href: "/services/video-animation",
     image: video,
     alt: "Video editing timeline on a monitor",
     blurb: "Explainer, product, sales and branding videos that make your brand look and sound its best.",
-    subs: [["Explainer Video Production"], ["Product Demo Animation"], ["Video Game Trailers"], ["3D Architectural Walkthroughs"], ["Medical Animation"], ["Character Animation"], ["Whiteboard Animation"]],
+    // the two active Video & Animation pages; the other offerings are kept (hiddenSubs) but not shown
+    subs: [["Explainer Video Production", s("explainer-videos")], ["Whiteboard Animation", s("whiteboard-videos-animation")]],
+    hiddenSubs: [["Product Demo Animation"], ["Video Game Trailers"], ["3D Architectural Walkthroughs"], ["Medical Animation"], ["Character Animation"]],
   },
   {
     key: "outsourcing",

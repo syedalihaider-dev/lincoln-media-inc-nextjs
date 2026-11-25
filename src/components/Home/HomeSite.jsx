@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext } from "@/lib/motion";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import Chat from "@/components/Common/Chat/Chat";
 import Hero from "./Hero";
 import Manifesto from "./Manifesto";
 import Services from "./Services";
@@ -214,6 +215,8 @@ export default function HomeSite() {
         <CTA />
         <Contact />
         <Footer />
+        {/* the contact desk appears once the guided intro has handed over to the homepage */}
+        {inSite && <Chat />}
 
         <div className={styles.grain} aria-hidden="true" />
         <div className={styles.curtain} ref={curtain} aria-hidden="true">

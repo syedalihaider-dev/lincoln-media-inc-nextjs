@@ -1,0 +1,10 @@
+.creative { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); overflow: hidden; background: var(--vb2); color: var(--vf); }
+.pair { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr); align-items: center; gap: clamp(20px, 3vw, 50px); margin-top: clamp(50px, 8vh, 90px); }
+.screen { padding: clamp(10px, 1.2vw, 18px); border-radius: 16px; background: var(--vs); box-shadow: 0 0 0 1px var(--vl), 0 50px 90px -40px rgba(0, 0, 0, 0.45); }
+.tall { position: relative; aspect-ratio: 3 / 4.4; overflow: hidden; background: #000; will-change: transform; }
+.tall > video { position: absolute; inset: 0; }
+
+@media (max-width: 900px) {
+  .pair { grid-template-columns: 1fr; }
+  .tall { aspect-ratio: 16 / 10; }
+}

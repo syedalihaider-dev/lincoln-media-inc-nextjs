@@ -1,37 +1,46 @@
-/* The back cover in ink: the wordmark set huge, rising out of a cyan horizon glow */
-.footer { position: relative; background: radial-gradient(ellipse 70% 45% at 50% 100%, rgba(54, 228, 208, 0.1), transparent 70%), linear-gradient(180deg, var(--lm-ink-2), var(--lm-ink)); color: var(--lm-paper); border-top: 1px solid var(--lm-line); padding: 14vh var(--lm-gutter) 30px; overflow: hidden; }
+/* The back cover in ink: a contact band, the studio and its map, the name along the foot */
+.footer { position: relative; background: radial-gradient(ellipse 70% 45% at 50% 100%, rgba(54, 228, 208, 0.08), transparent 70%), linear-gradient(180deg, var(--lm-ink-2), var(--lm-ink)); color: var(--lm-paper); border-top: 1px solid var(--lm-line); padding: clamp(60px, 9vh, 100px) var(--lm-gutter) 28px; overflow: hidden; }
 
-.cols { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr)); gap: 40px; }
-.lead { display: grid; align-content: start; gap: 22px; }
-.leadText { max-width: 24ch; font: 700 clamp(17px, 1.5vw, 24px)/1.2 var(--lm-text); letter-spacing: -0.02em; text-transform: uppercase; }
-.mail { justify-self: start; font: 500 15px var(--lm-body); color: var(--lm-accent); border-bottom: 1px solid currentColor; padding-bottom: 3px; }
-.h { font: 500 10px var(--lm-mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-accent); margin-bottom: 18px; }
+.band { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 22px 40px; padding-bottom: clamp(40px, 6vh, 64px); margin-bottom: clamp(44px, 7vh, 72px); border-bottom: 1px solid var(--lm-line); }
+.bandTitle { margin: 0; font: 500 clamp(28px, 3.4vw, 58px)/1.05 var(--lm-display); letter-spacing: -0.05em; }
+.bandActions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+
+.cols { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 0.8fr)) minmax(0, 1.1fr); gap: 40px; }
+.lead { display: grid; align-content: start; justify-items: start; gap: 22px; }
+.logo { display: block; width: 170px; }
+.leadText { max-width: 30ch; margin: 0; font: 400 15px/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.72); }
+.h { font: 500 11px var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-accent); margin: 0 0 18px; }
 .col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.col a, .col address { font: 400 14px/1.5 var(--lm-body); font-style: normal; color: var(--lm-mute); transition: color 0.3s; }
+.col a, .col address { font: 400 14px/1.5 var(--lm-text); font-style: normal; color: var(--lm-mute); transition: color 0.3s; }
 .col a:hover { color: var(--lm-accent); }
+.contact { gap: 14px !important; }
+.contact a, .contact address { display: grid; gap: 2px; color: var(--lm-paper); }
+.contact span { font: 500 10px/1.4 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--lm-mute); }
 
 .word {
-  margin: 12vh 0 4vh;
-  font: 800 clamp(40px, 10.4vw, 236px)/0.86 var(--lm-display);
+  margin: clamp(50px, 8vh, 90px) 0 3vh;
+  font: 800 clamp(30px, 6.5vw, 132px)/0.9 var(--lm-display);
   letter-spacing: -0.05em;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   padding-bottom: 0.06em;
 }
-.word em { display: inline-block; color: var(--lm-accent); padding-left: 0.04em; }
+.word em { font-style: normal; color: var(--lm-accent); }
 .ch { display: inline-block; will-change: transform; }
 
-.base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 28px; padding-top: 22px; border-top: 1px solid var(--lm-line); font: 500 10px var(--lm-mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--lm-mute); }
+.base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 28px; padding-top: 22px; border-top: 1px solid var(--lm-line); font: 500 11px var(--lm-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--lm-mute); }
 .base a { color: var(--lm-paper); }
 .base a:hover { color: var(--lm-accent); }
 
-@media (max-width: 1100px) {
-  .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1200px) {
+  .cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .lead { grid-column: 1 / -1; }
 }
-@media (max-width: 560px) {
-  .cols { grid-template-columns: 1fr; }
-  .word { font-size: 10.4vw; }
+@media (max-width: 700px) {
+  .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 20px; }
+  .cols > :last-child { grid-column: 1 / -1; }
+  .word { font-size: 10vw; white-space: normal; }
+  .word em { display: block; }
   .base { flex-direction: column; }
 }

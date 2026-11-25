@@ -1,0 +1,22 @@
+.inter { position: relative; height: calc(var(--n) * 85vh + 100vh); background: #000; color: #fff; }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #000 url("/videos/video-animation/projector-poster.jpg") center / cover; }
+.stage video { will-change: transform; }
+.shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.7) 100%), linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6)); }
+.bar { position: absolute; left: 0; right: 0; height: 13vh; background: #000; will-change: transform; }
+.top { top: 0; transform-origin: top; }
+.bottom { bottom: 0; transform-origin: bottom; }
+.subs { position: absolute; left: var(--lm-gutter); right: var(--lm-gutter); bottom: 20vh; display: grid; justify-items: center; text-align: center; }
+.line { grid-area: 1 / 1; max-width: 22ch; margin: 0; font: 500 clamp(28px, 4.2vw, 76px)/1.1 var(--lm-display); letter-spacing: -0.045em; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5); visibility: hidden; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .inter { height: auto; }
+  .stage { position: relative; }
+  .subs { bottom: auto; top: 50%; translate: 0 -50%; gap: 10px; }
+  .line { grid-area: auto; visibility: visible; font-size: clamp(22px, 3vw, 46px); }
+}
+@media (max-width: 900px) {
+  .inter { height: calc(var(--n) * 70vh + 100vh); }
+  .bar { height: 8vh; }
+  .line { font-size: clamp(24px, 7.6vw, 40px); }
+}

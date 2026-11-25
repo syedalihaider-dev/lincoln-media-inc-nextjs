@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import pages from "@/data/legacy-pages.json";
 import LegacyPage, { getPage, pageMetadata } from "@/components/Legacy/LegacyPage";
+import Chat from "@/components/Common/Chat/Chat";
 import { CHILD_SERVICE_PATHS } from "@/data/child-services";
 import { MARKETING_SERVICE_PATHS } from "@/data/marketing-services";
 import { ROUTE_ALIASES, ALIASED_SOURCES, sourceOf } from "@/data/route-aliases";
@@ -33,5 +34,10 @@ export async function generateMetadata({ params }) {
 export default async function InnerPage({ params }) {
   const route = await routeOf(params);
   if (!getPage(sourceOf(route))) notFound();
-  return <LegacyPage route={sourceOf(route)} />;
+  return (
+    <>
+      <LegacyPage route={sourceOf(route)} />
+      <Chat />
+    </>
+  );
 }

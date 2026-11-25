@@ -1,0 +1,31 @@
+.show { padding: clamp(110px, 16vh, 190px) var(--lm-gutter) clamp(120px, 18vh, 220px); background: #ecebe6; color: var(--lm-ink); overflow: hidden; }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(26px, 3vw, 48px) clamp(16px, 2vw, 32px); margin-top: clamp(60px, 9vh, 110px); }
+.piece { display: grid; grid-template-rows: auto auto; align-content: start; gap: 14px; margin: 0; will-change: transform; }
+.media { position: relative; overflow: hidden; background: #d7d5ce; }
+.media > video { position: absolute; inset: 0; }
+.piece figcaption { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; }
+.pname { font: 500 clamp(16px, 1.2vw, 20px)/1.2 var(--lm-display); letter-spacing: -0.03em; }
+.ptext { grid-column: 1; font: 400 14px/1.5 var(--lm-text); color: rgba(3, 5, 11, 0.66); }
+.kind { grid-column: 2; grid-row: 1; align-self: start; padding: 5px 9px; border: 1px solid rgba(3, 5, 11, 0.25); border-radius: 999px; font: 500 10px/1 var(--lm-text); letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+
+/* the cutting-room layout */
+.p0 { grid-column: 1 / span 7; }
+.p0 .media { aspect-ratio: 16 / 9; }
+.p1 { grid-column: 8 / span 5; align-self: end; }
+.p1 .media { aspect-ratio: 4 / 3; }
+.p2 { grid-column: 1 / span 4; }
+.p2 .media { aspect-ratio: 4 / 3; }
+.p3 { grid-column: 5 / span 3; grid-row: 2 / span 2; }
+.p3 .media { aspect-ratio: 9 / 16; }
+.p4 { grid-column: 1 / span 4; }
+.p4 .media { aspect-ratio: 16 / 9; }
+.p5 { grid-column: 8 / span 5; grid-row: 2 / span 2; }
+.p5 .media { aspect-ratio: 4 / 4.2; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 14px; }
+  .p0, .p1, .p2, .p4, .p5 { grid-column: 1 / -1; grid-row: auto; }
+  .p3 { grid-column: 1 / -1; grid-row: auto; }
+  .p3 .media { aspect-ratio: 4 / 5; }
+  .p5 .media { aspect-ratio: 4 / 4.6; }
+}

@@ -4,9 +4,16 @@ import { gsap, SplitText, useGSAP, ANY_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import { FOOTER_COLUMNS, SITE } from "@/data/site";
 import Clock from "@/components/Common/Clock";
+import Button from "@/components/Common/Button";
+import Social from "@/components/Common/Social";
+import Logo from "@/components/Header/Logo";
 import styles from "./Footer.module.css";
 
-/** The footer: business details, the site map, and the name set as large as the page allows. */
+/**
+ * The footer: a contact band (the next step, the phone line), then the studio — logo, statement and
+ * its social profiles — beside the site map and every way to reach us; the name set large along the
+ * foot, and the small print.
+ */
 export default function Footer() {
   const ref = useRef(null);
   const { ready } = useSiteMotion();
@@ -25,10 +32,19 @@ export default function Footer() {
 
   return (
     <footer ref={ref} className={styles.footer} data-chapter="Footer" data-nav="contact">
+      <div className={styles.band} data-col>
+        <p className={styles.bandTitle}>Have a project in mind?</p>
+        <div className={styles.bandActions}>
+          <Button href="/#contact">Start a project</Button>
+          <Button href={SITE.phoneHref} variant="outline" icon="phone">{SITE.phone}</Button>
+        </div>
+      </div>
+
       <div className={styles.cols}>
         <div className={styles.lead} data-col>
-          <p className={styles.leadText}>A New York studio for web, marketing, e-commerce and branding.</p>
-          <a className={styles.mail} href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          <a href="/" className={styles.logo} aria-label={`${SITE.name} — home`}><Logo priority={false} /></a>
+          <p className={styles.leadText}>A New York studio for web, marketing, e-commerce, branding, video and animation.</p>
+          <Social />
         </div>
         {FOOTER_COLUMNS.map((c) => (
           <nav key={c.title} className={styles.col} aria-label={c.title} data-col>
@@ -40,17 +56,17 @@ export default function Footer() {
         ))}
         <div className={styles.col} data-col>
           <p className={styles.h}>Contact</p>
-          <ul>
-            <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
-            <li><a href={SITE.whatsapp} target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-            <li><address>{SITE.street},<br />{SITE.locality}</address></li>
+          <ul className={styles.contact}>
+            <li><a href={SITE.phoneHref}><span>Call</span>{SITE.phone}</a></li>
+            <li><a href={SITE.whatsapp} target="_blank" rel="noopener"><span>WhatsApp</span>Message us</a></li>
+            <li><a href={`mailto:${SITE.email}`}><span>Email</span>{SITE.email}</a></li>
+            <li><address><span>Studio</span>{SITE.street},<br />{SITE.locality}</address></li>
           </ul>
         </div>
       </div>
 
       <p className={styles.word} aria-label={SITE.name}>
-        <span data-word aria-hidden="true">The Lincoln<br /><em>Media</em></span>
+        <span data-word aria-hidden="true">The Lincoln <em>Media</em></span>
       </p>
 
       <div className={styles.base}>

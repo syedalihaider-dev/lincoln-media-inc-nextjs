@@ -1,0 +1,22 @@
+.motion { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); background: #ecebe6; color: var(--lm-ink); }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0 0 clamp(30px, 5vh, 56px); font: 500 12px/1 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: #0f6f66; }
+.kicker i { width: 34px; height: 1px; background: currentColor; }
+.statement { max-width: 1500px; margin: 0; font: 500 clamp(30px, 4.3vw, 80px)/1.12 var(--lm-display); letter-spacing: -0.05em; }
+/* a picture set inside the line, opening out of the text */
+.slot { --slot: 2.2em; position: relative; display: inline-block; width: var(--slot); height: 0.82em; margin: 0 0.18em; vertical-align: -0.06em; overflow: hidden; border-radius: 999px; }
+.slot img { object-fit: cover; }
+
+.lower { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: end; gap: 5vw; margin-top: clamp(70px, 12vh, 140px); }
+.pic { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: #d8d6cf; }
+.pic img { object-fit: cover; scale: 1.2; }
+.notes { display: grid; gap: 0; }
+.note { position: relative; display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); gap: 20px; padding: clamp(22px, 3.4vh, 34px) 0; }
+.rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(3, 5, 11, 0.2); transform-origin: left; }
+.note h3 { margin: 0; font: 500 clamp(17px, 1.3vw, 22px)/1.2 var(--lm-display); letter-spacing: -0.03em; }
+.note p { margin: 0; font: 400 clamp(15px, 1.02vw, 17px)/1.6 var(--lm-text); color: rgba(3, 5, 11, 0.72); }
+
+@media (max-width: 900px) {
+  .statement { font-size: clamp(26px, 7.4vw, 46px); }
+  .lower { grid-template-columns: 1fr; gap: 30px; }
+  .note { grid-template-columns: 1fr; gap: 8px; }
+}
