@@ -1,0 +1,37 @@
+.hero { position: relative; padding: calc(var(--lm-header-h) + 26px) var(--lm-gutter) clamp(70px, 10vh, 120px); background: var(--lm-paper); color: var(--lm-ink); overflow: hidden; }
+/* the header sits on dark pages; on this paper hero it gets a dark band to read against */
+.hero::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--lm-header-h); background: var(--lm-ink); }
+.top { position: relative; display: flex; justify-content: space-between; margin-top: 16px; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; font: 500 12px/1.4 var(--lm-text); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(3, 5, 11, 0.55); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent-deep); }
+.crumb a:hover { color: var(--lm-ink); }
+.crumb [aria-current] { color: var(--lm-ink); }
+
+/* the name fills the width: sized from its own length (--len, set inline), never wider than the page */
+.title { margin: clamp(20px, 4vh, 50px) 0 0; font: 800 clamp(48px, min(13.6vw, calc(100vw / var(--len, 7))), 260px)/0.84 var(--lm-display); letter-spacing: -0.07em; text-transform: uppercase; white-space: nowrap; }
+.name { display: block; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.intro { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 5vw; margin-top: clamp(30px, 5vh, 56px); padding-top: 26px; border-top: 1px solid rgba(3, 5, 11, 0.16); }
+.sub { margin: 0; max-width: 20ch; font: 700 clamp(22px, 2.1vw, 36px)/1.12 var(--lm-display); letter-spacing: -0.035em; }
+.leadCol { display: grid; gap: 26px; }
+.lead { margin: 0; max-width: 52ch; font: 400 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-text); color: rgba(3, 5, 11, 0.72); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.actions a:last-child { --lm-paper: var(--lm-ink); color: var(--lm-ink); }
+
+.visual { position: relative; margin-top: clamp(50px, 8vh, 90px); }
+.frame { position: relative; margin: 0; aspect-ratio: 2.35; overflow: hidden; background: var(--lm-paper-2); border-radius: 14px; will-change: clip-path; }
+.frame img { object-fit: cover; will-change: transform; }
+.phone { position: absolute; right: 7%; bottom: -8%; width: clamp(150px, 15vw, 270px); will-change: transform; filter: drop-shadow(0 40px 50px rgba(3, 5, 11, 0.35)); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.facts li { padding: 10px 18px; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.25); font: 500 14px/1 var(--lm-text); }
+.facts li:first-child { background: var(--lm-ink); color: var(--lm-paper); box-shadow: none; }
+
+@media (max-width: 900px) {
+  /* phones: one word per line, sized from the longest word */
+  .title { white-space: normal; font-size: min(17vw, calc(94vw / var(--word, 7)), 120px); }
+  .intro { grid-template-columns: 1fr; gap: 22px; }
+  .frame { aspect-ratio: 4 / 5; }
+  .phone { right: 4%; bottom: 10%; width: 40%; }
+  .facts { margin-top: 18px; }
+}

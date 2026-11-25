@@ -1,0 +1,104 @@
+.conv { position: relative; padding: clamp(110px, 16vh, 180px) var(--lm-gutter); overflow: hidden; background: var(--lm-paper); color: var(--lm-ink); }
+.marqueeWrap { margin: clamp(40px, 7vh, 80px) calc(var(--lm-gutter) * -1) clamp(50px, 8vh, 100px); overflow: hidden; }
+.marquee { display: flex; gap: 0.6em; margin: 0; white-space: nowrap; font: 500 clamp(64px, 12vw, 230px)/0.95 var(--lm-display); letter-spacing: -0.06em; color: var(--lm-ink); will-change: transform; }
+.marquee span:nth-child(even) { color: transparent; -webkit-text-stroke: 0; color: rgba(3, 5, 11, 0.12); }
+.marquee span::after { content: "·"; margin-left: 0.6em; color: var(--lm-accent-deep); }
+
+.rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(60px, 9vh, 110px) 6vw; margin: 0; padding: 0; list-style: none; }
+.row { display: grid; align-content: start; gap: 12px; }
+.row:nth-child(even) { margin-top: 14vh; margin-bottom: -14vh; }
+.row h3 { margin: 18px 0 0; font: 500 clamp(22px, 2vw, 34px)/1.1 var(--lm-display); letter-spacing: -0.04em; }
+.row p { margin: 0; max-width: 46ch; font: 400 16px/1.6 var(--lm-text); color: rgba(3, 5, 11, 0.68); }
+.frag { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: #fbfaf8; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.1); display: grid; place-items: center; font-family: var(--lm-text); }
+
+/* speed: the skeleton gives way to the product */
+.fSpeed { position: relative; display: grid; grid-template-columns: 38% 1fr; grid-template-rows: auto auto; column-gap: 20px; align-items: center; width: 78%; }
+.fImg { position: relative; grid-row: 1 / span 2; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: #e9e6e0; }
+.fImg img { object-fit: cover; }
+.fSpeed b { align-self: end; font: 500 clamp(14px, 1.2vw, 20px)/1.2 var(--lm-text); }
+.fSpeed small { align-self: start; font-size: 14px; color: rgba(3, 5, 11, 0.55); }
+.skel { position: absolute; inset: -6px; border-radius: 6px; background: linear-gradient(90deg, #eeece8, #f8f7f4, #eeece8); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; transition: opacity 0.7s 1.1s; }
+.play .skel { opacity: 0; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* mobile: thumb zone and the sticky bar */
+.fMobile { height: 86%; aspect-ratio: 9 / 17; }
+.fPhone { position: relative; display: block; height: 100%; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 5px #14161a; background: #e9e6e0; }
+.fPhone img { object-fit: cover; }
+.thumb { position: absolute; inset: 55% -20% -20%; border-radius: 50% 50% 0 0; background: radial-gradient(closest-side, rgba(54, 228, 208, 0.45), transparent); opacity: 0; transition: opacity 0.8s 0.4s; }
+.sticky { position: absolute; left: 8%; right: 8%; bottom: 6%; padding: 9px 0; border-radius: 6px; background: #14161a; color: #fff; font: 500 11px/1 var(--lm-text); font-style: normal; text-align: center; transform: translateY(160%); transition: transform 0.9s var(--lm-ease) 0.9s; }
+.play .thumb { opacity: 1; }
+.play .sticky { transform: none; }
+
+/* discovery: filters switch on and the grid narrows */
+.fDisc { display: grid; gap: 16px; width: 84%; }
+.chips { display: flex; gap: 8px; margin: 0; }
+.chips span { padding: 6px 12px; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.18); font-size: 12px; transition: background-color 0.4s, color 0.4s; }
+.play .chips span:nth-child(1) { background: #14161a; color: #fff; transition-delay: 0.5s; }
+.play .chips span:nth-child(2) { background: #14161a; color: #fff; transition-delay: 1.1s; }
+.minis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 0; }
+.minis span { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: #e9e6e0; transition: opacity 0.6s, transform 0.6s; }
+.minis img { object-fit: cover; }
+.play .minis span:nth-child(2), .play .minis span:nth-child(5) { opacity: 0.12; transform: scale(0.9); transition-delay: 0.8s; }
+.play .minis span:nth-child(3), .play .minis span:nth-child(6) { opacity: 0.12; transform: scale(0.9); transition-delay: 1.4s; }
+
+/* search: the query types and the answers appear */
+.fSearch { display: grid; gap: 14px; width: 78%; }
+.field { margin: 0; padding-bottom: 10px; border-bottom: 2px solid #14161a; font: 500 clamp(18px, 1.6vw, 26px)/1 var(--lm-text); }
+.typed { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; border-right: 2px solid #14161a; }
+.play .typed { animation: type 1s steps(7) 0.3s forwards, caret 0.8s steps(1) 1.3s infinite; }
+@keyframes type { to { width: 7.2ch; } }
+@keyframes caret { 50% { border-color: transparent; } }
+.sugs { display: grid; gap: 8px; margin: 0; }
+.sugs span { display: flex; align-items: center; gap: 12px; font-size: 14px; opacity: 0; transform: translateY(8px); transition: opacity 0.5s, transform 0.5s; }
+.sugs i { position: relative; width: 34px; height: 34px; border-radius: 4px; overflow: hidden; }
+.sugs img { object-fit: cover; }
+.play .sugs span { opacity: 1; transform: none; transition-delay: 1.3s; }
+.play .sugs span + span { transition-delay: 1.45s; }
+
+/* ux: the facts that settle the decision, beside the product */
+.fUx { display: grid; gap: 10px; width: 76%; }
+.fUx b { font: 500 18px/1.2 var(--lm-text); margin-bottom: 4px; }
+.fUx span { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(3, 5, 11, 0.72); opacity: 0; transition: opacity 0.6s; }
+.fUx i { width: 8px; height: 8px; border-radius: 50%; background: #1d6b4f; }
+.play .fUx span { opacity: 1; }
+.play .fUx span:nth-child(3) { transition-delay: 0.3s; }
+.play .fUx span:nth-child(4) { transition-delay: 0.6s; }
+
+/* checkout: one press */
+.fCheck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 84%; }
+.fCheck span { position: relative; padding: 16px 0; border-radius: 6px; background: #14161a; color: #fff; font: 500 13px/1 var(--lm-text); text-align: center; }
+.fCheck span:nth-child(2) { background: #2b4a7e; }
+.pressed { background: var(--lm-accent-deep) !important; }
+.pressed i { position: absolute; inset: 0; border-radius: 6px; background: #1d6b4f; opacity: 0; transition: opacity 0.4s 1.2s; }
+.pressed i::after { content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 18px; }
+.play .pressed { animation: press 0.5s 0.8s; }
+.play .pressed i { opacity: 1; }
+@keyframes press { 50% { transform: scale(0.94); } }
+
+/* cro: one experiment */
+.fCro { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 84%; }
+.fCro span { display: grid; gap: 10px; padding: 14px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.14); }
+.fCro small { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(3, 5, 11, 0.5); }
+.fCro i { padding: 10px; border-radius: 4px; background: #14161a; color: #fff; font: 500 12px/1.2 var(--lm-text); font-style: normal; text-align: center; }
+.fCro em { grid-column: 1 / -1; font-style: normal; font-size: 12px; color: rgba(3, 5, 11, 0.55); }
+.fCro em::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--lm-accent-deep); animation: pulse 1.4s infinite; }
+@keyframes pulse { 50% { opacity: 0.2; } }
+
+/* scale: orders keep moving on launch day */
+.fScale { display: grid; gap: 14px; width: 86%; overflow: hidden; }
+.fScale em { font-style: normal; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(3, 5, 11, 0.55); }
+.fScale p { display: flex; gap: 8px; margin: 0; }
+.fScale p span { flex: none; padding: 9px 12px; border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.12); font: 500 13px/1 var(--lm-text); }
+.play .fScale p { animation: flow 6s linear infinite; }
+@keyframes flow { to { transform: translateX(-50%); } }
+
+@media (max-width: 900px) {
+  .rows { grid-template-columns: 1fr; gap: 56px; }
+  .row:nth-child(even) { margin: 0; }
+  .frag { aspect-ratio: 16 / 10; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .play .fScale p, .skel, .fCro em::before { animation: none; }
+  .typed { width: auto; border: 0; }
+}

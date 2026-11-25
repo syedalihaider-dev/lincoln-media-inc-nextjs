@@ -1,0 +1,91 @@
+.hero {
+  position: relative;
+  height: max(740px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse 50% 60% at 20% 70%, #0b1424, transparent 70%), #03050b;
+}
+
+/* the scene: a window of footage on the right, the interfaces standing in front of it */
+.scene { position: absolute; inset: 0; perspective: 1800px; }
+.window {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  clip-path: inset(10% 4% 9% 50% round 22px);
+  background: #0b0f17 url("/videos/ecommerce/hangers-poster.jpg") center / cover;
+  will-change: clip-path;
+}
+.shade { position: absolute; inset: 0; opacity: 0; background: linear-gradient(90deg, rgba(3, 5, 11, 0.9) 0%, rgba(3, 5, 11, 0.35) 55%, rgba(3, 5, 11, 0.55) 100%); }
+.window::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3, 5, 11, 0.15), rgba(3, 5, 11, 0.45)); pointer-events: none; }
+
+.browserWrap { position: absolute; z-index: 2; left: 41%; top: 46%; width: min(36vw, 640px); transform-style: preserve-3d; will-change: transform; }
+.phoneWrap { position: absolute; z-index: 3; right: 7%; top: 21%; width: min(12.5vw, 220px); will-change: transform; }
+.flow { position: absolute; inset: 0; }
+.product {
+  position: absolute;
+  z-index: 1;
+  left: 55%;
+  top: 15%;
+  width: min(11vw, 200px);
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  outline: 1px solid rgba(255, 255, 255, 0.12);
+  outline-offset: -1px;
+}
+.product img { object-fit: cover; }
+
+/* the words */
+.copy {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  align-content: center;
+  gap: 26px;
+  width: min(44vw, 720px);
+  height: 100%;
+  padding: calc(var(--lm-header-h) + 20px) 0 60px var(--lm-gutter);
+  will-change: transform;
+}
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; font: 500 12px/1.4 var(--lm-text); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent); }
+.crumb a { transition: color 0.3s; }
+.crumb a:hover { color: var(--lm-accent); }
+.crumb [aria-current] { color: var(--lm-paper); }
+.title { display: grid; margin: 0; font: 500 clamp(48px, 5.5vw, 112px)/0.96 var(--lm-display); letter-spacing: -0.06em; color: var(--lm-paper); overflow-wrap: normal; word-break: keep-all; }
+.tl { display: block; white-space: nowrap; }
+.tl:nth-child(2) { padding-left: 0.5em; color: var(--lm-accent); }
+.lead { max-width: 44ch; margin: 0; font: 300 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-text); color: rgba(238, 241, 247, 0.74); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+
+.after { position: absolute; z-index: 4; left: var(--lm-gutter); bottom: 9vh; display: grid; gap: 14px; max-width: 34ch; opacity: 0; visibility: hidden; }
+.after p { margin: 0; font: 500 clamp(22px, 2vw, 34px)/1.2 var(--lm-display); letter-spacing: -0.03em; color: var(--lm-paper); }
+
+.cue { position: absolute; z-index: 4; left: 50%; bottom: 26px; translate: -50% 0; display: grid; justify-items: center; gap: 10px; margin: 0; font: 500 11px/1 var(--lm-text); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+.cue i { width: 1px; height: 38px; background: linear-gradient(var(--lm-accent), transparent); animation: cue 2.2s var(--lm-ease) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .copy { width: 50vw; }
+  .browserWrap { left: 53%; top: 56%; width: 36vw; }
+  .phoneWrap { right: 4%; }
+  .product { left: 56%; }
+}
+
+/* phones and tablets: the copy, then the framed scene beneath it */
+@media (max-width: 900px) {
+  .hero { height: auto; display: flex; flex-direction: column; padding-bottom: 48px; }
+  .copy { width: 100%; height: auto; padding: calc(var(--lm-header-h) + 28px) var(--lm-gutter) 36px; gap: 20px; }
+  .title { font-size: clamp(46px, 13vw, 92px); }
+  .scene { position: relative; inset: auto; height: min(118vw, 680px); margin: 0 var(--lm-gutter); perspective: none; }
+  .window { clip-path: inset(0% 0% 0% 0% round 18px); }
+  .browserWrap { left: -4%; top: auto; bottom: 8%; width: 74%; }
+  .phoneWrap { right: 4%; top: 10%; width: 33%; }
+  .product { left: auto; right: 40%; top: 6%; width: 24%; }
+  .after, .cue { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cue i { animation: none; }
+}

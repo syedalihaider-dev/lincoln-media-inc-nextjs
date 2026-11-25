@@ -4,6 +4,7 @@ import LegacyPage, { getPage, pageMetadata } from "@/components/Legacy/LegacyPag
 import { CHILD_SERVICE_PATHS } from "@/data/child-services";
 import { MARKETING_SERVICE_PATHS } from "@/data/marketing-services";
 import { ROUTE_ALIASES, ALIASED_SOURCES, sourceOf } from "@/data/route-aliases";
+import { ECOM_LEGACY_PATHS } from "@/data/ecommerce/inner";
 
 // All inner pages (services, work, policies) — pre-rendered at build time
 export const dynamicParams = false;
@@ -11,7 +12,9 @@ export const dynamicParams = false;
 // Routes that now have their own page in src/app (the legacy copy stays in the JSON, unused)
 // (/services/conversion-rate-optimization is the legacy spelling: it redirects to the live
 // /services/conversation-rate-optimization — next.config.mjs)
-const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", "/services/conversion-rate-optimization", ...CHILD_SERVICE_PATHS, ...MARKETING_SERVICE_PATHS]);
+// The e-commerce category page has its own route; its six platform pages live at the live site's
+// /services/<slug>, so the legacy nested copies (/services/ecommerce-web-development/<slug>) redirect there.
+const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", "/services/conversion-rate-optimization", "/services/ecommerce-web-development", ...ECOM_LEGACY_PATHS, ...CHILD_SERVICE_PATHS, ...MARKETING_SERVICE_PATHS]);
 
 
 export function generateStaticParams() {

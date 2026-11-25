@@ -1,0 +1,20 @@
+.process { padding: clamp(100px, 15vh, 170px) var(--lm-gutter); background: #e3e7ef; color: var(--lm-ink); }
+.track { position: relative; max-width: 1100px; margin: clamp(60px, 9vh, 100px) auto 0; }
+.steps { display: grid; gap: clamp(40px, 7vh, 80px); margin: 0; padding: 0; list-style: none; }
+.rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(3, 5, 11, 0.15); }
+.rail span { position: absolute; inset: 0; background: var(--lm-ink); transform-origin: top; }
+.step { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+.node { position: absolute; left: 50%; top: 6px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: #e3e7ef; box-shadow: inset 0 0 0 1.5px rgba(3, 5, 11, 0.35); transition: background-color 0.5s, box-shadow 0.5s, transform 0.5s var(--lm-ease); }
+.lit .node { background: var(--lm-accent); box-shadow: 0 0 0 6px rgba(54, 228, 208, 0.25), inset 0 0 0 1.5px var(--lm-ink); transform: scale(1.15); }
+.copy { display: grid; gap: 10px; }
+.step:nth-child(even) .copy { grid-column: 1; padding-right: 4vw; text-align: right; justify-items: end; }
+.step:nth-child(odd) .copy { grid-column: 2; padding-left: 4vw; }
+.copy h3 { margin: 0; font: 800 clamp(22px, 2vw, 36px)/1 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; color: rgba(3, 5, 11, 0.35); transition: color 0.6s; }
+.lit .copy h3 { color: var(--lm-ink); }
+.copy p { margin: 0; max-width: 40ch; font: 400 16px/1.6 var(--lm-text); color: rgba(3, 5, 11, 0.7); }
+
+@media (max-width: 900px) {
+  .rail, .node { left: 9px; }
+  .step { grid-template-columns: 1fr; }
+  .step:nth-child(even) .copy, .step:nth-child(odd) .copy { grid-column: 1; padding: 0 0 0 44px; text-align: left; justify-items: start; }
+}

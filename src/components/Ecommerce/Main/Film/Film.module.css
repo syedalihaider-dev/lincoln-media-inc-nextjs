@@ -1,0 +1,15 @@
+.film { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: #03050b; isolation: isolate; }
+.frame { position: absolute; inset: 0; z-index: -1; background: #0b0f17 url("/videos/ecommerce/conveyor-poster.jpg") center / cover; will-change: clip-path; }
+.frame video { will-change: transform; }
+.copy { position: absolute; inset: auto var(--lm-gutter) clamp(48px, 10vh, 110px); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; gap: 4vw; }
+.title { display: grid; margin: 0; font: 500 clamp(40px, 6.4vw, 120px)/0.96 var(--lm-display); letter-spacing: -0.055em; color: var(--lm-paper); }
+.mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.mask > span { display: block; }
+.mask:nth-child(2) > span { padding-left: 1em; color: var(--lm-accent); }
+.text { max-width: 40ch; margin: 0; font: 300 clamp(16px, 1.2vw, 20px)/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.84); }
+
+@media (max-width: 900px) {
+  .film { height: 100svh; min-height: 560px; }
+  .copy { grid-template-columns: 1fr; gap: 22px; }
+  .mask:nth-child(2) > span { padding-left: 0.5em; }
+}

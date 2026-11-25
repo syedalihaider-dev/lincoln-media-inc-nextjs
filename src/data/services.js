@@ -84,12 +84,12 @@ export const SERVICES = [
     alt: "Red and black shopping bags on a dark surface",
     blurb: "Conversion-obsessed stores on Shopify, Magento, WooCommerce and more — engineered to sell around the clock.",
     subs: [
-      ["WooCommerce", s("ecommerce-web-development/woo-commerce")],
-      ["Mirakl", s("ecommerce-web-development/mirakl")],
-      ["Magento", s("ecommerce-web-development/magento")],
-      ["BigCommerce", s("ecommerce-web-development/big-commerce")],
-      ["Shopify", s("ecommerce-web-development/shopify")],
-      ["Shopify Plus", s("ecommerce-web-development/shopify-plus")],
+      ["WooCommerce", s("woo-commerce")],
+      ["Mirakl", s("mirakl")],
+      ["Magento", s("magento")],
+      ["BigCommerce", s("big-commerce")],
+      ["Shopify", s("shopify")],
+      ["Shopify Plus", s("shopify-plus")],
     ],
   },
   {

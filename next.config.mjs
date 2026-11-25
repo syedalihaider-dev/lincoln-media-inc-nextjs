@@ -18,6 +18,8 @@ const nextConfig = {
       { source: "/services/whatsapp-business-integration", destination: "/services/whatsapp-web-integration", permanent: true },
       // the live site spells the CRO page "conversation-rate-optimization"; the older spelling forwards there
       { source: "/services/conversion-rate-optimization", destination: "/services/conversation-rate-optimization", permanent: true },
+      // the e-commerce platform pages are at the live site's direct slugs; the older nested routes forward there
+      { source: "/services/ecommerce-web-development/:slug(woo-commerce|mirakl|magento|big-commerce|shopify|shopify-plus)", destination: "/services/:slug", permanent: true },
     ];
   },
   async headers() {

@@ -1,0 +1,16 @@
+.head { display: grid; gap: 22px; max-width: 1000px; }
+.tab { display: inline-flex; justify-self: start; align-items: stretch; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.16em; text-transform: uppercase; box-shadow: inset 0 0 0 1px currentColor; border-radius: 99px; overflow: hidden; }
+.tab b, .tab span { padding: 9px 14px; }
+.tab b { font-weight: 600; background: var(--lm-ink); color: var(--lm-paper); }
+.title { max-width: 18ch; margin: 0; font: 800 clamp(30px, 3.9vw, 66px)/0.98 var(--lm-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.text { max-width: 52ch; margin: 0; font: 400 clamp(16px, 1.1vw, 18px)/1.65 var(--lm-text); }
+.center { justify-items: center; text-align: center; margin-inline: auto; }
+.center .tab { justify-self: center; }
+
+.paper { color: var(--lm-ink); }
+.paper .tab { color: rgba(3, 5, 11, 0.7); }
+.paper .text { color: rgba(3, 5, 11, 0.68); }
+.ink { color: var(--lm-paper); }
+.ink .tab { color: rgba(238, 241, 247, 0.75); }
+.ink .tab b { background: var(--lm-accent); color: var(--lm-ink); }
+.ink .text { color: rgba(238, 241, 247, 0.74); }

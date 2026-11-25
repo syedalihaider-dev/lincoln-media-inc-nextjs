@@ -1,0 +1,22 @@
+.show { position: relative; display: grid; grid-template-rows: auto 1fr auto; gap: 3vh; min-height: 100svh; padding: calc(var(--lm-header-h) + 20px) var(--lm-gutter) 30px; overflow: hidden; background: radial-gradient(ellipse 60% 50% at 50% 65%, #13203a, transparent 70%), linear-gradient(180deg, #05080f, #03050b); color: var(--lm-paper); }
+.headWrap { position: relative; z-index: 2; }
+.headWrap h2 { font-size: clamp(26px, 2.8vw, 48px); }
+.stage { position: relative; display: grid; place-items: center; perspective: 1800px; perspective-origin: 50% 20%; }
+.browser { position: relative; width: min(66vw, 1060px, 92vh); transform-origin: 50% 100%; transform-style: preserve-3d; will-change: transform; }
+.phone { position: absolute; right: max(0px, calc((100% - min(66vw, 1060px, 92vh)) / 2 - 5vw)); bottom: 2%; width: min(13vw, 220px, 24vh); will-change: transform; }
+.note { position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; translate: -12px -12px; }
+.note i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--lm-accent); color: var(--lm-ink); font: 700 12px/1 var(--lm-text); font-style: normal; box-shadow: 0 0 0 6px rgba(54, 228, 208, 0.25); }
+.note b { padding: 7px 12px; border-radius: 6px; background: rgba(3, 5, 11, 0.88); font: 500 13px/1.2 var(--lm-text); white-space: nowrap; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.list { display: none; }
+
+@media (max-width: 900px) {
+  .show { min-height: 0; grid-template-rows: auto; padding: clamp(90px, 13vh, 130px) var(--lm-gutter); gap: 36px; }
+  .browser { width: 100%; }
+  .note b { display: none; }
+  .note i { width: 20px; height: 20px; font-size: 10px; box-shadow: 0 0 0 4px rgba(54, 228, 208, 0.25); }
+  .phone { position: relative; right: auto; bottom: auto; justify-self: end; width: 44%; margin-top: -24%; margin-right: 4%; }
+  .foot { flex-direction: column; align-items: flex-start; }
+  .list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font: 400 15px/1.4 var(--lm-text); color: rgba(238, 241, 247, 0.8); }
+  .list i { display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 10px; border-radius: 50%; background: var(--lm-accent); color: var(--lm-ink); font: 700 10px/1 var(--lm-text); font-style: normal; }
+}

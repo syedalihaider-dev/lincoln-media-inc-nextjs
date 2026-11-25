@@ -1,0 +1,10 @@
+.head { display: grid; gap: 22px; max-width: 1040px; }
+.kicker { display: flex; align-items: center; gap: 14px; margin: 0; font: 500 12px/1.3 var(--lm-text); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(238, 241, 247, 0.7); }
+.kicker::before { content: ""; width: 9px; height: 9px; border: 1px solid var(--lm-accent); transform: rotate(45deg); }
+.title { max-width: 20ch; margin: 0; font: 500 clamp(32px, 4.4vw, 76px)/1.02 var(--lm-display); letter-spacing: -0.045em; color: var(--lm-paper); }
+.text { max-width: 54ch; margin: 0; font: 300 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-text); color: rgba(238, 241, 247, 0.72); }
+.center { justify-items: center; text-align: center; margin-inline: auto; }
+.paper .title { color: var(--lm-ink); }
+.paper .text { color: rgba(3, 5, 11, 0.66); }
+.paper .kicker { color: rgba(3, 5, 11, 0.6); }
+.paper .kicker::before { border-color: var(--lm-ink); }

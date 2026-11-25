@@ -1,0 +1,81 @@
+.arch {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 3vw;
+  min-height: 100svh;
+  padding: calc(var(--lm-header-h) + 20px) var(--lm-gutter) 40px;
+  overflow: hidden;
+  background: radial-gradient(ellipse 55% 60% at 70% 55%, rgba(54, 228, 208, 0.07), transparent 70%), linear-gradient(180deg, #060a13, #03050b);
+}
+.copy { position: relative; z-index: 2; display: grid; gap: 34px; }
+.copy header h2 { font-size: clamp(30px, 3.4vw, 58px); }
+.labels { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.labels > li { display: grid; gap: 4px; padding-left: 18px; border-left: 1px solid var(--lm-line-strong); }
+.labels h3 { margin: 0; font: 600 17px/1.3 var(--lm-text); color: var(--lm-paper); }
+.labels p { margin: 0; max-width: 46ch; font: 300 14.5px/1.55 var(--lm-text); color: rgba(238, 241, 247, 0.72); }
+.chipsInline { display: none; }
+
+/* the 3D stack */
+.scene { position: relative; height: min(84vh, 820px); display: grid; place-items: center; perspective: 2400px; will-change: transform; }
+.stack {
+  --gap: 12px;
+  --rx: 62deg;
+  --rz: -46deg;
+  position: relative;
+  width: min(34vw, 600px);
+  aspect-ratio: 1.45;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateZ(var(--rz));
+}
+.plane {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(calc(var(--i) * var(--gap)));
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(20, 28, 44, 0.96), rgba(9, 13, 22, 0.96));
+  box-shadow: inset 0 0 0 1px rgba(238, 241, 247, 0.14), 0 30px 60px rgba(0, 0, 0, 0.45);
+  padding: 7%;
+}
+.planeName { position: absolute; left: 7%; top: -1.9em; font: 600 13px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--lm-accent); white-space: nowrap; }
+.experience { padding: 0; background: transparent; box-shadow: none; }
+.storefront { position: absolute; inset: 0; }
+.storefront > div { height: 100%; aspect-ratio: auto; }
+.modules { display: flex; flex-wrap: wrap; align-content: center; gap: 10px; height: 100%; margin: 0; padding: 0; list-style: none; }
+.modules li { padding: 10px 16px; border-radius: 8px; background: rgba(238, 241, 247, 0.06); box-shadow: inset 0 0 0 1px rgba(238, 241, 247, 0.16); font: 500 clamp(11px, 0.9vw, 15px)/1.2 var(--lm-text); color: var(--lm-paper); }
+.commerce .modules li { background: rgba(54, 228, 208, 0.1); box-shadow: inset 0 0 0 1px rgba(54, 228, 208, 0.4); }
+
+/* the wires between layers: each stands upright from one plane to the next */
+.wires { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+.wire {
+  position: absolute;
+  left: var(--x);
+  top: 50%;
+  width: 2px;
+  height: var(--gap);
+  transform-origin: 50% 0;
+  transform: translateZ(calc(var(--i) * var(--gap))) rotateX(-90deg);
+  background: linear-gradient(rgba(54, 228, 208, 0.15), rgba(54, 228, 208, 0.6));
+}
+.wire b { position: absolute; left: -2px; width: 6px; height: 6px; border-radius: 50%; background: var(--lm-accent); box-shadow: 0 0 10px var(--lm-accent); animation: packet 2.4s var(--d) linear infinite; }
+@keyframes packet { from { top: 100%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { top: 0%; opacity: 0; } }
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .labels p { display: none; }
+}
+
+/* phones: the four layers as a plain stack */
+@media (max-width: 900px) {
+  .arch { grid-template-columns: 1fr; min-height: 0; padding: clamp(100px, 14vh, 140px) var(--lm-gutter); }
+  .scene { display: none; }
+  .labels { gap: 14px; }
+  .labels > li { padding: 22px; border: 0; border-radius: 12px; background: rgba(238, 241, 247, 0.04); box-shadow: inset 0 0 0 1px var(--lm-line); }
+  .labels > li:first-child { box-shadow: inset 0 0 0 1px rgba(54, 228, 208, 0.5); }
+  .chipsInline { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .chipsInline li { padding: 5px 11px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--lm-line-strong); font: 500 12px/1.2 var(--lm-text); color: rgba(238, 241, 247, 0.8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack { --gap: 90px; --rx: 56deg; --rz: -34deg; }
+  .wire b { animation: none; display: none; }
+}
