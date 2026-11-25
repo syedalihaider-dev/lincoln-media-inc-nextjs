@@ -1,0 +1,25 @@
+.exp { position: relative; padding: clamp(110px, 16vh, 180px) var(--lm-gutter) clamp(80px, 12vh, 140px); overflow: hidden; isolation: isolate; color: var(--lm-ink); }
+.bg { position: absolute; inset: 0; z-index: -1; }
+.bg img { object-fit: cover; }
+.bg::after { content: ""; position: absolute; inset: 0; background: rgba(238, 230, 214, 0.35); }
+.head { position: relative; z-index: 3; }
+.collage { position: relative; height: min(110vh, 1000px); margin-top: clamp(40px, 6vh, 70px); }
+.layer { position: absolute; box-shadow: 0 40px 70px -30px rgba(40, 25, 10, 0.55); will-change: transform; }
+.site { left: 2%; top: 4%; width: 44%; z-index: 1; }
+.social { right: 30%; top: 0; width: 18%; z-index: 2; }
+.pack { right: 2%; top: 10%; width: 26%; z-index: 1; box-shadow: none; }
+.poster { left: 8%; bottom: 2%; width: 20%; z-index: 2; }
+.slide { left: 32%; bottom: 10%; width: 36%; z-index: 3; }
+.card { right: 6%; bottom: 8%; width: 24%; z-index: 4; }
+.packPair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.packPair figure { position: relative; margin: 0; aspect-ratio: 3 / 2.4; overflow: hidden; box-shadow: 0 30px 50px -24px rgba(40, 25, 10, 0.55); }
+.packPair figure img { object-fit: cover; }
+.packPair > div { box-shadow: 0 30px 50px -24px rgba(40, 25, 10, 0.55); }
+.caption { position: absolute; right: var(--lm-gutter); bottom: 30px; }
+
+@media (max-width: 900px) {
+  .collage { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .layer { position: relative; inset: auto !important; width: auto !important; }
+  .site, .slide { grid-column: 1 / -1; }
+  .pack { grid-column: 1 / -1; }
+}

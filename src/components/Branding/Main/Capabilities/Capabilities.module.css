@@ -1,0 +1,29 @@
+.caps { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); background: #08080a; color: var(--lm-paper); }
+.listWrap { position: relative; margin-top: clamp(50px, 8vh, 100px); }
+.list { margin: 0; padding: 0; list-style: none; }
+.row { position: relative; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 3vw; padding: clamp(18px, 2.8vh, 30px) 0; outline: none; transition: opacity 0.4s; }
+.rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--lm-line-strong); transform-origin: left; }
+.name { margin: 0; overflow: hidden; padding-bottom: 0.06em; font: 800 clamp(28px, 3.8vw, 70px)/1 var(--lm-display); letter-spacing: -0.055em; }
+.name span { display: block; transition: color 0.4s, translate 0.6s var(--lm-ease); }
+.text { max-width: 40ch; margin: 0; font: 300 clamp(15px, 1.05vw, 18px)/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.66); }
+.thumb { display: none; }
+.dim .row { opacity: 0.32; }
+.dim .row.on { opacity: 1; }
+.on .name span, .row:focus-visible .name span { color: var(--lm-accent); translate: 18px 0; }
+.row:focus-visible { opacity: 1 !important; }
+
+/* the picture that follows the pointer */
+.preview { position: absolute; left: 0; top: 0; z-index: 2; width: clamp(200px, 19vw, 320px); aspect-ratio: 4 / 5; margin: calc(clamp(200px, 19vw, 320px) * -0.625) 0 0 calc(clamp(200px, 19vw, 320px) * -0.5); pointer-events: none; visibility: hidden; }
+.pic { position: absolute; inset: 0; margin: 0; overflow: hidden; clip-path: inset(100% 0% 0% 0%); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8); }
+.pic img { object-fit: cover; }
+
+@media (hover: none), (max-width: 900px) {
+  .preview { display: none; }
+}
+@media (max-width: 900px) {
+  .row { grid-template-columns: minmax(0, 1fr) 26%; gap: 6px 16px; }
+  .name { grid-column: 1; font-size: min(5.6vw, 34px); }
+  .text { grid-column: 1; }
+  .thumb { display: block; position: relative; grid-column: 2; grid-row: 1 / span 2; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+  .thumb img { object-fit: cover; }
+}

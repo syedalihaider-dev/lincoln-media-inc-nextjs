@@ -9,6 +9,7 @@ import { PSD_PATH } from "@/data/psd-to-html/main";
 import { UIUX_INNER_PATHS } from "@/data/ui-ux/inner";
 import { PSD_INNER_PATHS } from "@/data/psd-to-html/inner";
 import { ECOM_INNER_PATHS, ECOM_LEGACY_PATHS } from "@/data/ecommerce/inner";
+// (the Branding category page and its five service pages keep their legacy URLs, so they're already listed)
 
 // Every page the site serves: the homepage plus all pre-built inner pages
 export default function sitemap() {

@@ -4,6 +4,7 @@ import { SITE } from "@/data/site";
 import Hero from "./Hero/Hero";
 import Intro from "./Intro/Intro";
 import Head from "./Head";
+import ScrollSync from "@/components/Common/ScrollSync";
 
 const Solves = dynamic(() => import("./Solves/Solves"));
 const Showcase = dynamic(() => import("./Showcase/Showcase"));
@@ -66,6 +67,7 @@ export default function EcomServicePage({ service: s }) {
         <Experience data={s.experience} store={s.store} platform={platform} />
         <Faq data={s.faq} variant="inner" prompt={`Something else about ${platform}?`} head={<Head platform={platform} kicker={s.faq.kicker} title={s.faq.title} id="eci-faq" tone="ink" />} />
         <CTA data={s.cta} siblings={s.siblings} />
+        <ScrollSync />
       </PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>

@@ -1,0 +1,22 @@
+.dir { position: relative; height: 260svh; background: #08080a; color: var(--lm-paper); }
+.sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; }
+.frame { position: absolute; inset: 0; z-index: 1; background: #111 url("/videos/branding/product-set-poster.jpg") center / cover; will-change: clip-path; }
+.frame video { will-change: transform; }
+.word { position: absolute; left: 0; margin: 0; white-space: nowrap; font: 800 clamp(90px, 19vw, 360px)/0.85 var(--lm-display); letter-spacing: -0.07em; pointer-events: none; will-change: transform; }
+.w0 { top: 4%; left: 8%; z-index: 0; color: rgba(238, 241, 247, 0.12); }
+/* in front of the film: solid paper with a soft shadow (a difference blend turned the warm set blue) */
+.w1 { top: 36%; left: 18%; z-index: 2; color: var(--lm-paper); text-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); }
+.w2 { bottom: 4%; left: 30%; z-index: 0; color: rgba(54, 228, 208, 0.22); }
+.note { position: absolute; z-index: 3; left: var(--lm-gutter); bottom: clamp(36px, 7vh, 80px); display: grid; gap: 14px; max-width: 460px; padding: 28px; background: rgba(8, 8, 10, 0.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.kicker { margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.3em; text-transform: uppercase; color: var(--lm-accent); }
+.note h2 { margin: 0; font: 800 clamp(26px, 2.6vw, 44px)/1 var(--lm-display); letter-spacing: -0.05em; }
+.note p:last-child { margin: 0; font: 300 16px/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.82); }
+
+@media (max-width: 900px) {
+  .dir { height: 200svh; }
+  .note { right: var(--lm-gutter); max-width: none; padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dir { height: auto; }
+  .sticky { position: relative; }
+}

@@ -1,0 +1,18 @@
+.show { padding: clamp(100px, 15vh, 170px) var(--lm-gutter); background: #ebe6db; color: #17150f; overflow: hidden; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; }
+.cap { color: #17150f; }
+.deck { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2vw; margin-top: clamp(50px, 8vh, 90px); }
+.plate { position: relative; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; display: grid; place-items: center; box-shadow: 0 40px 70px -30px rgba(23, 21, 15, 0.5); will-change: transform; }
+.bg { position: absolute; inset: 0; }
+.bg img { object-fit: cover; }
+.bg::after { content: ""; position: absolute; inset: 0; background: rgba(23, 21, 15, 0.12); }
+.art { position: relative; width: 74%; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.35)); }
+.k_letter, .k_label, .k_poster, .k_quote, .k_social { width: 50%; }
+.k_card-front { width: 70%; }
+.plate figcaption { position: absolute; left: 16px; bottom: 14px; padding: 6px 12px; background: rgba(244, 241, 234, 0.92); font: 500 12px/1 var(--lm-text); letter-spacing: 0.12em; text-transform: uppercase; }
+@media (max-width: 900px) {
+  .head { flex-direction: column; align-items: flex-start; }
+  .deck { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: calc(var(--lm-gutter) * -1); padding: 0 var(--lm-gutter) 10px; scrollbar-width: none; }
+  .deck::-webkit-scrollbar { display: none; }
+  .plate { flex: 0 0 78vw; scroll-snap-align: center; }
+}

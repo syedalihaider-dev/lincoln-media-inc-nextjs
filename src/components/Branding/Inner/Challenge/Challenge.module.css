@@ -1,0 +1,11 @@
+.ch { padding: clamp(100px, 15vh, 170px) var(--lm-gutter); background: #17150f; color: #f4f1ea; overflow: hidden; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: clamp(50px, 8vh, 90px) 0 0; padding: 0; list-style: none; }
+.note { display: flex; align-items: center; gap: 14px; min-height: 120px; padding: 24px 26px; background: #f4f1ea; color: #17150f; font: 700 clamp(17px, 1.5vw, 26px)/1.15 var(--lm-display); letter-spacing: -0.035em; box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7); will-change: transform; }
+.note span { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--b2); color: var(--b0); font: 700 13px/1 var(--lm-text); }
+.note:nth-child(3n + 2) { background: var(--b1); }
+.resolve { max-width: 30ch; margin: clamp(50px, 8vh, 90px) 0 0 auto; font: 700 clamp(24px, 2.6vw, 44px)/1.12 var(--lm-display); letter-spacing: -0.045em; color: var(--b2); text-align: right; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .note { min-height: 96px; padding: 18px; font-size: 16px; flex-direction: column; align-items: flex-start; }
+  .resolve { text-align: left; margin-left: 0; }
+}

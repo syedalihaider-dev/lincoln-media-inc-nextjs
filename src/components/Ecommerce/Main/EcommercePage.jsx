@@ -5,6 +5,7 @@ import { ECOM_PAGE as d, ECOM_PATH, ECOM_CHILDREN } from "@/data/ecommerce/main"
 import Hero from "./Hero/Hero";
 import Experience from "./Experience/Experience";
 import Head from "./Head";
+import ScrollSync from "@/components/Common/ScrollSync";
 
 // Below the fold: their own chunks so the hero's code arrives first (still server-rendered)
 const Showcase = dynamic(() => import("./Showcase/Showcase"));
@@ -75,6 +76,7 @@ export default function EcommercePage() {
         <Quality data={d.quality} />
         <Faq data={d.faq} variant="paper" prompt="Something else about your store?" head={<Head kicker={d.faq.kicker} title={d.faq.title} id="ecom-faq" tone="paper" />} />
         <CTA data={d.cta} links={ECOM_CHILDREN} />
+        <ScrollSync />
       </PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>

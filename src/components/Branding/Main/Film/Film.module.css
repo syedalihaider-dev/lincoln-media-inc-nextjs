@@ -1,0 +1,12 @@
+.film { position: relative; min-height: 120svh; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; background: #08080a; color: var(--lm-paper); }
+.bg { position: absolute; inset: -12% 0; z-index: -1; background: #111 url("/videos/branding/shoot-poster.jpg") center / cover; will-change: transform; }
+.copy { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; gap: 4vw; width: 100%; padding: 0 var(--lm-gutter) clamp(60px, 12vh, 130px); }
+.title { display: grid; margin: 0; font: 800 clamp(44px, 7.6vw, 150px)/0.9 var(--lm-display); letter-spacing: -0.065em; }
+.title span { display: block; padding-bottom: 0.04em; }
+.title span:nth-child(2) { padding-left: 1.2em; color: var(--lm-accent); }
+.text { max-width: 40ch; margin: 0; font: 300 clamp(16px, 1.2vw, 20px)/1.65 var(--lm-text); color: rgba(238, 241, 247, 0.86); }
+@media (max-width: 900px) {
+  .film { min-height: 100svh; }
+  .copy { grid-template-columns: 1fr; gap: 24px; }
+  .title span:nth-child(2) { padding-left: 0.4em; }
+}

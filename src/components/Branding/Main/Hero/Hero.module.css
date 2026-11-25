@@ -1,0 +1,69 @@
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto auto;
+  column-gap: 2vw;
+  min-height: max(780px, 100svh);
+  padding: calc(var(--lm-header-h) + 18px) var(--lm-gutter) 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #08080a;
+  color: var(--lm-paper);
+}
+.crumb { grid-column: 1 / -1; position: relative; z-index: 4; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; font: 500 12px/1.4 var(--lm-text); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+.crumb li + li::before { content: "/"; margin-right: 10px; color: var(--lm-accent); }
+.crumb a:hover { color: var(--lm-accent); }
+.crumb [aria-current] { color: var(--lm-paper); }
+
+/* the film window, right of centre, full height of the stage */
+.window { grid-column: 7 / span 4; grid-row: 2 / span 2; position: relative; z-index: 1; align-self: stretch; min-height: 62vh; margin: 2vh 0 0; overflow: hidden; background: #111 url("/videos/branding/calligraphy-poster.jpg") center / cover; will-change: clip-path; }
+.window video { will-change: transform; }
+
+/* the headline sits over the film and inverts where it crosses it */
+.title { grid-column: 1 / -1; grid-row: 2; position: relative; z-index: 3; align-self: center; display: grid; margin: 0; font: 800 clamp(52px, 8.8vw, 170px)/0.88 var(--lm-display); letter-spacing: -0.065em; color: #fff; mix-blend-mode: difference; pointer-events: none; }
+.hl { display: block; white-space: nowrap; will-change: transform; }
+.hl:nth-child(2) { padding-left: 1.6em; }
+.hl:nth-child(3) { padding-left: 0.6em; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.strip { grid-column: 11 / span 2; grid-row: 2; z-index: 2; align-self: start; margin-top: 6vh; transform: rotate(4deg); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); will-change: transform; }
+.card { grid-column: 9 / span 3; grid-row: 3; z-index: 4; align-self: end; margin: 0 0 -4vh -3vw; transform: rotate(-8deg); will-change: transform; }
+.tag { grid-column: 1 / span 4; grid-row: 2; z-index: 2; align-self: start; margin-top: 4vh; display: flex; align-items: center; gap: 16px; font-size: 20px; }
+
+.foot { grid-column: 1 / span 6; grid-row: 3; position: relative; z-index: 4; display: grid; gap: 24px; padding: 0 0 5vh; }
+.lead { max-width: 46ch; margin: 0; font: 300 clamp(16px, 1.15vw, 19px)/1.65 var(--lm-text); color: rgba(238, 241, 247, 0.78); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+
+.tickerWrap { grid-column: 1 / -1; grid-row: 4; margin: 0 calc(var(--lm-gutter) * -1); padding: 18px 0; border-top: 1px solid var(--lm-line); overflow: hidden; }
+.ticker { display: flex; gap: 0.5em; margin: 0; white-space: nowrap; font: 800 clamp(22px, 2.6vw, 44px)/1 var(--lm-display); letter-spacing: -0.05em; color: rgba(238, 241, 247, 0.18); will-change: transform; }
+.ticker span::after { content: "✦"; margin-left: 0.5em; font-size: 0.5em; vertical-align: middle; color: var(--lm-accent); }
+.ticker span:nth-child(4n + 2) { color: var(--lm-paper); }
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .window { grid-column: 6 / span 5; }
+  .foot { grid-column: 1 / span 7; }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; min-height: 0; }
+  .crumb, .title, .window, .strip, .card, .tag, .foot, .tickerWrap { grid-column: 1; grid-row: auto; }
+  /* phones: headline first, then the film with the card and colours leaning on it */
+  .crumb { order: 0; }
+  .tag { order: 1; }
+  .title { order: 2; }
+  .window { order: 3; }
+  .strip { order: 4; }
+  .card { order: 5; }
+  .foot { order: 6; }
+  .tickerWrap { order: 7; }
+  .title { margin: 26px 0 0; font-size: clamp(40px, 12.4vw, 90px); mix-blend-mode: normal; }
+  .hl { white-space: normal; }
+  .hl:nth-child(2), .hl:nth-child(3) { padding-left: 0; }
+  .tag { margin: 22px 0 0; font-size: 16px; }
+  .window { min-height: 0; aspect-ratio: 4 / 4.6; margin: 26px 0 0; }
+  .strip { width: 40%; margin: -18% 0 0 auto; transform: rotate(4deg); }
+  .card { width: 58%; margin: -14% 0 0 4%; }
+  .foot { padding: 34px 0 28px; }
+}

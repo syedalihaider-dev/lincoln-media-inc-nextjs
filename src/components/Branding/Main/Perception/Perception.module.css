@@ -1,0 +1,28 @@
+.perc { padding: clamp(110px, 16vh, 190px) var(--lm-gutter); background: var(--lm-paper); color: var(--lm-ink); }
+.body { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 5vw; margin-top: clamp(60px, 10vh, 120px); }
+.media { position: relative; }
+.sticky { position: sticky; top: calc(var(--lm-header-h) + 6vh); height: 76vh; }
+.fig { position: absolute; margin: 0; overflow: hidden; background: var(--lm-paper-2); will-change: transform; }
+.fig img { object-fit: cover; }
+.f0 { left: 0; top: 0; width: 82%; height: 72%; }
+.f1 { right: 0; bottom: 0; width: 56%; height: 44%; box-shadow: 0 30px 60px -24px rgba(3, 5, 11, 0.45); }
+.list { margin: 0; }
+.row { padding: clamp(26px, 4vh, 44px) 0; border-top: 1px solid rgba(3, 5, 11, 0.14); }
+/* the word: a proof that inks from left to right (background swept through the letters) */
+.word {
+  font: 800 clamp(40px, 6.4vw, 118px)/0.95 var(--lm-display);
+  letter-spacing: -0.065em;
+  color: transparent;
+  background: linear-gradient(90deg, var(--lm-ink) 0 50%, rgba(3, 5, 11, 0.13) 50% 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.def { max-width: 46ch; margin: 16px 0 0; font: 400 clamp(16px, 1.15vw, 19px)/1.6 var(--lm-text); color: rgba(3, 5, 11, 0.7); }
+
+@media (max-width: 900px) {
+  .body { grid-template-columns: 1fr; gap: 40px; }
+  .sticky { position: relative; top: 0; height: 100vw; }
+  .word { font-size: min(8.4vw, 64px); }
+}

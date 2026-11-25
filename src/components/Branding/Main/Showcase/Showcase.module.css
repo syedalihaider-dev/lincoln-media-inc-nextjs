@@ -1,0 +1,52 @@
+.show { background: #08080a; color: var(--lm-paper); }
+.headRow { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; padding: clamp(110px, 16vh, 180px) var(--lm-gutter) clamp(40px, 6vh, 70px); }
+.cap0 { color: var(--lm-paper); }
+.reel { position: relative; height: 100svh; min-height: 620px; overflow: hidden; }
+.frame { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; will-change: clip-path; }
+.bg0 { background: var(--b1); color: var(--b0); }
+.bg1 { background: var(--b0); color: var(--b1); }
+.bg2 { background: #e9e4da; color: var(--b0); }
+.bg3 { background: var(--b3); color: var(--b1); }
+.art { position: relative; width: 100%; height: 100%; display: grid; place-items: center; padding: calc(var(--lm-header-h) + 20px) var(--lm-gutter) 120px; will-change: transform; }
+.caption { position: absolute; left: var(--lm-gutter); bottom: 40px; display: grid; gap: 6px; max-width: 40ch; }
+.caption h3 { margin: 0; font: 800 clamp(22px, 2.2vw, 38px)/1 var(--lm-display); letter-spacing: -0.045em; }
+.caption p { margin: 0; font: 400 clamp(14px, 1vw, 17px)/1.5 var(--lm-text); opacity: 0.75; }
+
+.solo { width: min(64vw, 110vh); box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.55); }
+.cards { position: relative; width: min(70vw, 120vh); height: 100%; }
+.cLetter { position: absolute; left: 6%; top: 0; width: 30%; transform: rotate(-4deg); }
+.cFront { position: absolute; left: 36%; top: 12%; width: 38%; transform: rotate(5deg); z-index: 2; }
+.cBack { position: absolute; right: 2%; bottom: 8%; width: 38%; transform: rotate(-6deg); z-index: 3; }
+.pack { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 4vw; width: min(74vw, 124vh); }
+.packPhoto { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 6px; }
+.packPhoto img { object-fit: cover; }
+.packLabel { width: 78%; justify-self: center; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.5); }
+.digital { position: relative; width: min(72vw, 120vh); }
+.dSite { width: 82%; box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.6); }
+.dPost { position: absolute; right: 0; bottom: -10%; width: 26%; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6); }
+/* each billboard photo keeps its own proportions, so the poster lands exactly on its blank face */
+.campaign { display: flex; align-items: center; justify-content: center; gap: 2vw; width: 100%; height: 100%; }
+.camA, .camB { position: relative; flex: none; }
+.camA { height: 100%; aspect-ratio: 1600 / 2133; }
+.camB { height: 84%; aspect-ratio: 1; }
+.surface { position: absolute; inset: 0; margin: 0; overflow: hidden; border-radius: 6px; }
+.surface img { object-fit: cover; }
+.face { position: absolute; overflow: hidden; }
+.faceArt { width: 100% !important; height: 100% !important; aspect-ratio: auto !important; }
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .headRow { flex-direction: column; align-items: flex-start; }
+  .reel { height: auto; min-height: 0; display: grid; gap: 12px; padding: 0 0 40px; overflow: visible; }
+  .frame { position: relative; inset: auto; min-height: 0; }
+  .art { padding: 50px var(--lm-gutter) 130px; }
+  .solo, .cards, .pack, .digital, .campaign { width: 100%; }
+  .cards { height: 92vw; }
+  .pack { grid-template-columns: 1fr; gap: 20px; }
+  .campaign { height: auto; flex-direction: column; gap: 12px; }
+  .camA { height: auto; width: 72%; }
+  .camB { height: auto; width: 100%; }
+  .dPost { bottom: -16%; width: 34%; }
+}
+@media (min-width: 901px) {
+  .campaign .surface img { object-position: center; }
+}

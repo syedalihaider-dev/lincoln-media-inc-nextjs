@@ -1,0 +1,22 @@
+.exp { position: relative; display: grid; align-content: space-between; gap: 60px; min-height: 115svh; padding: clamp(100px, 15vh, 170px) 0 clamp(60px, 9vh, 100px); overflow: hidden; isolation: isolate; background: #17150f; color: #f4f1ea; }
+.exp > div:first-child { z-index: -1; }
+.copy { display: grid; gap: 20px; max-width: 760px; padding: 0 var(--lm-gutter); }
+.folio { display: flex; align-items: center; gap: 12px; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244, 241, 234, 0.75); }
+.folio span { font-weight: 600; }
+.folio i { width: 28px; height: 1px; background: currentColor; }
+.title { margin: 0; font: 700 clamp(36px, 5vw, 92px)/0.96 var(--lm-display); letter-spacing: -0.055em; }
+.text { max-width: 46ch; margin: 0; font: 400 clamp(16px, 1.2vw, 20px)/1.65 var(--lm-text); color: rgba(244, 241, 234, 0.86); }
+.reelWrap { overflow: hidden; }
+.reel { display: flex; align-items: center; gap: 18px; width: max-content; padding-left: var(--lm-gutter); will-change: transform; }
+.tile { position: relative; flex: none; width: clamp(180px, 20vw, 340px); aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.8); }
+.tile img { object-fit: cover; }
+/* an artefact is a size container: inside the max-content reel a percentage width resolves to zero,
+   so it gets an explicit width from the tile's own size */
+.artTile { --tw: clamp(180px, 20vw, 340px); display: flex; align-items: center; justify-content: center; background: var(--b1); }
+.artTile > * { flex: none; width: calc(var(--tw) * 0.86); }
+.tile:nth-child(3n + 2) { translate: 0 30px; }
+@media (max-width: 900px) {
+  .exp { min-height: 0; }
+  .tile { width: 46vw; }
+  .artTile { --tw: 46vw; }
+}

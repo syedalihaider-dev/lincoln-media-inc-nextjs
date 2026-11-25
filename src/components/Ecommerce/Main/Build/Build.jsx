@@ -34,7 +34,8 @@ export default function Build({ data }) {
     );
     const mm = gsap.matchMedia();
     mm.add(ANY_MOTION, () => {
-      gsap.from(items.map((el) => el.querySelector("[data-name]")), { yPercent: 60, opacity: 0, duration: 1.2, stagger: 0.06, ease: "expo.out", scrollTrigger: { trigger: root.querySelector("[data-list]"), start: "top 80%", once: true } });
+      // the words rise inside the heading's mask (never the heading itself, so it can't drift onto its text)
+      gsap.from(items.map((el) => el.querySelector("[data-name]")), { yPercent: 100, opacity: 0, duration: 1.2, stagger: 0.06, ease: "expo.out", scrollTrigger: { trigger: root.querySelector("[data-list]"), start: "top 80%", once: true } });
     });
     return () => { triggers.forEach((t) => t.kill()); mm.revert(); };
   }, { dependencies: [ready], scope: ref });
@@ -46,7 +47,7 @@ export default function Build({ data }) {
         <ol className={styles.list} data-list>
           {data.items.map((it) => (
             <li key={it.name} className={styles.item} data-item>
-              <h3 className={styles.name} data-name>{it.name}</h3>
+              <h3 className={styles.name}><span className={styles.nameIn} data-name>{it.name}</span></h3>
               <div className={styles.more}>
                 <div className={styles.moreIn}>
                   <p>{it.text}</p>

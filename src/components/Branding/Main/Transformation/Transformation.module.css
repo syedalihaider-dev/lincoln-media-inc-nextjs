@@ -1,0 +1,53 @@
+.tx { position: relative; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; gap: 4vw; min-height: 100svh; padding: calc(var(--lm-header-h) + 20px) var(--lm-gutter) 40px; overflow: hidden; background: #0c0b0d; color: var(--lm-paper); }
+.side { display: grid; gap: 36px; }
+.side header h2 { font-size: clamp(30px, 3.6vw, 64px); }
+.stages { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.stage { padding: 12px 0 12px 22px; border-left: 2px solid var(--lm-line); transition: border-color 0.5s; }
+.stage h3 { margin: 0; font: 700 clamp(18px, 1.5vw, 24px)/1.2 var(--lm-display); letter-spacing: -0.03em; color: rgba(238, 241, 247, 0.35); transition: color 0.5s; }
+.stage p { max-height: 0; margin: 0; overflow: hidden; max-width: 42ch; font: 300 15px/1.55 var(--lm-text); color: rgba(238, 241, 247, 0.72); opacity: 0; transition: max-height 0.7s var(--lm-ease), opacity 0.5s, margin 0.5s; }
+.on { border-color: var(--lm-accent); }
+.on h3 { color: var(--lm-paper); }
+.on p { max-height: 5em; margin-top: 6px; opacity: 1; }
+.done h3 { color: rgba(238, 241, 247, 0.65); }
+
+/* the composition */
+.stage3 { position: relative; height: min(78vh, 760px); }
+.piece { position: absolute; will-change: transform; }
+.piece > div { position: relative; }
+.after { position: absolute !important; inset: 0; }
+.after > * { height: 100%; }
+.pCard { left: 0; top: 8%; width: 46%; transform: rotate(-5deg); }
+.pBag { left: 40%; top: 30%; width: 26%; transform: rotate(3deg); z-index: 2; }
+.pPost { right: 0; top: 2%; width: 30%; transform: rotate(4deg); }
+.poster { position: absolute; z-index: 3; right: 4%; bottom: 0; width: 26%; transform: rotate(-3deg); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+.idea { position: absolute; z-index: 4; left: 8%; bottom: 10%; display: grid; gap: 8px; padding: 22px 26px; background: #f3e8d6; color: #2a1a12; transform: rotate(-2deg); box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.6); }
+.idea small { font: 500 11px/1 var(--lm-text); letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; }
+.idea b { font: 700 clamp(20px, 1.8vw, 30px)/1.1 var(--lm-display); letter-spacing: -0.04em; }
+.mark { position: absolute; z-index: 5; left: 50%; top: 50%; width: min(24vw, 280px); margin: calc(min(24vw, 280px) / -2) 0 0 calc(min(24vw, 280px) / -2); display: grid; justify-items: center; gap: 18px; opacity: 0; --hole: #0c0b0d; }
+.mark span { font: 500 13px/1 var(--lm-text); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-accent); white-space: nowrap; }
+.caption { position: absolute; right: 0; bottom: -28px; }
+
+/* the generic "before" */
+.bCard { aspect-ratio: 85 / 55; display: grid; align-content: center; justify-items: center; gap: 4%; padding: 6%; background: #fff; color: #333; font-family: var(--lm-text); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6); text-align: center; }
+.bCard b { font-size: clamp(16px, 1.6vw, 26px); font-weight: 400; }
+.bCard span { font-size: clamp(10px, 0.8vw, 13px); font-style: italic; color: #777; }
+.bCard small { font-size: clamp(8px, 0.6vw, 10px); color: #999; }
+.bBag { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: #c9a77d; }
+.bBag img { object-fit: cover; }
+.sticker { position: absolute; left: 50%; top: 52%; translate: -50% -50%; padding: 6px 12px; background: #fff; color: #444; font: 400 clamp(11px, 0.9vw, 14px)/1 var(--lm-text); border-radius: 50%; }
+.bPost { aspect-ratio: 4 / 5; display: grid; align-content: center; justify-items: center; gap: 6%; padding: 8%; background: linear-gradient(160deg, #ffd34d, #ff7b54); color: #222; font-family: var(--lm-text); text-align: center; }
+.bPost span { padding: 3px 10px; background: red; color: #fff; font-size: clamp(10px, 0.8vw, 13px); font-weight: 700; }
+.bPost b { font-size: clamp(16px, 1.5vw, 24px); }
+.bPost small { font-size: clamp(9px, 0.7vw, 12px); }
+
+.compare { display: none; }
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .tx { grid-template-columns: 1fr; min-height: 0; padding: clamp(100px, 14vh, 140px) var(--lm-gutter); gap: 44px; }
+  .stage3 { display: none; }
+  .stage { border-color: var(--lm-accent); }
+  .stage h3 { color: var(--lm-paper); }
+  .stage p { max-height: none; margin-top: 6px; opacity: 1; }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: end; }
+  .compare small { display: block; margin-bottom: 10px; font: 500 11px/1 var(--lm-text); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(238, 241, 247, 0.6); }
+}

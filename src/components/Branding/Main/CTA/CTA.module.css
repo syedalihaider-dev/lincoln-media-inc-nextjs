@@ -1,0 +1,17 @@
+.cta { position: relative; min-height: 100svh; display: grid; align-items: center; overflow: hidden; isolation: isolate; background: #08080a; color: var(--lm-paper); }
+.band { position: absolute; inset: 0; z-index: -1; background: #111 url("/videos/branding/paint-poster.jpg") center / cover; will-change: clip-path; }
+.inner { display: grid; gap: 26px; padding: 140px var(--lm-gutter) 100px; }
+.kicker { margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.3em; text-transform: uppercase; color: var(--lm-accent); }
+.title { display: grid; margin: 0; font: 800 clamp(50px, 10vw, 200px)/0.86 var(--lm-display); letter-spacing: -0.07em; }
+.title span { display: block; }
+.accent { padding-left: 0.7em; color: var(--lm-accent); }
+.text { max-width: 44ch; margin: 0; font: 300 clamp(16px, 1.25vw, 20px)/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.88); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 0; margin-top: 30px; }
+.links a { padding: 0 18px; font: 500 14px/1.4 var(--lm-text); letter-spacing: 0.04em; color: rgba(238, 241, 247, 0.78); transition: color 0.3s; }
+.links a:first-child { padding-left: 0; }
+.links a + a { border-left: 1px solid var(--lm-line-strong); }
+.links a:hover { color: var(--lm-accent); }
+@media (max-width: 900px) {
+  .accent { padding-left: 0; }
+}

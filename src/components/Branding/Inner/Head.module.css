@@ -1,0 +1,13 @@
+.head { display: grid; gap: 20px; max-width: 980px; }
+.folio { display: flex; align-items: center; gap: 12px; margin: 0; font: 500 12px/1 var(--lm-text); letter-spacing: 0.18em; text-transform: uppercase; }
+.folio i { width: 28px; height: 1px; background: currentColor; opacity: 0.5; }
+.folio span:first-child { font-weight: 600; }
+.title { max-width: 20ch; margin: 0; font: 700 clamp(30px, 3.8vw, 64px)/1.02 var(--lm-display); letter-spacing: -0.05em; }
+.text { max-width: 52ch; margin: 0; font: 400 clamp(16px, 1.1vw, 18px)/1.65 var(--lm-text); }
+.center { justify-items: center; text-align: center; margin-inline: auto; }
+.paper { color: #17150f; }
+.paper .folio { color: rgba(23, 21, 15, 0.6); }
+.paper .text { color: rgba(23, 21, 15, 0.7); }
+.ink { color: #f4f1ea; }
+.ink .folio { color: rgba(244, 241, 234, 0.65); }
+.ink .text { color: rgba(244, 241, 234, 0.75); }
