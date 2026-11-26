@@ -35,7 +35,7 @@ export default function Contact() {
 
       <form className={styles.form} id="contactForm" aria-label="Project enquiry">
         {/* Honeypot (bots fill it; people never see it) */}
-        <input name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
+        <input name="lm_hp" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
         <label className={styles.field}>
           <input name="name" required autoComplete="name" placeholder=" " />
           <span>Name *</span>

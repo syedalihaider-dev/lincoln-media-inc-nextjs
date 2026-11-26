@@ -38,8 +38,11 @@ export const FOOTER_COLUMNS = [
   {
     title: "Overview",
     links: [
-      { label: "About Us", href: "/about-us" },
+      { label: "Home", href: "/" },
+      { label: "About", href: "/about-us" },
       { label: "Services", href: "/services" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Contact Us", href: "/contact-us" },
       { label: "Terms & Conditions", href: "/terms-and-condition" },
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Refund Policy", href: "/refund-policy" },

@@ -33,9 +33,23 @@ function getTransport() {
   return transport;
 }
 
-/** Sends to every lead recipient. From = the studio's mailbox; Reply-To = the visitor. */
+/**
+ * Sends to every lead recipient. From = the studio's mailbox; Reply-To = the visitor.
+ * Resolves only when the SMTP server has accepted the message for at least one recipient
+ * (nodemailer rejects on connection/auth/DATA errors; this also fails when every RCPT was refused).
+ * Returns { messageId, accepted, rejected, response } for logging — no credentials.
+ */
 export async function sendLead({ subject, html, text, replyTo }) {
   const e = process.env;
   const from = { name: e.MAIL_FROM_NAME || "Website", address: e.MAIL_FROM_ADDRESS };
-  return getTransport().sendMail({ from, to: recipients(), replyTo, subject, html, text });
+  const info = await getTransport().sendMail({ from, to: recipients(), replyTo, subject, html, text });
+  const accepted = (info.accepted || []).map(String);
+  const rejected = (info.rejected || []).map(String);
+  if (!accepted.length) {
+    const err = new Error(`SMTP accepted no recipients (rejected: ${rejected.join(", ") || "all"})`);
+    err.code = "ENORECIPIENTS";
+    err.response = info.response;
+    throw err;
+  }
+  return { messageId: info.messageId, accepted, rejected, response: String(info.response || "").slice(0, 160) };
 }

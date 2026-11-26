@@ -3,7 +3,6 @@ import { useRef } from "react";
 import { gsap, SplitText, useGSAP, ANY_MOTION } from "@/lib/gsap";
 import { useSiteMotion } from "@/lib/motion";
 import { FOOTER_COLUMNS, SITE } from "@/data/site";
-import Clock from "@/components/Common/Clock";
 import Button from "@/components/Common/Button";
 import Social from "@/components/Common/Social";
 import Logo from "@/components/Header/Logo";
@@ -72,8 +71,6 @@ export default function Footer() {
       <div className={styles.base}>
         {/* #year is filled in by public/app.js */}
         <span>© <span id="year" suppressHydrationWarning>{new Date().getFullYear()}</span> {SITE.name}. All rights reserved.</span>
-        <span>{SITE.city} · Est. {SITE.established} · <Clock /></span>
-        <span>Voice by Kokoro (Apache 2.0)</span>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

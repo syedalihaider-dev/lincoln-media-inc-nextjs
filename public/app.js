@@ -1159,12 +1159,9 @@
   addEventListener("pointermove", (e) => { cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; });
   document.addEventListener("pointerover", (e) => cursor.classList.toggle("hover", !!e.target.closest("a, button, input, select, textarea")));
 
-  // Voice meter bars + NYC clock
+  // Voice meter bars (the NYC clock readout was removed from the banner)
   const bars = $("#bars"), barEls = [];
   for (let i = 0; i < 14; i++) { const b = document.createElement("i"); bars.appendChild(b); barEls.push(b); }
-  const clock = $("#clock");
-  const tickClock = () => { clock.textContent = "NYC " + new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false }); };
-  tickClock(); setInterval(tickClock, 1000);
 
   // The enquiry goes to the site's lead endpoint (/api/lead → SMTP), tagged as the homepage form
   const contactForm = $("#contactForm");
@@ -1187,7 +1184,7 @@
           source: "homepage",
           pageUrl: location.href,
           elapsed: formStarted ? Date.now() - formStarted : null,
-          website: d.website || "",
+          website: d.lm_hp || "",
           fields: { name: d.name, email: d.email, company: d.company || "", service: d.service, budget: d.budget, message: d.message },
         }),
       });

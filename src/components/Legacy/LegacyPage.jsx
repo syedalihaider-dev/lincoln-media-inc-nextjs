@@ -22,7 +22,12 @@ export function pageMetadata(route) {
 // like every contact call to action on the site, they now open the contact page's form
 const toContactForm = (html) => html.replace(/href="\/?#contact"/g,'href="/contact-us#contact-form"');
 
-const render = (html) => withSiteContact(toContactForm(html));
+// Their footers match the site footer: the full Overview list, and no "New York · Est. 2012" line
+const OLD_OVERVIEW = '<li><a href="/about-us">About Us</a></li><li><a href="/services">Services</a></li>';
+const NEW_OVERVIEW = '<li><a href="/">Home</a></li><li><a href="/about-us">About</a></li><li><a href="/services">Services</a></li><li><a href="/case-studies">Case Studies</a></li><li><a href="/contact-us">Contact Us</a></li>';
+const tidyFooter = (html) => html.replace(OLD_OVERVIEW, NEW_OVERVIEW).replace(/\s*<span>New York · Est\. 2012<\/span>/, "");
+
+const render = (html) => withSiteContact(toContactForm(tidyFooter(html)));
 
 export default function LegacyPage({ route }) {
   const p = getPage(route);

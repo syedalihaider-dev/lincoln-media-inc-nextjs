@@ -6,7 +6,6 @@ import { useMediaQuery, useReducedMotion, useSiteMotion } from "@/lib/motion";
 import { HERO } from "@/data/home";
 import { SITE } from "@/data/site";
 import Button from "@/components/Common/Button";
-import Clock from "@/components/Common/Clock";
 import styles from "./Hero.module.css";
 
 // WebGL corridor is client-only and loaded after the page is interactive
@@ -93,7 +92,6 @@ export default function Hero() {
 
       <div className={styles.meta} data-fade>
         <span>{SITE.city}</span>
-        <span>Est. {SITE.established}</span>
         <span className={styles.avail}><i aria-hidden="true" />Available for new projects</span>
       </div>
 
@@ -119,8 +117,6 @@ export default function Hero() {
           <Button href="#work" variant="outline" icon="down">View work</Button>
         </div>
         <div className={styles.hud} data-fade aria-hidden="true">
-          <span>40.7128° N · 74.0060° W</span>
-          <Clock />
           <span className={styles.depth}>Scroll to enter <b ref={counter}>000</b></span>
         </div>
       </div>

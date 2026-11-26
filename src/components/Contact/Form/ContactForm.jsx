@@ -84,7 +84,7 @@ export default function ContactForm({ copy, source = "contact" }) {
           source,
           pageUrl: window.location.href,
           elapsed: started.current ? Date.now() - started.current : null,
-          website: d.website || "",
+          website: d.lm_hp || "",
           fields: {
             name: d.name, company: d.company, email: d.email, phone: d.phone,
             interest: d.interest || "", budget: d.budget || "", message: d.message || "", consent: Boolean(d.consent),
@@ -111,8 +111,8 @@ export default function ContactForm({ copy, source = "contact" }) {
       <form ref={ref} className={f.form} onSubmit={submit} onFocus={touch} noValidate aria-label={copy.title} aria-busy={sending || undefined} inert={sent ? true : undefined}>
         {/* Honeypot: hidden from people and assistive tech; bots that fill every field reveal themselves */}
         <div className={f.trap} aria-hidden="true">
-          <label htmlFor="cf-website">Website</label>
-          <input id="cf-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          <label htmlFor="cf-lm-hp">Leave this field empty</label>
+          <input id="cf-lm-hp" name="lm_hp" type="text" tabIndex={-1} autoComplete="off" />
         </div>
         <div className={f.grid}>
           <Field name="name" label="Full Name*" autoComplete="name" required error={errors.name} onBlur={blur("name")} />

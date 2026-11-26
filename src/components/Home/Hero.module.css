@@ -109,7 +109,6 @@
 @media (max-width: 760px) {
   .hero { height: auto; min-height: 100svh; padding-bottom: 28px; }
   .shade { background: linear-gradient(180deg, rgba(3, 5, 11, 0.35), rgba(3, 5, 11, 0.2) 40%, rgba(3, 5, 11, 0.85) 80%); }
-  .meta span:nth-child(2) { display: none; }
   .title { font-size: clamp(28px, 9.2vw, 76px); margin: 8vh 0 5vh; }
   .accent { padding-left: 0; }
   .soft { font-size: clamp(24px, 7.6vw, 44px); }

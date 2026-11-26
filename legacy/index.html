@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=39">
+<link rel="stylesheet" href="styles.css?v=40">
 <link rel="stylesheet" href="site.css?v=38">
 </head>
 <body class="locked" data-page="home">
@@ -28,12 +28,6 @@
     <path d="M300 4 v18 M300 578 v18 M4 300 h18 M578 300 h18" class="cross"/>
   </svg>
 </div>
-<aside class="readout readout-left mono" aria-hidden="true">
-  <p>LAT 40.7128° N</p>
-  <p>LON 74.0060° W</p>
-  <p id="clock">NYC --:--:--</p>
-  <p>EST. 2012</p>
-</aside>
 <aside class="readout readout-right mono" aria-hidden="true">
   <p>VOICE SIGNAL</p>
   <div class="bars" id="bars"></div>
@@ -136,10 +130,10 @@
         <h2 class="headline" data-say="stage" aria-live="polite"></h2>
         <div class="after">
           <div class="choices" data-key="stage">
-            <button data-value="idea"><i class="mono">A</i>An idea on paper</button>
-            <button data-value="prototype"><i class="mono">B</i>A prototype or MVP</button>
-            <button data-value="live"><i class="mono">C</i>Live, and needs to scale</button>
-            <button data-value="rebuild"><i class="mono">D</i>Live, and needs a rebuild</button>
+            <button data-value="idea"><i class="mono">A</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1V16h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z"/></svg></span><span class="lbl">An idea on paper</span></button>
+            <button data-value="prototype"><i class="mono">B</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg></span><span class="lbl">A prototype or MVP</span></button>
+            <button data-value="live"><i class="mono">C</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span class="lbl">Live, and needs to scale</span></button>
+            <button data-value="rebuild"><i class="mono">D</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.6 4.5L20 16"/><path d="M20 21v-5h-5"/></svg></span><span class="lbl">Live, and needs a rebuild</span></button>
           </div>
         </div>
       </div>
@@ -148,10 +142,10 @@
         <h2 class="headline" data-say="priority" aria-live="polite"></h2>
         <div class="after">
           <div class="choices" data-key="priority">
-            <button data-value="speed"><i class="mono">A</i>Speed to market</button>
-            <button data-value="scale"><i class="mono">B</i>Scale and reliability</button>
-            <button data-value="experience"><i class="mono">C</i>A product people love</button>
-            <button data-value="automation"><i class="mono">D</i>Automating the busywork</button>
+            <button data-value="speed"><i class="mono">A</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span class="lbl">Speed to market</span></button>
+            <button data-value="scale"><i class="mono">B</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="lbl">Scale and reliability</span></button>
+            <button data-value="experience"><i class="mono">C</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><span class="lbl">A product people love</span></button>
+            <button data-value="automation"><i class="mono">D</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></span><span class="lbl">Automating the busywork</span></button>
           </div>
         </div>
       </div>
@@ -160,10 +154,10 @@
         <h2 class="headline" data-say="timeline" aria-live="polite"></h2>
         <div class="after">
           <div class="choices" data-key="timeline">
-            <button data-value="6w"><i class="mono">A</i>Within 6 weeks</button>
-            <button data-value="3m"><i class="mono">B</i>In about 3 months</button>
-            <button data-value="6m"><i class="mono">C</i>Within 6 months</button>
-            <button data-value="flex"><i class="mono">D</i>When it's right</button>
+            <button data-value="6w"><i class="mono">A</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2M10 2.5h4M12 2.5V6M18.5 6.5l1.5-1.5"/></svg></span><span class="lbl">Within 6 weeks</span></button>
+            <button data-value="3m"><i class="mono">B</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M12 14h2M8 17h2"/></svg></span><span class="lbl">In about 3 months</span></button>
+            <button data-value="6m"><i class="mono">C</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V3.5"/><path d="M5 4h12l-2.5 4.25L17 12.5H5"/></svg></span><span class="lbl">Within 6 months</span></button>
+            <button data-value="flex"><i class="mono">D</i><span class="ico-wrap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="lbl">When it's right</span></button>
           </div>
         </div>
       </div>
@@ -518,7 +512,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="voice-lines.js?v=26"></script>
-<script src="app.js?v=37"></script>
+<script src="app.js?v=38"></script>
 <script src="site.js?v=37"></script>
 </body>
 </html>

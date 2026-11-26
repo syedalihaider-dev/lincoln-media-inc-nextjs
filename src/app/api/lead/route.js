@@ -55,12 +55,18 @@ export async function POST(request) {
 
   const ip = clientIp(headers);
 
-  // Bots: the hidden "website" field is filled, or the form came back impossibly fast.
-  // Answer as if it worked, so they learn nothing — and send nothing.
-  const elapsed = Number(body.elapsed);
-  if ((typeof body.website === "string" && body.website.trim()) || (Number.isFinite(elapsed) && elapsed < MIN_FILL_MS)) {
-    console.warn(`[lead] dropped as spam (ip ${ip})`);
+  // Bots: the hidden honeypot field is filled — people never see it. Answer as if it worked, so the bot
+  // learns nothing, and send nothing (logged, so a dropped lead is never invisible).
+  if (typeof body.website === "string" && body.website.trim()) {
+    console.warn(`[lead] dropped: honeypot filled (ip ${ip}, source ${String(body.source).slice(0, 20)})`);
     return reply(200, { ok: true });
+  }
+  // Impossibly fast. A person using browser autofill can get close to this, so never fake a success:
+  // ask them to send again (the second attempt is always slower than the threshold).
+  const elapsed = Number(body.elapsed);
+  if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < MIN_FILL_MS) {
+    console.warn(`[lead] held: submitted ${elapsed}ms after first focus (ip ${ip}) — asked to resend`);
+    return reply(429, { ok: false, error: "Please take a moment to check your details, then press send again." });
   }
   if (limited(ip)) return reply(429, { ok: false, error: "You've sent several messages in a short time. Please wait a few minutes, or contact us directly." });
 
@@ -100,12 +106,14 @@ export async function POST(request) {
   const mail = leadEmail({ sourceLabel: FORM_SOURCES[sourceKey], fields, meta, topic });
 
   try {
-    await sendLead({ ...mail, replyTo: data.email });
-    console.info(`[lead] sent: ${FORM_SOURCES[sourceKey]} from ${ip} (${where.country})`);
+    const sent = await sendLead({ ...mail, replyTo: data.email });
+    // SMTP acceptance (not inbox delivery): what the server took, refused, and its reply
+    console.info(`[lead] accepted by SMTP: ${FORM_SOURCES[sourceKey]} from ${ip} (${where.country}) · id ${sent.messageId} · to ${sent.accepted.join(", ")} · "${sent.response}"`);
+    if (sent.rejected.length) console.warn(`[lead] SMTP refused some recipients: ${sent.rejected.join(", ")}`);
     return reply(200, { ok: true });
   } catch (err) {
     // log the reason, never the credentials or the full error object
-    console.error(`[lead] SMTP send failed: ${err?.code || ""} ${err?.responseCode || ""} ${String(err?.message || "").slice(0, 200)}`);
+    console.error(`[lead] SMTP send failed: ${err?.code || ""} ${err?.responseCode || ""} ${String(err?.response || err?.message || "").slice(0, 200)}`);
     return reply(502, { ok: false, error: GENERIC });
   }
 }

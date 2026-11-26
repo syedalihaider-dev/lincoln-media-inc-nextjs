@@ -120,37 +120,79 @@ main { position: relative; z-index: 2; }
 .field .hint.err { color: #ff6b7a; }
 .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 720px; margin: 48px auto 0; }
 /* ---- 3D curved option slider: cards wrap around a cylinder and the sides fall back into depth ---- */
-.choices.arc { display: block; position: relative; width: min(1100px, 100vw); max-width: none; left: 50%; transform: translateX(-50%); height: 220px; margin: 40px 0 0; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.choices.arc.icons { height: 270px; }
+.choices.arc { display: block; position: relative; width: min(1100px, 100vw); max-width: none; left: 50%; transform: translateX(-50%); height: 286px; margin: 36px 0 0; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.choices.arc.icons { height: 286px; }
 .arc-track { position: absolute; inset: 0; cursor: grab; perspective: 1100px; perspective-origin: 50% 40%; transform-style: preserve-3d; }
 .choices.arc.dragging .arc-track { cursor: grabbing; }
 /* box colours follow the orb: app.js updates --accent / --accent-2 every frame */
 .step[data-step] { --n1: var(--accent); --n2: var(--accent-2); }
-.choices.arc .arc-track > button { position: absolute; left: 50%; top: 10px; width: 230px; min-height: 120px; padding: 22px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
-  font: 500 clamp(15px, 1.4vw, 17px) var(--sans); color: var(--ink); border-radius: 26px; border: 1.5px solid transparent;
-  background: linear-gradient(rgba(6, 9, 20, .82), rgba(6, 9, 20, .82)) padding-box, linear-gradient(135deg, var(--n1), var(--n2)) border-box;
-  box-shadow: 0 0 18px -6px var(--n1), inset 0 0 22px -14px var(--n2); backdrop-filter: blur(8px);
-  backface-visibility: hidden; transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .5s, box-shadow .35s, filter .35s; will-change: transform; }
-.choices.arc.dragging .arc-track > button { transition: opacity .2s, box-shadow .35s; }
-.choices.arc.icons .arc-track > button { width: 210px; min-height: 190px; }
-.choices.arc .arc-track > button i { font-style: normal; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--n1); color: var(--n1); font-size: 12px; text-shadow: 0 0 8px var(--n1); box-shadow: 0 0 12px -4px var(--n1); }
+/* Option cards — one size for every card in every question (the label never changes the box), content
+   centred: icon above the label. The label block always holds two lines, so icons line up across a group. */
+.choices.arc .arc-track > button { --card-w: 236px; --card-h: 232px; --ico: 78px;
+  position: absolute; left: 50%; top: 8px; width: var(--card-w); height: var(--card-h); min-height: 0; padding: 26px 22px; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; overflow: hidden;
+  font: 500 16px var(--sans); letter-spacing: .005em; color: var(--ink); border-radius: 24px; border: 1px solid transparent;
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--n1) 9%, transparent), transparent 62%) padding-box,
+    linear-gradient(180deg, rgba(15, 20, 38, .9), rgba(6, 9, 20, .94)) padding-box,
+    linear-gradient(160deg, color-mix(in srgb, var(--n1) 45%, transparent), rgba(238, 241, 247, .07) 42%, rgba(238, 241, 247, .05) 60%, color-mix(in srgb, var(--n2) 35%, transparent)) border-box;
+  box-shadow: 0 22px 44px -26px rgba(0, 0, 0, .95), inset 0 1px 0 rgba(255, 255, 255, .05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  backface-visibility: hidden; translate: 0 0;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), translate .45s cubic-bezier(.2,.8,.2,1), opacity .5s, box-shadow .45s, background .45s; will-change: transform; }
+.choices.arc.dragging .arc-track > button { transition: opacity .2s, box-shadow .35s, translate .35s; }
+.choices.arc.icons .arc-track > button { width: var(--card-w); min-height: 0; }
+/* A–D: the option's letter, kept as a quiet index in the corner */
+.choices.arc .arc-track > button i { position: absolute; top: 16px; left: 18px; width: auto; height: auto; border: 0; box-shadow: none; text-shadow: none; display: block;
+  font: 500 10px/1 var(--mono); letter-spacing: .18em; font-style: normal; color: var(--mute); transition: color .35s; }
+/* Selected indicator: a check badge in the opposite corner */
+.choices.arc .arc-track > button::after { content: ""; position: absolute; top: 13px; right: 13px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--n1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2303050b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+  opacity: 0; scale: .5; transition: opacity .3s, scale .45s cubic-bezier(.3,1.6,.5,1); }
+/* the card in focus */
 .choices.arc .arc-track > button.is-center, .choices.arc .arc-track > button:focus-visible { outline: none;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--n1) 60%, transparent), 0 0 34px -4px var(--n1), 0 0 70px -20px var(--n2), inset 0 0 30px -12px var(--n1); }
-.choices.arc .arc-track > button:hover { filter: brightness(1.3); }
-.choices.arc .arc-track > button.picked { background: linear-gradient(135deg, color-mix(in srgb, var(--n1) 30%, #060914), color-mix(in srgb, var(--n2) 30%, #060914)) padding-box, linear-gradient(135deg, var(--n1), var(--n2)) border-box; box-shadow: 0 0 50px -2px var(--n1), 0 0 90px -10px var(--n2); }
-.ico-wrap { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; position: relative; background: radial-gradient(circle, color-mix(in srgb, var(--n1) 22%, transparent), transparent 70%); }
-.ico-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--n1) 50%, transparent); box-shadow: 0 0 18px -6px var(--n1); }
-.ico { width: 38px; height: 38px; fill: none; stroke: var(--n1); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 4px var(--n1)) drop-shadow(0 0 10px var(--n1)); }
-.lbl { line-height: 1.3; }
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--n1) 16%, transparent), transparent 64%) padding-box,
+    linear-gradient(180deg, rgba(17, 23, 43, .92), rgba(7, 10, 22, .95)) padding-box,
+    linear-gradient(160deg, var(--n1), color-mix(in srgb, var(--n1) 22%, rgba(238, 241, 247, .1)) 45%, color-mix(in srgb, var(--n2) 70%, transparent)) border-box;
+  box-shadow: 0 28px 60px -30px color-mix(in srgb, var(--n1) 70%, transparent), 0 0 0 1px color-mix(in srgb, var(--n1) 18%, transparent), inset 0 1px 0 rgba(255, 255, 255, .07); }
+.choices.arc .arc-track > button:focus-visible { box-shadow: 0 0 0 2px var(--n1), 0 28px 60px -30px color-mix(in srgb, var(--n1) 70%, transparent); }
+/* hover: the card lifts, its border warms and the icon steps forward */
+@media (hover: hover) {
+  .choices.arc .arc-track > button:hover { translate: 0 -8px;
+    box-shadow: 0 34px 64px -30px color-mix(in srgb, var(--n1) 75%, transparent), 0 0 0 1px color-mix(in srgb, var(--n1) 30%, transparent), inset 0 1px 0 rgba(255, 255, 255, .08); }
+  .choices.arc .arc-track > button:hover .ico-wrap { scale: 1.07; background-color: color-mix(in srgb, var(--n1) 14%, transparent); }
+  .choices.arc .arc-track > button:hover .ico { translate: 0 -1px; }
+  .choices.arc .arc-track > button:hover i { color: var(--n1); }
+}
+/* selected */
+.choices.arc .arc-track > button.picked {
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--n1) 30%, transparent), transparent 70%) padding-box,
+    linear-gradient(180deg, color-mix(in srgb, var(--n1) 16%, #0b1020), color-mix(in srgb, var(--n2) 14%, #060914)) padding-box,
+    linear-gradient(160deg, var(--n1), var(--n2)) border-box;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--n1) 55%, transparent), 0 30px 70px -28px var(--n1), inset 0 1px 0 rgba(255, 255, 255, .1); }
+.choices.arc .arc-track > button.picked::after { opacity: 1; scale: 1; }
+.choices.arc .arc-track > button.picked i { color: var(--n1); }
+.choices.arc .arc-track > button.picked .ico-wrap { background-color: color-mix(in srgb, var(--n1) 24%, transparent); }
+.choices.arc .arc-track > button.picked .ico-wrap::after { border-color: var(--n1); }
+.choices.arc .arc-track > button.picked .ico { stroke: var(--ink); }
+.ico-wrap { width: var(--ico, 74px); height: var(--ico, 74px); flex: none; border-radius: 50%; display: grid; place-items: center; position: relative;
+  background: radial-gradient(circle, color-mix(in srgb, var(--n1) 18%, transparent), transparent 72%); background-color: color-mix(in srgb, var(--n1) 6%, transparent);
+  transition: scale .45s cubic-bezier(.2,.8,.2,1), background-color .35s; }
+.ico-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--n1) 42%, transparent); box-shadow: inset 0 0 16px -8px var(--n1); transition: border-color .35s; }
+.ico { width: calc(var(--ico, 74px) * .5); height: calc(var(--ico, 74px) * .5); fill: none; stroke: var(--n1); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--n1) 55%, transparent)); transition: stroke .35s, translate .45s cubic-bezier(.2,.8,.2,1); }
+.lbl { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 2.6em; line-height: 1.3; overflow-wrap: anywhere; text-wrap: balance; }
 .arc-hint { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 10px; color: var(--mute); }
 .arc-hint b { color: var(--ink); font-weight: 400; }
 .step.ready .choices.arc .arc-track > button { animation: none; }
 .step.ready .choices.arc { animation: arcIn .7s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes arcIn { from { opacity: 0; transform: translateX(-50%) translateY(24px); } }
 @media (max-width: 700px) {
-  .choices.arc { height: 210px; } .choices.arc.icons { height: 250px; }
-  .choices.arc .arc-track > button { width: 180px; padding: 18px 14px; } .choices.arc.icons .arc-track > button { width: 165px; min-height: 165px; }
-  .ico-wrap { width: 60px; height: 60px; } .ico { width: 30px; height: 30px; }
+  .choices.arc, .choices.arc.icons { height: 244px; margin-top: 28px; }
+  .choices.arc .arc-track > button { --card-w: 184px; --card-h: 200px; --ico: 64px; padding: 22px 14px; gap: 14px; font-size: 14.5px; border-radius: 20px; }
+  .choices.arc .arc-track > button i { top: 13px; left: 14px; }
+  .choices.arc .arc-track > button::after { top: 10px; right: 10px; width: 22px; height: 22px; background-size: 13px; }
 }
 .choices button { display: flex; align-items: center; gap: 16px; padding: 20px 22px; text-align: left; font-size: clamp(16px, 1.6vw, 19px); border: 1px solid var(--line); background: rgba(3,5,11,.5); backdrop-filter: blur(6px); transition: border-color .3s, background .3s, transform .3s; }
 .choices button i { font-style: normal; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--line); flex: none; }
