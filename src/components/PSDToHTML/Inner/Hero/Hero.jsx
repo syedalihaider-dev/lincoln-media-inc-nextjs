@@ -43,7 +43,7 @@ export default function Hero({ service: s }) {
           <p className={styles.headline} data-rise>{h.headline}</p>
           <p className={styles.text} data-rise>{h.text}</p>
           <div className={styles.actions} data-rise>
-            <Button href="/#contact" size="lg">{h.cta}</Button>
+            <Button href="/contact-us#contact-form" size="lg">{h.cta}</Button>
             <Button href={SITE.phoneHref} variant="text" icon="phone">{SITE.phone}</Button>
           </div>
         </div>

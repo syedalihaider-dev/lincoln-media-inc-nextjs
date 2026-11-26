@@ -47,7 +47,7 @@ export default function CTA({ data, links = [], kicker }) {
         </h2>
         <p className={styles.text} data-rise>{data.text}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your film</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your film</Button>
           <Button href={SITE.phoneHref} variant="outline" icon="phone">{SITE.phone}</Button>
         </div>
 

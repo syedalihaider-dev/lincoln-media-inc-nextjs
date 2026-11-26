@@ -5,6 +5,7 @@ import { UIUX_PAGE as d, UIUX_PATH } from "@/data/ui-ux/main";
 import { UIUX_CHILDREN } from "@/data/ui-ux/children";
 import Hero from "./Hero/Hero";
 import Statement from "./Statement/Statement";
+import { ROBOTS } from "@/config/site";
 
 // Below the fold: each section is its own chunk so the hero's code arrives first (still server-rendered)
 const Journey = dynamic(() => import("./Journey/Journey"));
@@ -70,7 +71,7 @@ export function uiuxMetadata() {
   const images = [{ url: s.image.src, width: s.image.width, height: s.image.height, alt: s.imageAlt }];
   return {
     title: { absolute: s.title }, description: s.description, keywords: s.keywords,
-    alternates: { canonical: UIUX_PATH }, robots: { index: true, follow: true },
+    alternates: { canonical: UIUX_PATH }, robots: ROBOTS,
     openGraph: { type: "website", url: UIUX_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

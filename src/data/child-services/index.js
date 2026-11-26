@@ -19,6 +19,7 @@ import PYTHON from "./python-development";
 import ANGULAR from "./angularjs-development";
 import MAINTENANCE from "./website-maintenance-services";
 import WHATSAPP from "./whatsapp-web-integration";
+import { ROBOTS } from "@/config/site";
 
 const entry = (slug, name, summary, data = null) => ({ slug, path: `/services/${slug}`, name, summary, data });
 
@@ -60,7 +61,7 @@ export function childServiceMetadata(slug) {
     description: s.seo.description,
     keywords: s.seo.keywords,
     alternates: { canonical: s.path },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: s.path, title: s.seo.title, description: s.seo.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.seo.title, description: s.seo.description, images: images?.map((i) => i.url) },
   };

@@ -1,5 +1,7 @@
 import { Poppins } from "next/font/google";
 import { SITE } from "@/data/site";
+import { ROBOTS } from "@/config/site";
+import ZendeskScript from "@/components/Common/Chat/ZendeskScript";
 import "./globals.css";
 
 // Typography: Unbounded (headings) arrives with each page's font request; Poppins (everything else) is loaded here.
@@ -13,7 +15,8 @@ export const metadata = {
   title: SITE.title,
   description: SITE.description,
   applicationName: SITE.name,
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  // NOINDEX + NOFOLLOW site-wide while siteConfig.seo.indexing is false (src/config/site.js)
+  robots: ROBOTS,
   openGraph: { type: "website", siteName: SITE.name, locale: "en_US" },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
@@ -35,7 +38,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.variable} suppressHydrationWarning>
       {/* Each page sets its own body class (e.g. "locked") and the scripts change it at runtime */}
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        {/* Live chat (Zendesk), once for every page, after the page is idle */}
+        <ZendeskScript />
+      </body>
     </html>
   );
 }

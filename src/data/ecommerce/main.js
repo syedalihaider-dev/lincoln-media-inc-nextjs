@@ -43,7 +43,7 @@ export const ECOM_PAGE = {
     kicker: "E-commerce Web Development",
     title: ["Stores", "engineered", "to sell."],
     lead: "We create online stores for simple, better and convenient shopping — conversion-obsessed builds on Shopify, Magento, WooCommerce and more, engineered to sell around the clock.",
-    primary: { label: "Start your store", href: "/#contact" },
+    primary: { label: "Start your store", href: "/contact-us#contact-form" },
     secondary: { label: "See what we build", href: "#ecom-build" },
     video: { src: "/videos/ecommerce/hangers.mp4", mobile: "/videos/ecommerce/hangers-mobile.mp4", poster: "/videos/ecommerce/hangers-poster.jpg" },
     store: STORES.maison,

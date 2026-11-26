@@ -6,6 +6,7 @@ import { UIUX_PATH } from "@/data/ui-ux/main";
 import { uiuxSiblings } from "@/data/ui-ux/children";
 import Hero from "./Hero/Hero";
 import Words from "./Words/Words";
+import { ROBOTS } from "@/config/site";
 
 const Pixel = dynamic(() => import("./Pixel/Pixel"));
 const Responsive = dynamic(() => import("./Responsive/Responsive"));
@@ -70,7 +71,7 @@ export function psdMetadata() {
   const images = [{ url: s.image.src, width: s.image.width, height: s.image.height, alt: s.imageAlt }];
   return {
     title: { absolute: s.title }, description: s.description, keywords: s.keywords,
-    alternates: { canonical: PSD_PATH }, robots: { index: true, follow: true },
+    alternates: { canonical: PSD_PATH }, robots: ROBOTS,
     openGraph: { type: "website", url: PSD_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

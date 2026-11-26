@@ -50,7 +50,7 @@ const WORDPRESS = {
     title: ["WordPress", "Development"],
     tagline: "High-quality, robust and tailor-made WordPress development services.", // (live)
     lead: "Ignite your online identity with professional WordPress website designers and developers.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
     secondary: { label: "Our WordPress expertise", href: "#expertise" },
     stage: {
       url: "yourbrand.com",
@@ -158,7 +158,7 @@ const WORDPRESS = {
     ],
     cta: {
       text: "Ready to build your WordPress experience?",
-      primary: { label: "Build your WordPress site", href: "/#contact" },
+      primary: { label: "Build your WordPress site", href: "/contact-us#contact-form" },
       secondary: { label: "See how we deliver", href: "#process" },
     },
   },
@@ -236,7 +236,7 @@ const WORDPRESS = {
     kicker: "Start your WordPress project",
     title: ["Let's create something", "exceptional."],
     text: "Reach out to our team and we'll get back to you within a day.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
     image: imgStudio, // (old site's UI/UX hero: a designer at work in the studio)
   },
 };

@@ -7,12 +7,13 @@ import ServicesApproach from "@/components/Services/ServicesApproach";
 import ServiceIndex from "@/components/Services/ServiceIndex";
 import ProcessPath from "@/components/Services/ProcessPath";
 import ServicesFinale from "@/components/Services/ServicesFinale";
+import { POSTAL_ADDRESS, ROBOTS } from "@/config/site";
 
 export const metadata = {
   title: { absolute: SERVICES_PAGE.title },
   description: SERVICES_PAGE.description,
   alternates: { canonical: "/services" },
-  robots: { index: true, follow: true },
+  robots: ROBOTS,
   openGraph: { type: "website", url: "/services", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description, siteName: SITE.name, images: [{ url: ogImage.src, width: ogImage.width, height: ogImage.height, alt: "Code open in an editor on a laptop screen" }] },
   twitter: { card: "summary_large_image", title: SERVICES_PAGE.title, description: SERVICES_PAGE.description, images: [ogImage.src] },
 };
@@ -24,7 +25,7 @@ const jsonLd = {
   url: `${SITE.url}/services`,
   telephone: SITE.phone,
   email: SITE.email,
-  address: { "@type": "PostalAddress", streetAddress: SITE.street, addressLocality: "New York", addressRegion: "NY", postalCode: "10065", addressCountry: "US" },
+  address: POSTAL_ADDRESS,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Services",

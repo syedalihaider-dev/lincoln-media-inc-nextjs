@@ -6,6 +6,7 @@ import { BRAND_PAGE as d, BRAND_PATH, BRAND_CHILDREN } from "@/data/branding/mai
 import Hero from "./Hero/Hero";
 import Perception from "./Perception/Perception";
 import Head from "./Head";
+import { ROBOTS } from "@/config/site";
 
 const Transformation = dynamic(() => import("./Transformation/Transformation"));
 const Film = dynamic(() => import("./Film/Film"));
@@ -75,7 +76,7 @@ export function brandingMetadata() {
   const images = [{ url: s.image.src, width: s.image.width, height: s.image.height, alt: s.imageAlt }];
   return {
     title: { absolute: s.title }, description: s.description, keywords: s.keywords,
-    alternates: { canonical: BRAND_PATH }, robots: { index: true, follow: true },
+    alternates: { canonical: BRAND_PATH }, robots: ROBOTS,
     openGraph: { type: "website", url: BRAND_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

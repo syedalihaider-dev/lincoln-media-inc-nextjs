@@ -11,9 +11,9 @@ const BUDGETS = ["Under $5k", "$5k – $15k", "$15k – $50k", "$50k+", "Not sur
 
 /**
  * Contact — the enquiry form.
- * Behaviour lives in public/app.js and is unchanged: it pre-fills these fields from the guided plan
- * (name, email, service, budget, message) and, on submit, opens an email to the studio and writes
- * into #formNote. So the form's id, field names and option values must stay exactly as they are.
+ * Behaviour lives in public/app.js: it pre-fills these fields from the guided plan (name, email,
+ * service, budget, message) and, on submit, posts the enquiry to /api/lead (emailed over SMTP, tagged
+ * "Homepage Contact Form") and writes the outcome into #formNote. So the form's id, field names and option values must stay exactly as they are.
  * Fields are uncontrolled on purpose, so React never overwrites what app.js fills in.
  */
 export default function Contact() {
@@ -34,6 +34,8 @@ export default function Contact() {
       </div>
 
       <form className={styles.form} id="contactForm" aria-label="Project enquiry">
+        {/* Honeypot (bots fill it; people never see it) */}
+        <input name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
         <label className={styles.field}>
           <input name="name" required autoComplete="name" placeholder=" " />
           <span>Name *</span>

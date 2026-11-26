@@ -18,7 +18,7 @@ const PHP = {
     title: ["PHP", "Development"],
     tagline: "A highly interactive, scalable and custom PHP website development company.", // (live)
     lead: "Professional PHP developers creating efficient, custom PHP applications and websites that fully meet your core business needs.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our PHP expertise", href: "#expertise" },
     stage: stage(["dusk", "bike", "ring", "house"], "Deployed to production"),
   },

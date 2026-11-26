@@ -41,7 +41,7 @@ export default function CTA({ data, links }) {
         <h2 id="ecom-cta" className={styles.title} data-title>{data.title.map((l, i) => <span key={l} className={i === data.title.length - 1 ? styles.accent : undefined}>{l} </span>)}</h2>
         <p className={styles.text} data-rise>{data.text}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start a project</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start a project</Button>
           <Button href={`mailto:${SITE.email}`} variant="outline" icon="mail">{SITE.email}</Button>
         </div>
         <nav className={styles.links} aria-label="E-commerce platforms" data-rise>

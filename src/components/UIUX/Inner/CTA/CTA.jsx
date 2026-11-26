@@ -51,7 +51,7 @@ export default function CTA({ service: s, siblings = [] }) {
         <h2 id="uxi-cta" className={styles.title}><span data-l>{c.title[0]}</span><span className={styles.em} data-l>{c.title[1]}</span></h2>
         <p className={styles.text} data-rise>{c.text}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">{c.button}</Button>
+          <Button href="/contact-us#contact-form" size="lg">{c.button}</Button>
           <Button href={SITE.phoneHref} variant="outline" size="lg" icon="phone">{SITE.phone}</Button>
         </div>
         <address className={styles.contact} data-rise><a href={`mailto:${SITE.email}`}>{SITE.email}</a><span>{SITE.street}, {SITE.locality}</span></address>

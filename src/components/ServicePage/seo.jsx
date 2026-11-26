@@ -1,4 +1,5 @@
 import { SITE } from "@/data/site";
+import { POSTAL_ADDRESS, ROBOTS } from "@/config/site";
 
 /**
  * Next.js metadata for a service page: unique title/description, canonical, Open Graph and X card.
@@ -11,7 +12,7 @@ export function serviceMetadata(path, seo) {
     description: seo.description,
     keywords: seo.keywords,
     alternates: { canonical: path },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: path, title: seo.ogTitle || seo.title, description: seo.description, siteName: SITE.name, locale: "en_US", images },
     twitter: { card: "summary_large_image", title: seo.ogTitle || seo.title, description: seo.description, images: images.map((i) => i.url) },
   };
@@ -31,7 +32,7 @@ export function serviceJsonLd({ path, name, serviceType, description, offers = [
         "@type": "Service", name, serviceType, description, url, areaServed: "US",
         provider: {
           "@type": "Organization", name: SITE.name, url: SITE.url, telephone: SITE.phone, email: SITE.email,
-          address: { "@type": "PostalAddress", streetAddress: SITE.street, addressLocality: SITE.city, addressRegion: "NY", postalCode: "10065", addressCountry: "US" },
+          address: POSTAL_ADDRESS,
         },
         ...(offers.length ? { hasOfferCatalog: { "@type": "OfferCatalog", name, itemListElement: offers.map((o) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: o.name, description: o.text } })) } } : {}),
       },

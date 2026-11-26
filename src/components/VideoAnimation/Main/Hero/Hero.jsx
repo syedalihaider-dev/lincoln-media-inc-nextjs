@@ -82,7 +82,7 @@ export default function Hero({ data }) {
         <p className={styles.lead} data-rise>{data.lead}</p>
         <p className={styles.sub} data-rise>{data.sub}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your film</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your film</Button>
           <Button href="#va-reel" variant="text" icon="down">Watch the reel</Button>
         </div>
       </div>

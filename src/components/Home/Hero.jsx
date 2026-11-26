@@ -115,7 +115,7 @@ export default function Hero() {
         <span className={styles.hair} data-hair data-keep aria-hidden="true" />
         <p className={styles.lede} data-fade>{HERO.lede}</p>
         <div className={styles.ctas} data-fade>
-          <Button href="#contact">Start a project</Button>
+          <Button href="/contact-us#contact-form">Start a project</Button>
           <Button href="#work" variant="outline" icon="down">View work</Button>
         </div>
         <div className={styles.hud} data-fade aria-hidden="true">

@@ -10,6 +10,10 @@
    font variables (public/site.css, intro-site.css, styles.css). html:root outranks their :root, so the
    same Poppins rule reaches them without editing those files. Their --display (Unbounded) is untouched. */
 html:root { --body: var(--lm-text); --mono: var(--lm-text); --sans: var(--lm-text); }
+/* No sideways scrolling anywhere: the intro's and pre-built pages' oversized decorative layers (grain,
+   scanlines, vignette, field canvas) extend past the viewport by design — clip them at the page edge.
+   (clip, unlike hidden, creates no scroll container, so sticky elements and pins keep working) */
+html { overflow-x: clip; }
 
 :root {
   --lm-ink: #03050b;
@@ -66,11 +70,23 @@ body[data-page="home"].in-site .cursor { mix-blend-mode: difference; border-colo
 #site img { display: block; max-width: 100%; }
 /* Unbounded has no italic: emphasis is carried by colour or outline, never a faked slant */
 #site em { font-style: normal; }
-#site :focus-visible {
-  outline: 1px solid var(--lm-accent);
-  outline-offset: 4px;
+/* Keyboard focus. Links, buttons and other focusable controls get a clear accent ring (it follows
+   their border radius); mouse focus shows nothing. Text fields, selects and anything marked
+   data-focus="self" draw their own focus state (e.g. the contact form's border and floating label),
+   so they never get the ring on top. */
+#site a:focus-visible,
+#site button:focus-visible,
+#site summary:focus-visible,
+#site [role="button"]:focus-visible,
+#site [tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--lm-accent);
+  outline-offset: 3px;
 }
-#site a:focus:not(:focus-visible), #site button:focus:not(:focus-visible) { outline: none; }
+#site input:focus-visible,
+#site textarea:focus-visible,
+#site select:focus-visible,
+#site [data-focus="self"]:focus-visible { outline: none; }
+#site :focus:not(:focus-visible) { outline: none; }
 
 /* Masked lines produced by SplitText (RevealText) */
 .lm-line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }

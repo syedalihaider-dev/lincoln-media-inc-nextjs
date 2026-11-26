@@ -21,7 +21,7 @@ export default function ServiceFAQ({ data }) {
         <SectionHead kicker={data.kicker} title={data.title} id="faq-title" />
         <p className={styles.ask}>Something else on your mind? Speak to an expert.</p>
         <div className={styles.sideActions}>
-          <ServiceButton href="/#contact">Ask a question</ServiceButton>
+          <ServiceButton href="/contact-us#contact-form">Ask a question</ServiceButton>
           <ServiceButton href={SITE.phoneHref} variant="text" icon="phone">{SITE.phone}</ServiceButton>
         </div>
       </div>

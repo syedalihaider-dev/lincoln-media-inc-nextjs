@@ -10,7 +10,7 @@ import Menu from "./Menu";
 import styles from "./Header.module.css";
 
 // Homepage sections → the nav item they belong to
-const NAV_KEY = { home: "#home", services: "/services", work: "/case-studies", launches: "/case-studies", contact: "#contact", cta: "#contact" };
+const NAV_KEY = { home: "#home", services: "/services", work: "/case-studies", launches: "/case-studies", contact: "/contact-us#contact-form", cta: "/contact-us#contact-form" };
 const EASE = [0.16, 1, 0.3, 1];
 
 // On other pages (base="/") the homepage anchors become links back to the homepage, e.g. "/#work"
@@ -140,7 +140,7 @@ export default function Header({ inSite, active, base = "", current = null }) {
                           <p className={styles.megaText}>{SERVICES_PAGE.promise}</p>
                           <div className={styles.megaActions}>
                             <Button href="/services" size="sm" onClick={() => setMega(false)}>All services</Button>
-                            <Button href="/#contact" size="sm" variant="text" onClick={() => setMega(false)}>{SERVICES_PAGE.expert}</Button>
+                            <Button href="/contact-us#contact-form" size="sm" variant="text" onClick={() => setMega(false)}>{SERVICES_PAGE.expert}</Button>
                           </div>
                         </motion.div>
                         <div className={styles.megaGrid}>

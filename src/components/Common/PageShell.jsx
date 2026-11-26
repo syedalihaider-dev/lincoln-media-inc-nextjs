@@ -36,6 +36,8 @@ export default function PageShell({ current, children }) {
     const el = typeof target === "string" ? (target === "#top" ? 0 : document.querySelector(target)) : target;
     if (el == null) return;
     const l = lenisRef.current;
+    // (both Lenis and scrollIntoView honour the target's CSS scroll-margin-top — e.g. the contact
+    // form's clearance under the fixed header)
     if (l) l.scrollTo(el, instant ? { immediate: true, force: true } : { duration: 1.5, force: true });
     else if (typeof el === "number") window.scrollTo({ top: el, behavior: instant ? "auto" : "smooth" });
     else el.scrollIntoView({ behavior: instant ? "auto" : "smooth" });
@@ -69,25 +71,43 @@ export default function PageShell({ current, children }) {
     const refresh = () => ScrollTrigger.refresh();
     window.addEventListener("load", refresh);
     cleanups.push(() => window.removeEventListener("load", refresh));
-    // Arriving with a hash (e.g. /about-us#values) — jump there once the layout has settled
-    if (location.hash.length > 1) {
-      const el = document.getElementById(location.hash.slice(1));
-      if (el) setTimeout(() => scrollTo(el, true), 350);
+    // Arriving with a hash (e.g. /about-us#values) — jump there once the layout has settled.
+    // A page that took its fragment off while parsing (window.__lmGlide — the contact form) gets a
+    // smooth glide from the top instead, and the fragment back in the address bar once it's there.
+    const glide = window.__lmGlide;
+    const hash = glide || location.hash;
+    if (hash.length > 1) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) {
+        const t = setTimeout(() => {
+          scrollTo(el, !glide);
+          if (glide) { delete window.__lmGlide; history.replaceState(null, "", hash); }
+        }, glide ? 600 : 350);
+        cleanups.push(() => clearTimeout(t));
+      }
     }
     return () => cleanups.forEach((f) => f());
   }, [ready, scrollTo]);
 
-  // In-page anchors glide through the smooth scroller
+  // In-page anchors glide through the smooth scroller — including links to this same page with a
+  // fragment (e.g. "/contact-us#contact-form" clicked on /contact-us), which then don't reload
   useEffect(() => {
     const onClick = (e) => {
-      const a = e.target.closest?.('a[href^="#"]');
-      if (!a) return;
-      const id = a.getAttribute("href");
-      if (id.length < 2) return;
-      const el = id === "#top" ? 0 : document.querySelector(id);
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target.closest?.("a[href]");
+      if (!a || (a.target && a.target !== "_self")) return;
+      const raw = a.getAttribute("href");
+      let id = raw.startsWith("#") ? raw : null;
+      if (!id) {
+        const url = new URL(a.href, location.href);
+        if (url.origin === location.origin && url.pathname === location.pathname && url.hash.length > 1) id = url.hash;
+      }
+      if (!id || id.length < 2) return;
+      const el = id === "#top" ? 0 : document.getElementById(id.slice(1));
       if (el == null) return;
       e.preventDefault();
       scrollTo(el);
+      if (id !== "#top" && !raw.startsWith("#")) history.replaceState(null, "", id);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

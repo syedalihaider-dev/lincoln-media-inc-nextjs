@@ -33,7 +33,7 @@ export const MOBILE_PAGE = {
     title: ["Mobile App", "Development"],
     tagline: "High performance mobile apps for your business.", // (live)
     lead: "Custom apps that engage your audience, win customers and build a brand people recognise — native and cross-platform, for iOS and Android.", // (live hero + repo)
-    primary: { label: "Start your app", href: "/#contact" },
+    primary: { label: "Start your app", href: "/contact-us#contact-form" },
     notes: [
       { kind: "push", app: "Yourbrand", title: "Your courier is 5 minutes away", text: "Marco is on Madison Ave with your order." },
       { kind: "code", file: "AddToBag.swift", line: 'Button("Add to bag") { cart.add(item) }' },
@@ -201,7 +201,7 @@ export const MOBILE_PAGE = {
     kicker: "Start your app",
     title: ["Turn your app idea", "into a digital product."],
     text: "Tell us what you want to build. Reach out to our team and we'll get back to you within a day.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
     image: imgHero,
     imageAlt: "A hand holding a phone showing a clean app dashboard",
   },

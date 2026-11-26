@@ -18,7 +18,7 @@ const ENTERPRISE = {
     title: ["Enterprise", "Development"],
     tagline: "Innovative enterprise web applications for your business.", // (live)
     lead: "We'll help you become a lasting success in the global arena by re-engineering solutions.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our enterprise expertise", href: "#expertise" },
     stage: stage(["towers", "dash", "london", "meeting"], "Report generated"),
   },

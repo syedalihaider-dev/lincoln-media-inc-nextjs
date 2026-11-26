@@ -3,6 +3,7 @@
 import { SITE } from "@/data/site";
 import explainer from "./explainer-videos";
 import whiteboard from "./whiteboard-videos-animation";
+import { ROBOTS } from "@/config/site";
 
 const PAGES = { [explainer.slug]: explainer, [whiteboard.slug]: whiteboard };
 
@@ -18,7 +19,7 @@ export function videoInnerMetadata(slug) {
   const images = [{ url: s.image, width: 1280, height: 720, alt: s.imageAlt }];
   return {
     title: { absolute: s.title }, description: s.description, keywords: s.keywords,
-    alternates: { canonical: path }, robots: { index: true, follow: true },
+    alternates: { canonical: path }, robots: ROBOTS,
     openGraph: { type: "website", url: path, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

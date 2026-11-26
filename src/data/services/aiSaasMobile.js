@@ -33,7 +33,7 @@ export const AI_PAGE = {
     title: ["Products that think,", "platforms that scale,", "apps people keep."],
     text: "Custom AI that does real work inside your business, SaaS platforms built to onboard, bill and scale, and native apps for iOS and Android that feel effortless.",
     chain: ["Intelligent products", "SaaS platforms", "Mobile apps", "Scalable experiences"],
-    primary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "Start a project", href: "/contact-us#contact-form" },
     secondary: { label: "See what we build", href: "#build" },
   },
 
@@ -184,7 +184,7 @@ export const AI_PAGE = {
     kicker: "Start a project",
     title: ["Let's build the product", "your market is waiting for."],
     text: "Tell us what you're building. We'll come back with a plan, a team and a timeline.",
-    primary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "Start a project", href: "/contact-us#contact-form" },
   },
 };
 

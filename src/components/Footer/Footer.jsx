@@ -35,7 +35,7 @@ export default function Footer() {
       <div className={styles.band} data-col>
         <p className={styles.bandTitle}>Have a project in mind?</p>
         <div className={styles.bandActions}>
-          <Button href="/#contact">Start a project</Button>
+          <Button href="/contact-us#contact-form">Start a project</Button>
           <Button href={SITE.phoneHref} variant="outline" icon="phone">{SITE.phone}</Button>
         </div>
       </div>

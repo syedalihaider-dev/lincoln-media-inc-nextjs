@@ -23,7 +23,7 @@ export const PSD_PAGE = {
     sub: "PSD to Responsive HTML",
     lead: "Your Photoshop, Figma or XD design, hand-coded into clean, responsive HTML and CSS — pixel-perfect, tested in every browser and built to load fast.",
     flow: ["Design file", "Code", "Responsive website", "Production"],
-    primary: { label: "Convert my design", href: "/#contact" },
+    primary: { label: "Convert my design", href: "/contact-us#contact-form" },
   },
   words: { kicker: "Design becomes reality", words: ["Design", "Code", "Experience"], text: ["A layer in a design file.", "Semantic, hand-written markup.", "A page people use on any screen."] },
   pixel: {
@@ -119,7 +119,7 @@ export const PSD_PAGE = {
     kicker: "Start your build",
     title: ["Turn your design into", "a high-quality website."],
     text: "Send us your design files. We'll review them and come back with a plan and timeline — within a day.",
-    primary: { label: "Convert my design", href: "/#contact" },
+    primary: { label: "Convert my design", href: "/contact-us#contact-form" },
     image: imgDev,
   },
 };

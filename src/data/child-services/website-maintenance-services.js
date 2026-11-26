@@ -18,7 +18,7 @@ const MAINTENANCE = {
     title: ["Website", "Maintenance"],
     tagline: "Hand over the daily running and maintenance of your website to our support team.", // (live)
     lead: "From website security to migration, plugin installation to customisation, we do everything.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "What we maintain", href: "#expertise" },
     stage: stage(["empire", "ring", "bike", "house"], "All updates applied"),
   },

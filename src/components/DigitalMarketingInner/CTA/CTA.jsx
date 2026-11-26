@@ -52,7 +52,7 @@ export default function CTA({ service, siblings = [] }) {
           </h2>
           <p className={styles.text} data-rise>{c.text}</p>
           <div className={styles.actions} data-rise>
-            <Button href="/#contact" size="lg">{c.button || "Start a project"}</Button>
+            <Button href="/contact-us#contact-form" size="lg">{c.button || "Start a project"}</Button>
             <Button href={SITE.phoneHref} variant="outline" size="lg" icon="phone">{SITE.phone}</Button>
           </div>
           <address className={styles.contact} data-rise>

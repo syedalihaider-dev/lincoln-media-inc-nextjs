@@ -1166,13 +1166,43 @@
   const tickClock = () => { clock.textContent = "NYC " + new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false }); };
   tickClock(); setInterval(tickClock, 1000);
 
-  $("#contactForm").addEventListener("submit", (e) => {
+  // The enquiry goes to the site's lead endpoint (/api/lead → SMTP), tagged as the homepage form
+  const contactForm = $("#contactForm");
+  let formStarted = 0, formSending = false;
+  contactForm.addEventListener("focusin", () => { if (!formStarted) formStarted = Date.now(); });
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (formSending) return;
+    const note = $("#formNote");
     const d = Object.fromEntries(new FormData(e.target));
-    const body = `Name: ${d.name}\nEmail: ${d.email}\nCompany / Brand: ${d.company}\nService: ${d.service}\nBudget: ${d.budget}\n\n${d.message}`;
-    location.href = `mailto:sales@thelincolnmedia.com?subject=${encodeURIComponent("New project — " + d.service)}&body=${encodeURIComponent(body)}`;
-    $("#formNote").textContent = "Opening your email app…";
-    sfx.chime();
+    const submitBtn = e.target.querySelector('[type="submit"]');
+    formSending = true;
+    if (submitBtn) submitBtn.disabled = true;
+    note.textContent = "Sending your enquiry…";
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source: "homepage",
+          pageUrl: location.href,
+          elapsed: formStarted ? Date.now() - formStarted : null,
+          website: d.website || "",
+          fields: { name: d.name, email: d.email, company: d.company || "", service: d.service, budget: d.budget, message: d.message },
+        }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || "");
+      note.textContent = "Thank you — your enquiry has reached our team. We'll be in touch shortly.";
+      e.target.reset();
+      formStarted = 0;
+      sfx.chime();
+    } catch (err) {
+      note.textContent = err.message || "Something went wrong while sending your message. Please try again or contact us directly.";
+    } finally {
+      formSending = false;
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
   $("#year").textContent = new Date().getFullYear();
 

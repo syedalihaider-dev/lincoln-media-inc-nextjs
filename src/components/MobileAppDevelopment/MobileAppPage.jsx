@@ -5,6 +5,7 @@ import { MOBILE_PAGE as d, MOBILE_PATH, MOBILE_CHILDREN } from "@/data/mobile-ap
 import Hero from "./Hero/Hero";
 import AppExperience from "./AppExperience/AppExperience";
 import WhatWeBuild from "./WhatWeBuild/WhatWeBuild";
+import { ROBOTS } from "@/config/site";
 
 // Below the fold: split into their own chunks so the hero's code arrives first (still server-rendered)
 const ProductJourney = dynamic(() => import("./ProductJourney/ProductJourney"));
@@ -89,7 +90,7 @@ export function mobileAppMetadata() {
     description: s.description,
     keywords: s.keywords,
     alternates: { canonical: MOBILE_PATH },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: MOBILE_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

@@ -1,0 +1,35 @@
+/* The studio — the city, then the address laid across it. */
+.studio { position: relative; padding: 40px var(--lm-gutter) 140px; background: #070b14; color: var(--lm-paper); overflow: clip; }
+
+.fig { position: relative; margin: 0; height: min(78vh, 760px); min-height: 420px; overflow: hidden; border-radius: 24px; }
+.pic { position: absolute; inset: -8% 0; will-change: transform; }
+.pic img { object-fit: cover; }
+.fig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 11, 20, 0) 40%, rgba(7, 11, 20, 0.75) 100%); }
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 100%);
+  margin: -160px 0 0 clamp(0px, 5vw, 80px);
+  padding: clamp(26px, 3.4vw, 48px);
+  border-radius: 22px;
+  background: #0b1120;
+  box-shadow: 0 0 0 1px rgba(238, 241, 247, 0.08), 0 40px 90px rgba(0, 0, 0, 0.5);
+  will-change: transform;
+}
+.kicker { font: 500 12px/1.3 var(--lm-text); letter-spacing: 0.24em; text-transform: uppercase; color: var(--lm-accent); }
+.title { margin: 14px 0 0; font: 800 clamp(26px, 3vw, 46px)/1.02 var(--lm-display); text-transform: uppercase; letter-spacing: -0.02em; }
+.address { margin-top: 22px; font: 400 clamp(16px, 1.3vw, 19px)/1.65 var(--lm-text); font-style: normal; color: rgba(238, 241, 247, 0.86); }
+.meta { display: flex; flex-wrap: wrap; gap: 16px 40px; margin: 26px 0 0; padding-top: 22px; border-top: 1px solid rgba(238, 241, 247, 0.12); }
+.meta dt { font: 500 11px/1.3 var(--lm-text); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+.meta dd { margin: 6px 0 0; font: 500 15px/1.4 var(--lm-text); font-variant-numeric: tabular-nums; }
+.meta a { border-bottom: 1px solid rgba(54, 228, 208, 0.45); transition: color 0.25s; }
+.meta a:hover { color: var(--lm-accent); }
+.social { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; margin-top: 26px; }
+.socialLabel { font: 500 12px/1.3 var(--lm-text); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(238, 241, 247, 0.55); }
+
+@media (max-width: 640px) {
+  .studio { padding: 20px 14px 100px; }
+  .fig { height: 62vh; min-height: 360px; border-radius: 20px; }
+  .card { margin: -90px 10px 0; width: auto; }
+}

@@ -40,7 +40,7 @@ export default function CTA({ data, siblings }) {
         </h2>
         <p className={styles.text} data-rise>{data.text}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your video</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your video</Button>
           <Button href={SITE.phoneHref} variant="text" icon="phone">{SITE.phone}</Button>
         </div>
         <nav className={styles.more} aria-label="More from Video & Animation" data-rise>

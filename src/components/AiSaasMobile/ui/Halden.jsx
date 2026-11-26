@@ -326,7 +326,7 @@ function Assistant() {
       <div className={s.aBar}><span>‹ Job</span><span className={s.muted}>Report</span></div>
       <div className={s.voice}>
         <span className={s.rec}><Ic n="mic" /></span>
-        <div className={s.wave}>{Array.from({ length: 34 }, (_, i) => <i key={i} style={{ "--v": 0.25 + Math.abs(Math.sin(i * 1.7)) * 0.75 }} />)}</div>
+        <div className={s.wave}>{Array.from({ length: 34 }, (_, i) => <i key={i} style={{ "--v": (0.25 + Math.abs(Math.sin(i * 1.7)) * 0.75).toFixed(3) }} />)}</div>
         <span className={s.muted}>0:24</span>
       </div>
       <div className={s.bubble}><span className={s.aiH}><Ic n="bolt" className={s.icAcc} /> Draft report</span>

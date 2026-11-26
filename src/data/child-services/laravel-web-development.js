@@ -18,7 +18,7 @@ const LARAVEL = {
     title: ["Laravel", "Development"],
     tagline: "Robust products on Laravel, developed cost-effectively for start-ups and enterprises.", // (live)
     lead: "Expert Laravel website programmers building high-performance, user-friendly web applications.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Laravel expertise", href: "#expertise" },
     stage: stage(["dusk", "bike", "house", "ring"], "Migration complete"),
   },

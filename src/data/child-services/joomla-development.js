@@ -18,7 +18,7 @@ const JOOMLA = {
     title: ["Joomla", "Development"],
     tagline: "Joomla development solutions for artistically pure and rich websites.", // (live)
     lead: "Our Joomla website developers and designers create aesthetic websites that are scalable and easy to maintain.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Joomla expertise", href: "#expertise" },
     stage: stage(["empire", "house", "ring", "london"], "Article published"),
   },

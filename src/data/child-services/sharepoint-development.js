@@ -18,7 +18,7 @@ const SHAREPOINT = {
     title: ["SharePoint", "Development"],
     tagline: "End-to-end SharePoint development and custom SharePoint solutions.", // (live)
     lead: "We help you run your business more efficiently with user-friendly, rich, efficient and secure SharePoint applications.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our SharePoint expertise", href: "#expertise" },
     stage: stage(["empire", "meeting", "towers", "team"], "Document shared"),
   },

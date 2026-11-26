@@ -41,7 +41,7 @@ export default function CTA({ data, links }) {
         </h2>
         <p className={styles.text} data-rise>{data.text}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your brand</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your brand</Button>
           <Button href={`mailto:${SITE.email}`} variant="outline" icon="mail">{SITE.email}</Button>
         </div>
         <nav className={styles.links} aria-label="Branding services" data-rise>

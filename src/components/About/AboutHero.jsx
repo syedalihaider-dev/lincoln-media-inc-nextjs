@@ -78,7 +78,7 @@ export default function AboutHero() {
           <div data-wipe><dt>City</dt><dd>{SITE.locality}</dd></div>
         </dl>
         <div className={styles.actions} data-wipe>
-          <Button href="/#contact">Start a project</Button>
+          <Button href="/contact-us#contact-form">Start a project</Button>
           <Button href="#story" variant="outline" icon="down">Our story</Button>
         </div>
       </div>

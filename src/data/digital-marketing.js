@@ -41,7 +41,7 @@ export const DM_PAGE = {
     title: ["Digital Marketing", "that moves business forward"],
     lead: "Bespoke, multi-channel campaigns for businesses big and small — strategy, creativity, data and performance working as one, so attention turns into revenue.", // (live intro, restructured)
     pillars: ["Strategy", "Creativity", "Data", "Performance"],
-    primary: { label: "Plan my growth", href: "/#contact" },
+    primary: { label: "Plan my growth", href: "/contact-us#contact-form" },
   },
 
   attention: {
@@ -202,7 +202,7 @@ export const DM_PAGE = {
     kicker: "Grow with purpose",
     title: ["Ready to turn attention", "into growth?"],
     text: "Tell us where you want to grow. Reach out to our team and we'll get back to you within a day.", // (live CTA)
-    primary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "Start a project", href: "/contact-us#contact-form" },
     image: imgLaptop,
   },
 };

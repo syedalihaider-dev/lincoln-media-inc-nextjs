@@ -98,7 +98,7 @@ export default function WorkShowcase() {
           ))}
           <div className={styles.outro}>
             <p className={styles.outroText}>Eight brands, eight different problems. <em>Yours could be next.</em></p>
-            <Button href="#contact">Start a project</Button>
+            <Button href="/contact-us#contact-form">Start a project</Button>
           </div>
         </div>
         <div className={styles.hud} aria-hidden="true">

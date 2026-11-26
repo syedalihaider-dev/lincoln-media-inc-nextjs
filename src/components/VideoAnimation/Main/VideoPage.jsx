@@ -6,6 +6,7 @@ import { VIDEO_PAGE as d, VIDEO_PATH, VIDEO_CHILDREN } from "@/data/video-animat
 import Head from "../kit/Head";
 import Hero from "./Hero/Hero";
 import Motion from "./Motion/Motion";
+import { POSTAL_ADDRESS, ROBOTS } from "@/config/site";
 
 const Reel = dynamic(() => import("./Reel/Reel"));
 const Formats = dynamic(() => import("./Formats/Formats"));
@@ -37,7 +38,7 @@ export default function VideoPage() {
     "@graph": [
       {
         "@type": "Service", name: "Video Production & Animation", serviceType: "Video production and animation studio", description: d.seo.description, url, areaServed: "US",
-        provider: { "@type": "Organization", name: SITE.name, url: SITE.url, telephone: SITE.phone, email: SITE.email, address: { "@type": "PostalAddress", streetAddress: SITE.street, addressLocality: SITE.city, addressRegion: "NY", postalCode: "10065", addressCountry: "US" } },
+        provider: { "@type": "Organization", name: SITE.name, url: SITE.url, telephone: SITE.phone, email: SITE.email, address: POSTAL_ADDRESS },
         hasOfferCatalog: { "@type": "OfferCatalog", name: "Video & animation services", itemListElement: d.formats.items.map((f) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: f.name, description: f.text, ...(f.href ? { url: `${SITE.url}${f.href}` } : {}) } })) },
       },
       { "@type": "BreadcrumbList", itemListElement: [
@@ -76,7 +77,7 @@ export function videoMetadata() {
   const images = [{ url: s.image, width: 1280, height: 720, alt: s.imageAlt }];
   return {
     title: { absolute: s.title }, description: s.description, keywords: s.keywords,
-    alternates: { canonical: VIDEO_PATH }, robots: { index: true, follow: true },
+    alternates: { canonical: VIDEO_PATH }, robots: ROBOTS,
     openGraph: { type: "website", url: VIDEO_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

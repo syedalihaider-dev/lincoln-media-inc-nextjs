@@ -69,7 +69,7 @@ export default function ServicesFinale() {
           <h2 id="finale-title" className={styles.title} data-rise>{SERVICES_PAGE.closing}</h2>
           <p className={styles.promise} data-rise>{SERVICES_PAGE.promise}</p>
           <div className={styles.buttons} data-rise>
-            <Button href="/#contact" size="lg">{SERVICES_PAGE.expert}</Button>
+            <Button href="/contact-us#contact-form" size="lg">{SERVICES_PAGE.expert}</Button>
             <Button href={SITE.phoneHref} variant="outline" size="lg" icon="phone">{SITE.phone}</Button>
           </div>
           <div data-rise><Button href={`mailto:${SITE.email}`} variant="text">{SITE.email}</Button></div>

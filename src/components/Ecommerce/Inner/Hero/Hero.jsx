@@ -61,7 +61,7 @@ export default function Hero({ data, store }) {
         <div className={styles.leadCol}>
           <p className={styles.lead} data-rise>{data.lead}</p>
           <div className={styles.actions} data-rise>
-            <Button href="/#contact" size="lg">Start a project</Button>
+            <Button href="/contact-us#contact-form" size="lg">Start a project</Button>
             <Button href={SITE.phoneHref} variant="text" icon="phone">{SITE.phone}</Button>
           </div>
         </div>

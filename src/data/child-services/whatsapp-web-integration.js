@@ -18,7 +18,7 @@ const WHATSAPP = {
     title: ["WhatsApp", "Integration"],
     tagline: "WhatsApp for business — to drive sales and offer round-the-clock support.", // (live)
     lead: "Leverage the world's most popular text and voice messaging service for your prospects and customers.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "What we integrate", href: "#expertise" },
     stage: stage(["dusk", "ring", "house", "london"], "New WhatsApp message"),
   },

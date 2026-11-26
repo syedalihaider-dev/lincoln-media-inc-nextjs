@@ -23,7 +23,7 @@ export const UIUX_PAGE = {
     title: ["UI/UX", "Design"],
     lead: "Experiences for websites and apps that people understand at a glance and enjoy using — researched, designed, prototyped and tested by one team, with your business goals built in.",
     stages: ["Research", "UX", "Interface", "Interaction", "Product"],
-    primary: { label: "Start a design project", href: "/#contact" },
+    primary: { label: "Start a design project", href: "/contact-us#contact-form" },
   },
   statement: {
     kicker: "Design is the experience",
@@ -122,7 +122,7 @@ export const UIUX_PAGE = {
     kicker: "Start designing",
     title: ["Design an experience", "people remember."],
     text: "Tell us about your product and the people who use it. We'll come back with how we'd approach it — within a day.",
-    primary: { label: "Start a design project", href: "/#contact" },
+    primary: { label: "Start a design project", href: "/contact-us#contact-form" },
     image: imgStudio,
   },
 };

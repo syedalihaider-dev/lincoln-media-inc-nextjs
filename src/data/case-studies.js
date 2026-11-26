@@ -70,7 +70,7 @@ export const CS_PAGE = {
     kicker: "Start a project",
     title: "Yours could be next.",
     text: "Eight brands, eight different problems. Tell us about yours.",
-    primary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "Start a project", href: "/contact-us#contact-form" },
     secondary: { label: "Get your AI build plan", href: "/" },
     video: { src: "/videos/nyc-night.mp4", mobileSrc: "/videos/nyc-night-mobile.mp4", poster: "/videos/nyc-night-poster.jpg" },
   },

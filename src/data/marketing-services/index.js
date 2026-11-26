@@ -21,6 +21,7 @@ import CONTENT from "./content-marketing";
 import ORM from "./online-reputation-management";
 import ASO from "./app-store-optimization";
 import PR from "./public-relation-firm";
+import { ROBOTS } from "@/config/site";
 
 const entry = (slug, name, short, data) => ({ slug, path: `/services/${slug}`, name, short, data });
 
@@ -57,7 +58,7 @@ export function marketingServiceMetadata(slug) {
     description: s.seo.description,
     keywords: s.seo.keywords,
     alternates: { canonical: s.path },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: s.path, title: s.seo.title, description: s.seo.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.seo.title, description: s.seo.description, images: images.map((i) => i.url) },
   };

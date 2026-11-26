@@ -31,7 +31,7 @@ export default function FAQ({ data }) {
         <Head kicker={data.kicker} title={data.title} id="afaq-title" />
         <p>Can't see your question?</p>
         <div className={styles.ask}>
-          <Button href="/#contact" size="sm">Ask us</Button>
+          <Button href="/contact-us#contact-form" size="sm">Ask us</Button>
           <Button href={SITE.phoneHref} size="sm" variant="text" icon="phone">{SITE.phone}</Button>
         </div>
       </div>

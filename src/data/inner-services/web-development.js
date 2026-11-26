@@ -40,7 +40,7 @@ const WEB_DEVELOPMENT = {
     title: ["Web", "Development"],
     tagline: "Bring the digital vision of your brand to life with a fully-functional, responsive website.", // (live)
     lead: "Fast, scalable websites and platforms on the stack that fits your business — from CMS builds to enterprise systems.", // (repo)
-    primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
     secondary: { label: "What we build", href: "#build" },
     marquee: ["WordPress", "SharePoint", "Sitecore", "Drupal", "Laravel", "PHP", "ASP.NET", "Python", "AngularJS", "Joomla"], // (live)
     // drawn into the 3D code panel — decorative, no claims
@@ -192,7 +192,7 @@ const WEB_DEVELOPMENT = {
     kicker: "Start a project",
     title: ["Let's build something", "worth experiencing."],
     text: "Reach out to our team and we'll get back to you within a day.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
     image: imgGlow,
   },
 };

@@ -21,16 +21,6 @@
   }
   const year = $("#year"); if (year) year.textContent = new Date().getFullYear();
 
-  // Contact form on inner pages opens the visitor's email app
-  const form = $("#contactForm");
-  if (form) form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const d = Object.fromEntries(new FormData(form));
-    const body = `Name: ${d.name}\nEmail: ${d.email}\nCompany / Brand: ${d.company || ""}\nService: ${d.service}\nBudget: ${d.budget}\n\n${d.message}`;
-    location.href = `mailto:sales@thelincolnmedia.com?subject=${encodeURIComponent("New project — " + d.service)}&body=${encodeURIComponent(body)}`;
-    const note = $("#formNote"); if (note) note.textContent = "Opening your email app…";
-  });
-
   if (!window.THREE) return;
   const canvas = $("#field");
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });

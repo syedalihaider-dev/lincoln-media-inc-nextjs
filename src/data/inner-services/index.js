@@ -4,6 +4,7 @@
 // the live site's (lincolnmediainc.com/services/<slug>); see MEGA_MENU in src/data/service-categories.js.
 import { SITE } from "@/data/site";
 import WEB_DEVELOPMENT from "./web-development";
+import { ROBOTS } from "@/config/site";
 
 export const INNER_SERVICES = {
   [WEB_DEVELOPMENT.slug]: WEB_DEVELOPMENT,
@@ -19,7 +20,7 @@ export function innerServiceMetadata(slug) {
     title: { absolute: s.seo.title },
     description: s.seo.description,
     alternates: { canonical: s.path },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: s.path, title: s.seo.title, description: s.seo.description, siteName: SITE.name, images: s.seo.image ? [{ url: s.seo.image.src, width: s.seo.image.width, height: s.seo.image.height, alt: s.seo.imageAlt }] : undefined },
     twitter: { card: "summary_large_image", title: s.seo.title, description: s.seo.description, images: s.seo.image ? [s.seo.image.src] : undefined },
   };

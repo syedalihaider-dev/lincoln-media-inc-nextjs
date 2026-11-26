@@ -65,7 +65,7 @@ export default function AboutCTA() {
       <div className={styles.actions} data-actions>
         <p className={styles.text} data-rise>{ABOUT_CTA.text}</p>
         <div className={styles.buttons} data-rise>
-          <Button href="/#contact" size="lg">Start a project</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start a project</Button>
           <Button href="/" variant="outline" size="lg">Get your AI build plan</Button>
         </div>
         <ul className={styles.direct} data-rise>

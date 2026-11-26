@@ -45,7 +45,7 @@ export default function Technology({ data, platform }) {
       </div>
       <div className={styles.end}>
         <p>Not sure which of these your store needs?</p>
-        <Button href="/#contact" size="md">Ask our {platform} team</Button>
+        <Button href="/contact-us#contact-form" size="md">Ask our {platform} team</Button>
       </div>
     </section>
   );

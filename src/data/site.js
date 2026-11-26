@@ -1,36 +1,29 @@
-// Business information. Source of truth: this site's existing pages (header, footer, contact form).
+import { siteConfig, phoneDisplay, phoneHref, whatsappHref } from "@/config/site";
+
+// Business information — everything comes from the single source of truth, src/config/site.js.
+// SITE keeps the shape the components have always used (display-ready strings and hrefs).
+const { contact, address } = siteConfig;
 export const SITE = {
-  name: "The Lincoln Media",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://thelincolnmedia.com").replace(/\/$/, ""),
-  email: "sales@thelincolnmedia.com",
-  phone: "+1-332-222-3984",
-  phoneHref: "tel:+13322223984",
-  whatsapp: "https://wa.me/13322223984",
-  street: "667 Madison Ave, Floor 4&5",
-  locality: "New York, NY 10065",
-  city: "New York",
-  established: 2012,
+  name: siteConfig.name,
+  url: siteConfig.url,
+  email: contact.email,
+  phone: phoneDisplay,
+  phoneHref,
+  whatsapp: whatsappHref,
+  street: address.street,
+  locality: `${address.city}, ${address.region} ${address.postalCode}`,
+  city: address.city,
+  region: address.region,
+  postalCode: address.postalCode,
+  established: siteConfig.established,
   title: "The Lincoln Media — Build What's Next",
   description:
     "The Lincoln Media is a New York studio building AI systems, SaaS platforms and mobile apps. Tell our guide what you're building and get a personal build plan.",
 };
 
-// The studio's social profiles — exactly the links the reference site (thelincolnmedia.com) shows in its
-// header and footer. It has no YouTube channel link (its YouTube tile points nowhere), so none is listed here.
-export const SOCIAL = [
-  { key: "facebook", label: "Facebook", href: "https://www.facebook.com/thelincolnmedia" },
-  { key: "instagram", label: "Instagram", href: "https://www.instagram.com/thelincolnmedia_/" },
-  { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/the-lincoln-media/" },
-  { key: "x", label: "X", href: "https://x.com/lincolnmedia_1" },
-  { key: "pinterest", label: "Pinterest", href: "https://www.pinterest.com/thelincolnmedia_/" },
-  { key: "quora", label: "Quora", href: "https://www.quora.com/profile/The-Lincoln-Media" },
-];
-
-// Live chat. The reference site runs Zendesk Chat with this widget key; the chat panel
-// (Common/Chat) loads it only when a visitor asks for live chat. Swap provider/key here to change it —
-// the panel calls the provider through Common/Chat/providers.js, so the design doesn't change.
-// Set provider to null to hide the live-chat option.
-export const CHAT = { provider: "zendesk", key: "4338bf84-3cf8-46ef-9cd1-996399dc7b9d" };
+// The studio's social profiles and the live-chat provider (src/config/site.js)
+export const SOCIAL = siteConfig.social;
+export const CHAT = siteConfig.chat;
 
 // In-page anchors stay "#…" so the homepage scrolls smoothly; other pages are full page loads
 export const NAV = [
@@ -38,7 +31,7 @@ export const NAV = [
   { label: "About", href: "/about-us" },
   { label: "Services", href: "/services", dropdown: true },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact-us#contact-form" },
 ];
 
 export const FOOTER_COLUMNS = [

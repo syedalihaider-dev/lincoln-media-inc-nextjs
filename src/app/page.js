@@ -3,6 +3,7 @@ import { SERVICES } from "@/data/services";
 import { introParts } from "@/components/Intro/introParts";
 import RawHTML from "@/components/Legacy/RawHTML";
 import HomeSite from "@/components/Home/HomeSite";
+import { POSTAL_ADDRESS } from "@/config/site";
 
 export const metadata = {
   title: { absolute: SITE.title },
@@ -20,7 +21,7 @@ const jsonLd = {
   email: SITE.email,
   telephone: SITE.phone,
   foundingDate: String(SITE.established),
-  address: { "@type": "PostalAddress", streetAddress: SITE.street, addressLocality: "New York", addressRegion: "NY", postalCode: "10065", addressCountry: "US" },
+  address: POSTAL_ADDRESS,
   areaServed: "Worldwide",
   hasOfferCatalog: {
     "@type": "OfferCatalog",

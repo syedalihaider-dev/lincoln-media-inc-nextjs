@@ -1,6 +1,7 @@
 // Live-chat providers. The chat panel only ever calls openLiveChat(CHAT); to switch provider, add one
-// here and change CHAT in src/data/site.js — the panel's design doesn't change. Nothing loads until a
-// visitor asks for live chat.
+// here and change chat in src/config/site.js — the panel's design doesn't change. The Zendesk snippet
+// is already loaded site-wide (ZendeskScript, id "ze-snippet"); loadScript only adds it if that
+// hasn't happened yet, so there is never a second copy.
 
 const loadScript = (src, id) => new Promise((resolve, reject) => {
   if (document.getElementById(id)) return resolve();
@@ -28,6 +29,10 @@ const PROVIDERS = {
         try { zE("webWidget", "show"); zE("webWidget", "open"); } catch {}
       }
       try { window.$zopim?.livechat?.window?.show(); } catch {}
+      // Only report success once a chat window is really on screen (the account may be offline or
+      // not allow this domain) — otherwise the panel offers the other channels instead.
+      await waitFor(() => [...document.querySelectorAll('iframe[id="webWidget"], iframe[title*="chat" i], iframe[title*="messaging" i]')]
+        .some((f) => { const r = f.getBoundingClientRect(); return r.height > 120 && r.bottom > 0 && r.top < innerHeight && getComputedStyle(f).visibility !== "hidden"; }), 6000);
     },
   },
 };

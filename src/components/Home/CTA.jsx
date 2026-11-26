@@ -50,7 +50,7 @@ export default function CTA() {
           <div className={styles.after} data-after>
             <p>Tell us what you&apos;re building. We&apos;ll come back with a plan, a team and a timeline.</p>
             <div className={styles.btns}>
-              <Button href="#contact" size="lg" icon="down">Start a project</Button>
+              <Button href="/contact-us#contact-form" size="lg">Start a project</Button>
               <Button href="/" variant="outline" size="lg">Get your AI build plan</Button>
             </div>
           </div>

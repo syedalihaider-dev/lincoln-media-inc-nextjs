@@ -18,7 +18,7 @@ const PYTHON = {
     title: ["Python", "Development"],
     tagline: "Your dedicated team of expert Python developers, ready to serve you.", // (live)
     lead: "Hire the best Python developers for web and all kinds of applications.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Python expertise", href: "#expertise" },
     stage: stage(["trading", "dash", "circuit", "meeting"], "Model deployed"),
   },

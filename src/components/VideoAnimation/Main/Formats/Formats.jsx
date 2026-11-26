@@ -69,7 +69,7 @@ export default function Formats({ data }) {
           <div className={styles.meta} data-meta aria-live="polite">
             <h3>{it.name}</h3>
             <p>{it.text}</p>
-            {it.href ? <Button href={it.href} variant="text" size="sm">See the service</Button> : <Button href="/#contact" variant="text" size="sm">Plan this film</Button>}
+            {it.href ? <Button href={it.href} variant="text" size="sm">See the service</Button> : <Button href="/contact-us#contact-form" variant="text" size="sm">Plan this film</Button>}
           </div>
         </div>
       </div>

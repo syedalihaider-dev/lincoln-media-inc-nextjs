@@ -116,14 +116,14 @@ export const cta = (kicker, title = ["Let's create something", "exceptional."]) 
   kicker,
   title,
   text: "Reach out to our team and we'll get back to you within a day.", // (live)
-  primary: { label: "Speak to an Expert", href: "/#contact" }, // (live)
+  primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" }, // (live)
   image: pic("studio"),
 });
 
 /** The technology section's call to action */
 export const techCta = (text, label) => ({
   text,
-  primary: { label, href: "/#contact" },
+  primary: { label, href: "/contact-us#contact-form" },
   secondary: { label: "See how we deliver", href: "#process" },
 });
 

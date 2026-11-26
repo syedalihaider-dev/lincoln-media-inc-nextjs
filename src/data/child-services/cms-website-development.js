@@ -18,7 +18,7 @@ const CMS = {
     title: ["CMS", "Development"],
     tagline: "Secure, scalable web-based content management systems.", // (live)
     lead: "Easily manageable CMSs that help organisations stay at the top of the competition.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our CMS expertise", href: "#expertise" },
     stage: stage(["dusk", "house", "ring", "empire"], "Changes published"),
   },

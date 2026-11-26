@@ -74,7 +74,7 @@ export default function Hero({ data, brand }) {
       <div className={styles.foot}>
         <p className={styles.lead} data-rise>{data.lead}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your brand</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your brand</Button>
           <Button href="#brand-capabilities" variant="text" icon="down">What we do</Button>
         </div>
       </div>

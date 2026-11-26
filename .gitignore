@@ -5,3 +5,7 @@ node_modules
 .next
 next-env.d.ts
 .next-*
+
+# Local secrets (SMTP etc.) — never commit
+.env*.local
+.env.local

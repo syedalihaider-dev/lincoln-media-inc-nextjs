@@ -59,7 +59,7 @@ export default function Hero({ data, page }) {
         </h1>
         <p className={styles.lead} data-rise>{data.lead}</p>
         <div className={styles.actions} data-rise>
-          <Button href="/#contact" size="lg">Start your video</Button>
+          <Button href="/contact-us#contact-form" size="lg">Start your video</Button>
           <Button href="#vs-process" variant="text" icon="down">How it's made</Button>
         </div>
       </div>

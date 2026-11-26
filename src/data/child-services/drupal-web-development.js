@@ -18,7 +18,7 @@ const DRUPAL = {
     title: ["Drupal", "Development"],
     tagline: "Using Drupal, we design websites that make customers for you.", // (live)
     lead: "Feature-rich, SEO-friendly content management systems built on Drupal.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Drupal expertise", href: "#expertise" },
     stage: stage(["london", "house", "ring", "towers"], "Content moderated"),
   },

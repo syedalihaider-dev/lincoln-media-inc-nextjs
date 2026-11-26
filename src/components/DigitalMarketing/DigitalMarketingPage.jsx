@@ -5,6 +5,7 @@ import { DM_PAGE as d, DM_PATH, DM_SERVICES } from "@/data/digital-marketing";
 import StoryRail from "./StoryRail";
 import Hero from "./Hero/Hero";
 import AttentionToConversion from "./AttentionToConversion/AttentionToConversion";
+import { ROBOTS } from "@/config/site";
 
 // Below the fold: each section is its own chunk so the hero's code arrives first (still server-rendered)
 const Ecosystem = dynamic(() => import("./Ecosystem/Ecosystem"));
@@ -92,7 +93,7 @@ export function digitalMarketingMetadata() {
     description: s.description,
     keywords: s.keywords,
     alternates: { canonical: DM_PATH },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: DM_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

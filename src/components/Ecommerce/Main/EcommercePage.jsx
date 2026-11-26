@@ -6,6 +6,7 @@ import Hero from "./Hero/Hero";
 import Experience from "./Experience/Experience";
 import Head from "./Head";
 import ScrollSync from "@/components/Common/ScrollSync";
+import { ROBOTS } from "@/config/site";
 
 // Below the fold: their own chunks so the hero's code arrives first (still server-rendered)
 const Showcase = dynamic(() => import("./Showcase/Showcase"));
@@ -91,7 +92,7 @@ export function ecommerceMetadata() {
     description: s.description,
     keywords: s.keywords,
     alternates: { canonical: ECOM_PATH },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: ECOM_PATH, title: s.title, description: s.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: s.title, description: s.description, images: images.map((i) => i.url) },
   };

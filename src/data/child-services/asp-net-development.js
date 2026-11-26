@@ -18,7 +18,7 @@ const ASPNET = {
     title: ["ASP.NET", "Development"],
     tagline: "Our ASP.NET Core developers help businesses through their digital transformation.", // (live)
     lead: "Top-notch ASP.NET development services to build advanced, feature-rich and secure software.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our .NET expertise", href: "#expertise" },
     stage: stage(["towers", "trading", "london", "meeting"], "Build succeeded"),
   },

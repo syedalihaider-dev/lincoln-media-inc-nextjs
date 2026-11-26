@@ -4,6 +4,7 @@ import ScrollSync from "@/components/Common/ScrollSync";
 import { SITE } from "@/data/site";
 import { CS_PAGE, CS_PATH, ROOMS } from "@/data/case-studies";
 import Overture from "./Overture/Overture";
+import { ROBOTS } from "@/config/site";
 
 const Gallery = dynamic(() => import("./Gallery/Gallery"));
 const Assembly = dynamic(() => import("./Assembly/Assembly"));
@@ -56,7 +57,7 @@ export function caseStudiesMetadata() {
     title: { absolute: title },
     description,
     alternates: { canonical: CS_PATH },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: CS_PATH, title, description, siteName: SITE.name, locale: "en_US", images },
     twitter: { card: "summary_large_image", title, description, images: images.map((i) => i.url) },
   };

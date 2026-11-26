@@ -18,7 +18,7 @@ const SITECORE = {
     title: ["Sitecore", "Development"],
     tagline: "Powerful CMSs and digital experience platforms, built by an in-house full-stack team.", // (live)
     lead: "Blazing fast web solutions with Sitecore developers in the USA.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Sitecore expertise", href: "#expertise" },
     stage: stage(["london", "ring", "house", "dusk"], "Personalisation live"),
   },

@@ -7,6 +7,7 @@ import WhoWeAre from "@/components/About/WhoWeAre";
 import MissionVision from "@/components/About/MissionVision";
 import OurValues from "@/components/About/OurValues";
 import AboutCTA from "@/components/About/AboutCTA";
+import { POSTAL_ADDRESS } from "@/config/site";
 
 export const metadata = {
   title: { absolute: ABOUT_META.title },
@@ -29,7 +30,7 @@ const jsonLd = {
     email: SITE.email,
     telephone: SITE.phone,
     foundingDate: String(SITE.established),
-    address: { "@type": "PostalAddress", streetAddress: SITE.street, addressLocality: "New York", addressRegion: "NY", postalCode: "10065", addressCountry: "US" },
+    address: POSTAL_ADDRESS,
   },
 };
 

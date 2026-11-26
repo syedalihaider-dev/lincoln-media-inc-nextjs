@@ -75,7 +75,7 @@ export default function Chat() {
   const close = () => setOpen(false);
   const options = [
     hasLiveChat(CHAT) && { key: "chat", icon: "chat", label: "Start a conversation", sub: live === "loading" ? "Connecting you to live chat…" : "Live chat with our team", onClick: startLive, busy: live === "loading" },
-    { key: "project", icon: "brief", label: "Discuss a project", sub: "Tell us what you're building", href: "/#contact", onClick: close },
+    { key: "project", icon: "brief", label: "Discuss a project", sub: "Tell us what you're building", href: "/contact-us#contact-form", onClick: close },
     { key: "quote", icon: "quote", label: "Request a quote", sub: "Email your brief — we reply within a day", href: `mailto:${SITE.email}?subject=${encodeURIComponent("Quote request")}` },
     { key: "call", icon: "phone", label: "Call us", sub: SITE.phone, href: SITE.phoneHref },
     SITE.whatsapp && { key: "whatsapp", icon: "whatsapp", label: "Message us on WhatsApp", sub: "Chat from your phone", href: SITE.whatsapp, external: true },

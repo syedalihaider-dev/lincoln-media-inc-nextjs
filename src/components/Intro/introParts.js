@@ -1,5 +1,6 @@
 import pages from "@/data/legacy-pages.json";
 import { trimFontRequest } from "@/components/Common/fonts";
+import { withSiteContact } from "@/lib/siteContact";
 
 /**
  * The guided AI intro, exactly as the original homepage (legacy/index.html) defines it.
@@ -22,7 +23,8 @@ let cache;
 export function introParts() {
   if (cache) return cache;
   const home = pages["/"];
-  const body = home.body;
+  // (contact details come from src/config/site.js — values only, the markup is untouched)
+  const body = withSiteContact(home.body);
 
   // Fixed chrome: WebGL canvas, HUD overlays, the intro header (logo, sound, menu) and its menu
   const [, mainAt] = cut(body, "", '<main id="top">', "<main>");

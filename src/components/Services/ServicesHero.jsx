@@ -76,7 +76,7 @@ export default function ServicesHero() {
           <p className={styles.text} data-wipe>{SERVICES_PAGE.headline}</p>
           <div className={styles.actions} data-wipe>
             <Button href="#index" size="lg" icon="down">{SERVICES_PAGE.explore}</Button>
-            <Button href="/#contact" variant="outline" size="lg">{SERVICES_PAGE.expert}</Button>
+            <Button href="/contact-us#contact-form" variant="outline" size="lg">{SERVICES_PAGE.expert}</Button>
           </div>
         </div>
       </div>

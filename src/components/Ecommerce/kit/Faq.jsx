@@ -44,7 +44,7 @@ export default function Faq({ data, head, variant = "paper", prompt = "Something
         {head}
         <div className={styles.ask}>
           <p>{prompt}</p>
-          <Button href="/#contact" size="sm">Ask a question</Button>
+          <Button href="/contact-us#contact-form" size="sm">Ask a question</Button>
           <Button href={SITE.phoneHref} size="sm" variant="text" icon="phone">{SITE.phone}</Button>
         </div>
       </div>

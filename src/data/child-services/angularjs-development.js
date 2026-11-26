@@ -18,7 +18,7 @@ const ANGULAR = {
     title: ["AngularJS", "Development"],
     tagline: "A team of specialised, talented developers creating state-of-the-art applications.", // (live)
     lead: "Angular is the choice of world-renowned brands and start-ups alike — the future of UX/UI development.", // (live)
-    primary: { label: "Speak to an Expert", href: "/#contact" },
+    primary: { label: "Speak to an Expert", href: "/contact-us#contact-form" },
     secondary: { label: "Our Angular expertise", href: "#expertise" },
     stage: stage(["trading", "house", "bike", "london"], "Route loaded"),
   },

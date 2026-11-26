@@ -9,6 +9,7 @@ import wooCommerce from "./woo-commerce";
 import magento from "./magento";
 import bigCommerce from "./big-commerce";
 import mirakl from "./mirakl";
+import { ROBOTS } from "@/config/site";
 
 const DATA = { shopify, "shopify-plus": shopifyPlus, "woo-commerce": wooCommerce, magento, "big-commerce": bigCommerce, mirakl };
 
@@ -30,7 +31,7 @@ export function ecomInnerMetadata(slug) {
     description: seo.description,
     keywords: seo.keywords,
     alternates: { canonical: path },
-    robots: { index: true, follow: true },
+    robots: ROBOTS,
     openGraph: { type: "website", url: path, title: seo.title, description: seo.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: seo.title, description: seo.description, images: images.map((i) => i.url) },
   };

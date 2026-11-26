@@ -7,6 +7,7 @@ import corporateIdentity from "./corporate-identity-design";
 import businessCards from "./business-card-design";
 import brochures from "./brochure-design";
 import packaging from "./packaging-designs";
+import { ROBOTS } from "@/config/site";
 
 const DATA = {
   "logo-design": logoDesign,
@@ -29,7 +30,7 @@ export function brandInnerMetadata(slug) {
   const images = [{ url: seo.image.src, width: seo.image.width, height: seo.image.height, alt: seo.imageAlt }];
   return {
     title: { absolute: seo.title }, description: seo.description, keywords: seo.keywords,
-    alternates: { canonical: path }, robots: { index: true, follow: true },
+    alternates: { canonical: path }, robots: ROBOTS,
     openGraph: { type: "website", url: path, title: seo.title, description: seo.description, siteName: SITE.name, images },
     twitter: { card: "summary_large_image", title: seo.title, description: seo.description, images: images.map((i) => i.url) },
   };

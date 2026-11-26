@@ -43,7 +43,7 @@ export const GMB_PAGE = {
     title: ["Be the place", "they find first."],
     lead: "Maximizing your Google My Business profile for the best local success.",
     text: "Let us help you get maximum results for your business on your Google Business Profile — so the people searching nearby find you, trust you and come through the door.",
-    primary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "Start a project", href: "/contact-us#contact-form" },
     secondary: { label: "What we optimize", href: "#profile" },
   },
 
@@ -165,7 +165,7 @@ export const GMB_PAGE = {
     kicker: "Start a project",
     title: ["Light up", "your corner of the map."],
     text: "Tell us about your business and where your customers are. We'll come back with an audit and a plan.",
-    primary: { label: "Get your GMB plan", href: "/#contact" },
+    primary: { label: "Get your GMB plan", href: "/contact-us#contact-form" },
   },
 };
 
