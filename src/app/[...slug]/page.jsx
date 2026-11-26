@@ -16,7 +16,7 @@ export const dynamicParams = false;
 // /services/conversation-rate-optimization — next.config.mjs)
 // The e-commerce category page has its own route; its six platform pages live at the live site's
 // /services/<slug>, so the legacy nested copies (/services/ecommerce-web-development/<slug>) redirect there.
-const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", "/services/conversion-rate-optimization", "/services/ecommerce-web-development", ...ECOM_LEGACY_PATHS, "/services/branding-communication-agency", ...BRAND_INNER_PATHS, ...CHILD_SERVICE_PATHS, ...MARKETING_SERVICE_PATHS]);
+const OWN_PAGES = new Set(["/", "/about-us", "/services", "/services/web-development", "/services/digital-marketing", "/services/conversion-rate-optimization", "/services/ecommerce-web-development", ...ECOM_LEGACY_PATHS, "/services/branding-communication-agency", ...BRAND_INNER_PATHS, ...CHILD_SERVICE_PATHS, ...MARKETING_SERVICE_PATHS, "/services/ai-saas-mobile", "/services/gmb-optimization-services"]);
 
 
 export function generateStaticParams() {

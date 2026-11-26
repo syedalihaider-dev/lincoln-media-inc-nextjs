@@ -133,7 +133,8 @@ export const SERVICE_CATEGORIES = [
 // The other service lines this site already offers (src/data/services.js)
 export const OTHER_SERVICES = [
   { key: "ai", name: "AI, SaaS & Mobile Apps", text: "Custom AI that does real work inside your business, SaaS platforms built to onboard, bill and scale, and native apps for iOS and Android that feel effortless.", href: "/services/ai-saas-mobile", image: imgAi },
-  { key: "outsourcing", name: "IT Resource Outsourcing", text: "On-demand IT talent for digital transformation — end-user support, application investment, and cloud and infrastructure expertise.", href: null, image: imgTeam },
+  // navHidden: kept in the data (and on the Services page) but not shown in the navigation menus
+  { key: "outsourcing", name: "IT Resource Outsourcing", text: "On-demand IT talent for digital transformation — end-user support, application investment, and cloud and infrastructure expertise.", href: null, image: imgTeam, navHidden: true },
   { key: "gmb", name: "GMB Optimization Services", text: null, href: "/services/gmb-optimization-services", image: null },
 ];
 
@@ -152,5 +153,5 @@ export const MEGA_MENU = [
   { title: "Branding & Communication", href: byKey.brand.href, items: byKey.brand.items },
   // only the two active Video & Animation pages (the animation offerings stay on the Services page's index)
   { title: "Video & Animation", href: byKey.video.href, items: visibleItems(byKey.video.items) },
-  { title: "Other Digital Services", href: "/services", items: OTHER_SERVICES.map((o) => ({ name: o.name, href: o.href })) },
+  { title: "Other Digital Services", href: "/services", items: OTHER_SERVICES.filter((o) => !o.navHidden).map((o) => ({ name: o.name, href: o.href })) },
 ];

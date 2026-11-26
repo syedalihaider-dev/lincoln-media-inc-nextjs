@@ -1,0 +1,52 @@
+/* Room VI — paper, ink, and a round window onto the screen. */
+.iris { position: relative; background: var(--lm-paper); color: var(--lm-ink); overflow: clip; }
+
+.stage { position: relative; display: flex; flex-direction: column; padding: 100px 0 90px; }
+
+.halves { display: flex; flex-direction: column; gap: 22px; margin: 0; padding: 0 var(--lm-gutter); font: 700 clamp(26px, 6.4vw, 72px)/1.1 var(--lm-display); text-transform: uppercase; letter-spacing: -0.02em; }
+.half { display: block; will-change: transform; }
+.h1 { color: var(--lm-accent-deep); }
+
+.window { position: relative; margin: 40px 0 0; aspect-ratio: 1; overflow: hidden; }
+.img { position: absolute; inset: 0; transform-origin: 30% 38%; will-change: transform; }
+.img img { object-fit: cover; }
+.veil {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(3, 5, 11, 0.88) 0%, rgba(3, 5, 11, 0.55) 45%, rgba(3, 5, 11, 0.05) 80%);
+}
+
+.copy { position: relative; padding: 36px var(--lm-gutter) 0; --k: var(--lm-accent-deep); }
+.copy a { --fg: currentColor; }
+.title { margin: 14px 0 0; font-size: clamp(48px, 14vw, 200px); }
+.title > span { display: inline-block; }
+.services { margin-top: 14px; font: 500 clamp(16px, 1.3vw, 19px)/1.5 var(--lm-text); }
+.facts { margin: 30px 0 24px; max-width: 560px; --rule: var(--lm-line-dark); }
+.cut { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .window { aspect-ratio: 16 / 8; }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .stage { display: block; height: 100vh; height: 100svh; padding: 0; }
+  .halves {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    justify-content: space-between;
+    padding: calc(var(--lm-header-h) + 4vh) var(--lm-gutter) max(7vh, 120px);
+    font-size: clamp(30px, 3.6vw, 76px);
+    pointer-events: none;
+  }
+  .h0 { max-width: 15ch; }
+  .h1 { max-width: 20ch; align-self: flex-end; text-align: right; }
+  .window { position: absolute; inset: 0; margin: 0; aspect-ratio: auto; clip-path: circle(9% at 50% 50%); }
+  .img { transform: scale(1.5); }
+  .copy { position: absolute; left: var(--lm-gutter); top: 50%; translate: 0 -46%; z-index: 4; width: min(40vw, 640px); padding: 0; color: var(--lm-paper); --k: var(--lm-accent); }
+  .copy [data-kick], .copy [data-fact], .copy [data-track] { opacity: 0; }
+  .facts { --rule: rgba(238, 241, 247, 0.26); }
+  .title { font-size: clamp(64px, 8vw, 180px); }
+  .cut { display: block; position: absolute; inset: 0; z-index: 6; background: #101114; opacity: 0; pointer-events: none; }
+}

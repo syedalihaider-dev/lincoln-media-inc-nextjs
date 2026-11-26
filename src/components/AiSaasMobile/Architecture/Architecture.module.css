@@ -1,0 +1,32 @@
+.arch {
+  position: relative;
+  padding: clamp(110px, 15vh, 170px) var(--lm-gutter);
+  background:
+    radial-gradient(50% 40% at 75% 50%, rgba(54, 228, 208, 0.08), transparent 70%),
+    linear-gradient(180deg, #03050b, #060a12 50%, #03050b);
+}
+.grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4vw; }
+.head { margin-bottom: 8vh; }
+.steps { margin: 0; padding: 0 0 30vh; list-style: none; }
+.step { position: relative; display: grid; gap: 10px; padding: 5vh 0 5vh 26px; border-left: 1px solid var(--lm-line); transition: opacity 0.5s; opacity: 0.38; }
+.step::before { content: ""; position: absolute; left: -1px; top: 0; bottom: 0; width: 1px; background: var(--lm-accent); transform: scaleY(0); transform-origin: top; transition: transform 0.8s var(--lm-ease); }
+.on, .past { opacity: 1; }
+.past { opacity: 0.6; }
+.on::before, .past::before { transform: scaleY(1); }
+.layer { color: var(--lm-accent); font: 500 12px/1 var(--lm-text); letter-spacing: 0.14em; text-transform: uppercase; }
+.step h3 { margin: 0; color: var(--lm-paper); font: 500 clamp(24px, 2.2vw, 38px)/1.05 var(--lm-display); letter-spacing: -0.045em; }
+.step p { margin: 0; max-width: 42ch; color: rgba(238, 241, 247, 0.7); font: 300 clamp(15px, 1vw, 17px)/1.65 var(--lm-text); }
+.sticky { position: sticky; top: var(--lm-header-h); height: calc(100vh - var(--lm-header-h)); display: grid; grid-template-rows: 1fr auto; }
+.scene { position: relative; }
+.caption { margin: 0 0 4vh; text-align: right; color: rgba(238, 241, 247, 0.55); font: 400 13px/1 var(--lm-text); letter-spacing: 0.08em; text-transform: uppercase; }
+.caption span { color: var(--lm-accent); }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .sticky { order: -1; top: calc(var(--lm-header-h) - 10px); height: 46vh; z-index: 1; background: linear-gradient(#050811 82%, transparent); }
+  .caption { display: none; }
+  .head { margin: 30px 0 4vh; }
+  .steps { padding-bottom: 10vh; }
+  .step { padding: 4vh 0 4vh 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .step { opacity: 1; } }

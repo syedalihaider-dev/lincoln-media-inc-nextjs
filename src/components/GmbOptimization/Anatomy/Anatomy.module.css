@@ -1,0 +1,40 @@
+.anatomy {
+  position: relative;
+  display: grid;
+  gap: clamp(50px, 8vh, 90px);
+  padding: clamp(110px, 15vh, 170px) var(--lm-gutter);
+  background:
+    radial-gradient(circle, rgba(60, 54, 44, 0.12) 1px, transparent 1.3px) 0 0 / 22px 22px,
+    #efe9dd;
+  color: var(--lm-ink);
+}
+.grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 440px) minmax(0, 0.85fr); gap: 4vw; align-items: center; }
+.list { display: grid; margin: 0; padding: 0; list-style: none; }
+.list button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(3, 5, 11, 0.12); text-align: left; }
+.list span { font: 600 clamp(18px, 1.5vw, 25px)/1.15 var(--lm-display); letter-spacing: -0.04em; color: rgba(3, 5, 11, 0.4); transition: color 0.4s, transform 0.6s var(--lm-ease); }
+.list i { flex: none; width: 34px; height: 1.5px; background: #0f7f74; transform: scaleX(0); transform-origin: right; transition: transform 0.6s var(--lm-ease); }
+.list .on span, .list button:hover span { color: var(--lm-ink); }
+.list .on span { transform: translateX(10px); }
+.list .on i { transform: scaleX(1); }
+.list button:focus-visible { outline: 1px solid #0f7f74; outline-offset: 4px; }
+.window { position: relative; height: min(64vh, 560px); overflow: hidden; border-radius: 24px; mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+.card { will-change: transform; padding: 18px 0; }
+.card > article { margin: 0 auto; }
+.desc h3 { margin: 0 0 16px; font: 600 clamp(24px, 2.4vw, 42px)/1.05 var(--lm-display); letter-spacing: -0.045em; color: #0f7f74; }
+.desc p { margin: 0; max-width: 34ch; color: rgba(3, 5, 11, 0.78); font: 400 clamp(16px, 1.25vw, 21px)/1.55 var(--lm-text); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .list { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+  .list button { width: auto; padding: 10px 16px; border: 0; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(3, 5, 11, 0.18); }
+  .list span { font: 500 14px/1 var(--lm-text); letter-spacing: 0; }
+  .list .on { background: var(--lm-ink); }
+  .list .on span { color: var(--lm-paper); transform: none; }
+  .list i { display: none; }
+}
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .desc { order: 2; }
+  .window { height: 58vh; }
+}

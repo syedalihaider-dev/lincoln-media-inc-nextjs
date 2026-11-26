@@ -1,0 +1,76 @@
+/* Room VII — graphite, the colour of the studio backdrop in the photograph. */
+.layers {
+  position: relative;
+  color: var(--lm-paper);
+  background: linear-gradient(180deg, #101114 0%, #222224 30%, #29292b 58%, #121315 100%);
+  overflow: clip;
+  padding-bottom: 110px;
+}
+
+.scene { position: relative; height: 128vw; }
+
+.back {
+  position: absolute;
+  inset: 8% 0 auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  font-size: 18vw;
+  line-height: 0.95;
+  color: rgba(238, 241, 247, 0.06);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.back span { display: block; will-change: transform; }
+.back span:nth-child(2) { padding-left: 18vw; }
+
+.main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22%;
+  margin: 0;
+  aspect-ratio: 1800 / 1272;
+  /* the photograph's own backdrop melts into the room */
+  -webkit-mask-image: radial-gradient(ellipse 56% 54% at 50% 50%, #000 42%, transparent 97%);
+  mask-image: radial-gradient(ellipse 56% 54% at 50% 50%, #000 42%, transparent 97%);
+  will-change: transform;
+}
+.main img { object-fit: cover; }
+
+.near {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(238, 241, 247, 0.08);
+  will-change: transform;
+}
+.n0 { left: 5%; top: 66%; width: 40vw; aspect-ratio: 1; }
+.n1 { right: 6%; top: 8%; width: 32vw; aspect-ratio: 3 / 4; }
+.zoom { position: absolute; inset: 0; transform: scale(var(--zoom)); }
+.zoom img { object-fit: cover; }
+
+.copy { position: relative; z-index: 2; display: grid; gap: 24px; padding: 30px var(--lm-gutter) 0; }
+.title { margin: 6px 0 0; font-size: clamp(42px, 12vw, 180px); }
+.brief { max-width: 38ch; font: 400 clamp(16px, 1.35vw, 20px)/1.6 var(--lm-text); color: rgba(238, 241, 247, 0.84); }
+.facts { margin: 10px 0 24px; --rule: rgba(238, 241, 247, 0.2); }
+
+@media (min-width: 901px) {
+  .scene { height: 118vh; min-height: 720px; }
+  .back { inset: 6% 0 auto; font-size: 13vw; }
+  .main { left: 15%; right: 15%; top: 12%; }
+  .n0 { left: 6%; top: 58%; width: 20vw; }
+  .n1 { right: 7%; top: 16%; width: 16vw; }
+  .copy { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: end; column-gap: 6vw; }
+  .copy > div:first-child, .title { grid-column: 1; }
+  .brief { grid-column: 1; }
+  .side { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
+}
+
+/* Desktop with motion: Polly's room ends on a cut to this graphite — slide up over its tail so the
+   cut lands straight in this room instead of holding an empty frame */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .layers { margin-top: -75vh; z-index: 1; }
+}

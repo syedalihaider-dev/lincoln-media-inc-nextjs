@@ -1,0 +1,27 @@
+.build { position: relative; padding: clamp(110px, 15vh, 170px) var(--lm-gutter); background: #03050b; display: grid; gap: clamp(50px, 8vh, 90px); }
+.grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 5vw; align-items: start; }
+.list { margin: 0; padding: 0; list-style: none; }
+.row { position: relative; }
+.rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--lm-line); }
+.h { margin: 0; font: inherit; }
+.h button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: clamp(16px, 2.3vh, 24px) 0; text-align: left; }
+.h span { color: rgba(238, 241, 247, 0.42); font: 500 clamp(21px, 2vw, 34px)/1.1 var(--lm-display); letter-spacing: -0.045em; transition: color 0.4s, transform 0.6s var(--lm-ease); }
+.h small { color: rgba(238, 241, 247, 0.35); font: 500 11.5px/1 var(--lm-text); letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.4s; }
+.on .h span, .h button:hover span { color: var(--lm-paper); }
+.on .h span { transform: translateX(14px); }
+.on .h small { color: var(--lm-accent); }
+.on .rule { background: linear-gradient(90deg, var(--lm-accent), var(--lm-line) 60%); }
+.more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s var(--lm-ease); }
+.more > div { overflow: hidden; }
+.on .more { grid-template-rows: 1fr; }
+.more p { max-width: 48ch; margin: 0 0 24px 14px; color: rgba(238, 241, 247, 0.7); font: 300 clamp(15px, 1vw, 17px)/1.65 var(--lm-text); }
+.aside { position: sticky; top: calc(var(--lm-header-h) + 8vh); }
+.preview { position: relative; }
+.pApp { display: grid; place-items: center; padding: 10px 0; border-radius: 18px; background: radial-gradient(60% 60% at 50% 50%, rgba(54, 228, 208, 0.08), transparent 70%); }
+.phone { width: min(300px, 46%); }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .preview { margin: 0 0 28px; }
+  .phone { width: 62%; }
+}

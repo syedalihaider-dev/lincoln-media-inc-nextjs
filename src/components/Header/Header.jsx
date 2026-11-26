@@ -10,7 +10,7 @@ import Menu from "./Menu";
 import styles from "./Header.module.css";
 
 // Homepage sections → the nav item they belong to
-const NAV_KEY = { home: "#home", services: "/services", work: "#work", launches: "#work", contact: "#contact", cta: "#contact" };
+const NAV_KEY = { home: "#home", services: "/services", work: "/case-studies", launches: "/case-studies", contact: "#contact", cta: "#contact" };
 const EASE = [0.16, 1, 0.3, 1];
 
 // On other pages (base="/") the homepage anchors become links back to the homepage, e.g. "/#work"

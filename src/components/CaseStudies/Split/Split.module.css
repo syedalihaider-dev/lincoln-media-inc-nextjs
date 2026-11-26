@@ -1,0 +1,51 @@
+/* Room IV — night navy that bakes to crust amber (colours animated on the section itself). */
+.split { position: relative; background: #070b14; color: #eef1f7; overflow: clip; }
+
+.stage { position: relative; display: flex; flex-direction: column; gap: 36px; padding: 100px var(--lm-gutter) 100px; }
+
+.fig { position: relative; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 16px; }
+.img { position: absolute; inset: 0; will-change: transform; }
+.img img { object-fit: cover; }
+.tag {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #1b0e05;
+  color: #f3dcc0;
+  font: 500 12px/1.2 var(--lm-text);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.story { position: relative; }
+.kicker { --k: currentColor; }
+.title { margin: 14px 0 0; font-size: clamp(32px, 9vw, 96px); }
+.lines { margin-top: 26px; font: 600 clamp(26px, 3vw, 54px)/1.16 var(--lm-text); letter-spacing: -0.015em; }
+.lineMask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.04em; }
+.lineMask > span { display: inline-block; }
+.facts { margin: 34px 0 24px; --rule: currentColor; }
+.facts > div { border-top-color: color-mix(in srgb, currentColor 35%, transparent); }
+/* the studio's text button, in the room's ink */
+.link > a { --fg: currentColor; }
+.link > a:hover { color: inherit; }
+
+@media (min-width: 640px) and (max-width: 900px) {
+  .fig { aspect-ratio: 4 / 3; }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6vw; align-items: center; }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .stage { display: block; height: 100vh; height: 100svh; padding: 0; }
+  .fig { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; clip-path: inset(10% 54% 10% 5% round 20px); }
+  .img { transform: scale(1.3); }
+  .tag { left: auto; right: 6.5vw; top: 9vh; bottom: auto; opacity: 0; }
+  .story { position: absolute; left: 52%; top: 50%; translate: 0 -50%; width: 41vw; will-change: transform; }
+  .title { font-size: clamp(36px, 4.2vw, 92px); }
+  .lineMask > span { transform: translateY(105%); }
+  .facts > div, .link { opacity: 0; }
+}
