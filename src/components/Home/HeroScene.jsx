@@ -5,6 +5,7 @@ import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { CASE_STUDIES } from "@/data/work";
 import { SERVICES } from "@/data/services";
+import { useAdaptiveDpr } from "@/components/Common/AdaptiveDpr";
 
 const CYAN = new THREE.Color("#36e4d0");
 const VIOLET = new THREE.Color("#3b5bff");
@@ -132,6 +133,7 @@ export default function HeroScene({ state, compact = false }) {
   const plates = usePlates(compact ? 8 : 16);
   const wrap = useRef(null);
   const [visible, setVisible] = useState(true);
+  const [dpr, monitor] = useAdaptiveDpr(compact ? 1.5 : 1.75);
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "100px" });
@@ -143,11 +145,12 @@ export default function HeroScene({ state, compact = false }) {
     <div ref={wrap} style={{ position: "absolute", inset: 0 }}>
       <Canvas
         frameloop={visible ? "always" : "never"}
-        dpr={[1, compact ? 1.5 : 1.75]}
+        dpr={dpr}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         camera={{ fov: 52, near: 0.1, far: 60, position: [0, 0, START_Z + 14] }}
         aria-hidden="true"
       >
+        {monitor}
         <Rig state={state} />
         <Dust count={compact ? 500 : 1400} />
         <Suspense fallback={null}>

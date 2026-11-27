@@ -1,10 +1,4 @@
 /* Label + disc. The disc is where the light comes from: on hover it floods the whole button. */
-@property --spin {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
 .btn {
   --h: 58px;
   --fg: var(--lm-ink);
@@ -85,20 +79,34 @@
   --flood: var(--lm-accent);
   background: transparent;
 }
-.outline::before {
-  content: "";
+/* The ring: a 1px band masked out of the button's shape. Inside it a conic gradient centred on the
+   button turns once every 5s. It turns as a transform (rotate), which the compositor runs on its own,
+   rather than by animating the gradient's start angle, which would restyle and repaint the button on
+   the main thread every frame. Rotating a centred conic gradient by θ = starting it at θ, so the
+   light looks exactly the same. The square is twice the button's width so it covers every corner. */
+.ring {
   position: absolute;
   inset: 0;
   z-index: -2;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(from var(--spin), rgba(238, 241, 247, 0.22), rgba(54, 228, 208, 0.9) 18%, rgba(238, 241, 247, 0.22) 36%, rgba(238, 241, 247, 0.22));
+  overflow: hidden;
+  pointer-events: none;
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: spin 5s linear infinite;
 }
-@keyframes spin { to { --spin: 360deg; } }
+.ring i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200%;
+  aspect-ratio: 1;
+  background: conic-gradient(from 0deg, rgba(238, 241, 247, 0.22), rgba(54, 228, 208, 0.9) 18%, rgba(238, 241, 247, 0.22) 36%, rgba(238, 241, 247, 0.22));
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: ring 5s linear infinite;
+}
+@keyframes ring { to { transform: translate(-50%, -50%) rotate(360deg); } }
 .outline .disc { background: rgba(54, 228, 208, 0.12); }
 .outline:hover { color: var(--lm-ink); }
 .outline:hover .disc { background: var(--lm-ink); color: var(--lm-accent); }
@@ -111,6 +119,6 @@
 
 .btn:focus-visible { outline: 1px solid var(--lm-accent); outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
-  .outline::before { animation: none; }
+  .ring i { animation: none; }
   .ch, .disc svg, .flood { transition: none; }
 }

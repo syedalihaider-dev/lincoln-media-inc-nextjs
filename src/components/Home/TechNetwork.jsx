@@ -3,6 +3,7 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { STACK } from "@/data/home";
+import { useAdaptiveDpr } from "@/components/Common/AdaptiveDpr";
 
 const CYAN = new THREE.Color("#36e4d0");
 const VIOLET = new THREE.Color("#3b5bff");
@@ -161,8 +162,10 @@ function Network({ state, labels }) {
  * `labels` is a ref to a DOM layer whose children carry data-g (group) and optional data-i (item).
  */
 export default function TechNetwork({ state, labels, frameloop = "always" }) {
+  const [dpr, monitor] = useAdaptiveDpr(1.75);
   return (
-    <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 8.8], fov: 40 }} gl={{ antialias: true, alpha: true }} frameloop={frameloop} aria-hidden="true">
+    <Canvas dpr={dpr} camera={{ position: [0, 0, 8.8], fov: 40 }} gl={{ antialias: true, alpha: true }} frameloop={frameloop} aria-hidden="true">
+      {monitor}
       <Network state={state} labels={labels} />
     </Canvas>
   );

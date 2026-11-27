@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext } from "@/lib/motion";
+import { pauseOffscreenAnimations } from "@/lib/pauseOffscreen";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Chat from "@/components/Common/Chat/Chat";
@@ -65,6 +66,8 @@ export default function PageShell({ current, children }) {
       setLenis(l);
       cleanups.push(() => { gsap.ticker.remove(raf); ScrollTrigger.removeEventListener("refresh", onRefresh); l.destroy(); lenisRef.current = null; });
     }
+    // Looping CSS animations in sections far off screen wait until the visitor gets near them
+    cleanups.push(pauseOffscreenAnimations(document.getElementById("main")));
     // Sections create their triggers before this runs; measure them in document order
     ScrollTrigger.sort();
     ScrollTrigger.refresh();

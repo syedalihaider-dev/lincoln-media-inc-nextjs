@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext } from "@/lib/motion";
+import { pauseOffscreenAnimations } from "@/lib/pauseOffscreen";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Chat from "@/components/Common/Chat/Chat";
@@ -150,6 +151,10 @@ export default function HomeSite() {
         .to(c.querySelector("[data-hair]"), { opacity: 0, duration: 0.3 }, "<");
       cleanups.push(() => tl.kill());
     } else gsap.set(c, { display: "none" });
+
+    // Looping CSS animations in chapters far off screen (the guided experience above included) wait
+    // until the visitor gets near them
+    cleanups.push(pauseOffscreenAnimations(document.getElementById("top")));
 
     // Section animations (set up by the children before this effect runs) measure in document order
     ScrollTrigger.sort();

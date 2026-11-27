@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+// `m` + the site-wide <LazyMotion features={domAnimation}> (Common/MotionFeatures) instead of `motion`:
+// the same animations without shipping framer-motion's full feature bundle on every page
+import { m, useMotionValue, useSpring } from "framer-motion";
 import { sfx } from "@/lib/motion";
 import styles from "./Button.module.css";
 
@@ -46,12 +48,13 @@ export default function Button({ href, children, variant = "solid", icon = "arro
         <span className={styles.rollB} aria-hidden="true"><Letters text={children} /></span>
       </span>
       {icon && ICONS[icon] && (
-        <motion.span className={styles.disc} style={{ x: dx, y: dy }} aria-hidden="true">
+        <m.span className={styles.disc} style={{ x: dx, y: dy }} aria-hidden="true">
           <svg viewBox="0 0 24 24" className={styles.iconA}>{ICONS[icon]}</svg>
           <svg viewBox="0 0 24 24" className={styles.iconB}>{ICONS[icon]}</svg>
-        </motion.span>
+        </m.span>
       )}
       <span className={styles.flood} aria-hidden="true" />
+      {variant === "outline" && <span className={styles.ring} aria-hidden="true"><i /></span>}
     </>
   );
   const props = {
@@ -65,8 +68,8 @@ export default function Button({ href, children, variant = "solid", icon = "arro
     ...rest,
   };
   return href ? (
-    <motion.a href={href} {...(external ? { target: "_blank", rel: "noopener" } : {})} {...props}>{inner}</motion.a>
+    <m.a href={href} {...(external ? { target: "_blank", rel: "noopener" } : {})} {...props}>{inner}</m.a>
   ) : (
-    <motion.button type={type} {...props}>{inner}</motion.button>
+    <m.button type={type} {...props}>{inner}</m.button>
   );
 }

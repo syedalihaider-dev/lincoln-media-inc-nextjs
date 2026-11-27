@@ -12,6 +12,9 @@
   overflow: hidden;
   padding: 0 0 12vh;
 }
+/* Invisible: the strip the panel's wipe leaves open (its top 18%). The intro's WebGL field
+   (public/app.js) keeps rendering while this is on screen and pauses once the panel covers it. */
+.seeThrough { position: absolute; top: 0; left: 0; width: 1px; height: 18%; pointer-events: none; visibility: hidden; }
 
 /* Running head, like the top of a magazine page */
 .head {

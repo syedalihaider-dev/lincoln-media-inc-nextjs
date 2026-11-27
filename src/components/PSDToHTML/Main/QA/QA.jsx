@@ -18,9 +18,22 @@ const BROWSERS = ["Chrome", "Safari", "Firefox", "Edge"];
 export default function QA({ data }) {
   const ref = useRef(null);
   const tests = data.tests;
-  const [p, setP] = useState(0); // 0…tests.length: which test is running and how far
+  // 0…tests.length: which test is running and how far. React only needs its *steps* (which test, and
+  // whether it has flipped to "Passed"), so the state holds a quantised value and re-renders only when a
+  // status changes; the scan line's continuous sweep is written straight to its style every frame.
+  const [p, setP] = useState(0);
+  const live = useRef(0);
+  const scan = useRef(null);
+  const scanTop = (v) => `${Math.min(100, (v - Math.floor(v)) * 166)}%`;
+  const scanRef = (el) => { scan.current = el; if (el) el.style.top = scanTop(live.current); };
+  const step = (v) => (v >= tests.length - 0.02 ? tests.length : Math.floor(v) + (v - Math.floor(v) > 0.6 ? 0.7 : 0.1));
   useScene(ref, (mm, root) => {
-    const run = (st) => ScrollTrigger.create({ ...st, onUpdate: (s) => setP(s.progress * tests.length) });
+    const run = (st) => ScrollTrigger.create({ ...st, onUpdate: (s) => {
+      const v = s.progress * tests.length;
+      live.current = v;
+      if (scan.current) scan.current.style.top = scanTop(v);
+      setP(step(v));
+    } });
     mm.add(PIN, () => { run({ trigger: root, start: "top top", end: `+=${tests.length * 45}%`, pin: true, scrub: true, anticipatePin: 1 }); });
     mm.add(SMALL, () => { run({ trigger: root.querySelector("[data-bench]"), start: "top 70%", end: "bottom 10%" }); });
     // reduced motion: show the finished run — every test passed, the build approved
@@ -52,7 +65,7 @@ export default function QA({ data }) {
           {t.device === "phone" && <div className={styles.ph}><OnDevice device="phone" page="listing" /></div>}
           {t.device === "matrix" && <div className={styles.matrix}>{BROWSERS.map((b) => <figure key={b}><OnDevice page="home" url={`${b} · meridian.example`} /><figcaption>{b}</figcaption></figure>)}</div>}
           {t.device === "approve" && <div className={styles.approve}><OnDevice page="landing" /><span className={styles.stamp}>Approved<small>Ready for production</small></span></div>}
-          {t.device !== "approve" && <span className={styles.scan} style={{ top: `${Math.min(100, frac * 166)}%`, opacity: status(at) === "Testing" ? 1 : 0 }} />}
+          {t.device !== "approve" && <span ref={scanRef} className={styles.scan} style={{ opacity: status(at) === "Testing" ? 1 : 0 }} />}
         </div>
       </div>
     </section>

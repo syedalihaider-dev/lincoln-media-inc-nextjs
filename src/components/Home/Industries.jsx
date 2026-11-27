@@ -101,6 +101,10 @@ export default function Industries() {
           .set(pOut.querySelectorAll("[data-strip], [data-img]"), { clearProps: "transform" });
       };
 
+      // --pos / --lp go straight onto the parts that read them (the ghost word, the plates' parallax, the
+      // rail), not the section: a custom property set on the section restyles every element inside it
+      // — the split titles included — on every scroll frame
+      const progressEls = gsap.utils.toArray("[data-progress]", root);
       st.current = ScrollTrigger.create({
         trigger: root.querySelector("[data-pin]"),
         start: "top top",
@@ -110,8 +114,8 @@ export default function Industries() {
         onUpdate: (self) => {
           const pos = self.progress * n;
           progressRef.current = self.progress;
-          root.style.setProperty("--pos", pos.toFixed(3));
-          root.style.setProperty("--lp", (pos - Math.min(n - 1, Math.floor(pos))).toFixed(3));
+          const posV = pos.toFixed(3), lpV = (pos - Math.min(n - 1, Math.floor(pos))).toFixed(3);
+          for (const el of progressEls) { el.style.setProperty("--pos", posV); el.style.setProperty("--lp", lpV); }
           const i = Math.min(n - 1, Math.floor(pos));
           if (i !== cur) show(i);
         },
@@ -187,7 +191,7 @@ export default function Industries() {
 
       {/* ---------- Desktop: pinned "aperture" ---------- */}
       <div className={styles.pin} data-pin data-stage>
-        <p className={styles.ghost} aria-hidden="true">{cur.name.split(" ")[0]}</p>
+        <p className={styles.ghost} data-progress aria-hidden="true">{cur.name.split(" ")[0]}</p>
 
         <nav className={styles.index} aria-label="Industries">
           <ol>
@@ -203,7 +207,7 @@ export default function Industries() {
 
         <div className={styles.visual} data-visual>
           <div className={styles.tilt} data-tilt>
-            <div className={styles.frame}>
+            <div className={styles.frame} data-progress>
               {INDUSTRIES.map((ind, i) => <Plate key={ind.name} ind={ind} i={i} sizes="(min-width: 901px) 46vw, 100vw" />)}
               <span className={styles.vignette} aria-hidden="true" />
               <span className={styles.ring} aria-hidden="true" />
@@ -230,7 +234,7 @@ export default function Industries() {
 
         <div className={styles.foot} aria-hidden="true">
           <p className={styles.counter}><b key={active}>{pad(active + 1)}</b> / {pad(n)}</p>
-          <div className={styles.rail}>
+          <div className={styles.rail} data-progress>
             {INDUSTRIES.map((ind, i) => <span key={ind.name} style={{ "--i": i }}><i /></span>)}
           </div>
         </div>

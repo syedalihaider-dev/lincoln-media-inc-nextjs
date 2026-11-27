@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { INDUSTRIES } from "@/data/home";
+import { useAdaptiveDpr } from "@/components/Common/AdaptiveDpr";
 
 const CYAN = new THREE.Color("#36e4d0");
 const CYAN_2 = new THREE.Color("#7ff0e2");
@@ -138,6 +139,7 @@ export default function IndustryField({ active, pointer, progress }) {
   const wrap = useRef(null);
   const [shapes, setShapes] = useState(null);
   const [visible, setVisible] = useState(false);
+  const [dpr, monitor] = useAdaptiveDpr(1.75);
 
   useEffect(() => setShapes(sampleShapes()), []);
   // Only render frames while the chapter is on screen
@@ -152,10 +154,11 @@ export default function IndustryField({ active, pointer, progress }) {
       {shapes && (
         <Canvas
           frameloop={visible ? "always" : "never"}
-          dpr={[1, 1.75]}
+          dpr={dpr}
           gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
           camera={{ position: [0, 0, 4.2], fov: 40 }}
         >
+          {monitor}
           <Constellation shapes={shapes} active={active} pointer={pointer} progress={progress} />
         </Canvas>
       )}

@@ -5,8 +5,12 @@
 .launcher::before { content: ""; position: absolute; right: 6px; top: 50%; z-index: -1; width: 44px; height: 44px; margin-top: -22px; border-radius: 50%; background: var(--lm-accent); transform: scale(1); transition: transform 0.6s var(--lm-ease); }
 .lText { font: 500 14px/1 var(--lm-text); letter-spacing: 0.01em; }
 .lDisc { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--lm-ink); }
-.lDisc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(54, 228, 208, 0.55); animation: ping 6s var(--lm-ease) 3s infinite; }
-@keyframes ping { 0%, 80% { box-shadow: 0 0 0 0 rgba(54, 228, 208, 0.5); } 100% { box-shadow: 0 0 0 14px rgba(54, 228, 208, 0); } }
+/* The ping: a ring of light leaving the disc every 6s. Drawn as a disc 14px wider all round that sits
+   behind the cyan disc (z-index -2, under the launcher's ::before at -1) and grows + fades out — the
+   same picture as a box-shadow spreading 0 → 14px while it fades, but run by the compositor (scale and
+   opacity) instead of repainting on the main thread every frame of every page. */
+.lDisc::after { content: ""; position: absolute; inset: -14px; z-index: -2; border-radius: 50%; background: rgba(54, 228, 208, 0.5); opacity: 0; transform: scale(0.6); pointer-events: none; animation: ping 6s var(--lm-ease) 3s infinite; }
+@keyframes ping { 0%, 80% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
 .lChat { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; transition: transform 0.45s var(--lm-ease), opacity 0.3s; }
 .lX { position: absolute; width: 16px; height: 16px; opacity: 0; transform: rotate(-90deg) scale(0.6); transition: transform 0.45s var(--lm-ease), opacity 0.3s; }
 .lX::before, .lX::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.8px; margin-top: -0.9px; background: currentColor; transform: rotate(45deg); }

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { NAV, SITE } from "@/data/site";
 import { MEGA_MENU, SERVICES_PAGE } from "@/data/service-categories";
 import { useSiteMotion, sfx } from "@/lib/motion";
@@ -126,7 +126,7 @@ export default function Header({ inSite, active, base = "", current = null }) {
 
                   <AnimatePresence>
                     {mega && (
-                      <motion.div
+                      <m.div
                         id="lm-mega"
                         className={styles.mega}
                         initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
@@ -134,7 +134,7 @@ export default function Header({ inSite, active, base = "", current = null }) {
                         exit={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)", transition: { duration: 0.35, ease: [0.5, 0, 0.75, 0] } }}
                         onPointerEnter={() => clearTimeout(timer.current)}
                       >
-                        <motion.div className={styles.megaLead} custom={0} variants={col} initial="hidden" animate="show">
+                        <m.div className={styles.megaLead} custom={0} variants={col} initial="hidden" animate="show">
                           <p className={styles.megaEyebrow}>{SERVICES_PAGE.eyebrow}</p>
                           <p className={styles.megaTitle}>{SERVICES_PAGE.tagline.map((t) => <span key={t}>{t}</span>)}</p>
                           <p className={styles.megaText}>{SERVICES_PAGE.promise}</p>
@@ -142,10 +142,10 @@ export default function Header({ inSite, active, base = "", current = null }) {
                             <Button href="/services" size="sm" onClick={() => setMega(false)}>All services</Button>
                             <Button href="/contact-us#contact-form" size="sm" variant="text" onClick={() => setMega(false)}>{SERVICES_PAGE.expert}</Button>
                           </div>
-                        </motion.div>
+                        </m.div>
                         <div className={styles.megaGrid}>
                           {MEGA_MENU.map((g, i) => (
-                            <motion.div key={g.title} className={`${styles.group} ${g.wide ? styles.groupWide : ""}`} custom={i + 1} variants={col} initial="hidden" animate="show">
+                            <m.div key={g.title} className={`${styles.group} ${g.wide ? styles.groupWide : ""}`} custom={i + 1} variants={col} initial="hidden" animate="show">
                               <a className={styles.groupTitle} href={g.href} onClick={() => setMega(false)}>
                                 {g.title}<i aria-hidden="true">→</i>
                               </a>
@@ -156,10 +156,10 @@ export default function Header({ inSite, active, base = "", current = null }) {
                                   </li>
                                 ))}
                               </ul>
-                            </motion.div>
+                            </m.div>
                           ))}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </li>
@@ -182,7 +182,7 @@ export default function Header({ inSite, active, base = "", current = null }) {
           </button>
         </div>
       </header>
-      <AnimatePresence>{mega && <motion.div className={styles.scrim} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-hidden="true" />}</AnimatePresence>
+      <AnimatePresence>{mega && <m.div className={styles.scrim} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-hidden="true" />}</AnimatePresence>
       <Menu open={open} onClose={() => toggleMenu(false)} base={base} current={activeHref} />
     </>
   );

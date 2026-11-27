@@ -24,14 +24,22 @@
   z-index: -1;
   transform: perspective(600px) rotateX(72deg);
   transform-origin: bottom;
-  background:
-    linear-gradient(rgba(54, 228, 208, 0.22) 1px, transparent 1px) 0 0 / 100% 56px,
-    linear-gradient(90deg, rgba(54, 228, 208, 0.22) 1px, transparent 1px) 0 0 / 56px 100%;
+  overflow: hidden;
+  /* the vertical lines stand still… */
+  background: linear-gradient(90deg, rgba(54, 228, 208, 0.22) 1px, transparent 1px) 0 0 / 56px 100%;
   mask-image: linear-gradient(transparent, #000 75%);
   -webkit-mask-image: linear-gradient(transparent, #000 75%);
+}
+/* …while the horizontal ones run toward the viewer: one extra 56px row above the floor slides down a
+   row every 3s and repeats — the same motion as shifting the background 56px, done as a transform */
+.floor::before {
+  content: "";
+  position: absolute;
+  inset: -56px 0 0;
+  background: linear-gradient(rgba(54, 228, 208, 0.22) 1px, transparent 1px) 0 0 / 100% 56px;
   animation: run 3s linear infinite;
 }
-@keyframes run { to { background-position: 0 56px, 0 0; } }
+@keyframes run { from { transform: translateY(0); } to { transform: translateY(56px); } }
 
 .inner { position: relative; display: grid; justify-items: center; gap: 26px; padding: 14vh var(--lm-gutter); }
 .titleWrap { perspective: 1000px; }
@@ -48,4 +56,4 @@
   .inner { padding: 96px var(--lm-gutter); }
   .title { font-size: clamp(28px, 8.4vw, 64px); }
 }
-@media (prefers-reduced-motion: reduce) { .floor { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .floor::before { animation: none; } }

@@ -27,7 +27,13 @@ export default function Clients() {
   useGSAP(() => {
     if (!ready) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const rows = gsap.utils.toArray("[data-dir]", ref.current).map((m) => ({ track: m.querySelector("[data-track]"), dir: +m.dataset.dir, x: 0 }));
+    const rows = gsap.utils.toArray("[data-dir]", ref.current).map((m) => ({ track: m.querySelector("[data-track]"), dir: +m.dataset.dir, x: 0, half: 0 }));
+    // Each loop's width is measured once (and again only when it resizes, e.g. fonts arriving) — reading
+    // scrollWidth every frame right after writing transforms forced a layout per frame
+    const measure = () => rows.forEach((r) => { r.half = r.track.scrollWidth / 2; });
+    measure();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    rows.forEach((r) => ro?.observe(r.track));
     let boost = 0, skew = 0, visible = false;
     const onScroll = (e) => { boost = Math.min(40, Math.abs(e.velocity)); skew = Math.max(-10, Math.min(10, e.velocity * 0.35)); };
     lenis?.on("scroll", onScroll);
@@ -37,7 +43,8 @@ export default function Clients() {
       boost *= 0.93; skew *= 0.9;
       if (!visible) return;
       rows.forEach((r) => {
-        const half = r.track.scrollWidth / 2;
+        const half = r.half;
+        if (!half) return;
         r.x -= r.dir * (0.05 + boost * 0.018) * dt;
         if (r.x <= -half) r.x += half;
         if (r.x > 0) r.x -= half;
@@ -45,7 +52,7 @@ export default function Clients() {
       });
     };
     gsap.ticker.add(tick);
-    return () => { gsap.ticker.remove(tick); io.disconnect(); lenis?.off?.("scroll", onScroll); };
+    return () => { gsap.ticker.remove(tick); io.disconnect(); ro?.disconnect(); lenis?.off?.("scroll", onScroll); };
   }, { dependencies: [ready, lenis], scope: ref });
 
   return (

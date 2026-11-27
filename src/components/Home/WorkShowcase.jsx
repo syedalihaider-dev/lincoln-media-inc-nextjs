@@ -36,7 +36,7 @@ export default function WorkShowcase() {
     });
 
     mm.add(DESKTOP_MOTION, () => {
-      const wrap = q("[data-pin]")[0], track = q("[data-track]")[0];
+      const wrap = q("[data-pin]")[0], track = q("[data-track]")[0], bar = q("[data-bar]")[0];
       const dist = () => track.scrollWidth - innerWidth;
       const tween = gsap.to(track, {
         x: () => -dist(),
@@ -44,7 +44,9 @@ export default function WorkShowcase() {
         scrollTrigger: {
           trigger: wrap, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.9, invalidateOnRefresh: true, anticipatePin: 1,
           onUpdate: (st) => {
-            ref.current.style.setProperty("--wp", st.progress.toFixed(4));
+            // only the progress bar reads --wp: set it there, not on the section (which would restyle the
+            // whole gallery every scroll frame)
+            bar?.style.setProperty("--wp", st.progress.toFixed(4));
             const n = q("[data-count]")[0];
             if (n) n.textContent = pad(Math.min(total, 1 + Math.floor(st.progress * total * 0.999)));
           },
@@ -103,7 +105,7 @@ export default function WorkShowcase() {
         </div>
         <div className={styles.hud} aria-hidden="true">
           <span><b data-count>01</b> / {pad(total)}</span>
-          <span className={styles.bar}><i /></span>
+          <span className={styles.bar} data-bar><i /></span>
           <span>Scroll to browse</span>
         </div>
       </div>

@@ -1,9 +1,12 @@
 /* Deep-violet night: the one chapter that leans into the brand's electric violet */
+/* The glow's travel with the scroll. Registered as non-inheriting so updating it each scroll frame
+   restyles only the section's own background, not every element inside the chapter */
+@property --svc-glow { syntax: "<number>"; inherits: false; initial-value: 0; }
 .section {
   position: relative;
   --p: 0;
   background:
-    radial-gradient(ellipse 60% 55% at calc(30% + var(--p) * 40%) 70%, rgba(54, 228, 208, 0.13), transparent 70%),
+    radial-gradient(ellipse 60% 55% at calc(30% + var(--svc-glow) * 40%) 70%, rgba(54, 228, 208, 0.13), transparent 70%),
     radial-gradient(ellipse 40% 40% at 50% 100%, rgba(59, 91, 255, 0.07), transparent 70%),
     var(--lm-ink);
 }

@@ -66,6 +66,7 @@ export default function Manifesto() {
 
   return (
     <section ref={ref} id="stories" className={styles.section} data-chapter="About" data-nav="home" aria-labelledby="manifesto-title">
+      <span className={styles.seeThrough} data-see-through aria-hidden="true" />
       <div className={styles.panel} data-panel>
         <header className={styles.head} data-head>
           <SectionLabel index="02" tone="dark">About the studio</SectionLabel>

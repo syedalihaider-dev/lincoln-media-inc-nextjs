@@ -25,6 +25,8 @@ export default function Process() {
     const mm = gsap.matchMedia();
     mm.add(DESKTOP_MOTION, () => {
       let cur = 0;
+      // --pp only feeds the numeral's fill and the timeline bar: set it on those, not the section
+      const ppEls = gsap.utils.toArray("[data-pp]", ref.current);
       st.current = ScrollTrigger.create({
         trigger: ref.current.querySelector("[data-pin]"),
         start: "top top",
@@ -32,7 +34,8 @@ export default function Process() {
         pin: true,
         anticipatePin: 1,
         onUpdate: (self) => {
-          ref.current.style.setProperty("--pp", self.progress.toFixed(4));
+          const v = self.progress.toFixed(4);
+          for (const el of ppEls) el.style.setProperty("--pp", v);
           const i = Math.min(n - 1, Math.floor(self.progress * n));
           if (i !== cur) { cur = i; setActive(i); sfx("tick"); }
         },
@@ -59,7 +62,7 @@ export default function Process() {
         </header>
 
         <div className={styles.stage}>
-          <div className={styles.numeral} aria-hidden="true">
+          <div className={styles.numeral} data-pp aria-hidden="true">
             <span className={styles.strip} style={{ transform: `translateY(${-active * 20}%)` }}>
               {PROCESS.map((_, i) => <span key={i}>{pad(i + 1)}</span>)}
             </span>
@@ -76,7 +79,7 @@ export default function Process() {
           </ol>
         </div>
 
-        <div className={styles.timeline} aria-hidden="true">
+        <div className={styles.timeline} data-pp aria-hidden="true">
           <span className={styles.track}><i /></span>
           {PROCESS.map((p, i) => (
             <button key={p.title} type="button" tabIndex={-1} className={`${styles.node} ${i <= active ? styles.passed : ""}`} style={{ left: `${(i / (n - 1)) * 100}%` }} onClick={() => go(i)}>

@@ -28,6 +28,7 @@ export default function ChildEcosystem({ data, photos, ui }) {
     if (!ready) return;
     const root = ref.current;
     const layers = gsap.utils.toArray("[data-layer]", root);
+    const line = root.querySelector("[data-progress]"); // the only reader of --p
     let last = 0;
     const set = (k) => { if (k !== last) { last = k; setActive(k); sfx("tick"); } };
     const mm = gsap.matchMedia();
@@ -36,7 +37,7 @@ export default function ChildEcosystem({ data, photos, ui }) {
         scrollTrigger: {
           trigger: root, start: "top top", end: () => `+=${(n - 1) * innerHeight * 0.6}`, pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true,
           snap: { snapTo: 1 / (n - 1), duration: { min: 0.2, max: 0.6 }, delay: 0.08 },
-          onUpdate: (self) => { set(Math.min(n - 1, Math.round(self.progress * (n - 1)))); root.style.setProperty("--p", self.progress.toFixed(3)); },
+          onUpdate: (self) => { set(Math.min(n - 1, Math.round(self.progress * (n - 1)))); line?.style.setProperty("--p", self.progress.toFixed(3)); },
         },
       });
       layers.slice(1).forEach((l, i) => {
@@ -60,7 +61,7 @@ export default function ChildEcosystem({ data, photos, ui }) {
       <div className={styles.side}>
         <SectionHead kicker={data.kicker} title={data.title} id="ecosystem-title" />
         <div className={styles.flowWrap}>
-        <span className={styles.line} aria-hidden="true" />
+        <span className={styles.line} data-progress aria-hidden="true" />
         <ol className={styles.flow}>
           {data.stages.map((s, i) => (
             <li key={s.name} className={`${styles.stage} ${i === active ? styles.on : ""} ${i < active ? styles.done : ""}`} data-stage>

@@ -1,4 +1,6 @@
 /* A night map: a path of light across graphite, its glow travelling with the work */
+/* (registered as non-inheriting: updating it each scroll frame restyles only the .pin background) */
+@property --path-glow { syntax: "<number>"; inherits: false; initial-value: 0; }
 .process {
   position: relative;
   background: linear-gradient(180deg, var(--lm-ink), #070c16);
@@ -12,7 +14,7 @@
   padding: clamp(72px, 11vh, 120px) var(--lm-gutter) clamp(48px, 7vh, 80px);
   overflow: hidden;
   isolation: isolate;
-  background: radial-gradient(ellipse 35% 45% at calc(8% + var(--pp) * 84%) 62%, rgba(54, 228, 208, 0.14), transparent 70%);
+  background: radial-gradient(ellipse 35% 45% at calc(8% + var(--path-glow) * 84%) 62%, rgba(54, 228, 208, 0.14), transparent 70%);
 }
 .head { display: grid; gap: 22px; }
 .title { font: 800 clamp(30px, 3.3vw, 58px)/0.98 var(--lm-display); letter-spacing: -0.04em; text-transform: uppercase; }

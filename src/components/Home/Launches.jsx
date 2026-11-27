@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { m, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { LAUNCHES } from "@/data/work";
 import SectionLabel from "@/components/Common/SectionLabel";
 import RevealText from "@/components/Common/RevealText";
@@ -79,10 +79,10 @@ export default function Launches() {
       </ul>
 
       {/* Pointer-following preview (decorative; the rows above carry the content) */}
-      <motion.div className={styles.preview} style={{ x, y, rotate: rot }} aria-hidden="true">
+      <m.div className={styles.preview} style={{ x, y, rotate: rot }} aria-hidden="true">
         <AnimatePresence>
           {hover > -1 && (
-            <motion.figure
+            <m.figure
               key={hover}
               className={styles.frame}
               initial={{ clipPath: "inset(100% 0% 0% 0%)", scale: 1.1 }}
@@ -91,10 +91,10 @@ export default function Launches() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <Image src={LAUNCHES[hover].image} alt="" fill sizes="440px" />
-            </motion.figure>
+            </m.figure>
           )}
         </AnimatePresence>
-      </motion.div>
+      </m.div>
       <p className={styles.foot}>Launched with our partner Sybrid · <a href="https://sybrid.com/" target="_blank" rel="noopener">sybrid.com ↗</a></p>
     </section>
   );

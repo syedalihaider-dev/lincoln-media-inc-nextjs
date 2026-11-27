@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useSiteMotion, sfx } from "@/lib/motion";
 import { PROCESS } from "@/data/home";
@@ -40,6 +40,7 @@ export default function ProcessPath() {
       const path = root.querySelector("[data-path]");
       const dot = root.querySelector("[data-dot]");
       const nodes = gsap.utils.toArray("[data-node]", root);
+      const pin = root.querySelector("[data-pin]");
       const len = path.getTotalLength();
       // place the nodes on the path
       nodes.forEach((n, i) => { const p = path.getPointAtLength(AT[i] * len); n.style.left = `${p.x / 10}%`; n.style.top = `${p.y / 3}%`; });
@@ -55,7 +56,9 @@ export default function ProcessPath() {
           path.style.strokeDashoffset = String(1 - p);
           const pt = path.getPointAtLength(p * len);
           dot.style.left = `${pt.x / 10}%`; dot.style.top = `${pt.y / 3}%`;
-          root.style.setProperty("--pp", p.toFixed(4));
+          // the travelling glow lives on the .pin background: a non-inheriting property set right there, so
+          // the scroll restyles that one background instead of everything inside the section
+          pin?.style.setProperty("--path-glow", p.toFixed(4));
           let i = 0;
           AT.forEach((a, k) => { if (p >= a - 0.02) i = k; });
           nodes.forEach((n, k) => n.classList.toggle(styles.reached, k <= i));
@@ -83,10 +86,10 @@ export default function ProcessPath() {
           <RevealText id="process-title" className={styles.title}>Five moves. <em>No wasted ones.</em></RevealText>
         </header>
         <div className={styles.now} aria-live="polite">
-            <motion.div key={s.title} initial={{ opacity: 0, y: 30, clipPath: "inset(0% 0% 100% 0%)" }} animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE } }}>
+            <m.div key={s.title} initial={{ opacity: 0, y: 30, clipPath: "inset(0% 0% 100% 0%)" }} animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 0.7, ease: EASE } }}>
               <h3 className={styles.stepName}>{s.title}</h3>
               <p className={styles.stepText}>{s.text}</p>
-            </motion.div>
+            </m.div>
         </div>
 
         </div>

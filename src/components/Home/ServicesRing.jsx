@@ -3,6 +3,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import { useAdaptiveDpr } from "@/components/Common/AdaptiveDpr";
 
 const CYAN = new THREE.Color("#36e4d0");
 const R = 4.3; // ring radius
@@ -110,6 +111,7 @@ function Ring({ images, state }) {
 export default function ServicesRing({ images, state }) {
   const wrap = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [dpr, monitor] = useAdaptiveDpr(1.75);
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { rootMargin: "200px" });
     io.observe(wrap.current);
@@ -120,12 +122,13 @@ export default function ServicesRing({ images, state }) {
     <div ref={wrap} style={{ position: "absolute", inset: 0 }}>
       <Canvas
         frameloop={visible ? "always" : "never"}
-        dpr={[1, 1.75]}
+        dpr={dpr}
         gl={{ antialias: true, alpha: true }}
         camera={{ fov: 30, position: [0, 0.7, R + 9.6], near: 0.1, far: 40 }}
         onCreated={({ camera }) => camera.lookAt(0, -0.15, R)}
         aria-hidden="true"
       >
+        {monitor}
         <Suspense fallback={null}>
           <Ring images={images} state={state} />
         </Suspense>

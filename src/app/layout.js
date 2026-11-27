@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import { SITE } from "@/data/site";
 import { ROBOTS } from "@/config/site";
 import ZendeskScript from "@/components/Common/Chat/ZendeskScript";
+import MotionFeatures from "@/components/Common/MotionFeatures";
 import "./globals.css";
 
 // Typography: Unbounded (headings) arrives with each page's font request; Poppins (everything else) is loaded here.
@@ -39,7 +40,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.variable} suppressHydrationWarning>
       {/* Each page sets its own body class (e.g. "locked") and the scripts change it at runtime */}
       <body suppressHydrationWarning>
-        {children}
+        <MotionFeatures>{children}</MotionFeatures>
         {/* Live chat (Zendesk), once for every page, after the page is idle */}
         <ZendeskScript />
       </body>

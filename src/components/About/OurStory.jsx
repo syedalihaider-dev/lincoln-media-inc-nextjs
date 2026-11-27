@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useSiteMotion, sfx } from "@/lib/motion";
 import { ABOUT_STORY } from "@/data/about";
@@ -111,7 +111,7 @@ export default function OurStory() {
             </div>
             <figure className={styles.c2Fig} data-reveal aria-hidden="true">
               <AnimatePresence initial={false}>
-                <motion.div
+                <m.div
                   key={disc}
                   className={styles.c2Img}
                   initial={{ clipPath: "inset(0% 0% 100% 0%)", scale: 1.15 }}
@@ -119,7 +119,7 @@ export default function OurStory() {
                   exit={{ opacity: 0, transition: { duration: 0.6, delay: 0.3 } }}
                 >
                   <Image src={disciplines.disciplines[disc].image} alt="" fill sizes="(min-width: 901px) 36vw, 100vw" />
-                </motion.div>
+                </m.div>
               </AnimatePresence>
               <figcaption>{disciplines.disciplines[disc].name}</figcaption>
             </figure>
@@ -145,7 +145,7 @@ export default function OurStory() {
             </div>
             <figure className={styles.c3Fig} aria-hidden="true">
               <AnimatePresence initial={false}>
-                <motion.div
+                <m.div
                   key={brand}
                   className={styles.c3Img}
                   initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
@@ -153,7 +153,7 @@ export default function OurStory() {
                   exit={{ opacity: 0, transition: { duration: 0.5, delay: 0.3 } }}
                 >
                   <Image src={CASE_STUDIES[brand].image} alt="" fill sizes="(min-width: 901px) 30vw, 100vw" />
-                </motion.div>
+                </m.div>
               </AnimatePresence>
               <figcaption>{CASE_STUDIES[brand].name} — {CASE_STUDIES[brand].services}</figcaption>
             </figure>

@@ -35,6 +35,7 @@ export default function Services() {
     mm.add(DESKTOP_MOTION, () => {
       let cur = 0;
       const r = ring.current;
+      const sec = ref.current, bar = q("[data-progress]")[0];
       st.current = ScrollTrigger.create({
         trigger: ref.current.querySelector("[data-pin]"),
         start: "top top",
@@ -46,7 +47,9 @@ export default function Services() {
           r.turn = self.progress * (count - 1);
           const i = Math.round(r.turn);
           r.active = i;
-          ref.current.style.setProperty("--p", self.progress.toFixed(4));
+          const v = self.progress.toFixed(4);
+          sec.style.setProperty("--svc-glow", v); // the background glow (non-inheriting)
+          bar?.style.setProperty("--p", v); // the progress line
           if (i !== cur) { cur = i; setActive(i); sfx("tick"); }
         },
       });
@@ -117,7 +120,7 @@ export default function Services() {
 
           <div className={styles.dial} aria-hidden="true">
             <span className={styles.counter}><b>{pad(active + 1)}</b> / {pad(count)}</span>
-            <span className={styles.progress}><i /></span>
+            <span className={styles.progress} data-progress><i /></span>
           </div>
 
           {/* Details: all in the document; on desktop only the active one shows */}

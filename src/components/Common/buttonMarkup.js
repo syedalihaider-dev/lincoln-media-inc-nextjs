@@ -15,7 +15,9 @@ export function buttonHTML({ href, label, variant = "solid", size = "md", extra 
   return `<a class="${cls}" href="${esc(href)}">`
     + `<span class="${styles.label}"><span class="${styles.rollA}">${letters(label)}</span><span class="${styles.rollB}" aria-hidden="true">${letters(label)}</span></span>`
     + `<span class="${styles.disc}" aria-hidden="true"><svg viewBox="0 0 24 24" class="${styles.iconA}">${ARROW}</svg><svg viewBox="0 0 24 24" class="${styles.iconB}">${ARROW}</svg></span>`
-    + `<span class="${styles.flood}" aria-hidden="true"></span></a>`;
+    + `<span class="${styles.flood}" aria-hidden="true"></span>`
+    + (variant === "outline" ? `<span class="${styles.ring}" aria-hidden="true"><i></i></span>` : "")
+    + `</a>`;
 }
 
 // Rewrites the legacy site's buttons — <a class="btn btn-red|btn-ghost [btn-sm] [extras]" href="…"><span>Label</span>[<i>↗</i>]</a> —

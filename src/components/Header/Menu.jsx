@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { NAV, SITE } from "@/data/site";
 import { SERVICE_CATEGORIES, categoryHref } from "@/data/service-categories";
 import styles from "./Menu.module.css";
@@ -33,27 +33,27 @@ export default function Menu({ open, onClose, base = "", current = null }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div id="lm-menu" className={styles.menu} role="dialog" aria-modal="true" aria-label="Menu" initial="closed" animate="open" exit="closed" variants={panel}>
+        <m.div id="lm-menu" className={styles.menu} role="dialog" aria-modal="true" aria-label="Menu" initial="closed" animate="open" exit="closed" variants={panel}>
           <div className={styles.inner}>
             <nav className={styles.primary} aria-label="Menu">
               <ul>
                 {NAV.map((n, i) => (
                   <li key={n.href}>
-                    <motion.a ref={i === 0 ? first : undefined} href={link(base, n.href)} variants={item} onClick={onClose} className={current === n.href ? styles.current : undefined} aria-current={current === n.href ? "page" : undefined}>
+                    <m.a ref={i === 0 ? first : undefined} href={link(base, n.href)} variants={item} onClick={onClose} className={current === n.href ? styles.current : undefined} aria-current={current === n.href ? "page" : undefined}>
                       <span className={styles.word}>{n.label}</span>
-                    </motion.a>
+                    </m.a>
                   </li>
                 ))}
                 <li>
                   {/* Reloading the homepage starts the AI guide again */}
-                  <motion.a href="/" variants={item} onClick={onClose}>
+                  <m.a href="/" variants={item} onClick={onClose}>
                     <span className={styles.word}><em>Your build plan</em></span>
-                  </motion.a>
+                  </m.a>
                 </li>
               </ul>
             </nav>
 
-            <motion.aside className={styles.side} variants={fade}>
+            <m.aside className={styles.side} variants={fade}>
               <div>
                 <p className={styles.h}>Services</p>
                 <ul className={styles.services}>
@@ -81,13 +81,13 @@ export default function Menu({ open, onClose, base = "", current = null }) {
                   <li className={styles.addr}>{SITE.street},<br />{SITE.locality}</li>
                 </ul>
               </div>
-            </motion.aside>
+            </m.aside>
           </div>
-          <motion.p className={styles.foot} variants={fade}>
+          <m.p className={styles.foot} variants={fade}>
             <span>{SITE.city} · Est. {SITE.established}</span>
             <span>Press Esc to close</span>
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
       )}
     </AnimatePresence>
   );

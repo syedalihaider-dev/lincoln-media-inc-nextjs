@@ -22,6 +22,7 @@ export default function ChildProcess({ data }) {
     if (!ready) return;
     const root = ref.current;
     const track = root.querySelector("[data-track]");
+    const fill = root.querySelector("[data-fill]");
     const mm = gsap.matchMedia();
     mm.add(DESKTOP_MOTION, () => {
       let last = 0;
@@ -33,7 +34,11 @@ export default function ChildProcess({ data }) {
         scrollTrigger: {
           trigger: root, start: "top top", end: () => `+=${dist() * 0.8}`, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (st) => {
-            root.style.setProperty("--p", st.progress.toFixed(3));
+            // the room's glow (a non-inheriting property, so only the section's own background restyles)
+            // and the timeline fill — rather than --p on the section, which restyled the whole track per frame
+            const v = st.progress.toFixed(3);
+            root.style.setProperty("--cp-glow", v);
+            fill?.style.setProperty("--p", v);
             const k = Math.min(n - 1, Math.round(st.progress * (n - 1)));
             if (k !== last) { last = k; setActive(k); sfx("tick"); }
           },
@@ -46,7 +51,7 @@ export default function ChildProcess({ data }) {
         gsap.fromTo(ch.querySelector("[data-ghost]"), { xPercent: 30 }, { xPercent: -30, ease: "none", scrollTrigger: { ...ca, start: "left right", end: "right left" } });
         gsap.fromTo(ch.querySelectorAll("[data-copy] > *"), { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, ease: "power2.out", scrollTrigger: { ...ca, start: "left 75%", end: "left 35%" } });
       });
-      return () => { setActive(0); root.style.removeProperty("--p"); };
+      return () => { setActive(0); root.style.removeProperty("--cp-glow"); fill?.style.removeProperty("--p"); };
     });
     mm.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
       gsap.utils.toArray("[data-chapter]", root).forEach((ch) => gsap.from(ch, { y: 50, opacity: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ch, start: "top 85%", once: true } }));
@@ -69,7 +74,7 @@ export default function ChildProcess({ data }) {
           <ol className={styles.rail}>
             {data.steps.map((s, i) => <li key={s.name} className={i <= active ? styles.reached : ""}>{s.name}</li>)}
           </ol>
-          <span className={styles.fill} />
+          <span className={styles.fill} data-fill />
         </div>
 
         <div className={styles.viewport} data-viewport>

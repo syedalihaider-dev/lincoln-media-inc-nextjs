@@ -39,7 +39,10 @@
    * ===================================================================== */
   const COUNT = innerWidth < 700 ? 12000 : 26000;
   const renderer = new THREE.WebGLRenderer({ canvas: $("#field"), antialias: false });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  // Phones/tablets (touch-first, narrow): a full-screen shader at 2-3x density is the heaviest GPU job on
+  // the page; 1.5x is visually indistinguishable for the soft nebula and the particles size by pixel ratio.
+  const touchSmall = matchMedia("(pointer: coarse) and (max-width: 1024px)").matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, touchSmall ? 1.5 : 2));
   renderer.autoClear = false;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
@@ -1138,6 +1141,7 @@
     siteMode(on) {
       if (on === siteMode) return;
       siteMode = on;
+      if (window.LM_wakeField) window.LM_wakeField();
       document.body.classList.toggle("in-site", on);
       if (on) { morph("orb"); colTarget = palette.unsure; }
       else {
@@ -1155,8 +1159,11 @@
   $$("[data-close]").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
 
+  // One style write per frame, however fast the mouse reports
   const cursor = $(".cursor");
-  addEventListener("pointermove", (e) => { cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; });
+  let curX = 0, curY = 0, curQueued = false;
+  const paintCursor = () => { curQueued = false; cursor.style.transform = `translate(${curX}px, ${curY}px)`; };
+  addEventListener("pointermove", (e) => { curX = e.clientX; curY = e.clientY; if (!curQueued) { curQueued = true; requestAnimationFrame(paintCursor); } }, { passive: true });
   document.addEventListener("pointerover", (e) => cursor.classList.toggle("hover", !!e.target.closest("a, button, input, select, textarea")));
 
   // Voice meter bars (the NYC clock readout was removed from the banner)
@@ -1208,7 +1215,35 @@
    * ===================================================================== */
   const clockGL = new THREE.Clock();
   const root = document.documentElement;
-  (function tick() {
+  // These custom properties live on <html>, so every write restyles the whole document (the homepage
+  // included). Write only when the value actually changes — while the guide is silent, that's never.
+  const cssVars = {};
+  const setVar = (k, v) => { if (cssVars[k] !== v) { cssVars[k] = v; root.style.setProperty(k, v); } };
+  const barH = [];
+
+  // Once the visitor is on the homepage, the canvas is only seen through the guided experience and the
+  // homepage hero (every other chapter paints an opaque background over it). Render only while one of
+  // those is on screen; the loop stops entirely otherwise and restarts when one comes back.
+  const seeThrough = new Set();
+  let loopOn = false;
+  const shouldRun = () => !siteMode || seeThrough.size > 0;
+  const startLoop = () => { if (!loopOn && shouldRun()) { loopOn = true; clockGL.getDelta(); requestAnimationFrame(tick); } };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? seeThrough.add(e.target) : seeThrough.delete(e.target)));
+      startLoop();
+    });
+    // #experience, the hero (#home) and any strip the homepage marks [data-see-through] (e.g. the top
+    // of the About chapter while its panel wipes in over the canvas)
+    const watch = () => document.querySelectorAll("#experience, #home, [data-see-through]").forEach((el) => io.observe(el));
+    watch();
+    // the homepage is rendered by React; observe its parts once they exist
+    if (!document.getElementById("home")) addEventListener("DOMContentLoaded", watch, { once: true });
+  } else seeThrough.add(root);
+  window.LM_wakeField = startLoop;
+
+  function tick() {
+    if (!shouldRun()) { loopOn = false; return; }
     const dt = Math.min(clockGL.getDelta(), 0.05), t = clockGL.elapsedTime;
     uniforms.uTime.value = t; bgUniforms.uTime.value = t;
     uniforms.uPulse.value *= 0.95;
@@ -1217,10 +1252,10 @@
     const lv = voice.update();
     uniforms.uVoice.value = Math.min(1, lv * 1.2);
     bgUniforms.uLevel.value += (lv - bgUniforms.uLevel.value) * 0.2;
-    root.style.setProperty("--lv", lv.toFixed(3));
+    setVar("--lv", lv.toFixed(3));
     for (let i = 0; i < barEls.length; i++) {
-      const h = 2 + lv * 28 * (0.45 + 0.55 * Math.abs(Math.sin(t * 9 + i * 1.7)));
-      barEls[i].style.height = h.toFixed(1) + "px";
+      const h = (2 + lv * 28 * (0.45 + 0.55 * Math.abs(Math.sin(t * 9 + i * 1.7)))).toFixed(1);
+      if (barH[i] !== h) { barH[i] = h; barEls[i].style.height = h + "px"; }
     }
 
     if (morphT < 1) {
@@ -1234,8 +1269,8 @@
     }
     colA.set(colTarget[0]); colB.set(colTarget[1]);
     uniforms.uColA.value.lerp(colA, 0.03); uniforms.uColB.value.lerp(colB, 0.03);
-    root.style.setProperty("--accent", "#" + uniforms.uColA.value.getHexString());
-    root.style.setProperty("--accent-2", "#" + uniforms.uColB.value.getHexString());
+    setVar("--accent", "#" + uniforms.uColA.value.getHexString());
+    setVar("--accent-2", "#" + uniforms.uColB.value.getHexString());
     bgUniforms.uColA.value.lerp(colA, 0.03); bgUniforms.uColB.value.lerp(colB, 0.03);
     mouse.x += (mouse.tx - mouse.x) * 0.05; mouse.y += (mouse.ty - mouse.y) * 0.05;
     bgUniforms.uMouse.value.set(mouse.x, -mouse.y);
@@ -1280,5 +1315,6 @@
     renderer.render(bgScene, bgCam);
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
-  })();
+  }
+  startLoop();
 })();

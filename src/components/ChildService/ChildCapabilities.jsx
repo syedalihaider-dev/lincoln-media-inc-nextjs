@@ -22,6 +22,7 @@ export default function ChildCapabilities({ data }) {
   useGSAP(() => {
     if (!ready) return;
     const root = ref.current;
+    const bar = root.querySelector("[data-progress]");
     let last = 0;
     const set = (k) => { if (k !== last) { last = k; setActive(k); sfx("tick"); } };
     const mm = gsap.matchMedia();
@@ -35,7 +36,8 @@ export default function ChildCapabilities({ data }) {
           snap: { snapTo: (v) => Math.round(v * (n - 1)) / (n - 1), duration: { min: 0.2, max: 0.6 }, delay: 0.08 },
           onUpdate: (self) => {
             set(Math.min(n - 1, Math.round(self.progress * (n - 1))));
-            root.style.setProperty("--p", self.progress.toFixed(3));
+            // only the progress bar reads --p; setting it on the section restyled the whole chapter per frame
+            bar?.style.setProperty("--p", self.progress.toFixed(3));
           },
         },
       }).scrollTrigger;
@@ -79,7 +81,7 @@ export default function ChildCapabilities({ data }) {
           );
         })}
       </ul>
-      <div className={styles.progress} aria-hidden="true"><span /></div>
+      <div className={styles.progress} data-progress aria-hidden="true"><span /></div>
     </section>
   );
 }
