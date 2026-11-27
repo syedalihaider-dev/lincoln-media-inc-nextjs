@@ -1,26 +1,30 @@
 "use client";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Lenis from "lenis";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { Suspense, startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { MotionContext } from "@/lib/motion";
 import { pauseOffscreenAnimations } from "@/lib/pauseOffscreen";
 import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-import Chat from "@/components/Common/Chat/Chat";
-import Hero from "./Hero";
-import Manifesto from "./Manifesto";
-import Services from "./Services";
-import WorkShowcase from "./WorkShowcase";
-import Launches from "./Launches";
-import Industries from "./Industries";
-import Technology from "./Technology";
-import Process from "./Process";
-import WhyLincoln from "./WhyLincoln";
-import Partners from "./Partners";
-import Clients from "./Clients";
-import CTA from "./CTA";
-import Contact from "./Contact";
+import HydrateGate from "@/components/Common/HydrateGate";
 import styles from "./HomeSite.module.css";
+
+// The hero and the chapters are separate modules: server-rendered (and their CSS linked) exactly as
+// before, but their code is evaluated only when their hydration gate opens (Common/HydrateGate) — one
+// short task per chapter after load instead of one long start-up task while the intro is on screen.
+const Hero = dynamic(() => import("./Hero"));
+const Manifesto = dynamic(() => import("./Manifesto"));
+const Services = dynamic(() => import("./Services"));
+const WorkShowcase = dynamic(() => import("./WorkShowcase"));
+const Launches = dynamic(() => import("./Launches"));
+const Industries = dynamic(() => import("./Industries"));
+const Technology = dynamic(() => import("./Technology"));
+const Process = dynamic(() => import("./Process"));
+const WhyLincoln = dynamic(() => import("./WhyLincoln"));
+const Partners = dynamic(() => import("./Partners"));
+const Clients = dynamic(() => import("./Clients"));
+const CTA = dynamic(() => import("./CTA"));
+const Contact = dynamic(() => import("./Contact"));
+const Footer = dynamic(() => import("@/components/Footer/Footer"));
+const Chat = dynamic(() => import("@/components/Common/Chat/Chat"));
 
 const REDUCED = "(prefers-reduced-motion: reduce)";
 
@@ -61,13 +65,15 @@ export default function HomeSite() {
 
   /* ---------- Bridge for the guided intro ---------- */
   useEffect(() => {
-    window.ScrollTrigger = ScrollTrigger; // app.js refreshes it after "Skip intro"
     const init = () => {
       if (readyRef.current) return;
       readyRef.current = true;
-      setSkipped(document.body.classList.contains("skipped"));
+      const wasSkipped = document.body.classList.contains("skipped");
+      startTransition(() => setSkipped(wasSkipped));
       // Line-split headlines must measure the real typefaces, not the fallback
-      const go = () => setReady(true);
+      // A transition: if a chapter is still on its way when the homepage opens, React finishes hydrating it
+      // before the motion starts instead of briefly clearing it
+      const go = () => startTransition(() => setReady(true));
       if (document.fonts?.status === "loaded") go();
       else Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]).then(go);
     };
@@ -96,81 +102,88 @@ export default function HomeSite() {
     if (!ready) return;
     const reduced = matchMedia(REDUCED).matches;
     const cleanups = [];
+    let cancelled = false;
+    // GSAP and Lenis are not part of the start-up bundle: they arrive with the hero and chapters, so by
+    // the time the homepage opens they are already in memory and this resolves within the same frame.
+    Promise.all([import("@/lib/gsap"), import("lenis")]).then(([{ gsap, ScrollTrigger }, { default: Lenis }]) => {
+      if (cancelled) return;
+      window.ScrollTrigger = ScrollTrigger; // app.js refreshes it after "Skip intro"
 
-    if (!reduced) {
-      const l = new Lenis({ duration: 1.15, smoothWheel: true, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-      l.on("scroll", (e) => { ScrollTrigger.update(); window.LM?.velocity?.(e.velocity); });
-      const raf = (t) => l.raf(t * 1000);
-      gsap.ticker.add(raf);
-      gsap.ticker.lagSmoothing(0);
-      const onRefresh = () => l.resize();
-      ScrollTrigger.addEventListener("refresh", onRefresh);
-      lenisRef.current = l;
-      setLenis(l);
-      cleanups.push(() => { gsap.ticker.remove(raf); ScrollTrigger.removeEventListener("refresh", onRefresh); l.destroy(); lenisRef.current = null; });
-    } else lenisRef.current = null;
+      if (!reduced) {
+        const l = new Lenis({ duration: 1.15, smoothWheel: true, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        l.on("scroll", (e) => { ScrollTrigger.update(); window.LM?.velocity?.(e.velocity); });
+        const raf = (t) => l.raf(t * 1000);
+        gsap.ticker.add(raf);
+        gsap.ticker.lagSmoothing(0);
+        const onRefresh = () => l.resize();
+        ScrollTrigger.addEventListener("refresh", onRefresh);
+        lenisRef.current = l;
+        setLenis(l);
+        cleanups.push(() => { gsap.ticker.remove(raf); ScrollTrigger.removeEventListener("refresh", onRefresh); l.destroy(); lenisRef.current = null; });
+      } else lenisRef.current = null;
 
-    // Scrolling down out of the guided experience switches the 3D scene to its "site" mode
-    const exp = document.getElementById("experience");
-    if (exp && !document.body.classList.contains("skipped")) {
-      const st = ScrollTrigger.create({ trigger: exp, start: "bottom 60%", onEnter: () => window.LM?.siteMode(true), onLeaveBack: () => window.LM?.siteMode(false) });
-      cleanups.push(() => st.kill());
-    } else window.LM?.siteMode(true);
+      // Scrolling down out of the guided experience switches the 3D scene to its "site" mode
+      const exp = document.getElementById("experience");
+      if (exp && !document.body.classList.contains("skipped")) {
+        const st = ScrollTrigger.create({ trigger: exp, start: "bottom 60%", onEnter: () => window.LM?.siteMode(true), onLeaveBack: () => window.LM?.siteMode(false) });
+        cleanups.push(() => st.kill());
+      } else window.LM?.siteMode(true);
 
-    // Each chapter: highlight its nav item, update the chapter index, park the orb where it belongs
-    const secs = [...root.current.querySelectorAll("[data-chapter]")];
-    const index = root.current.querySelector("[data-index]");
-    secs.forEach((sec, i) => {
-      const st = ScrollTrigger.create({
-        trigger: sec,
-        start: "top 55%",
-        end: "bottom 55%",
-        onToggle: (self) => {
-          if (!self.isActive) return;
-          setActive(sec.dataset.nav || sec.id);
-          if (index) index.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b> / ${sec.dataset.chapter}`;
-          const [x, y, s] = (sec.dataset.orb || "0,-3.2,0.4").split(",").map(Number);
-          window.LM?.blob(x, y, s);
-        },
+      // Each chapter: highlight its nav item, update the chapter index, park the orb where it belongs
+      const secs = [...root.current.querySelectorAll("[data-chapter]")];
+      const index = root.current.querySelector("[data-index]");
+      secs.forEach((sec, i) => {
+        const st = ScrollTrigger.create({
+          trigger: sec,
+          start: "top 55%",
+          end: "bottom 55%",
+          onToggle: (self) => {
+            if (!self.isActive) return;
+            setActive(sec.dataset.nav || sec.id);
+            if (index) index.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b> / ${sec.dataset.chapter}`;
+            const [x, y, s] = (sec.dataset.orb || "0,-3.2,0.4").split(",").map(Number);
+            window.LM?.blob(x, y, s);
+          },
+        });
+        cleanups.push(() => st.kill());
       });
-      cleanups.push(() => st.kill());
+      const rail = root.current.querySelector("[data-rail]");
+      const railST = ScrollTrigger.create({ trigger: root.current, start: "top top", end: "bottom bottom", onUpdate: (s) => rail && (rail.style.transform = `scaleY(${s.progress})`) });
+      cleanups.push(() => railST.kill());
+
+      // Curtain: after "Skip intro", the homepage opens like a stage
+      const c = curtain.current;
+      if (document.body.classList.contains("skipped") && !reduced) {
+        const tl = gsap.timeline({ delay: 0.45, onComplete: () => gsap.set(c, { display: "none" }) });
+        tl.fromTo(c.querySelector("[data-hair]"), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" })
+          .fromTo(c.querySelectorAll("[data-word]"), { yPercent: 110 }, { yPercent: 0, duration: 0.7, stagger: 0.06, ease: "expo.out" }, "-=0.4")
+          .to(c.querySelectorAll("[data-word]"), { yPercent: -110, duration: 0.45, stagger: 0.04, ease: "expo.in" }, "+=0.25")
+          .to(c.querySelector("[data-top]"), { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "-=0.1")
+          .to(c.querySelector("[data-bottom]"), { yPercent: 100, duration: 1.1, ease: "expo.inOut" }, "<")
+          .to(c.querySelector("[data-hair]"), { opacity: 0, duration: 0.3 }, "<");
+        cleanups.push(() => tl.kill());
+      } else gsap.set(c, { display: "none" });
+
+      // Looping CSS animations in chapters far off screen (the guided experience above included) wait
+      // until the visitor gets near them
+      cleanups.push(pauseOffscreenAnimations(document.getElementById("top")));
+
+      // Section animations (set up by the children before this effect runs) measure in document order
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+      const refresh = () => ScrollTrigger.refresh();
+      document.fonts?.ready.then(refresh);
+      window.addEventListener("load", refresh);
+      cleanups.push(() => window.removeEventListener("load", refresh));
+
+      // A deep link waits for the layout to settle, then jumps
+      if (pending.current) {
+        const t = pending.current;
+        pending.current = null;
+        setTimeout(() => scrollTo(t, true), 350);
+      }
     });
-    const rail = root.current.querySelector("[data-rail]");
-    const railST = ScrollTrigger.create({ trigger: root.current, start: "top top", end: "bottom bottom", onUpdate: (s) => rail && (rail.style.transform = `scaleY(${s.progress})`) });
-    cleanups.push(() => railST.kill());
-
-    // Curtain: after "Skip intro", the homepage opens like a stage
-    const c = curtain.current;
-    if (document.body.classList.contains("skipped") && !reduced) {
-      const tl = gsap.timeline({ delay: 0.45, onComplete: () => gsap.set(c, { display: "none" }) });
-      tl.fromTo(c.querySelector("[data-hair]"), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" })
-        .fromTo(c.querySelectorAll("[data-word]"), { yPercent: 110 }, { yPercent: 0, duration: 0.7, stagger: 0.06, ease: "expo.out" }, "-=0.4")
-        .to(c.querySelectorAll("[data-word]"), { yPercent: -110, duration: 0.45, stagger: 0.04, ease: "expo.in" }, "+=0.25")
-        .to(c.querySelector("[data-top]"), { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "-=0.1")
-        .to(c.querySelector("[data-bottom]"), { yPercent: 100, duration: 1.1, ease: "expo.inOut" }, "<")
-        .to(c.querySelector("[data-hair]"), { opacity: 0, duration: 0.3 }, "<");
-      cleanups.push(() => tl.kill());
-    } else gsap.set(c, { display: "none" });
-
-    // Looping CSS animations in chapters far off screen (the guided experience above included) wait
-    // until the visitor gets near them
-    cleanups.push(pauseOffscreenAnimations(document.getElementById("top")));
-
-    // Section animations (set up by the children before this effect runs) measure in document order
-    ScrollTrigger.sort();
-    ScrollTrigger.refresh();
-    const refresh = () => ScrollTrigger.refresh();
-    document.fonts?.ready.then(refresh);
-    window.addEventListener("load", refresh);
-    cleanups.push(() => window.removeEventListener("load", refresh));
-
-    // A deep link waits for the layout to settle, then jumps
-    if (pending.current) {
-      const t = pending.current;
-      pending.current = null;
-      setTimeout(() => scrollTo(t, true), 350);
-    }
-    return () => cleanups.forEach((f) => f());
+    return () => { cancelled = true; cleanups.forEach((f) => f()); };
   }, [ready, scrollTo]);
 
   /* ---------- In-page anchors glide through the smooth scroller ---------- */
@@ -199,27 +212,31 @@ export default function HomeSite() {
       {/* app.js toggles this element's classes and aria-hidden — keep them static here */}
       <div className="site" id="site" aria-hidden="true" ref={root} suppressHydrationWarning>
         <a className="lm-skip" href="#home">Skip to content</a>
-        <Header inSite={inSite} active={active} />
+        <Suspense fallback={null}><HydrateGate index={0}><Header inSite={inSite} active={active} /></HydrateGate></Suspense>
 
         <div className={styles.chrome} aria-hidden="true">
           <span className={styles.rail}><i data-rail /></span>
           <p className={styles.index} data-index><b>01</b> / Home</p>
         </div>
 
-        <Hero />
-        <Manifesto />
-        <Services />
-        <WorkShowcase />
-        <Launches />
-        <Industries />
-        <Technology />
-        <Process />
-        <WhyLincoln />
-        <Partners />
-        <Clients />
-        <CTA />
-        <Contact />
-        <Footer />
+        {/* The header and each chapter are their own hydration boundaries, and their hydration waits for idle
+           time after load (Common/HydrateGate) — the homepage is behind the intro until the visitor acts, so
+           no long hydration task competes with the intro. The server HTML is complete either way, so
+           nothing changes on screen. */}
+        <Suspense fallback={null}><HydrateGate index={1}><Hero /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={2}><Manifesto /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={3}><Services /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={4}><WorkShowcase /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={5}><Launches /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={6}><Industries /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={7}><Technology /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={8}><Process /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={9}><WhyLincoln /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={10}><Partners /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={11}><Clients /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={12}><CTA /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={13}><Contact /></HydrateGate></Suspense>
+        <Suspense fallback={null}><HydrateGate index={14}><Footer /></HydrateGate></Suspense>
         {/* the contact desk appears once the guided intro has handed over to the homepage */}
         {inSite && <Chat />}
 

@@ -13,7 +13,8 @@ const SITE_START = '<!-- The rest of the site stays hidden until the visitor fin
 const DROP_SCRIPTS = /gsap|ScrollTrigger|lenis|site\.js/i;
 const THREE_CDN = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
 // Bump when public/app.js changes so browsers fetch the new engine
-const APP_VERSION = 39;
+const APP_VERSION = 42;
+const STYLES_VERSION = 41;
 const LOGO_TEXT = '<span class="logo-text">THE&nbsp;LINCOLN<span>MEDIA</span></span>';
 const LOGO_IMG = '<img class="logo-img" src="/images/logo.png" alt="The Lincoln Media" width="200" height="50" decoding="async" fetchpriority="high">';
 
@@ -48,7 +49,11 @@ export function introParts() {
     .filter((s) => !DROP_SCRIPTS.test(s))
     // three.js r128 served from this site (public/vendor, immutable cache) instead of a third-party CDN:
     // the same file, without an extra DNS/TLS connection in front of the intro
-    .map((s) => s.replace(THREE_CDN, "/vendor/three-r128.min.js").replace(/app\.js\?v=\d+/, `app.js?v=${APP_VERSION}`));
+    .map((s) => s.replace(THREE_CDN, "/vendor/three-r128.min.js").replace(/app\.js\?v=\d+/, `app.js?v=${APP_VERSION}`))
+    // defer: same order (three → voice lines → app.js), still before DOMContentLoaded, but the parser and
+    // the first paint no longer wait for ~190 kB of script to download and run. Everything app.js touches
+    // is server-rendered markup above it, and React reaches app.js only through window.LMSite / window.LM.
+    .map((s) => s.replace("<script src=", "<script defer src="));
   if (!scripts.some((s) => /app\.js/.test(s))) throw new Error("Intro markup: app.js script tag not found");
 
   // The intro's CSS reads <body class="locked" data-page="home"> before anything paints
@@ -58,7 +63,8 @@ export function introParts() {
   // The intro only needs a few of its rules, copied verbatim into public/intro-site.css.
   const SITE_CSS = /href="site\.css\?v=\d+"/;
   if (!SITE_CSS.test(home.head)) throw new Error("Intro markup: site.css link not found in <head>");
-  const head = trimFontRequest(home.head.replace(SITE_CSS, 'href="intro-site.css?v=2"'));
+  // (STYLES_VERSION: bump when public/styles.css changes so browsers fetch the new file)
+  const head = trimFontRequest(home.head.replace(SITE_CSS, 'href="intro-site.css?v=2"').replace(/styles\.css\?v=\d+/, `styles.css?v=${STYLES_VERSION}`));
 
   cache = { boot, head, chrome, experience, scripts: scripts.join("") };
   return cache;

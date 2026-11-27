@@ -145,7 +145,16 @@
     drift() { return [rnd(9), rnd(5.5), rnd(4) - 2]; },
   };
   const makeShape = (fn) => { const a = new Float32Array(COUNT * 3); for (let i = 0; i < COUNT; i++) a.set(fn(i), i * 3); return a; };
-  const targets = Object.fromEntries(Object.keys(shapes).map((k) => [k, makeShape(shapes[k])]));
+  // Only the orb (below) is on screen at first; the plan-screen shapes are built in idle moments after
+  // load (a few ms each), or on the spot if a morph asks for one sooner.
+  const targets = {};
+  const getTarget = (k) => targets[k] || (shapes[k] ? (targets[k] = makeShape(shapes[k])) : undefined);
+  addEventListener("load", () => {
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+    const todo = Object.keys(shapes);
+    const next = () => { const k = todo.shift(); if (!k) return; getTarget(k); idle(next); };
+    idle(next);
+  }, { once: true });
 
   // The orb: a glowing particle shell, a faint inner core, and two thin orbit rings.
   // Normals point outward; their length marks the layer (1 = shell/rings, .4 = inner dust).
@@ -235,6 +244,7 @@
       }`,
   });
   const points = new THREE.Points(geo, mat);
+  points.frustumCulled = false; // always in view: skips a bounding-sphere pass over every particle on the first frame
   scene.add(points);
 
   /* Voice ring: a circle of particles around the orb that faces the camera. Spikes rise and fall
@@ -270,6 +280,7 @@
         }`,
     });
     const obj = new THREE.Points(g, m);
+    obj.frustumCulled = false;
     obj.renderOrder = 2;
     scene.add(obj);
     const amp = new Float32Array(BINS), line = new Float32Array(LINES * LPTS);
@@ -312,7 +323,7 @@
 
   let current = "orb", spin = 0, morphFrom = new Float32Array(pos), morphT = 1;
   function morph(name) {
-    if (name === current || !targets[name]) return;
+    if (name === current || !getTarget(name)) return;
     morphFrom.set(pos); current = name; morphT = 0;
     if (name === "orb") spin = points.rotation.y;
     sfx.whoosh();
@@ -829,6 +840,10 @@
   /* Options sit on a curved, neon slider: the centre card is in focus, the rest bend away along an arc.
      Browse with the arrows, drag/swipe, the mouse wheel or ← →; click a card (or press Enter) to choose. */
   const sliders = new Map();
+  // Reading innerWidth forces a full layout; the sliders read this copy instead (kept current by this
+  // resize listener, registered before theirs, so it is updated before any slider re-lays itself out)
+  let vw = innerWidth;
+  addEventListener("resize", () => { vw = innerWidth; });
   $$(".choices").forEach((group) => {
     const key = group.dataset.key, btns = $$("button", group);
     const track = document.createElement("div"); track.className = "arc-track";
@@ -840,7 +855,7 @@
     let active = Math.floor((btns.length - 1) / 2), dragX = 0;
     const layout = () => {
       // Cards sit on a cylinder: the centre faces you, neighbours turn and fall back into depth
-      const small = innerWidth < 700, step = small ? 30 : 22, R = small ? 400 : 720;
+      const small = vw < 700, step = small ? 30 : 22, R = small ? 400 : 720;
       btns.forEach((b, i) => {
         const d = i - active - dragX, ad = Math.abs(d), max = small ? 1.6 : 2.6;
         b.style.transform = `translate(-50%, 0) translateZ(${-R}px) rotateY(${d * step}deg) translateZ(${R}px)`;
@@ -1227,7 +1242,7 @@
   const seeThrough = new Set();
   let loopOn = false;
   const shouldRun = () => !siteMode || seeThrough.size > 0;
-  const startLoop = () => { if (!loopOn && shouldRun()) { loopOn = true; clockGL.getDelta(); requestAnimationFrame(tick); } };
+  const startLoop = () => { if (!loopOn && shouldRun()) { loopOn = true; lastTick = 0; drewLast = false; clockGL.getDelta(); requestAnimationFrame(tick); } };
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => (e.isIntersecting ? seeThrough.add(e.target) : seeThrough.delete(e.target)));
@@ -1241,6 +1256,66 @@
     if (!document.getElementById("home")) addEventListener("DOMContentLoaded", watch, { once: true });
   } else seeThrough.add(root);
   window.LM_wakeField = startLoop;
+
+  /* Frame budget — keeps the main thread free without touching the look on real hardware.
+     • Hardware GPU: renders exactly as designed (full density, every frame). Only if the device can't
+       hold ~22 fps for several frames in a row does the canvas density step down — never below one
+       drawn pixel per CSS pixel — or, failing that, draw every other frame; it climbs back when there
+       is room again (each failed climb waits twice as long before the next try).
+     • Software WebGL (no usable GPU: SwiftShader/llvmpipe — blocklisted drivers, VMs, remote desktops,
+       headless test machines): every full-screen frame of this shader is a 70–130 ms main-thread stall,
+       so animating it continuously would freeze the page itself. There the scene is drawn as a still at
+       full quality (again after a resize) until the visitor first interacts; from then on it animates
+       at a small pixel budget at 30 fps, and if even that can't keep up, the last frame stays on screen. */
+  const SOFTWARE_GL = (() => {
+    try {
+      const gl = renderer.getContext(), ext = gl.getExtension("WEBGL_debug_renderer_info");
+      return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
+    } catch { return false; }
+  })();
+  const BASE_PR = renderer.getPixelRatio();
+  const SOFT_PIXELS = 120000; // drawn pixels per frame on a software renderer (~a 400×300 buffer)
+  // (viewport size from the renderer — resize() keeps it equal to innerWidth × innerHeight — so this
+  // never forces a layout)
+  const softScale = () => { const v = renderer.getSize(new THREE.Vector2()); return Math.min(1, Math.sqrt(SOFT_PIXELS / (v.x * v.y)) / BASE_PR); };
+  const MIN_SCALE = SOFTWARE_GL ? softScale() : Math.min(1, 1 / BASE_PR);
+  const TOP_SCALE = SOFTWARE_GL ? MIN_SCALE : 1, BASE_EVERY = SOFTWARE_GL ? 2 : 1;
+  const gov = { scale: 1, every: BASE_EVERY, n: 0, warm: 6, slow: 0, fast: 0, wait: 300, held: false, still: SOFTWARE_GL, drawOnce: true };
+  const setScale = (s) => {
+    // particle size is in drawn pixels: rescale it with the density so the orb looks the same size
+    uniforms.uSize.value *= (BASE_PR * s) / renderer.getPixelRatio();
+    gov.scale = s; renderer.setPixelRatio(BASE_PR * s); resize(); gov.warm = 4; gov.slow = 0;
+  };
+  if (SOFTWARE_GL) {
+    addEventListener("resize", () => { gov.drawOnce = true; });
+    const ENGAGE = ["pointerdown", "keydown", "touchstart", "wheel"];
+    const engage = () => {
+      ENGAGE.forEach((t) => removeEventListener(t, engage, true));
+      gov.still = false; gov.n = 0;
+      if (TOP_SCALE < 1) setScale(TOP_SCALE);
+    };
+    ENGAGE.forEach((t) => addEventListener(t, engage, { capture: true, passive: true }));
+  }
+  // dtMs: the time from a drawn frame to the next tick — where the GPU work actually lands on the main thread
+  function govern(dtMs) {
+    if (gov.warm > 0) { gov.warm--; return; }
+    if (dtMs > 250) return; // tab hidden, or one unrelated stall — not a sustained cost of this scene
+    if (dtMs > 45) {
+      gov.fast = 0;
+      if (++gov.slow < 3) return;
+      gov.slow = 0;
+      if (gov.scale > MIN_SCALE + 1e-3) setScale(Math.max(MIN_SCALE, gov.scale * 0.7));
+      else if (gov.every < (SOFTWARE_GL ? 3 : 2)) { gov.every++; gov.warm = 4; }
+      else if (SOFTWARE_GL) gov.held = true;
+    } else {
+      gov.slow = 0;
+      if (dtMs < 24 && (gov.scale < TOP_SCALE - 1e-3 || gov.every > BASE_EVERY) && ++gov.fast > gov.wait) {
+        gov.fast = 0; gov.wait *= 2;
+        if (gov.every > BASE_EVERY) gov.every--; else setScale(Math.min(TOP_SCALE, gov.scale / 0.7));
+      }
+    }
+  }
+  let lastTick = 0, drewLast = false;
 
   function tick() {
     if (!shouldRun()) { loopOn = false; return; }
@@ -1311,9 +1386,16 @@
     spinKick *= 0.94;
     const sizeT = (siteMode ? 1.7 : 3.4) * renderer.getPixelRatio();
     uniforms.uSize.value += (sizeT - uniforms.uSize.value) * 0.05;
-    renderer.clear();
-    renderer.render(bgScene, bgCam);
-    renderer.render(scene, camera);
+    const now = performance.now();
+    if (drewLast) govern(lastTick ? now - lastTick : 16);
+    lastTick = now; drewLast = false;
+    if (gov.still ? gov.drawOnce : !gov.held && ++gov.n % gov.every === 0) {
+      if (gov.still) gov.drawOnce = false;
+      renderer.clear();
+      renderer.render(bgScene, bgCam);
+      renderer.render(scene, camera);
+      drewLast = !gov.still;
+    }
     requestAnimationFrame(tick);
   }
   startLoop();

@@ -1,5 +1,5 @@
 /* Three depths: a faded photograph, the name sliding past, and the story in front */
-.intro { position: relative; overflow: hidden; isolation: isolate; padding: clamp(90px, 13vh, 150px) var(--lm-gutter) clamp(80px, 12vh, 130px); background: #02040a; }
+.intro { position: relative; display: flow-root; overflow: clip; isolation: isolate; /* clip (not hidden) so .left can stay sticky */ padding: clamp(90px, 13vh, 150px) var(--lm-gutter) clamp(80px, 12vh, 130px); background: #02040a; }
 .backdrop { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
 .backdropIn { position: absolute; inset: -10% 0; will-change: transform; }
 .backImg { object-fit: cover; opacity: 0.12; filter: grayscale(0.6) contrast(1.1); }

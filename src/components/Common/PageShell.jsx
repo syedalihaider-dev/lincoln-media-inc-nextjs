@@ -8,15 +8,14 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Chat from "@/components/Common/Chat/Chat";
 import styles from "./PageShell.module.css";
-import { FONT_CSS } from "./fonts";
 
-// The heading typeface (React hoists this into <head>); body text is Poppins via next/font
-const FONTS = FONT_CSS;
+// Fonts: Unbounded (headings) is self-hosted in globals.css; body text is Poppins via next/font
 // The base the homepage gets from the intro stylesheet (public/styles.css), so shared parts render the same
 const BASE_CSS = [
   "*{box-sizing:border-box;margin:0;padding:0}",
   "html,body{background:#03050b}",
-  "body{color:#eef1f7;overflow-x:hidden;-webkit-font-smoothing:antialiased}",
+  // overflow-x clip, not hidden: hidden made <body> a scroll container and broke position:sticky (globals.css)
+  "body{color:#eef1f7;overflow-x:clip;-webkit-font-smoothing:antialiased}",
   "a{color:inherit;text-decoration:none}",
   "button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}",
 ].join("");
@@ -120,9 +119,6 @@ export default function PageShell({ current, children }) {
 
   return (
     <MotionContext.Provider value={ctx}>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link rel="stylesheet" href={FONTS} precedence="default" />
       <style dangerouslySetInnerHTML={{ __html: BASE_CSS }} />
       <div id="site" className={styles.page}>
         <a className="lm-skip" href="#main">Skip to content</a>

@@ -23,7 +23,7 @@ function Plate({ ind, i, sizes }) {
         <div key={s} className={styles.strip} style={{ "--s": s }} data-strip>
           <div className={styles.stripImg} data-img>
             <div className={styles.par}>
-              <Image src={ind.image} alt="" fill sizes={sizes} className={styles.photo} priority={i === 0 && s === 0} />
+              <Image src={ind.image} alt="" fill sizes={sizes} className={styles.photo} />
             </div>
           </div>
         </div>
@@ -213,7 +213,8 @@ export default function Industries() {
               <span className={styles.ring} aria-hidden="true" />
             </div>
             <div className={styles.field} aria-hidden="true">
-              {desktop && <IndustryField active={activeRef} pointer={pointer} progress={progressRef} />}
+              {/* mounts with the homepage (like the hero and services scenes), not behind the intro */}
+              {ready && desktop && <IndustryField active={activeRef} pointer={pointer} progress={progressRef} />}
             </div>
             <p className={styles.hudTop} aria-hidden="true">FIG. {pad(active + 1)} — {cur.name}</p>
             <p className={styles.hudBottom} aria-hidden="true">Hover to look closer</p>

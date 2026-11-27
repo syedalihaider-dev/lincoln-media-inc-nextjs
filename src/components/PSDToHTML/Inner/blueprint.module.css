@@ -1,5 +1,5 @@
 /* Shared blueprint tokens for the PSD-to-HTML inner sections */
-.bp { --bp: #0c2a52; --bp2: #0a2346; --line: rgba(220, 236, 255, 0.9); --faint: rgba(220, 236, 255, 0.28); --ink: #eaf3ff; --hi: #8fc1ff; position: relative; overflow: hidden; color: var(--ink);
+.bp { --bp: #0c2a52; --bp2: #0a2346; --line: rgba(220, 236, 255, 0.9); --faint: rgba(220, 236, 255, 0.28); --ink: #eaf3ff; --hi: #8fc1ff; position: relative; overflow: clip; color: var(--ink); /* clip (not hidden): lets the phone layout's sticky drawing (Parts) hold */
   background: linear-gradient(rgba(170, 205, 255, 0.07) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(170, 205, 255, 0.07) 1px, transparent 1px) 0 0 / 24px 24px, var(--bp); }
 .deep { background: linear-gradient(rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(170, 205, 255, 0.06) 1px, transparent 1px) 0 0 / 24px 24px, var(--bp2); }
 /* a heading styled like a drawing's section label: number-free, ruled */

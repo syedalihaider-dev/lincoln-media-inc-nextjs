@@ -6,10 +6,21 @@ import styles from "./VideoBackground.module.css";
  * Muted, looping, inline background video.
  * - Nothing downloads until the section is near the viewport; it pauses again off-screen.
  * - Phones get a smaller encode; reduced-motion and data-saver visitors only get the poster.
+ * - lazyPoster: for sections that are never on screen at load (e.g. the homepage chapters behind the
+ *   guided intro) the poster image, too, waits until the section is within ~1.5 screens of the viewport
+ *   (browsers otherwise fetch a poster at once, even inside a hidden element).
  */
-export default function VideoBackground({ src, mobileSrc, poster, className = "", tint = true }) {
+export default function VideoBackground({ src, mobileSrc, poster, className = "", tint = true, lazyPoster = false }) {
   const ref = useRef(null);
   const [source, setSource] = useState(null);
+  const [posterOn, setPosterOn] = useState(!lazyPoster);
+
+  useEffect(() => {
+    if (posterOn) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setPosterOn(true); io.disconnect(); } }, { rootMargin: "150% 0px" });
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [posterOn]);
 
   useEffect(() => {
     const el = ref.current;
@@ -36,7 +47,7 @@ export default function VideoBackground({ src, mobileSrc, poster, className = ""
 
   return (
     <div className={`${styles.wrap} ${tint ? styles.tint : ""} ${className}`} aria-hidden="true">
-      <video ref={ref} className={styles.video} poster={poster} src={source || undefined} muted loop playsInline autoPlay preload="none" disablePictureInPicture tabIndex={-1} />
+      <video ref={ref} className={styles.video} poster={posterOn ? poster : undefined} src={source || undefined} muted loop playsInline autoPlay preload="none" disablePictureInPicture tabIndex={-1} />
     </div>
   );
 }

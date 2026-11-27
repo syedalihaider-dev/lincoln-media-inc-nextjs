@@ -70,7 +70,7 @@ export default function WorkShowcase() {
   return (
     <section ref={ref} id="work" className={styles.section} data-chapter="Work" data-nav="work" aria-labelledby="work-title">
       <div className={styles.intro} data-intro>
-        <VideoBackground src="/videos/smoke.mp4" mobileSrc="/videos/smoke-mobile.mp4" poster="/videos/smoke-poster.jpg" className={styles.smoke} tint={false} />
+        <VideoBackground src="/videos/smoke.mp4" mobileSrc="/videos/smoke-mobile.mp4" lazyPoster poster="/videos/smoke-poster.jpg" className={styles.smoke} tint={false} />
         <div className={styles.introInner} data-intro-inner>
           <SectionLabel index="04">Selected work</SectionLabel>
           <h2 id="work-title" className={styles.big}>

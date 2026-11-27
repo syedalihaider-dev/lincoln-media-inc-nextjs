@@ -122,6 +122,9 @@ main { position: relative; z-index: 2; }
 /* ---- 3D curved option slider: cards wrap around a cylinder and the sides fall back into depth ---- */
 .choices.arc { display: block; position: relative; width: min(1100px, 100vw); max-width: none; left: 50%; transform: translateX(-50%); height: 286px; margin: 36px 0 0; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .choices.arc.icons { height: 286px; }
+/* Every option group becomes the arc slider when app.js starts; until then (hidden steps, but they size
+   the shared stage grid) reserve the slider's exact footprint so the stage doesn't shrink after first paint */
+.choices:not(.arc) { height: 286px; margin: 36px 0 0; overflow: hidden; }
 .arc-track { position: absolute; inset: 0; cursor: grab; perspective: 1100px; perspective-origin: 50% 40%; transform-style: preserve-3d; }
 .choices.arc.dragging .arc-track { cursor: grabbing; }
 /* box colours follow the orb: app.js updates --accent / --accent-2 every frame */
@@ -189,7 +192,7 @@ main { position: relative; z-index: 2; }
 .step.ready .choices.arc { animation: arcIn .7s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes arcIn { from { opacity: 0; transform: translateX(-50%) translateY(24px); } }
 @media (max-width: 700px) {
-  .choices.arc, .choices.arc.icons { height: 244px; margin-top: 28px; }
+  .choices.arc, .choices.arc.icons, .choices:not(.arc) { height: 244px; margin-top: 28px; }
   .choices.arc .arc-track > button { --card-w: 184px; --card-h: 200px; --ico: 64px; padding: 22px 14px; gap: 14px; font-size: 14.5px; border-radius: 20px; }
   .choices.arc .arc-track > button i { top: 13px; left: 14px; }
   .choices.arc .arc-track > button::after { top: 10px; right: 10px; width: 22px; height: 22px; background-size: 13px; }

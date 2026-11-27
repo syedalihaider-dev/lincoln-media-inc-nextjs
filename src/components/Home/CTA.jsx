@@ -38,7 +38,7 @@ export default function CTA() {
     <section ref={ref} id="cta" className={styles.section} data-chapter="Let's talk" data-nav="contact" aria-labelledby="cta-title">
       <div className={styles.pin} data-pin>
         <div className={styles.window} data-window>
-          <VideoBackground src="/videos/nyc-night.mp4" mobileSrc="/videos/nyc-night-mobile.mp4" poster="/videos/nyc-night-poster.jpg" />
+          <VideoBackground src="/videos/nyc-night.mp4" mobileSrc="/videos/nyc-night-mobile.mp4" lazyPoster poster="/videos/nyc-night-poster.jpg" />
         </div>
         <div className={styles.copy}>
           <p className={styles.kicker} data-after>12 / 13 — {SITE.city}, after hours</p>

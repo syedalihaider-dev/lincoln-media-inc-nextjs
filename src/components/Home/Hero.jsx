@@ -1,15 +1,21 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { gsap, useGSAP, ANY_MOTION, DESKTOP_MOTION } from "@/lib/gsap";
 import { useMediaQuery, useReducedMotion, useSiteMotion } from "@/lib/motion";
 import { HERO } from "@/data/home";
 import { SITE } from "@/data/site";
 import Button from "@/components/Common/Button";
+import { gatesOpened } from "@/components/Common/HydrateGate";
 import styles from "./Hero.module.css";
 
 // WebGL corridor is client-only and loaded after the page is interactive
-const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false, loading: () => null });
+const loadHeroScene = () => import("./HeroScene");
+const HeroScene = dynamic(loadHeroScene, { ssr: false, loading: () => null });
+// The homepage (and this scene) opens only after the visitor acts on the intro (enter, skip, a deep link),
+// so the visitor's first interaction warms the 3D chunks (three.js + R3F) — downloaded while the intro
+// plays or the curtain opens, never during page load.
+const WARM = ["pointerdown", "keydown", "touchstart"];
 
 const lerp = (a, b, t) => a + (b - a) * t;
 
@@ -25,6 +31,15 @@ export default function Hero() {
   const { ready, entranceDelay } = useSiteMotion();
   const reduced = useReducedMotion();
   const compact = useMediaQuery("(max-width: 900px)");
+
+  useEffect(() => {
+    if (reduced) return;
+    if (ready || gatesOpened()) { loadHeroScene(); return; }
+    const opts = { capture: true, passive: true };
+    const warm = () => { WARM.forEach((t) => removeEventListener(t, warm, opts)); loadHeroScene(); };
+    WARM.forEach((t) => addEventListener(t, warm, opts));
+    return () => WARM.forEach((t) => removeEventListener(t, warm, opts));
+  }, [ready, reduced]);
 
   useGSAP(() => {
     if (!ready) return;

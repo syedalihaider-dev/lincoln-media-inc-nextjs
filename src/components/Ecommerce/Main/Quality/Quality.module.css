@@ -1,4 +1,4 @@
-.quality { position: relative; overflow: hidden; isolation: isolate; background: #03050b; }
+.quality { position: relative; display: flow-root; overflow: clip; isolation: isolate; /* clip (not hidden) so .head can stay sticky */ background: #03050b; }
 .bgWrap { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .bg { position: absolute; inset: -6% 0; will-change: transform; }
 .bg img { object-fit: cover; filter: saturate(0.7) contrast(1.05); }
